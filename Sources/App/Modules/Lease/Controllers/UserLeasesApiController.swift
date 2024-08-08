@@ -36,7 +36,7 @@ struct UserLeasesApiController: ListController {
         
         existingModelRoutes.on(.GET, use: detailApi)
         existingModelRoutes.on(.PUT, use: updateApi)
-        existingModelRoutes.on(.PATCH, use: patchApi)
+//        existingModelRoutes.on(.PATCH, use: patchApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
     }
     
@@ -66,19 +66,9 @@ struct UserLeasesApiController: ListController {
     }
     
     func createInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Lease.Create) async throws {
-        
     }
     
     func updateInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Lease.Update) async throws {
-        let jwtUser = try req.auth.require(JWTUser.self)
-        
-        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db) else {
-            throw AuthenticationError.userNotFound
-        }
-        
-        input.armoryItemsIds.forEach { itemId in
-            
-        }
     }
     
     func patchInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Lease.Patch) async throws {
@@ -103,10 +93,13 @@ struct UserLeasesApiController: ListController {
     func patchResponse(_ req: Vapor.Request, _ model: LeaseModel) async throws -> Response {
         return Response(status: .ok)
     }
-    
-    func createNewLease(_ req: Request) async throws -> Armory.Lease.Detail {
+}
+
+
+extension UserLeasesApiController {
+    func createApi(_ req: Request) async throws -> DetailObject {
+        let input = try req.content.decode(CreateObject.self)
         let jwtUser = try req.auth.require(JWTUser.self)
-        let input = try req.content.decode(Armory.Lease.Create.self)
         
         guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db), let userId = try? user.requireID() else {
             throw AuthenticationError.userNotFound
@@ -130,43 +123,70 @@ struct UserLeasesApiController: ListController {
         
         return try await detailOutput(req, createdLeaseModel)
     }
-}
-
-
-extension UserLeasesApiController {
-    func createApi(_ req: Request) async throws -> Response {
-        let input = try req.content.decode(CreateObject.self)
-        let model = DatabaseModel()
-        try await createInput(req, model, input)
-        try await model.create(on: req.db)
-        return try await createResponse(req, model)
-    }
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
         let model = try await findBy(identifier(req), on: req.db)
         try await model.delete(on: req.db)
         return .noContent
     }
     
     func detailApi(_ req: Request) async throws -> DetailObject {
-        let model = try await findBy(identifier(req), on: req.db)
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        guard let model = try await DatabaseModel.query(on: req.db)
+            .with(\.$user)
+            .with(\.$armoryItems)
+            .filter(\.$id == identifier(req))
+            .first() else {
+            throw Abort(.notFound)
+        }
+        
         return try await detailOutput(req, model)
     }
     
-    func patchApi(_ req: Request) async throws -> Response {
-        let model = try await findBy(identifier(req), on: req.db)
-        let input = try req.content.decode(PatchObject.self)
-        try await patchInput(req, model, input)
-        try await model.update(on: req.db)
-        return try await patchResponse(req, model)
-    }
+//    func patchApi(_ req: Request) async throws -> Response {
+//        let jwtUser = try req.auth.require(JWTUser.self)
+//        
+//        guard let leaseModel = try await DatabaseModel.query(on: req.db)
+//            .with(\.$user)
+//            .with(\.$armoryItems)
+//            .filter(\.$id == identifier(req))
+//            .first() else {
+//            throw Abort(.notFound)
+//        }
+//        
+//        let patchObject = try req.content.decode(PatchObject.self)
+//        
+//
+//        
+//        try await model.update(on: req.db)
+//        return try await patchResponse(req, model)
+//    }
     
     func updateApi(_ req: Request) async throws -> Response {
-        let model = try await findBy(identifier(req), on: req.db)
-        let input = try req.content.decode(UpdateObject.self)
-        try await updateInput(req, model, input)
-        try await model.update(on: req.db)
-        return try await updateResponse(req, model)
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        let updateObject = try req.content.decode(UpdateObject.self)
+        
+        guard let leaseModel = try await DatabaseModel.query(on: req.db)
+            .with(\.$user)
+            .with(\.$armoryItems)
+            .filter(\.$id == identifier(req))
+            .first() else {
+            throw Abort(.notFound)
+        }
+        
+        let armoryItems = try await ArmoryItemModel.query(on: req.db)
+                .filter(\.$id ~~ updateObject.armoryItemsIds) // Use `~~` for "in" clause
+                .all()
+        
+        try await leaseModel.$armoryItems.detachAll(on: req.db)
+        try await leaseModel.$armoryItems.attach(armoryItems, on: req.db)
+        
+        try await leaseModel.update(on: req.db)
+        return try await updateResponse(req, leaseModel)
     }
     
     func listApi(_ req: Request) async throws -> [ListObject] {

@@ -14,7 +14,7 @@ public struct LeaseRouter: RouteCollection {
     public func boot(routes: RoutesBuilder) throws {
         let api = routes.grouped("api")
         armoryLeasesController.setupRoutes(api)
-        api.on(.POST, "armory", "leases", use: armoryLeasesController.createNewLease)
+//        api.on(.POST, "armory", "leases", use: armoryLeasesController.createNewLease)
         
 //        api.on(.POST, ["armory", "accessories"], use: armoryAccessoryController.leaseAccessories)
     }

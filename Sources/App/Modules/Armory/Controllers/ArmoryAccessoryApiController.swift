@@ -38,7 +38,7 @@ struct ArmoryItemsApiController: ApiController {
                          imageKey: model.imageKey,
                          aboutInfo: model.aboutInfo,
                          inStock: model.inStock,
-                         category: .init(id: category!.id!, name: category!.name))
+                         category: category != nil ? .init(id: category!.id!, name: category!.name) : nil)
         } catch {
             print(error)
         }
