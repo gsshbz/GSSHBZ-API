@@ -68,7 +68,22 @@ RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app
 WORKDIR /app
 
 # Copy built executable and any staged resources from builder
-COPY --from=build --chown=vapor:vapor /staging /app
+#COPY --from=build --chown=vapor:vapor /staging /app
+
+# Copy JWKS
+COPY --from=build --chown=vapor:vapor /build/keypair.jwks /app
+
+# Copy dotenv files
+COPY --from=build --chown=vapor:vapor /build/.env.development /app
+
+# Copy dotenv files
+COPY --from=build --chown=vapor:vapor /build/.env.production /app
+
+# Copy dotenv files
+COPY --from=build --chown=vapor:vapor /build/.env.production /app/.env
+
+# Copy database certificate
+COPY --from=build --chown=vapor:vapor /build/ca-certificate.crt /app
 
 # Provide configuration needed by the built-in crash reporter and some sensible default behaviors.
 ENV SWIFT_ROOT=/usr SWIFT_BACKTRACE=enable=yes,sanitize=yes,threads=all,images=all,interactive=no
