@@ -34,11 +34,11 @@ public func configure(_ app: Application) async throws {
     let connectionConfig = PostgresConnection.Configuration.TLS.prefer(sslContext)
     app.databases.use(.postgres(configuration: SQLPostgresConfiguration(
         hostname: Environment.get("DATABASE_HOST") ?? "localhost",
-        port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? 5436,//SQLPostgresConfiguration.ianaPortNumber,
-        username: Environment.get("DATABASE_USERNAME") ?? "gsshbz_username",
-        password: Environment.get("DATABASE_PASSWORD") ?? "gsshbz_password",
-        database: Environment.get("DATABASE_NAME") ?? "gsshbz_database",
-        tls: connectionConfig
+        port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? 5432,//SQLPostgresConfiguration.ianaPortNumber,
+        username: Environment.get("DATABASE_USERNAME") ?? "vapor",
+        password: Environment.get("DATABASE_PASSWORD") ?? "password",
+        database: Environment.get("DATABASE_NAME") ?? "vapor",
+        tls: .disable
     ), sqlLogLevel: .debug), as: .psql)
     
     
