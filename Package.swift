@@ -16,12 +16,16 @@ let package = Package(
         .package(url: "https://github.com/vapor/jwt.git", from: "4.0.0"),
         .package(url: "https://github.com/binarybirds/swift-html", from: "1.7.0"),
         .package(url: "https://github.com/binarybirds/liquid", from: "1.3.0"),
-        .package(url: "https://github.com/binarybirds/liquid-local-driver", from: "1.3.0")
+        .package(url: "https://github.com/binarybirds/liquid-local-driver", from: "1.3.0"),
+        
+        // Other
+        .package(url: "https://github.com/swift-cloud/Vercel", from : "1.0.0")
     ],
     targets: [
         .executableTarget(
             name: "App",
             dependencies: [
+                .product(name: "Vercel", package: "Vercel"),
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),
