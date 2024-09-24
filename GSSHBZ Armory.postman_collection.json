@@ -1,0 +1,1596 @@
+{
+	"info": {
+		"_postman_id": "9424c228-ab4c-406d-9e19-99f38d8393da",
+		"name": "GSSHBZ Armory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7022573"
+	},
+	"item": [
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Create category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Created category\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/categories",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"categories"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": [
+						{
+							"name": "Create category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Created category\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/categories",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "71"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:02:22 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:02:22 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Created category\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"categories",
+								"92B79E61-449F-46F3-85F1-5837ED445B74"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": [
+						{
+							"name": "Get Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"categories",
+										"92B79E61-449F-46F3-85F1-5837ED445B74"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "71"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:03:38 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:03:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Created category\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/categories/",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"categories",
+								""
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": [
+						{
+							"name": "Get Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/categories/",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"categories",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "353"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:01:30 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:01:29 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"899BA710-4DCA-4F93-BBB1-11EA644A2C8D\",\n        \"name\": \"Carabiner\"\n    },\n    {\n        \"name\": \"Belays and Descenders\",\n        \"id\": \"A13F0731-F461-4242-ABE7-5175C7A01F86\"\n    },\n    {\n        \"name\": \"Helmet\",\n        \"id\": \"CC6CFEF0-1C80-4384-8F74-EB9B35BCAEA6\"\n    },\n    {\n        \"id\": \"700379C6-FA9F-4BB5-882A-C12D9E2B0842\",\n        \"name\": \"Category to delete\"\n    },\n    {\n        \"name\": \"Category to delete\",\n        \"id\": \"EAD12C2A-B93B-4B9A-8668-C92EAC2DFDDE\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Updated category\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"categories",
+								"92B79E61-449F-46F3-85F1-5837ED445B74"
+							]
+						},
+						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+					},
+					"response": [
+						{
+							"name": "Update Category",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Updated category\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"categories",
+										"92B79E61-449F-46F3-85F1-5837ED445B74"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "71"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:04:00 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:04:00 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Updated category\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"categories",
+								"92B79E61-449F-46F3-85F1-5837ED445B74"
+							]
+						},
+						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Carabiners\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"categories",
+								"92B79E61-449F-46F3-85F1-5837ED445B74"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Patch Category",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Carabiners\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"categories",
+										"92B79E61-449F-46F3-85F1-5837ED445B74"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "65"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:04:32 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:04:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Carabiners\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Sign Up",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Mateo\",\n    \"lastName\": \"Cobanov\",\n    \"username\": \"mateocobanov\",\n    \"email\": \"mateo.cobanov@gmail.com\",\n    \"password\": \"123456789\",\n    \"confirmPassword\": \"123456789\",\n    \"address\": \"Testna Ulica 1\",\n    \"phoneNumber\": \"0028428371098\",\n    \"profileImageUrlString\": \"https://sidneyliebrand.io/media/posts/asdfmovie-banner.svg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/sign-up",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tesnikorisnik@test.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/sign-in",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"sign-in"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sign In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"tesnikorisnik@test.com\",\n    \"password\": \"123456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/sign-in",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"sign-in"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "794"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 19:26:58 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 19:26:58 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\",\n        \"username\": \"tesniKorisnik12\"\n    },\n    \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiIzQjM3REQ2Ni1GODY3LTQ5NDYtOTk4RC0yQjBCNEVBNDY1OTYiLCJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTQ4ODE4LjYxMTE1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.FXlxUoyd3XwOypfYqBjKARdBaivzYy7vo37nr2MaRMp-b1XO2pRe08Ix90T_SQZpBUxJgCu1p3diVwYIYQ-2EZ0xkyCTUet4AJ3uQo1NyYolP-byep5NkuL1EEi6mFuZe1Z-kHoSk_ST6wmVN6waeJIK0z6nx_CKA12vfvQ-uAAhCiOj5zI4zoeTl3lm4AMuSJUkesw63HyLBHZw31ZZqobBxZ4JfwlP79XNKRwLbQH86uhLtbpC0rq9If0b1RRCF1cozfRODg5a4ZBC2R4Js4b0tZOX6rImEmF3WkNYQ5V3SAkEPaaUYJAp_ZVZrrA0hZ_zWTDQdtycwUBQW7pWag\",\n    \"id\": \"3EE7BCF6-CD42-4CD3-8540-D21C9A6D8FA2\",\n    \"refreshToken\": \"0da30ac9d51791c6fa721173e5fc13997d4ae40188f9414580e8c6c1ab352ab0\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Access Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"ec972fec32c4ca96a17501001f3ca89a95784f9eafd3eff368085525b9809805\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/refresh-access-token",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"refresh-access-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Refresh Access Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"ec972fec32c4ca96a17501001f3ca89a95784f9eafd3eff368085525b9809805\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/refresh-access-token",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"refresh-access-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "671"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:05:51 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:05:51 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiIzQjM3REQ2Ni1GODY3LTQ5NDYtOTk4RC0yQjBCNEVBNDY1OTYiLCJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payIsImV4cGlyYXRpb24iOjE3MjMxNTQ3NTEuODAwNzAxMX0.TjKisYiP-uy9lsve_pAMwMDWTKK9pbtOFFsMfxBbPvDYQvVJPmE_k-H4X2sMXsOKj0CchzZ1mXaay27x1v0PSvn1uAjXAUSg_xLtC-XHeaxghNed2pf6bAmiVqgYJjNwUeqETSdyVwTO2PVEwmAfgVH_Ra9F7au9y33AVxJHzjWzp12oEhghFYhG5swLgoJ03IaZH2oMAHzd5I7FPibT_Gt3vDYEa-yj9qgjF4zoAXNOa9dfMu5yAGsjvP2e3UHjdRmkLGA5-7M6i1bBzv3Be4UtSo3fH1U-qb88cacms9tDLOM_4Rx4sqvw830VSc_INYl9eLdn3IPohvAqiqE9sQ\",\n    \"refreshToken\": \"66dfd1f47fb5cd950b2db0271a97b67698860d36c8f6002cc128f7a3a00f4666\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"brinaxx@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/reset-password",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Reset Password Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/reset-password?token=feb340fe0973e7046928b551affa3125036be3a9e6c7a0cc4176edacc7277228",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"reset-password"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "feb340fe0973e7046928b551affa3125036be3a9e6c7a0cc4176edacc7277228"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Armory Items",
+			"item": [
+				{
+					"name": "Create Armory Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTU0NzY0LjY3ODgxNSwidXNlcklkIjoiM0IzN0RENjYtRjg2Ny00OTQ2LTk5OEQtMkIwQjRFQTQ2NTk2IiwiZnVsbE5hbWUiOiJUZXN0bmkgS29yaXNuaWsifQ.g7ofYn1_UxqodsUlXAC4xa77tI7zaLH8Pt_DEqt3GydVCfmTPt4gOKRY_LH5ywYHqJvmzJvxmxskGzaL9-ljfvnlvDKqR_cSzi1XxFdcVts2UcMUqpRTEPM0zmqco2ZwQ1viCHwkJjFpTfpyN0cOoO6x1AHTXGPcAJp2uXbJ5QLIB7WMPcfyOzU_fsJ56qpqNd7rSYDPBRVajKeLXC21ov4okWfc09KqWNBBHGkdgnYBqcqBN0dao3vgzq6bkSZCNuzELxHqre-fSUOh0h4lcGmwa7RroK3VbyZ5WAWiHvy4u_iPWkSECf9mOsp8ebu1vgSRHZpXyf-bNJSmhNMFgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Prusik\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Tanko uže bla bla bla\",\n    \"inStock\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/items",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"items"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Armory Item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Prusik\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Tanko uže bla bla bla\",\n    \"inStock\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/items",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"items"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "210"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:12:35 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:12:35 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"325AD55B-9A1E-48F9-8C4D-327A3242A453\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Tanko uže bla bla bla\",\n    \"inStock\": 10,\n    \"name\": \"Prusik\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Armory Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/items/6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"items",
+								"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Armory Item",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/items/6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"items",
+										"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "598"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:14:07 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:14:07 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"imageKey\": \"william.jpeg\",\n    \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n    \"name\": \"William karabiner\",\n    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n    \"inStock\": 0,\n    \"category\": {\n        \"name\": \"Carabiner\",\n        \"id\": \"899BA710-4DCA-4F93-BBB1-11EA644A2C8D\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Armory Items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payIsInVzZXJJZCI6IjQwRTIyRjFGLUJBMEYtNDI5OC1CMTFDLTY0MzFGNkM2OUYzRiIsImV4cGlyYXRpb24iOjE3MjQ5MjU2NDguNDE4ODUsImVtYWlsIjoidGVzbmlrb3Jpc25pa0B0ZXN0LmNvbSJ9.QosnyQZWd6wK6W7nt75x7WrcxzRNOwbkVVqnZZzUvMficH1Kk3HWnVV-uGpCaegpV1-RNX4sJGfDTgiVKcY2BWUtp2tYiGB4Z00ECt7TOhWJwyNu-slxaen3z8t8EXqMg_H45db7XKtXfJNePNUkgZUMvElBqS9xt5ausk4HR1vmSrtH6Od-GnzAZppSSWs81-sjHOXlA4odjo-5lh2KNxxa_D3W2jauLM1tr-2HtCkEoUa4m1bVI-73GILDWJmm3j11DWtQIGQV5ghfmsGzMHv2j1QWAYd_YZuJz226c9GRP9xefGpPq-RPD6vR7uiLnKzlzQFwI0z8udH8_Vy5vw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/items",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"items"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Armory Items",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/items",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"items"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2319"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:11:38 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:11:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"imageKey\": \"william.jpeg\",\n        \"name\": \"William karabiner\",\n        \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n        \"inStock\": 0\n    },\n    {\n        \"inStock\": 0,\n        \"name\": \"OK karabiner\",\n        \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n        \"imageKey\": \"carabiner-ok.jpeg\",\n        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n    },\n    {\n        \"inStock\": 0,\n        \"imageKey\": \"grigri.jpeg\",\n        \"name\": \"GRIGRI\",\n        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n        \"id\": \"61D75FDF-D520-4405-9A66-4B06364F9220\"\n    },\n    {\n        \"id\": \"E9DE436D-62EB-48D2-A354-1B5ED466E861\",\n        \"name\": \"Petzl Boreo Caving kaciga\",\n        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n        \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n        \"inStock\": 0\n    },\n    {\n        \"inStock\": 10,\n        \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n        \"id\": \"D473ADF7-56B7-4C17-A6B0-E7E4E0284ECC\",\n        \"name\": \"Stop descender\",\n        \"aboutInfo\": \"Descent control bla bla bla\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update Armory Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiIzQjM3REQ2Ni1GODY3LTQ5NDYtOTk4RC0yQjBCNEVBNDY1OTYiLCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payIsImV4cGlyYXRpb24iOjE3MjQzNTU5MTQuMjI2NTQ2fQ.Dg5_F3jsiYqmaDtPwDCEWT4JzyQtRceb6r3pC6MTpkq-FO0rEgfsk2l7pqO1yOD27q9jCu5Bi7xkdCwoHfQcfO18jcEXAiJuI3DPTwkp43OV06A2m8uH_NJKCAGodTCR47UnltmEHtx5_Op9dpC59L9fPF03NiOJP1e0QKjd5OxlV-lQkDLC1dt729MWoUEn8FQ5W9SKpYAVFcctSKXV2jvPRwpWv_FI2Tr8VShTqSy42dwsNJ0xFJRQTifpi1n3oIvZp9OfyfJA-HNSIF61QgIQlcZJ5SsjqrZX1EO-y7RrliUk2W2nWIejZ0gLwv6U2IJBRvsecBWzYHR3nnTsBQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 14\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/items/D473ADF7-56B7-4C17-A6B0-E7E4E0284ECC",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"items",
+								"D473ADF7-56B7-4C17-A6B0-E7E4E0284ECC"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Accessory",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 15\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/items/325AD55B-9A1E-48F9-8C4D-327A3242A453",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"items",
+										"325AD55B-9A1E-48F9-8C4D-327A3242A453"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "217"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:41:46 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:41:46 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"325AD55B-9A1E-48F9-8C4D-327A3242A453\",\n    \"name\": \"Updateani armory item\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 15,\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Armory Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTU0NzY0LjY3ODgxNSwidXNlcklkIjoiM0IzN0RENjYtRjg2Ny00OTQ2LTk5OEQtMkIwQjRFQTQ2NTk2IiwiZnVsbE5hbWUiOiJUZXN0bmkgS29yaXNuaWsifQ.g7ofYn1_UxqodsUlXAC4xa77tI7zaLH8Pt_DEqt3GydVCfmTPt4gOKRY_LH5ywYHqJvmzJvxmxskGzaL9-ljfvnlvDKqR_cSzi1XxFdcVts2UcMUqpRTEPM0zmqco2ZwQ1viCHwkJjFpTfpyN0cOoO6x1AHTXGPcAJp2uXbJ5QLIB7WMPcfyOzU_fsJ56qpqNd7rSYDPBRVajKeLXC21ov4okWfc09KqWNBBHGkdgnYBqcqBN0dao3vgzq6bkSZCNuzELxHqre-fSUOh0h4lcGmwa7RroK3VbyZ5WAWiHvy4u_iPWkSECf9mOsp8ebu1vgSRHZpXyf-bNJSmhNMFgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/items/325AD55B-9A1E-48F9-8C4D-327A3242A453",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"items",
+								"325AD55B-9A1E-48F9-8C4D-327A3242A453"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Armory Item",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/items/325AD55B-9A1E-48F9-8C4D-327A3242A453",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"items",
+										"325AD55B-9A1E-48F9-8C4D-327A3242A453"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:49:57 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:49:56 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Patch Armory Item",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"categoryId\": \"51744A11-E2F3-46B8-92AA-67353E370609\"\n    \"inStock\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/accessories/C1999D50-42A4-428B-8E27-8F71368D7D15",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"accessories",
+								"C1999D50-42A4-428B-8E27-8F71368D7D15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leases",
+			"item": [
+				{
+					"name": "Create Lease",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiI0MEUyMkYxRi1CQTBGLTQyOTgtQjExQy02NDMxRjZDNjlGM0YiLCJleHBpcmF0aW9uIjoxNzI1MDIwNjM5LjQ5NDU1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.eN0Iw5RX0lGA04Wko7FRdAfTt3mIu79AB-rYygVyAgLWrDf9DAuH-MuhMLR-s8mH-0uH1SfTrhT1ozKee6UONOvrnni2NBOv03PHgHN8r8dNsJy0ZjvfdGZSd5UQGFQpBTgMoXk7Kqihu6ITeXLK2URZEIxVdP1jbBHZqlBYVxo2g6cjoMncVqJeQUNY2SrYbXuYDSA5DLAe5g6lUO9wMw6QVjoDPeqCSi9PCK3z4SjAUDlONc3u9CYYwl3OSevP1ImB64HOcTaemIInmZY-g7z6iyBsu0n1kNiEJ0iZ49Nf4SzUAudeHN5dsypIqM0sSf-_SqOIuDdfodkfopjB1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"AB39072D-FF6C-4646-9983-F96843FE6B09\",\n            \"quantity\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Lease",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"armoryItemsIds\": [\n        \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n        \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1040"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:42:42 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:42:41 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"armoryItems\": [\n        {\n            \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n            \"imageKey\": \"william.jpeg\",\n            \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n            \"inStock\": 0,\n            \"name\": \"William karabiner\"\n        },\n        {\n            \"inStock\": 0,\n            \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n            \"imageKey\": \"carabiner-ok.jpeg\",\n            \"name\": \"OK karabiner\",\n            \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n        }\n    ],\n    \"id\": \"EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2\",\n    \"user\": {\n        \"username\": \"tesniKorisnik12\",\n        \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Lease",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiI0MEUyMkYxRi1CQTBGLTQyOTgtQjExQy02NDMxRjZDNjlGM0YiLCJleHBpcmF0aW9uIjoxNzI1MDIwNjM5LjQ5NDU1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.eN0Iw5RX0lGA04Wko7FRdAfTt3mIu79AB-rYygVyAgLWrDf9DAuH-MuhMLR-s8mH-0uH1SfTrhT1ozKee6UONOvrnni2NBOv03PHgHN8r8dNsJy0ZjvfdGZSd5UQGFQpBTgMoXk7Kqihu6ITeXLK2URZEIxVdP1jbBHZqlBYVxo2g6cjoMncVqJeQUNY2SrYbXuYDSA5DLAe5g6lUO9wMw6QVjoDPeqCSi9PCK3z4SjAUDlONc3u9CYYwl3OSevP1ImB64HOcTaemIInmZY-g7z6iyBsu0n1kNiEJ0iZ49Nf4SzUAudeHN5dsypIqM0sSf-_SqOIuDdfodkfopjB1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/32DB3209-3EBE-4FCD-9166-0BEDD7DB0E9F",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"32DB3209-3EBE-4FCD-9166-0BEDD7DB0E9F"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Lease",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/1B4007C0-019C-43A6-8F43-3178F3C8E96D",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"1B4007C0-019C-43A6-8F43-3178F3C8E96D"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1040"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:44:15 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:44:15 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"armoryItems\": [\n        {\n            \"imageKey\": \"william.jpeg\",\n            \"name\": \"William karabiner\",\n            \"inStock\": 0,\n            \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n            \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n        },\n        {\n            \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n            \"imageKey\": \"carabiner-ok.jpeg\",\n            \"name\": \"OK karabiner\",\n            \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n            \"inStock\": 0\n        }\n    ],\n    \"id\": \"1B4007C0-019C-43A6-8F43-3178F3C8E96D\",\n    \"user\": {\n        \"username\": \"tesniKorisnik12\",\n        \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Leases",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiI0MEUyMkYxRi1CQTBGLTQyOTgtQjExQy02NDMxRjZDNjlGM0YiLCJleHBpcmF0aW9uIjoxNzI1MDIwNjM5LjQ5NDU1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.eN0Iw5RX0lGA04Wko7FRdAfTt3mIu79AB-rYygVyAgLWrDf9DAuH-MuhMLR-s8mH-0uH1SfTrhT1ozKee6UONOvrnni2NBOv03PHgHN8r8dNsJy0ZjvfdGZSd5UQGFQpBTgMoXk7Kqihu6ITeXLK2URZEIxVdP1jbBHZqlBYVxo2g6cjoMncVqJeQUNY2SrYbXuYDSA5DLAe5g6lUO9wMw6QVjoDPeqCSi9PCK3z4SjAUDlONc3u9CYYwl3OSevP1ImB64HOcTaemIInmZY-g7z6iyBsu0n1kNiEJ0iZ49Nf4SzUAudeHN5dsypIqM0sSf-_SqOIuDdfodkfopjB1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Leases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "9370"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:43:15 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:43:14 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"B6C8338A-F48B-465E-B8E7-BA477CD638DB\",\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"armoryItems\": [\n            {\n                \"inStock\": 0,\n                \"imageKey\": \"william.jpeg\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\"\n            },\n            {\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\"\n            }\n        ]\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"name\": \"William karabiner\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"inStock\": 0\n            },\n            {\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0,\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n            }\n        ],\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"id\": \"BB1162E6-6651-4331-A2ED-3230A4240C11\"\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"name\": \"William karabiner\",\n                \"inStock\": 0,\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n            },\n            {\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n            }\n        ],\n        \"id\": \"7749B954-8759-4D33-A6F4-8EDA1B17C628\",\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        }\n    },\n    {\n        \"user\": {\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\",\n            \"username\": \"tesniKorisnik12\"\n        },\n        \"id\": \"73931FD9-B17B-4FB8-98C0-CE20841496F2\",\n        \"armoryItems\": [\n            {\n                \"inStock\": 0,\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\"\n            },\n            {\n                \"inStock\": 0,\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"name\": \"OK karabiner\"\n            }\n        ]\n    },\n    {\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"armoryItems\": [\n            {\n                \"imageKey\": \"william.jpeg\",\n                \"name\": \"William karabiner\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"inStock\": 0,\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\"\n            },\n            {\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\"\n            }\n        ],\n        \"id\": \"1B4007C0-019C-43A6-8F43-3178F3C8E96D\"\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"name\": \"William karabiner\",\n                \"imageKey\": \"william.jpeg\",\n                \"inStock\": 0\n            },\n            {\n                \"name\": \"OK karabiner\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0\n            }\n        ],\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"id\": \"760C8288-93E5-41C2-AA28-F7FA5B15D62C\"\n    },\n    {\n        \"user\": {\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\",\n            \"username\": \"tesniKorisnik12\"\n        },\n        \"armoryItems\": [\n            {\n                \"imageKey\": \"william.jpeg\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"name\": \"William karabiner\",\n                \"inStock\": 0,\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n            },\n            {\n                \"inStock\": 0,\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"imageKey\": \"carabiner-ok.jpeg\"\n            }\n        ],\n        \"id\": \"6D84225D-35FE-4325-AF26-3E57554B7C26\"\n    },\n    {\n        \"id\": \"85A91B7B-4B54-47DA-AD8B-622D5085D505\",\n        \"armoryItems\": [\n            {\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"name\": \"William karabiner\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"inStock\": 0\n            },\n            {\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0\n            }\n        ],\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        }\n    },\n    {\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"armoryItems\": [\n            {\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\",\n                \"inStock\": 0\n            },\n            {\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n            }\n        ],\n        \"id\": \"EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update Lease",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTU0NzY0LjY3ODgxNSwidXNlcklkIjoiM0IzN0RENjYtRjg2Ny00OTQ2LTk5OEQtMkIwQjRFQTQ2NTk2IiwiZnVsbE5hbWUiOiJUZXN0bmkgS29yaXNuaWsifQ.g7ofYn1_UxqodsUlXAC4xa77tI7zaLH8Pt_DEqt3GydVCfmTPt4gOKRY_LH5ywYHqJvmzJvxmxskGzaL9-ljfvnlvDKqR_cSzi1XxFdcVts2UcMUqpRTEPM0zmqco2ZwQ1viCHwkJjFpTfpyN0cOoO6x1AHTXGPcAJp2uXbJ5QLIB7WMPcfyOzU_fsJ56qpqNd7rSYDPBRVajKeLXC21ov4okWfc09KqWNBBHGkdgnYBqcqBN0dao3vgzq6bkSZCNuzELxHqre-fSUOh0h4lcGmwa7RroK3VbyZ5WAWiHvy4u_iPWkSECf9mOsp8ebu1vgSRHZpXyf-bNJSmhNMFgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"armoryItemsIds\": [\n        \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/B6C8338A-F48B-465E-B8E7-BA477CD638DB",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"B6C8338A-F48B-465E-B8E7-BA477CD638DB"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Lease",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"armoryItemsIds\": [\n        \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/B6C8338A-F48B-465E-B8E7-BA477CD638DB",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"B6C8338A-F48B-465E-B8E7-BA477CD638DB"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "0"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:46:56 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:46:55 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Delete Lease",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTU0NzY0LjY3ODgxNSwidXNlcklkIjoiM0IzN0RENjYtRjg2Ny00OTQ2LTk5OEQtMkIwQjRFQTQ2NTk2IiwiZnVsbE5hbWUiOiJUZXN0bmkgS29yaXNuaWsifQ.g7ofYn1_UxqodsUlXAC4xa77tI7zaLH8Pt_DEqt3GydVCfmTPt4gOKRY_LH5ywYHqJvmzJvxmxskGzaL9-ljfvnlvDKqR_cSzi1XxFdcVts2UcMUqpRTEPM0zmqco2ZwQ1viCHwkJjFpTfpyN0cOoO6x1AHTXGPcAJp2uXbJ5QLIB7WMPcfyOzU_fsJ56qpqNd7rSYDPBRVajKeLXC21ov4okWfc09KqWNBBHGkdgnYBqcqBN0dao3vgzq6bkSZCNuzELxHqre-fSUOh0h4lcGmwa7RroK3VbyZ5WAWiHvy4u_iPWkSECf9mOsp8ebu1vgSRHZpXyf-bNJSmhNMFgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Lease",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:45:34 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 08 Aug 2024 21:45:33 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_api_url",
+			"value": "localhost:8080/api",
+			"type": "string"
+		}
+	]
+}

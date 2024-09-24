@@ -29,7 +29,7 @@ struct PasswordResetter {
     }
     
     private func resetURL(for token: String) -> String {
-        "\(config.frontendUrl)/api/auth/reset-password?token=\(token)"
+        "\(config.frontendUrl)/api/reset-password?token=\(token)"
     }
 }
 

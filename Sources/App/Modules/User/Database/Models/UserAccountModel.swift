@@ -21,9 +21,6 @@ final class UserAccountModel: DatabaseModelInterface {
     @Field(key: FieldKeys.v1.lastName)
     var lastName: String
     
-    @Field(key: FieldKeys.v1.username)
-    var username: String
-    
     @Field(key: FieldKeys.v1.email)
     var email: String
     
@@ -53,11 +50,10 @@ final class UserAccountModel: DatabaseModelInterface {
     
     init() { }
     
-    init(id: UUID? = nil, firstName: String, lastName: String, username: String, email: String, password: String) {
+    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
-        self.username = username
         self.email = email
         self.password = password
     }
@@ -67,7 +63,6 @@ final class UserAccountModel: DatabaseModelInterface {
             static var id: FieldKey { "id" }
             static var firstName: FieldKey { "first_name" }
             static var lastName: FieldKey { "last_name" }
-            static var username: FieldKey { "username" }
             static var email: FieldKey { "email" }
             static var password: FieldKey { "password" }
             static var phoneNumber: FieldKey { "phone_number" }
@@ -82,7 +77,7 @@ final class UserAccountModel: DatabaseModelInterface {
 
 
 extension UserAccountModel: ModelAuthenticatable {
-    static let usernameKey = \UserAccountModel.$username
+    static let usernameKey = \UserAccountModel.$email
     static let passwordHashKey = \UserAccountModel.$password
     
     func verify(password: String) throws -> Bool {
@@ -98,7 +93,6 @@ extension UserAccountModel {
     static func create(from registerData: User.Account.Create, hash: String, registrationType: RegistrationType) -> UserAccountModel {
         return UserAccountModel(firstName: registerData.firstName,
                                 lastName: registerData.lastName,
-                                username: registerData.username,
                                 email: registerData.email,
                                 password: hash)
     }

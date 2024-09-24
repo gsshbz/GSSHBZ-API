@@ -26,7 +26,7 @@ extension User.Account.Create: Validatable {
     static func validations(_ validations: inout Validations) {
         validations.add("firstName", as: String.self, is: .ascii)
         validations.add("lastName", as: String.self, is: .ascii)
-        validations.add("username", as: String.self, is: .alphanumeric && .count(4...))
+//        validations.add("username", as: String.self, is: .alphanumeric && .count(4...))
         validations.add("email", as: String.self, is: .email)
         validations.add("password", as: String.self, is: .count(8...))
     }
@@ -84,7 +84,7 @@ struct UserApiController {
         try await refreshToken.create(on: req.db)
         
         let accessToken = try req.jwt.sign(JWTUser(with: user))
-        let userDetail = try User.Account.Detail(id: user.requireID(), username: user.username)
+        let userDetail = try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email)
         
         return User.Token.Detail(id: refreshToken.id!, user: userDetail, accessToken: accessToken, refreshToken: token)
     }
@@ -129,7 +129,7 @@ struct UserApiController {
             throw AuthenticationError.userNotFound
         }
         
-        return try User.Account.Detail(id: user.requireID(), username: user.username)
+        return try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email)
     }
     
     func resetPasswordHandler(_ req: Request) async throws -> HTTPStatus {

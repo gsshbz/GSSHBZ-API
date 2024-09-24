@@ -19,6 +19,6 @@ struct UserSessionAuthenticator: AsyncSessionAuthenticator {
             return
         }
         
-        try request.auth.login(AuthenticatedUser(id: user.requireID(), username: user.username))
+        try request.auth.login(AuthenticatedUser(id: user.requireID(), email: user.email))
     }
 }

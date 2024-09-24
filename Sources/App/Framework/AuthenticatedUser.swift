@@ -10,11 +10,11 @@ import Vapor
 
 public struct AuthenticatedUser {
     public let id: UUID
-    public let username: String
+    public let email: String
     
-    public init(id: UUID, username: String) {
+    public init(id: UUID, email: String) {
         self.id = id
-        self.username = username
+        self.email = email
     }
 }
 

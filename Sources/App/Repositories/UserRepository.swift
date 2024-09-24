@@ -34,7 +34,7 @@ struct DatabaseUserRepository: UserRepository, DatabaseRepository {
     
     func all() async throws -> [User.Account.List] {
         try await UserAccountModel.query(on: database).all().map { user in
-                .init(id: try user.requireID(), username: user.username)
+                .init(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, email: user.email)
         }
     }
     

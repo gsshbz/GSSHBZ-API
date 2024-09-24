@@ -18,7 +18,6 @@ enum UserMigrations {
                 .field(UserAccountModel.FieldKeys.v1.firstName, .string, .required)
                 .field(UserAccountModel.FieldKeys.v1.lastName, .string, .required)
                 .field(UserAccountModel.FieldKeys.v1.email, .string, .required)
-                .field(UserAccountModel.FieldKeys.v1.username, .string, .required)
                 .field(UserAccountModel.FieldKeys.v1.password, .string, .required)
                 .field(UserAccountModel.FieldKeys.v1.phoneNumber, .string)
                 .field(UserAccountModel.FieldKeys.v1.address, .string)
@@ -26,7 +25,6 @@ enum UserMigrations {
                 .field(UserAccountModel.FieldKeys.v1.createdAt, .datetime)
                 .field(UserAccountModel.FieldKeys.v1.updatedAt, .datetime)
                 .field(UserAccountModel.FieldKeys.v1.deletedAt, .datetime)
-                .unique(on: UserAccountModel.FieldKeys.v1.username)
                 .unique(on: UserAccountModel.FieldKeys.v1.email)
                 .create()
             
@@ -91,7 +89,7 @@ enum UserMigrations {
     struct seed: AsyncMigration {
         func prepare(on database: Database) async throws {
             let password = "admin"
-            let userAccountModel = UserAccountModel(firstName: "Admin", lastName: "Admin", username: "admin", email: "root@localhost.localhost", password: try Bcrypt.hash(password))
+            let userAccountModel = UserAccountModel(firstName: "Admin", lastName: "Admin", email: "root@localhost.localhost", password: try Bcrypt.hash(password))
             
             try await userAccountModel.create(on: database)
         }

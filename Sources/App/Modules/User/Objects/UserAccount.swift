@@ -11,18 +11,22 @@ import Foundation
 extension User.Account {
     struct List: Codable {
         let id: UUID
-        let username: String
+        let firstName: String
+        let lastName: String
+        let email: String
     }
     
     struct Detail: Codable {
         let id: UUID
-        let username: String
+        let firstName: String
+        let lastName: String
+        let profileImageUrlString: String?
+        let email: String
     }
     
     struct Create: Codable {
         let firstName: String
         let lastName: String
-        let username: String
         let email: String
         let password: String
         let confirmPassword: String
@@ -32,13 +36,11 @@ extension User.Account {
     }
     
     struct Update: Codable {
-        let username: String
         let email: String
         let password: String?
     }
     
     struct Patch: Codable {
-        let username: String?
         let email: String?
         let password: String?
     }

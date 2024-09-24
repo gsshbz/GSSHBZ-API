@@ -42,8 +42,7 @@ struct UserLeasesApiController: ListController {
     func listOutput(_ req: Request, _ models: [DatabaseModel]) async throws -> [Armory.Lease.List] {
         try models.map { model in
                 .init(id: model.id!,
-                      user: .init(id: try model.user.requireID(),
-                                  username: model.user.username),
+                      user: .init(id: try model.user.requireID(), firstName: model.user.firstName, lastName: model.user.lastName, email: model.user.email),
                       armoryItems: model.armoryItems.map { .init(id: $0.id!,
                                                                  name: $0.name,
                                                                  imageKey: $0.imageKey,
@@ -54,8 +53,7 @@ struct UserLeasesApiController: ListController {
     }
     
     func detailOutput(_ req: Request, _ model: DatabaseModel) async throws -> Armory.Lease.Detail {
-            return .init(id: model.id!, user: .init(id: try model.user.requireID(),
-                                                    username: model.user.username),
+        return .init(id: model.id!, user: .init(id: try model.user.requireID(), firstName: model.user.firstName, lastName: model.user.lastName, email: model.user.email),
                          armoryItems: model.armoryItems.map { .init(id: $0.id!,
                                                                     name: $0.name,
                                                                     imageKey: $0.imageKey,

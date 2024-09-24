@@ -24,7 +24,7 @@ struct UserCredentialsAuthenticator: AsyncCredentialsAuthenticator {
         do {
             guard try Bcrypt.verify(credentials.password, created: user.password) else { return }
             
-            try request.auth.login(AuthenticatedUser(id: user.requireID(), username: user.username))
+            try request.auth.login(AuthenticatedUser(id: user.requireID(), email: user.email))
         } catch {
             // do nothing...
         }
