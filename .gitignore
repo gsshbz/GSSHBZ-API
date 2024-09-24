@@ -10,3 +10,4 @@ db.sqlite
 .idea/
 *.crt
 *.jwks
+*.toml
