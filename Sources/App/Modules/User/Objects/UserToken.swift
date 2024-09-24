@@ -24,4 +24,8 @@ extension User.Token {
         let refreshToken: String
         let accessToken: String
     }
+    
+    struct ResetPasswordRequest: Codable {
+        let email: String
+    }
 }

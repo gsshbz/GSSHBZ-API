@@ -14,6 +14,7 @@ struct UserRouter: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         let apiRoutes = routes.grouped("api")
+        let resetPassword = apiRoutes.grouped("reset-password")
         
         apiRoutes
 //            .grouped(JWTUser.guardMiddleware())
@@ -22,5 +23,8 @@ struct UserRouter: RouteCollection {
         apiRoutes.on(.POST, "sign-up", use: apiController.signUpApi)
         
         apiRoutes.on(.POST, "refresh-access-token", use: apiController.refreshAccessTokenHandler)
+        
+        resetPassword.on(.POST, use: apiController.resetPasswordHandler)
+        resetPassword.on(.GET, "verify", use: apiController.verifyResetPasswordTokenHandler)
     }
 }

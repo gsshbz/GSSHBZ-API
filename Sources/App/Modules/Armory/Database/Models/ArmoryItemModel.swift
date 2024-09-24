@@ -12,7 +12,7 @@ import Fluent
 final class ArmoryItemModel: DatabaseModelInterface {
     typealias Module = ArmoryModule
     
-    static var identifier: String = "accessories"
+    static var identifier: String = "armory_items"
     
     @ID()
     var id: UUID?

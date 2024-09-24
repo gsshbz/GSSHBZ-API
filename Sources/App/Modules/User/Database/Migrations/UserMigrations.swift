@@ -52,12 +52,39 @@ enum UserMigrations {
                 .field(OAuthToken.FieldKeys.v1.expiresAt, .datetime)
                 .unique(on: OAuthToken.FieldKeys.v1.value)
                 .create()
+            
+            try await database.schema(EmailTokenModel.schema)
+                .id()
+                .field(EmailTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
+                .field(EmailTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(EmailTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
+                .unique(on: EmailTokenModel.FieldKeys.v1.userId)
+                .unique(on: EmailTokenModel.FieldKeys.v1.token)
+                .create()
+            
+            try await database.schema(PasswordTokenModel.schema)
+                .id()
+                .field(PasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
+                .field(PasswordTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(PasswordTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
+                .create()
+            
+            try await database.schema(ResetPasswordTokenModel.schema)
+                .id()
+                .field(ResetPasswordTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(ResetPasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id))
+                .field(ResetPasswordTokenModel.FieldKeys.v1.createdAt, .datetime)
+                .unique(on: ResetPasswordTokenModel.FieldKeys.v1.token)
+                .create()
         }
         
         func revert(on database: Database) async throws {
             try await database.schema(UserAccountModel.schema).delete()
             try await database.schema(RefreshTokenModel.schema).delete()
             try await database.schema(OAuthToken.schema).delete()
+            try await database.schema(EmailTokenModel.schema).delete()
+            try await database.schema(PasswordTokenModel.schema).delete()
+            try await database.schema(ResetPasswordTokenModel.schema).delete()
         }
     }
     

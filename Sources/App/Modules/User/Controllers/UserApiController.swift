@@ -131,4 +131,33 @@ struct UserApiController {
         
         return try User.Account.Detail(id: user.requireID(), username: user.username)
     }
+    
+    func resetPasswordHandler(_ req: Request) async throws -> HTTPStatus {
+        let resetPasswordRequest = try req.content.decode(User.Token.ResetPasswordRequest.self)
+        
+        guard let user = try await UserAccountModel.query(on: req.db).filter(\.$email == resetPasswordRequest.email).first() else {
+            throw Abort(.noContent)
+        }
+        
+        try await req.passwordResetter.reset(for: user)
+        
+        return .noContent
+    }
+    
+    func verifyResetPasswordTokenHandler(_ req: Request) async throws -> HTTPStatus {
+        let token = try req.query.get(String.self, at: "token")
+        let hashedToken = SHA256.hash(token)
+        
+        guard let passwordToken = try await req.passwordTokens.find(token: hashedToken) else {
+            throw AuthenticationError.invalidPasswordToken
+        }
+        
+        
+        guard passwordToken.expiresAt > Date() else {
+            try await req.passwordTokens.delete(passwordToken)
+            throw AuthenticationError.passwordTokenHasExpired
+        }
+        
+        return .noContent
+    }
 }

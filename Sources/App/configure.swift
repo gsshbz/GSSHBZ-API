@@ -5,6 +5,10 @@ import Vapor
 import Liquid
 import LiquidLocalDriver
 import JWT
+import Redis
+import QueuesRedisDriver
+import SendGrid
+
 
 // configures your application
 public func configure(_ app: Application) async throws {
@@ -41,6 +45,12 @@ public func configure(_ app: Application) async throws {
         tls: .disable
     ), sqlLogLevel: .debug), as: .psql)
     
+    // MARK: - Redis setup
+    let redisHostname = Environment.get("REDIS_HOSTNAME") ?? "localhost"
+    let redisConfiguration = try RedisConfiguration(hostname: redisHostname)
+    
+    app.redis.configuration = redisConfiguration
+    app.sessions.use(.redis)
     
     // MARK: - Sessions
     app.sessions.use(.fluent)
@@ -75,5 +85,16 @@ public func configure(_ app: Application) async throws {
         try module.boot(app)
     }
     
+    try queues(app)
+    try services(app)
+    
     try await app.autoMigrate()
+    
+    
+    // MARK: - Queues Job
+    try app.queues.startInProcessJobs()
+    
+    
+    // MARK: - Mail service setup
+    app.sendgrid.initialize()
 }

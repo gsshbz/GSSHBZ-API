@@ -17,6 +17,9 @@ let package = Package(
         .package(url: "https://github.com/binarybirds/swift-html", from: "1.7.0"),
         .package(url: "https://github.com/binarybirds/liquid", from: "1.3.0"),
         .package(url: "https://github.com/binarybirds/liquid-local-driver", from: "1.3.0"),
+        .package(url: "https://github.com/vapor-community/Imperial.git", from: "1.0.0"),
+        .package(url: "https://github.com/vapor-community/sendgrid.git", from: "4.0.0"),
+        .package(url: "https://github.com/vapor/queues-redis-driver.git", from: "1.0.0-rc.1"),
         
         // Other
         .package(url: "https://github.com/swift-cloud/Vercel", from : "1.0.0")
@@ -33,7 +36,10 @@ let package = Package(
                 .product(name: "SwiftHtml", package: "swift-html"),
                 .product(name: "SwiftSvg", package: "swift-html"),
                 .product(name: "Liquid", package: "liquid"),
-                .product(name: "LiquidLocalDriver", package: "liquid-local-driver")
+                .product(name: "LiquidLocalDriver", package: "liquid-local-driver"),
+                .product(name: "ImperialGoogle", package: "Imperial"),
+                .product(name: "SendGrid", package: "sendgrid"),
+                .product(name: "QueuesRedisDriver", package: "queues-redis-driver")
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of

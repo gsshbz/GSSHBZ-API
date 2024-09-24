@@ -24,7 +24,6 @@ struct UserLeasesApiController: ListController {
     typealias PatchObject = Armory.Lease.Patch
     typealias ListObject = Armory.Lease.List
     
-//    var modelName: Name = .init(singular: "accessory", plural: "accessories")
     var parameterId: String = "leaseId"
     
     func setupRoutes(_ routes: RoutesBuilder) {
@@ -125,16 +124,12 @@ extension UserLeasesApiController {
     }
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
-        let jwtUser = try req.auth.require(JWTUser.self)
-        
         let model = try await findBy(identifier(req), on: req.db)
         try await model.delete(on: req.db)
         return .noContent
     }
     
     func detailApi(_ req: Request) async throws -> DetailObject {
-        let jwtUser = try req.auth.require(JWTUser.self)
-        
         guard let model = try await DatabaseModel.query(on: req.db)
             .with(\.$user)
             .with(\.$armoryItems)
@@ -166,8 +161,6 @@ extension UserLeasesApiController {
 //    }
     
     func updateApi(_ req: Request) async throws -> Response {
-        let jwtUser = try req.auth.require(JWTUser.self)
-        
         let updateObject = try req.content.decode(UpdateObject.self)
         
         guard let leaseModel = try await DatabaseModel.query(on: req.db)
