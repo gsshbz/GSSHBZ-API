@@ -18,6 +18,7 @@ version: '3.7'
 
 volumes:
   db_data:
+  redis_data: # Redis persistent data
 
 x-shared_environment: &shared_environment
   LOG_LEVEL: ${LOG_LEVEL:-debug}
@@ -25,7 +26,9 @@ x-shared_environment: &shared_environment
   DATABASE_NAME: gsshbz_database
   DATABASE_USERNAME: gsshbz_username
   DATABASE_PASSWORD: gsshbz_password
-  
+  REDIS_HOST: 127.0.0.1 # Add Redis connection environment variable
+  REDIS_PORT: 6379
+
 services:
   app:
     image: gsshbz-image:latest
@@ -35,10 +38,12 @@ services:
       <<: *shared_environment
     depends_on:
       - db
+      - redis
     ports:
       - '8080:8080'
     # user: '0' # uncomment to run as root for testing purposes even though Dockerfile defines 'vapor' user.
     command: ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8080"]
+
   migrate:
     image: gsshbz-image:latest
     build:
@@ -50,6 +55,7 @@ services:
     command: ["migrate", "--yes"]
     deploy:
       replicas: 0
+
   revert:
     image: gsshbz-image:latest
     build:
@@ -61,6 +67,7 @@ services:
     command: ["migrate", "--revert", "--yes"]
     deploy:
       replicas: 0
+
   db:
     image: postgres:16-alpine
     volumes:
@@ -72,3 +79,12 @@ services:
       POSTGRES_DB: gsshbz_database
     ports:
       - '5432:5432'
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - '6379:6379'
+    command: ["redis-server", "--appendonly", "yes"] # Ensure data persistence
+
