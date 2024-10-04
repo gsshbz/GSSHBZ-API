@@ -18,8 +18,8 @@ final class LeaseModel: DatabaseModelInterface {
     @Parent(key: FieldKeys.v1.userId)
     var user: UserAccountModel
     
-    @Siblings(through: LeaseItemModel.self, from: \.$lease, to: \.$armoryItem)
-    var armoryItems: [ArmoryItemModel]
+//    @Siblings(through: LeaseItemModel.self, from: \.$lease, to: \.$armoryItem)
+//    var armoryItems: [ArmoryItemModel]
     
     @Timestamp(key: FieldKeys.v1.createdAt, on: .create)
     var createdAt: Date?

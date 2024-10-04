@@ -28,4 +28,12 @@ public extension ListController {
         
         return try await query.all()
     }
+    
+    func paginatedList(_ req: Request, queryBuilders: (QueryBuilder<DatabaseModel>) -> Void...) async throws -> Page<DatabaseModel> {
+        let query = DatabaseModel.query(on: req.db)
+        
+        queryBuilders.forEach { $0(query) }
+        
+        return try await query.paginate(for: req)
+    }
 }

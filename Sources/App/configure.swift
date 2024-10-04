@@ -97,4 +97,32 @@ public func configure(_ app: Application) async throws {
     
     // MARK: - Mail service setup
     app.sendgrid.initialize()
+    
+    // MARK: - WebSocket setup
+    let eventLoop = app.eventLoopGroup.next()
+    ArmoryWebSocketSystem.shared = ArmoryWebSocketSystem(eventLoop: eventLoop)
+    
+    // WebSocket route setup
+    app.webSocket("armory") { req, ws async in
+        do {
+            guard let clientIdString = req.query[String.self, at: "client"],
+                  let clientId = UUID(uuidString: clientIdString),
+                  let user = try await UserAccountModel.find(clientId, on: req.db) else {
+                ws.close(promise: nil)
+                return
+            }
+            
+            let client = WebSocketClient(id: try user.requireID(), socket: ws)
+            ArmoryWebSocketSystem.shared.clients.add(client)
+            
+            ws.onClose.whenComplete { _ in
+                ArmoryWebSocketSystem.shared.clients.remove(client)
+            }
+        } catch {
+            print("Error handling WebSocket connection: \(error)")
+            Task {
+                try await ws.close()
+            }
+        }
+    }
 }

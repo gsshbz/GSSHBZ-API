@@ -26,7 +26,7 @@ x-shared_environment: &shared_environment
   DATABASE_NAME: gsshbz_database
   DATABASE_USERNAME: gsshbz_username
   DATABASE_PASSWORD: gsshbz_password
-  REDIS_HOST: redis # Add Redis connection environment variable
+  REDIS_HOST: redis://localhost:6379 # Add Redis connection environment variable
   REDIS_PORT: 6379
 
 services:

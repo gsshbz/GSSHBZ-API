@@ -25,8 +25,10 @@ enum LeaseMigrations {
                 .id()
                 .field(LeaseItemModel.FieldKeys.v1.leaseId, .uuid, .required)
                 .field(LeaseItemModel.FieldKeys.v1.armoryItemId, .uuid, .required)
+                .field(LeaseItemModel.FieldKeys.v1.quantity, .int, .required, .sql(.default(1)))
                 .foreignKey(LeaseItemModel.FieldKeys.v1.leaseId, references: LeaseModel.schema, LeaseModel.FieldKeys.v1.id, onDelete: .cascade)
                 .foreignKey(LeaseItemModel.FieldKeys.v1.armoryItemId, references: ArmoryItemModel.schema, ArmoryItemModel.FieldKeys.v1.id, onDelete: .cascade)
+                .unique(on: LeaseItemModel.FieldKeys.v1.leaseId, LeaseItemModel.FieldKeys.v1.armoryItemId)
                 .create()
         }
         

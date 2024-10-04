@@ -17,8 +17,8 @@ final class ArmoryItemModel: DatabaseModelInterface {
     @ID()
     var id: UUID?
     
-    @Siblings(through: LeaseItemModel.self, from: \.$armoryItem, to: \.$lease)
-    var leases: [LeaseModel]
+//    @Siblings(through: LeaseItemModel.self, from: \.$armoryItem, to: \.$lease)
+//    var leases: [LeaseModel]
     
     @Field(key: FieldKeys.v1.name)
     var name: String
@@ -55,5 +55,16 @@ final class ArmoryItemModel: DatabaseModelInterface {
             static var inStock: FieldKey { "in_stock" }
             static var aboutInfo: FieldKey { "about_info" }
         }
+    }
+}
+
+
+struct ArmoryItemModelUpdateMiddleware: AsyncModelMiddleware {
+    func update(model: ArmoryItemModel, on db: Database, next: AnyAsyncModelResponder) async throws {
+        Task {
+            try await ArmoryWebSocketSystem.shared.broadcastArmoryItemUpdated(.init(id: try model.requireID(), name: model.name, imageKey: model.imageKey, aboutInfo: model.aboutInfo, inStock: model.inStock, category: model.category != nil ? .init(id: try model.category!.requireID(), name: model.category!.name) : nil))
+        }
+        
+        try await next.update(model, on: db)
     }
 }

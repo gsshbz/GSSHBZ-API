@@ -10,9 +10,14 @@ import Foundation
 
 public extension Armory.Lease {
     struct List: Codable {
-        let id: UUID
-        let user: User.Account.List
-        let armoryItems: [Armory.Item.List]
+        let leases: [Detail]
+        let metadata: Metadata?
+        
+        struct Metadata: Codable {
+            let page: Int
+            let per: Int
+            let total: Int
+        }
     }
     
     struct Detail: Codable {
@@ -22,14 +27,29 @@ public extension Armory.Lease {
     }
     
     struct Create: Codable {
-        let armoryItemsIds: [UUID]
+        let items: [ArmoryItem]
+        
+        struct ArmoryItem: Codable {
+            let armoryItemId: UUID
+            let quantity: Int
+        }
     }
     
     struct Update: Codable {
-        let armoryItemsIds: [UUID]
+        let items: [ArmoryItem]
+        
+        struct ArmoryItem: Codable {
+            let armoryItemId: UUID
+            let quantity: Int
+        }
     }
     
     struct Patch: Codable {
-        let armoryItemsIds: [UUID]?
+        let items: [ArmoryItem]?
+        
+        struct ArmoryItem: Codable {
+            let armoryItemId: UUID
+            let quantity: Int
+        }
     }
 }

@@ -15,18 +15,22 @@ final class LeaseItemModel: DatabaseModelInterface {
     @ID()
     var id: UUID?
 
-    @Parent(key: FieldKeys.v1.leaseId)
-    var lease: LeaseModel
+    @Field(key: FieldKeys.v1.leaseId)
+    var leaseId: UUID
 
-    @Parent(key: FieldKeys.v1.armoryItemId)
-    var armoryItem: ArmoryItemModel
+    @Field(key: FieldKeys.v1.armoryItemId)
+    var armoryItemId: UUID
+    
+    @Field(key: FieldKeys.v1.quantity)
+    var quantity: Int
 
     init() {}
 
-    init(id: UUID? = nil, leaseId: UUID, armoryItemId: UUID) {
+    init(id: UUID? = nil, leaseId: UUID, armoryItemId: UUID, quantity: Int) {
         self.id = id
-        self.$lease.id = leaseId
-        self.$armoryItem.id = armoryItemId
+        self.leaseId = leaseId
+        self.armoryItemId = armoryItemId
+        self.quantity = quantity
     }
 }
 
@@ -36,6 +40,7 @@ extension LeaseItemModel {
             static var id: FieldKey { "id" }
             static var leaseId: FieldKey { "lease_id" }
             static var armoryItemId: FieldKey { "armory_item_id" }
+            static var quantity: FieldKey { "quantity" }
         }
     }
 }
