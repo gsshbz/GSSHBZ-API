@@ -734,6 +734,73 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Sign Out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/sign-out",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"sign-out"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sign Out",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/sign-out",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"sign-out"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "0"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=R2ezcjc4bBfLXq5ZjRz+bFCoVUJJJuDSiEwEscCEb6Y=; Expires=Wed, 16 Oct 2024 19:27:58 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 09 Oct 2024 19:27:58 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			]
 		},

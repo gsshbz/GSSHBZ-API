@@ -20,6 +20,8 @@ struct UserRouter: RouteCollection {
 //            .grouped(JWTUser.guardMiddleware())
             .on(.POST, "sign-in", use: apiController.signInApi)
         
+        apiRoutes.on(.POST, "sign-out", use: apiController.signOutApi)
+        
         apiRoutes.on(.POST, "sign-up", use: apiController.signUpApi)
         
         apiRoutes.on(.POST, "refresh-access-token", use: apiController.refreshAccessTokenHandler)

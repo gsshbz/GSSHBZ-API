@@ -89,6 +89,20 @@ struct UserApiController {
         return User.Token.Detail(id: refreshToken.id!, user: userDetail, accessToken: accessToken, refreshToken: token)
     }
     
+    func signOutApi(_ req: Request) async throws -> HTTPStatus {
+        // Require the user to be authenticated
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        // Find and delete all refresh tokens for this user, essentially signing them out
+        try await RefreshTokenModel.query(on: req.db)
+            .filter(\.$user.$id == jwtUser.userId)
+            .delete()
+        
+        // Optionally, if you want to perform other cleanup tasks, like logging out on the frontend.
+        
+        return .ok
+    }
+    
     func refreshAccessTokenHandler(_ req: Request) async throws -> User.Token.AccessTokenResponse {
         let accessTokenRequest = try req.content.decode(User.Token.AccessTokenRequest.self)
         let hashedRefreshToken = SHA256.hash(accessTokenRequest.refreshToken)
