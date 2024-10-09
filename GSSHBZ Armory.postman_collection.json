@@ -506,7 +506,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"Mateo\",\n    \"lastName\": \"Cobanov\",\n    \"username\": \"mateocobanov\",\n    \"email\": \"mateo.cobanov@gmail.com\",\n    \"password\": \"123456789\",\n    \"confirmPassword\": \"123456789\",\n    \"address\": \"Testna Ulica 1\",\n    \"phoneNumber\": \"0028428371098\",\n    \"profileImageUrlString\": \"https://sidneyliebrand.io/media/posts/asdfmovie-banner.svg\"\n}",
+							"raw": "{\n    \"firstName\": \"Mico\",\n    \"lastName\": \"Miloloza\",\n    \"email\": \"brinaxx@gmail.com\",\n    \"password\": \"123456789\",\n    \"confirmPassword\": \"123456789\",\n    \"address\": \"Testna Ulica 1\",\n    \"phoneNumber\": \"0028428371098\",\n    \"profileImageUrlString\": \"https://sidneyliebrand.io/media/posts/asdfmovie-banner.svg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -535,7 +535,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"tesnikorisnik@test.com\",\n    \"password\": \"123456789\"\n}",
+							"raw": "{\n    \"email\": \"brinaxx@gmail.com\",\n    \"password\": \"123456789\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -904,7 +904,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payIsInVzZXJJZCI6IjQwRTIyRjFGLUJBMEYtNDI5OC1CMTFDLTY0MzFGNkM2OUYzRiIsImV4cGlyYXRpb24iOjE3MjQ5MjU2NDguNDE4ODUsImVtYWlsIjoidGVzbmlrb3Jpc25pa0B0ZXN0LmNvbSJ9.QosnyQZWd6wK6W7nt75x7WrcxzRNOwbkVVqnZZzUvMficH1Kk3HWnVV-uGpCaegpV1-RNX4sJGfDTgiVKcY2BWUtp2tYiGB4Z00ECt7TOhWJwyNu-slxaen3z8t8EXqMg_H45db7XKtXfJNePNUkgZUMvElBqS9xt5ausk4HR1vmSrtH6Od-GnzAZppSSWs81-sjHOXlA4odjo-5lh2KNxxa_D3W2jauLM1tr-2HtCkEoUa4m1bVI-73GILDWJmm3j11DWtQIGQV5ghfmsGzMHv2j1QWAYd_YZuJz226c9GRP9xefGpPq-RPD6vR7uiLnKzlzQFwI0z8udH8_Vy5vw",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
 									"type": "string"
 								}
 							]
@@ -949,11 +949,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "2319"
+									"value": "1629"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:11:38 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=R2ezcjc4bBfLXq5ZjRz+bFCoVUJJJuDSiEwEscCEb6Y=; Expires=Wed, 16 Oct 2024 19:12:57 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -961,11 +961,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 21:11:38 GMT"
+									"value": "Wed, 09 Oct 2024 19:12:57 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"imageKey\": \"william.jpeg\",\n        \"name\": \"William karabiner\",\n        \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n        \"inStock\": 0\n    },\n    {\n        \"inStock\": 0,\n        \"name\": \"OK karabiner\",\n        \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n        \"imageKey\": \"carabiner-ok.jpeg\",\n        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n    },\n    {\n        \"inStock\": 0,\n        \"imageKey\": \"grigri.jpeg\",\n        \"name\": \"GRIGRI\",\n        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n        \"id\": \"61D75FDF-D520-4405-9A66-4B06364F9220\"\n    },\n    {\n        \"id\": \"E9DE436D-62EB-48D2-A354-1B5ED466E861\",\n        \"name\": \"Petzl Boreo Caving kaciga\",\n        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n        \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n        \"inStock\": 0\n    },\n    {\n        \"inStock\": 10,\n        \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n        \"id\": \"D473ADF7-56B7-4C17-A6B0-E7E4E0284ECC\",\n        \"name\": \"Stop descender\",\n        \"aboutInfo\": \"Descent control bla bla bla\"\n    }\n]"
+							"body": "[\n    {\n        \"name\": \"OK karabiner\",\n        \"id\": \"6D848FE8-975B-4D2A-8713-52297B4B5536\",\n        \"inStock\": 0,\n        \"imageKey\": \"carabiner-ok.jpeg\",\n        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n    },\n    {\n        \"imageKey\": \"grigri.jpeg\",\n        \"id\": \"1345D1C3-EAE9-43BC-AC4D-7EBFF31EEB00\",\n        \"inStock\": 0,\n        \"name\": \"GRIGRI\",\n        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\"\n    },\n    {\n        \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n        \"imageKey\": \"william.jpeg\",\n        \"inStock\": 6,\n        \"name\": \"William karabiner\",\n        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n    },\n    {\n        \"name\": \"Updateani armory item\",\n        \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n        \"inStock\": 40,\n        \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n        \"aboutInfo\": \"Updateani info\"\n    }\n]"
 						}
 					]
 				},
@@ -977,7 +977,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiIzQjM3REQ2Ni1GODY3LTQ5NDYtOTk4RC0yQjBCNEVBNDY1OTYiLCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payIsImV4cGlyYXRpb24iOjE3MjQzNTU5MTQuMjI2NTQ2fQ.Dg5_F3jsiYqmaDtPwDCEWT4JzyQtRceb6r3pC6MTpkq-FO0rEgfsk2l7pqO1yOD27q9jCu5Bi7xkdCwoHfQcfO18jcEXAiJuI3DPTwkp43OV06A2m8uH_NJKCAGodTCR47UnltmEHtx5_Op9dpC59L9fPF03NiOJP1e0QKjd5OxlV-lQkDLC1dt729MWoUEn8FQ5W9SKpYAVFcctSKXV2jvPRwpWv_FI2Tr8VShTqSy42dwsNJ0xFJRQTifpi1n3oIvZp9OfyfJA-HNSIF61QgIQlcZJ5SsjqrZX1EO-y7RrliUk2W2nWIejZ0gLwv6U2IJBRvsecBWzYHR3nnTsBQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
 									"type": "string"
 								}
 							]
@@ -986,7 +986,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 14\n}",
+							"raw": "{\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 40\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -994,20 +994,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/D473ADF7-56B7-4C17-A6B0-E7E4E0284ECC",
+							"raw": "{{base_api_url}}/armory/items/5963FA33-23EC-4A16-9585-5C6E3D07042C",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"D473ADF7-56B7-4C17-A6B0-E7E4E0284ECC"
+								"5963FA33-23EC-4A16-9585-5C6E3D07042C"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Update Accessory",
+							"name": "Update Armory Item",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [],
@@ -1170,7 +1170,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiI0MEUyMkYxRi1CQTBGLTQyOTgtQjExQy02NDMxRjZDNjlGM0YiLCJleHBpcmF0aW9uIjoxNzI1MDIwNjM5LjQ5NDU1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.eN0Iw5RX0lGA04Wko7FRdAfTt3mIu79AB-rYygVyAgLWrDf9DAuH-MuhMLR-s8mH-0uH1SfTrhT1ozKee6UONOvrnni2NBOv03PHgHN8r8dNsJy0ZjvfdGZSd5UQGFQpBTgMoXk7Kqihu6ITeXLK2URZEIxVdP1jbBHZqlBYVxo2g6cjoMncVqJeQUNY2SrYbXuYDSA5DLAe5g6lUO9wMw6QVjoDPeqCSi9PCK3z4SjAUDlONc3u9CYYwl3OSevP1ImB64HOcTaemIInmZY-g7z6iyBsu0n1kNiEJ0iZ49Nf4SzUAudeHN5dsypIqM0sSf-_SqOIuDdfodkfopjB1w",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
 									"type": "string"
 								}
 							]
@@ -1179,7 +1179,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"AB39072D-FF6C-4646-9983-F96843FE6B09\",\n            \"quantity\": 1\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n            \"quantity\": 2\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1205,7 +1205,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"armoryItemsIds\": [\n        \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n        \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n    ]\n}",
+									"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n            \"quantity\": 2\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1233,11 +1233,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "1040"
+									"value": "924"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:42:42 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=R2ezcjc4bBfLXq5ZjRz+bFCoVUJJJuDSiEwEscCEb6Y=; Expires=Wed, 16 Oct 2024 19:15:12 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1245,11 +1245,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 21:42:41 GMT"
+									"value": "Wed, 09 Oct 2024 19:15:12 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"armoryItems\": [\n        {\n            \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n            \"imageKey\": \"william.jpeg\",\n            \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n            \"inStock\": 0,\n            \"name\": \"William karabiner\"\n        },\n        {\n            \"inStock\": 0,\n            \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n            \"imageKey\": \"carabiner-ok.jpeg\",\n            \"name\": \"OK karabiner\",\n            \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n        }\n    ],\n    \"id\": \"EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2\",\n    \"user\": {\n        \"username\": \"tesniKorisnik12\",\n        \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n    }\n}"
+							"body": "{\n    \"user\": {\n        \"lastName\": \"Miloloza\",\n        \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n        \"email\": \"brinaxx@gmail.com\",\n        \"firstName\": \"Mico\"\n    },\n    \"armoryItems\": [\n        {\n            \"name\": \"William karabiner\",\n            \"imageKey\": \"william.jpeg\",\n            \"inStock\": 5,\n            \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n            \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n        },\n        {\n            \"aboutInfo\": \"Updateani info\",\n            \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n            \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n            \"inStock\": 38,\n            \"name\": \"Updateani armory item\"\n        }\n    ],\n    \"id\": \"3372B001-029F-44C0-9215-FA231FCE95D2\"\n}"
 						}
 					]
 				},
@@ -1261,7 +1261,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiI0MEUyMkYxRi1CQTBGLTQyOTgtQjExQy02NDMxRjZDNjlGM0YiLCJleHBpcmF0aW9uIjoxNzI1MDIwNjM5LjQ5NDU1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.eN0Iw5RX0lGA04Wko7FRdAfTt3mIu79AB-rYygVyAgLWrDf9DAuH-MuhMLR-s8mH-0uH1SfTrhT1ozKee6UONOvrnni2NBOv03PHgHN8r8dNsJy0ZjvfdGZSd5UQGFQpBTgMoXk7Kqihu6ITeXLK2URZEIxVdP1jbBHZqlBYVxo2g6cjoMncVqJeQUNY2SrYbXuYDSA5DLAe5g6lUO9wMw6QVjoDPeqCSi9PCK3z4SjAUDlONc3u9CYYwl3OSevP1ImB64HOcTaemIInmZY-g7z6iyBsu0n1kNiEJ0iZ49Nf4SzUAudeHN5dsypIqM0sSf-_SqOIuDdfodkfopjB1w",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
 									"type": "string"
 								}
 							]
@@ -1269,14 +1269,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/32DB3209-3EBE-4FCD-9166-0BEDD7DB0E9F",
+							"raw": "{{base_api_url}}/armory/leases/5963FA33-23EC-4A16-9585-5C6E3D07042C",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"32DB3209-3EBE-4FCD-9166-0BEDD7DB0E9F"
+								"5963FA33-23EC-4A16-9585-5C6E3D07042C"
 							]
 						}
 					},
@@ -1287,14 +1287,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_api_url}}/armory/leases/1B4007C0-019C-43A6-8F43-3178F3C8E96D",
+									"raw": "{{base_api_url}}/armory/leases/5963FA33-23EC-4A16-9585-5C6E3D07042C",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"leases",
-										"1B4007C0-019C-43A6-8F43-3178F3C8E96D"
+										"5963FA33-23EC-4A16-9585-5C6E3D07042C"
 									]
 								}
 							},
@@ -1308,11 +1308,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "1040"
+									"value": "782"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:44:15 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=R2ezcjc4bBfLXq5ZjRz+bFCoVUJJJuDSiEwEscCEb6Y=; Expires=Wed, 16 Oct 2024 19:16:04 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1320,11 +1320,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 21:44:15 GMT"
+									"value": "Wed, 09 Oct 2024 19:16:04 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"armoryItems\": [\n        {\n            \"imageKey\": \"william.jpeg\",\n            \"name\": \"William karabiner\",\n            \"inStock\": 0,\n            \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n            \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n        },\n        {\n            \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n            \"imageKey\": \"carabiner-ok.jpeg\",\n            \"name\": \"OK karabiner\",\n            \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n            \"inStock\": 0\n        }\n    ],\n    \"id\": \"1B4007C0-019C-43A6-8F43-3178F3C8E96D\",\n    \"user\": {\n        \"username\": \"tesniKorisnik12\",\n        \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n    }\n}"
+							"body": "{\n    \"armoryItems\": [\n        {\n            \"name\": \"William karabiner\",\n            \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n            \"imageKey\": \"william.jpeg\",\n            \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n            \"category\": {\n                \"name\": \"Carabiner\",\n                \"id\": \"42FCCA26-301A-4E0A-9D08-AA0D5A788ACD\"\n            },\n            \"inStock\": 5\n        }\n    ],\n    \"user\": {\n        \"lastName\": \"Miloloza\",\n        \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n        \"email\": \"brinaxx@gmail.com\",\n        \"firstName\": \"Mico\"\n    },\n    \"id\": \"5963FA33-23EC-4A16-9585-5C6E3D07042C\"\n}"
 						}
 					]
 				},
@@ -1336,7 +1336,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJ1c2VySWQiOiI0MEUyMkYxRi1CQTBGLTQyOTgtQjExQy02NDMxRjZDNjlGM0YiLCJleHBpcmF0aW9uIjoxNzI1MDIwNjM5LjQ5NDU1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.eN0Iw5RX0lGA04Wko7FRdAfTt3mIu79AB-rYygVyAgLWrDf9DAuH-MuhMLR-s8mH-0uH1SfTrhT1ozKee6UONOvrnni2NBOv03PHgHN8r8dNsJy0ZjvfdGZSd5UQGFQpBTgMoXk7Kqihu6ITeXLK2URZEIxVdP1jbBHZqlBYVxo2g6cjoMncVqJeQUNY2SrYbXuYDSA5DLAe5g6lUO9wMw6QVjoDPeqCSi9PCK3z4SjAUDlONc3u9CYYwl3OSevP1ImB64HOcTaemIInmZY-g7z6iyBsu0n1kNiEJ0iZ49Nf4SzUAudeHN5dsypIqM0sSf-_SqOIuDdfodkfopjB1w",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
 									"type": "string"
 								}
 							]
@@ -1383,11 +1383,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "9370"
+									"value": "4090"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:43:15 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=R2ezcjc4bBfLXq5ZjRz+bFCoVUJJJuDSiEwEscCEb6Y=; Expires=Wed, 16 Oct 2024 19:12:05 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1395,11 +1395,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 21:43:14 GMT"
+									"value": "Wed, 09 Oct 2024 19:12:05 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"B6C8338A-F48B-465E-B8E7-BA477CD638DB\",\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"armoryItems\": [\n            {\n                \"inStock\": 0,\n                \"imageKey\": \"william.jpeg\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\"\n            },\n            {\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\"\n            }\n        ]\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"name\": \"William karabiner\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"inStock\": 0\n            },\n            {\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0,\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n            }\n        ],\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"id\": \"BB1162E6-6651-4331-A2ED-3230A4240C11\"\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"name\": \"William karabiner\",\n                \"inStock\": 0,\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n            },\n            {\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n            }\n        ],\n        \"id\": \"7749B954-8759-4D33-A6F4-8EDA1B17C628\",\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        }\n    },\n    {\n        \"user\": {\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\",\n            \"username\": \"tesniKorisnik12\"\n        },\n        \"id\": \"73931FD9-B17B-4FB8-98C0-CE20841496F2\",\n        \"armoryItems\": [\n            {\n                \"inStock\": 0,\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\"\n            },\n            {\n                \"inStock\": 0,\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"name\": \"OK karabiner\"\n            }\n        ]\n    },\n    {\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"armoryItems\": [\n            {\n                \"imageKey\": \"william.jpeg\",\n                \"name\": \"William karabiner\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"inStock\": 0,\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\"\n            },\n            {\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\"\n            }\n        ],\n        \"id\": \"1B4007C0-019C-43A6-8F43-3178F3C8E96D\"\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"name\": \"William karabiner\",\n                \"imageKey\": \"william.jpeg\",\n                \"inStock\": 0\n            },\n            {\n                \"name\": \"OK karabiner\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0\n            }\n        ],\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"id\": \"760C8288-93E5-41C2-AA28-F7FA5B15D62C\"\n    },\n    {\n        \"user\": {\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\",\n            \"username\": \"tesniKorisnik12\"\n        },\n        \"armoryItems\": [\n            {\n                \"imageKey\": \"william.jpeg\",\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"name\": \"William karabiner\",\n                \"inStock\": 0,\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n            },\n            {\n                \"inStock\": 0,\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"imageKey\": \"carabiner-ok.jpeg\"\n            }\n        ],\n        \"id\": \"6D84225D-35FE-4325-AF26-3E57554B7C26\"\n    },\n    {\n        \"id\": \"85A91B7B-4B54-47DA-AD8B-622D5085D505\",\n        \"armoryItems\": [\n            {\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"name\": \"William karabiner\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"inStock\": 0\n            },\n            {\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 0\n            }\n        ],\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        }\n    },\n    {\n        \"user\": {\n            \"username\": \"tesniKorisnik12\",\n            \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\"\n        },\n        \"armoryItems\": [\n            {\n                \"id\": \"6C96D6DC-9D95-49C2-ABE8-10FDAF4E762B\",\n                \"imageKey\": \"william.jpeg\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\",\n                \"inStock\": 0\n            },\n            {\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"inStock\": 0,\n                \"name\": \"OK karabiner\",\n                \"id\": \"1BCDE390-DABA-42DB-A56F-243F0E3F29F0\"\n            }\n        ],\n        \"id\": \"EA5465D0-6BE9-4BA5-BAB9-8FCA12BE0ED2\"\n    }\n]"
+							"body": "{\n    \"leases\": [\n        {\n            \"armoryItems\": [],\n            \"user\": {\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\",\n                \"lastName\": \"Miloloza\"\n            },\n            \"id\": \"3D103FF6-76B2-4584-A063-7C52BCDF850E\"\n        },\n        {\n            \"id\": \"73341407-623C-4280-ABD2-02FD6B38D168\",\n            \"user\": {\n                \"email\": \"brinaxx@gmail.com\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"firstName\": \"Mico\",\n                \"lastName\": \"Miloloza\"\n            },\n            \"armoryItems\": []\n        },\n        {\n            \"user\": {\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"lastName\": \"Miloloza\"\n            },\n            \"id\": \"5963FA33-23EC-4A16-9585-5C6E3D07042C\",\n            \"armoryItems\": [\n                {\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"inStock\": 6,\n                    \"name\": \"William karabiner\",\n                    \"imageKey\": \"william.jpeg\"\n                }\n            ]\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"imageKey\": \"william.jpeg\",\n                    \"name\": \"William karabiner\",\n                    \"inStock\": 6,\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\"\n                },\n                {\n                    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n                    \"aboutInfo\": \"Updateani info\",\n                    \"inStock\": 40,\n                    \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n                    \"name\": \"Updateani armory item\"\n                }\n            ],\n            \"user\": {\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\",\n                \"lastName\": \"Miloloza\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\"\n            },\n            \"id\": \"B88A01E7-C78B-4748-8AC5-396837F52BA3\"\n        },\n        {\n            \"user\": {\n                \"lastName\": \"Miloloza\",\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\"\n            },\n            \"armoryItems\": [\n                {\n                    \"name\": \"William karabiner\",\n                    \"imageKey\": \"william.jpeg\",\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"inStock\": 6\n                },\n                {\n                    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n                    \"inStock\": 40,\n                    \"aboutInfo\": \"Updateani info\",\n                    \"name\": \"Updateani armory item\",\n                    \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\"\n                }\n            ],\n            \"id\": \"B668978E-A193-4A57-AF42-41A1869A53BB\"\n        },\n        {\n            \"id\": \"4BBA3CC3-EFD6-4B24-8B7F-D553CBE7C2C4\",\n            \"user\": {\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"lastName\": \"Miloloza\",\n                \"firstName\": \"Mico\",\n                \"email\": \"brinaxx@gmail.com\"\n            },\n            \"armoryItems\": [\n                {\n                    \"inStock\": 6,\n                    \"imageKey\": \"william.jpeg\",\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n                    \"name\": \"William karabiner\"\n                },\n                {\n                    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n                    \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n                    \"name\": \"Updateani armory item\",\n                    \"inStock\": 40,\n                    \"aboutInfo\": \"Updateani info\"\n                }\n            ]\n        },\n        {\n            \"id\": \"895345B7-0803-4276-8365-B5111EF3AD71\",\n            \"user\": {\n                \"lastName\": \"Miloloza\",\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\"\n            },\n            \"armoryItems\": []\n        }\n    ],\n    \"metadata\": {\n        \"page\": 1,\n        \"per\": 10,\n        \"total\": 7\n    }\n}"
 						}
 					]
 				},
@@ -1556,6 +1556,101 @@
 							],
 							"cookie": [],
 							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get User Leases",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/user-leases?page=1&per=5",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"user-leases"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User Leases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/user-leases?page=1&per=5",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"user-leases"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2979"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=R2ezcjc4bBfLXq5ZjRz+bFCoVUJJJuDSiEwEscCEb6Y=; Expires=Wed, 16 Oct 2024 19:12:38 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 09 Oct 2024 19:12:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"metadata\": {\n        \"page\": 1,\n        \"per\": 5,\n        \"total\": 7\n    },\n    \"leases\": [\n        {\n            \"armoryItems\": [],\n            \"user\": {\n                \"lastName\": \"Miloloza\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\"\n            },\n            \"id\": \"3D103FF6-76B2-4584-A063-7C52BCDF850E\"\n        },\n        {\n            \"user\": {\n                \"lastName\": \"Miloloza\",\n                \"email\": \"brinaxx@gmail.com\",\n                \"firstName\": \"Mico\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\"\n            },\n            \"armoryItems\": [],\n            \"id\": \"73341407-623C-4280-ABD2-02FD6B38D168\"\n        },\n        {\n            \"id\": \"5963FA33-23EC-4A16-9585-5C6E3D07042C\",\n            \"user\": {\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"firstName\": \"Mico\",\n                \"lastName\": \"Miloloza\",\n                \"email\": \"brinaxx@gmail.com\"\n            },\n            \"armoryItems\": [\n                {\n                    \"imageKey\": \"william.jpeg\",\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"inStock\": 6,\n                    \"name\": \"William karabiner\",\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\"\n                }\n            ]\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"imageKey\": \"william.jpeg\",\n                    \"inStock\": 6,\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"name\": \"William karabiner\"\n                },\n                {\n                    \"aboutInfo\": \"Updateani info\",\n                    \"inStock\": 40,\n                    \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n                    \"name\": \"Updateani armory item\",\n                    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\"\n                }\n            ],\n            \"user\": {\n                \"email\": \"brinaxx@gmail.com\",\n                \"lastName\": \"Miloloza\",\n                \"firstName\": \"Mico\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\"\n            },\n            \"id\": \"B88A01E7-C78B-4748-8AC5-396837F52BA3\"\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"name\": \"William karabiner\",\n                    \"imageKey\": \"william.jpeg\",\n                    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                    \"id\": \"0AE39E99-637C-457D-9910-E2426F252E66\",\n                    \"inStock\": 6\n                },\n                {\n                    \"name\": \"Updateani armory item\",\n                    \"inStock\": 40,\n                    \"id\": \"DFF46CEE-70CD-4518-B691-1342B62D8642\",\n                    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n                    \"aboutInfo\": \"Updateani info\"\n                }\n            ],\n            \"id\": \"B668978E-A193-4A57-AF42-41A1869A53BB\",\n            \"user\": {\n                \"email\": \"brinaxx@gmail.com\",\n                \"id\": \"B56920B3-472F-449A-AA2A-C359D4A04A40\",\n                \"firstName\": \"Mico\",\n                \"lastName\": \"Miloloza\"\n            }\n        }\n    ]\n}"
 						}
 					]
 				}
