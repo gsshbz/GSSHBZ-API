@@ -26,6 +26,8 @@ struct UserRouter: RouteCollection {
         
         apiRoutes.on(.POST, "refresh-access-token", use: apiController.refreshAccessTokenHandler)
         
+        apiRoutes.on(.GET, "current-user", use: apiController.getCurrentUserHandler)
+        
         resetPassword.on(.POST, use: apiController.resetPasswordHandler)
         resetPassword.on(.GET, "verify", use: apiController.verifyResetPasswordTokenHandler)
     }

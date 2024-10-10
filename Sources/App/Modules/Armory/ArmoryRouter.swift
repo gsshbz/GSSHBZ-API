@@ -26,8 +26,5 @@ public struct ArmoryRouter: RouteCollection {
         
         armoryCategoryApiController.setupRoutes(api)
         armoryItemsController.setupRoutes(api)
-//        armoryLeasesController.setupRoutes(authenticated)
-        
-//        api.on(.POST, ["armory", "accessories"], use: armoryAccessoryController.leaseAccessories)
     }
 }

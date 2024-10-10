@@ -6,44 +6,100 @@
 //
 
 import Vapor
+import Fluent
 
 
 extension Armory.Category.List: Content {}
 extension Armory.Category.Detail: Content {}
 
-struct ArmoryCategoryApiController: ApiController {
+struct ArmoryCategoryApiController: ListController {
     typealias ApiModel = Armory.Category
+    
+    // Response Objects
     typealias DatabaseModel = ArmoryCategoryModel
+    typealias DetailObject = Armory.Category.Detail
+    typealias ListObject = Armory.Category.List
+    
+    // Request Objects
+    typealias GetList = Armory.Category.GetList
+    typealias CreateObject = Armory.Category.Create
+    typealias UpdateObject = Armory.Category.Update
+    typealias PatchObject = Armory.Category.Patch
     
     var modelName: Name = .init(singular: "category", plural: "categories")
     var parameterId: String = "categoryId"
     
-    // MARK: - Model manipulation methods
-    
-    // MARK: - List
-    func listOutput(_ req: Request, _ models: [DatabaseModel]) async throws -> [Armory.Category.List] {
-        models.map {
-            .init(id: $0.id!, name: $0.name)
+    func setupRoutes(_ routes: RoutesBuilder) {
+        let baseRoutes = getBaseRoutes(routes)
+        let existingModelRoutes = baseRoutes.grouped(ApiModel.pathIdComponent)
+        
+        baseRoutes.on(.GET, use: listApi)
+        baseRoutes.on(.POST, use: createApi)
+        
+        existingModelRoutes.on(.GET, use: detailApi)
+        existingModelRoutes.on(.PUT, use: updateApi)
+        existingModelRoutes.on(.DELETE, use: deleteApi)
+    }
+}
+
+extension ArmoryCategoryApiController {
+    func createApi(_ req: Request) async throws -> DetailObject {
+        let input = try req.content.decode(CreateObject.self)
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db),
+              let _ = try? user.requireID() else {
+            throw AuthenticationError.userNotFound
         }
+        
+        let categoryModel = ArmoryCategoryModel(name: input.name)
+        try await categoryModel.save(on: req.db)
+        
+        return .init(id: try categoryModel.requireID(), name: categoryModel.name)
     }
     
-    // MARK: - Detail
-    func detailOutput(_ req: Request, _ model: DatabaseModel) async throws -> Armory.Category.Detail {
-        return .init(id: model.id!, name: model.name)
+    func deleteApi(_ req: Request) async throws -> HTTPStatus {
+        let model = try await findBy(identifier(req), on: req.db)
+        try await model.delete(on: req.db)
+        return .noContent
     }
     
-    // MARK: - Create
-    func createInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Category.Create) async throws {
-        model.name = input.name
+    func detailApi(_ req: Request) async throws -> DetailObject {
+        guard let categoryModel = try await DatabaseModel.query(on: req.db)
+            .filter(\.$id == identifier(req))
+            .first() else {
+            throw Abort(.notFound)
+        }
+        
+        return .init(id: try categoryModel.requireID(), name: categoryModel.name)
     }
     
-    // MARK: - Update
-    func updateInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Category.Update) async throws {
-        model.name = input.name
+    func updateApi(_ req: Request) async throws -> DetailObject {
+        let updateObject = try req.content.decode(UpdateObject.self)
+        
+        guard let categoryModel = try await DatabaseModel.query(on: req.db)
+            .filter(\.$id == identifier(req))
+            .first() else {
+            throw Abort(.notFound)
+        }
+        
+        categoryModel.name = updateObject.name
+        
+        try await categoryModel.update(on: req.db)
+        return .init(id: try categoryModel.requireID(), name: categoryModel.name)
     }
     
-    // MARK: - Patch
-    func patchInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Category.Patch) async throws {
-        model.name = input.name ?? model.name
+    func listApi(_ req: Request) async throws -> [ListObject] {
+        let getList = req.body.data != nil ? try req.content.decode(GetList.self) : GetList(items: false)
+        
+        let models: [DatabaseModel]
+        
+        if getList.items {
+            models = try await list(req, queryBuilders: { $0.with(\.$armoryItems) })
+        } else {
+            models = try await list(req)
+        }
+        
+        return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: nil) }) }
     }
 }

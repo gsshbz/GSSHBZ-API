@@ -14,6 +14,7 @@ struct LeaseModule: ModuleInterface {
     
     func boot(_ app: Application) throws {
         app.migrations.add(LeaseMigrations.v1())
+        app.migrations.add(LeaseMigrations.seed())
         
         app.middleware.use(ApiUserAuthenticator())
         

@@ -6,6 +6,7 @@
 //
 
 import Fluent
+import Vapor
 
 
 enum LeaseMigrations {
@@ -37,6 +38,43 @@ enum LeaseMigrations {
         func revert(on database: Database) async throws {
             try await database.schema(LeaseModel.schema).delete()
             try await database.schema(LeaseItemModel.schema).delete()
+        }
+    }
+    
+    struct seed: AsyncMigration {
+        func prepare(on database: any Database) async throws {
+            let user = try await UserAccountModel.query(on: database)
+                .filter(\.$email == "root@localhost.localhost")
+                .first() // Fetch an existing user
+            
+            guard let user = user else {
+                throw Abort(.internalServerError, reason: "No user found for seeding leases.")
+            }
+
+            let lease1 = try LeaseModel(userId: try user.requireID())
+            let lease2 = try LeaseModel(userId: try user.requireID())
+            let lease3 = try LeaseModel(userId: try user.requireID())
+            
+            try await lease1.create(on: database)
+            try await lease2.create(on: database)
+            try await lease3.create(on: database)
+            
+            let armoryItem1 = try await ArmoryItemModel.query(on: database).all().first!
+            let armoryItem2 = try await ArmoryItemModel.query(on: database).all().last!
+            
+            // Create LeaseItemModel to link leases with armory items
+            let leaseItem1 = LeaseItemModel(leaseId: try lease1.requireID(), armoryItemId: try armoryItem1.requireID(), quantity: 1)
+            let leaseItem2 = LeaseItemModel(leaseId: try lease2.requireID(), armoryItemId: try armoryItem2.requireID(), quantity: 2)
+            let leaseItem3 = LeaseItemModel(leaseId: try lease3.requireID(), armoryItemId: try armoryItem1.requireID(), quantity: 3)
+            
+            try await leaseItem1.create(on: database)
+            try await leaseItem2.create(on: database)
+            try await leaseItem3.create(on: database)
+        }
+        
+        func revert(on database: any Database) async throws {
+            try await LeaseItemModel.query(on: database).delete()
+            try await LeaseModel.query(on: database).delete()
         }
     }
 }

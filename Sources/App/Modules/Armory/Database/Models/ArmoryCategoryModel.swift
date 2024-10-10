@@ -21,7 +21,7 @@ final class ArmoryCategoryModel: DatabaseModelInterface {
     var name: String
     
     @Children(for: \.$category)
-    var accessories: [ArmoryItemModel]
+    var armoryItems: [ArmoryItemModel]
     
     public init() {
         

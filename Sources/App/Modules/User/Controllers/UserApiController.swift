@@ -14,6 +14,8 @@ extension User.Token.AccessTokenRequest: Content {}
 extension User.Token.AccessTokenResponse: Content {}
 extension User.Account.Create: Content {}
 extension User.Account.LoginRequest: Content {}
+extension User.Account.List: Content {}
+extension User.Account.Detail: Content {}
 
 extension User.Account.LoginRequest: Validatable {
     static func validations(_ validations: inout Validations) {
@@ -155,7 +157,7 @@ struct UserApiController {
         
         try await req.passwordResetter.reset(for: user)
         
-        return .noContent
+        return .ok
     }
     
     func verifyResetPasswordTokenHandler(_ req: Request) async throws -> HTTPStatus {
