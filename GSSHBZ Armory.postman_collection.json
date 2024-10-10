@@ -197,13 +197,26 @@
 									"    pm.response.to.have.status(200);",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"items\": true}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_api_url}}/armory/categories/",
 							"host": [
@@ -262,6 +275,60 @@
 							],
 							"cookie": [],
 							"body": "[\n    {\n        \"id\": \"899BA710-4DCA-4F93-BBB1-11EA644A2C8D\",\n        \"name\": \"Carabiner\"\n    },\n    {\n        \"name\": \"Belays and Descenders\",\n        \"id\": \"A13F0731-F461-4242-ABE7-5175C7A01F86\"\n    },\n    {\n        \"name\": \"Helmet\",\n        \"id\": \"CC6CFEF0-1C80-4384-8F74-EB9B35BCAEA6\"\n    },\n    {\n        \"id\": \"700379C6-FA9F-4BB5-882A-C12D9E2B0842\",\n        \"name\": \"Category to delete\"\n    },\n    {\n        \"name\": \"Category to delete\",\n        \"id\": \"EAD12C2A-B93B-4B9A-8668-C92EAC2DFDDE\"\n    }\n]"
+						},
+						{
+							"name": "Get Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"items\": true}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/categories/",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"categories",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2352"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=3cc4D3N0rC/XFjTOqjAE11Fo+UuQXNG5knkFgb5lexk=; Expires=Thu, 17 Oct 2024 21:17:20 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 10 Oct 2024 21:17:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"name\": \"Carabiner\",\n        \"id\": \"8604AE20-C87D-4D07-A74E-33FD03A88E02\",\n        \"armoryItems\": [\n            {\n                \"name\": \"William karabiner\",\n                \"id\": \"57795F96-F45A-4B89-BA44-D30C97FDD5EC\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"imageKey\": \"william.jpeg\",\n                \"inStock\": 10\n            },\n            {\n                \"id\": \"42E266A3-D73E-41E6-A77A-0883F6579383\",\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 10,\n                \"imageKey\": \"carabiner-ok.jpeg\"\n            },\n            {\n                \"id\": \"8FAE907B-7D35-4476-ACCF-040E7B5FB3CD\",\n                \"imageKey\": \"grigri.jpeg\",\n                \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                \"name\": \"GRIGRI\",\n                \"inStock\": 10\n            }\n        ]\n    },\n    {\n        \"id\": \"CD8D2763-BB23-4E4B-8F40-3B9A5B8B8688\",\n        \"name\": \"Belays and Descenders\",\n        \"armoryItems\": []\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"id\": \"E200012E-6F2C-4B74-A1E4-B19B2DD196BF\",\n                \"inStock\": 10,\n                \"name\": \"Petzl Boreo Caving kaciga\",\n                \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\"\n            }\n        ],\n        \"name\": \"Helmet\",\n        \"id\": \"A58836F5-0B0D-4521-85FC-A4C220E09FEE\"\n    }\n]"
 						}
 					]
 				},
@@ -490,6 +557,14 @@
 							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Carabiners\"\n}"
 						}
 					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -535,7 +610,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"brinaxx@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"raw": "{\n    \"email\": \"root@localhost.localhost\",\n    \"password\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -693,7 +768,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"brinaxx@gmail.com\"\n}",
+							"raw": "{\n    \"email\": \"root@localhost.localhost\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -799,6 +874,77 @@
 							],
 							"cookie": [],
 							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTcyODU5ODcxNS4yNDkxOTYsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiNDMzQTY5REEtNjE4RS00M0JGLTgxNTQtNUQ1NEMxRkRBQjZGIn0.RmBpRFqgRbKXtwQMdytq71SxwjOdoh48HoUgzwNbd1lvbc0LxYjN5fLIqDVyT4mFM6R0zYg5K75P4I-0l5SQqR6qnP37O5FU0qehFwkGDO81Mz9bVT6EvO9LJvKKn-G7H0Dtit02w4ilJd39zI9-U3cJK_A1QKxFkj9qUmYpbpbjS7t53BfjjYdpLk4XSDSNS4GoPbXRPRrkSYlhrx8-T8XRcN991gQLneMfAceanu7pqAKOTgnwWITb-8nCgggT96FsGpEpnoTPPb6StIX73wQaQNNGagvwqoN2CiYmwiB3mdimMr3S4OlrKgyYBPJuQZVzEsMJymTbZOiHNEWqXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/current-user",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"current-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Current User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/current-user",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"current-user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "119"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=3cc4D3N0rC/XFjTOqjAE11Fo+UuQXNG5knkFgb5lexk=; Expires=Thu, 17 Oct 2024 21:18:55 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 10 Oct 2024 21:18:55 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lastName\": \"Admin\",\n    \"email\": \"root@localhost.localhost\",\n    \"firstName\": \"Admin\",\n    \"id\": \"433A69DA-618E-43BF-8154-5D54C1FDAB6F\"\n}"
 						}
 					]
 				}
@@ -1403,7 +1549,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImZ1bGxOYW1lIjoiQWRtaW4gQWRtaW4iLCJ1c2VySWQiOiI0MzNBNjlEQS02MThFLTQzQkYtODE1NC01RDU0QzFGREFCNkYiLCJleHBpcmF0aW9uIjoxNzI4NTg3ODEyLjg5NjA2NX0.L9j-2dCuz1-VTsXUV6uzOeBB1QFcotejdJpImCDzLc7En2rzhXxn4AhrUxQ00Q1As-Z8-78ActabVC2MK1anUPttFNXKclrK_S4vaR5BRpQ7o_gndlvW5dQP61Og_ctNm7weOZ19R_9oeSTyJY2wkGzoPU5TOcU9RMyhRnkgTWPl8QJhxPSWZl83n95kpLClQfZwtaqfqeZ1TvB2SqF2tVd2AVWj2vRxBAt-HcY7VOn9Lq309yTQWVEP9hpLIJcx5sT1je_eRSR8Zb7UppG_bKLFPaFHpKkIL5s-WxDkWXbfRmq-BMonYW0dxR-DbzbYflrAtsYFiPospHM2XH-Zlw",
 									"type": "string"
 								}
 							]
@@ -1634,7 +1780,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik1pY28gTWlsb2xvemEiLCJleHBpcmF0aW9uIjoxNzI4NTA0Njk1LjY0NTczMzgsInVzZXJJZCI6IkI1NjkyMEIzLTQ3MkYtNDQ5QS1BQTJBLUMzNTlENEEwNEE0MCIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.MdSO_WLvaLnUXSxjMJQBZ4LXcFemNqBobzSLvXAbh_QFUCM9r6ykftvluk0zeANDrb_QULdmumlIhDKXZQgeZqycaOWUlJ6BidTD2laDwbcxCuLNvrhUP3spYljrwu4myI5jz107PW__Az659DEKXEErC8uJvwZ69ARo9Fa6aU3YFdTtGLSNONBhzeB7gG08O0xwB8MgBhewEy-mfukXH13NXosZbTGjTkpDQ02evaWBla-qwfVeOyyUCSCluU77gYawbHBe7gxKrRf-cxpsTOnKuWiEnGQlGmTwmpMJ0WyMjabcr-WO2_MNKfT61pSPT_3aqucB26KcYrsh9jwZTg",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNjNBNTVCRi1CMEEwLTQzNUItODQwNC1FQzc2NkU5ODA0QzgiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTcyODU4NzY3MC44Mzg4MjUsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.EldTX0yS4yNZLuq_lyu3Q1RfFO48HBxcG_0b4lrIy511o-B2V5CvQ07V0ZYuNQFH-avYD-0rn7AWjaxo7x9wDQyCaJBbNB-xHGaK2OFuvvhceMezTPUwIQLK-MxZO0CUc1VFc04hdq89ctdq95VLMeh-Tow502aFFsfDvGT6mv9kgDQff3ZmnwCsQ86tTGBSjTE7-et5DUN_HzxWAjgL7EYwCgn7APOjT_iXmdk4mgLzU67zBO3hV-GysSHKJmx_dq8Q0lYqe9rx9uqigBQPXZ30OqfH0ZiG_8vZ30Blv1R6PnSHHum156X1n-2hnGoIIWdYQ-H3LB9z4O80Mh_4tQ",
 									"type": "string"
 								}
 							]
