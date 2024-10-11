@@ -26,13 +26,6 @@ class ArmoryWebSocketSystem {
     }
     
     private func broadcast<T: Codable>(_ message: WebSocketMessage<T>) async throws {
-//        let jsonData = try JSONEncoder().encode(message)
-//        let buffer = ByteBuffer(data: jsonData)
-//        
-//        for client in clients.active {
-//            client.socket.send(buffer)
-//        }
-        
         let jsonData = try JSONEncoder().encode(message)
         
         // Convert JSON data to a String

@@ -21,7 +21,6 @@ struct ArmoryCategoryApiController: ListController {
     typealias ListObject = Armory.Category.List
     
     // Request Objects
-    typealias GetList = Armory.Category.GetList
     typealias CreateObject = Armory.Category.Create
     typealias UpdateObject = Armory.Category.Update
     typealias PatchObject = Armory.Category.Patch
@@ -90,11 +89,11 @@ extension ArmoryCategoryApiController {
     }
     
     func listApi(_ req: Request) async throws -> [ListObject] {
-        let getList = req.body.data != nil ? try req.content.decode(GetList.self) : GetList(items: false)
+        let getList = try? req.query.get(Bool.self, at: "items")
         
         let models: [DatabaseModel]
         
-        if getList.items {
+        if let getList, getList {
             models = try await list(req, queryBuilders: { $0.with(\.$armoryItems) })
         } else {
             models = try await list(req)
