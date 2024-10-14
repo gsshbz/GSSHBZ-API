@@ -82,7 +82,8 @@ enum ArmoryMigrations {
         }
         
         func revert(on database: Database) async throws {
-            
+            try await ArmoryItemModel.query(on: database).delete()
+            try await ArmoryCategoryModel.query(on: database).delete()
         }
     }
 }
