@@ -1,5 +1,5 @@
 //
-//  ArmoryAccessory.swift
+//  ArmoryItem.swift
 //
 //
 //  Created by Mico Miloloza on 12.11.2023..
@@ -16,6 +16,7 @@ public extension Armory.Item {
         let aboutInfo: String
         let inStock: Int
         let category: Armory.Category.List?
+        let categoryId: UUID?
     }
     
     struct Detail: Codable {
@@ -25,6 +26,7 @@ public extension Armory.Item {
         let aboutInfo: String
         let inStock: Int
         let category: Armory.Category.List?
+        let categoryId: UUID?
     }
     
     struct Create: Codable {

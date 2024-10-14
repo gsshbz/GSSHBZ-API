@@ -22,6 +22,7 @@ enum UserMigrations {
                 .field(UserAccountModel.FieldKeys.v1.phoneNumber, .string)
                 .field(UserAccountModel.FieldKeys.v1.address, .string)
                 .field(UserAccountModel.FieldKeys.v1.profileImageUrlString, .string)
+                .field(UserAccountModel.FieldKeys.v1.isAdmin, .bool, .required, .sql(.default(false)))
                 .field(UserAccountModel.FieldKeys.v1.createdAt, .datetime)
                 .field(UserAccountModel.FieldKeys.v1.updatedAt, .datetime)
                 .field(UserAccountModel.FieldKeys.v1.deletedAt, .datetime)

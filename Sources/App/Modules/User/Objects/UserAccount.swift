@@ -14,6 +14,7 @@ extension User.Account {
         let firstName: String
         let lastName: String
         let email: String
+        let isAdmin: Bool
     }
     
     struct Detail: Codable {
@@ -22,6 +23,7 @@ extension User.Account {
         let lastName: String
         let profileImageUrlString: String?
         let email: String
+        let isAdmin: Bool
     }
     
     struct Create: Codable {
@@ -38,11 +40,13 @@ extension User.Account {
     struct Update: Codable {
         let email: String
         let password: String?
+        let isAdmin: Bool
     }
     
     struct Patch: Codable {
         let email: String?
         let password: String?
+        let isAdmin: Bool?
     }
     
     struct LoginRequest: Codable {

@@ -11,8 +11,6 @@ import Vapor
 public struct ArmoryRouter: RouteCollection {
     let armoryCategoryApiController = ArmoryCategoryApiController()
     let armoryItemsController = ArmoryItemsApiController()
-//    let armoryLeasesController = UserLeasesApiController()
-    
     
     public func boot(routes: RoutesBuilder) throws {
         let api = routes.grouped("api")

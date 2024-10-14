@@ -62,7 +62,7 @@ final class ArmoryItemModel: DatabaseModelInterface {
 struct ArmoryItemModelUpdateMiddleware: AsyncModelMiddleware {
     func update(model: ArmoryItemModel, on db: Database, next: AnyAsyncModelResponder) async throws {
         Task {
-            try await ArmoryWebSocketSystem.shared.broadcastArmoryItemUpdated(.init(id: try model.requireID(), name: model.name, imageKey: model.imageKey, aboutInfo: model.aboutInfo, inStock: model.inStock, category: model.category != nil ? .init(id: try model.category!.requireID(), name: model.category!.name) : nil))
+            try await ArmoryWebSocketSystem.shared.broadcastArmoryItemUpdated(.init(id: try model.requireID(), name: model.name, imageKey: model.imageKey, aboutInfo: model.aboutInfo, inStock: model.inStock, category: model.category != nil ? .init(id: try model.category!.requireID(), name: model.category!.name) : nil, categoryId: try model.category?.requireID()))
         }
         
         try await next.update(model, on: db)

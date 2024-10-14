@@ -166,7 +166,7 @@ extension UserLeasesApiController {
         
         let armoryItems = try createdLeaseItems.map { try $0.joined(ArmoryItemModel.self) }
         
-        let detailOutput = DetailObject(id: try createdLeaseModel.requireID(), user: .init(id: try createdLeaseModel.user.requireID(), firstName: createdLeaseModel.user.firstName, lastName: createdLeaseModel.user.lastName, email: createdLeaseModel.user.email), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: try $0.category!.requireID(), name: $0.category!.name) : nil) })
+        let detailOutput = DetailObject(id: try createdLeaseModel.requireID(), user: .init(id: try createdLeaseModel.user.requireID(), firstName: createdLeaseModel.user.firstName, lastName: createdLeaseModel.user.lastName, email: createdLeaseModel.user.email, isAdmin: createdLeaseModel.user.isAdmin), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: try $0.category!.requireID(), name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) })
         
         try await ArmoryWebSocketSystem.shared.broadcastNewLeaseCreated(detailOutput)
         
@@ -209,13 +209,13 @@ extension UserLeasesApiController {
         }
         
         
-        return .init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email),
-                     armoryItems: armoryItemsWithCategories.map { .init(id: $0.id!,
+        return .init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email, isAdmin: leaseModel.user.isAdmin),
+                     armoryItems: try armoryItemsWithCategories.map { .init(id: $0.id!,
                                                                 name: $0.name,
                                                                 imageKey: $0.imageKey,
                                                                 aboutInfo: $0.aboutInfo,
                                                                 inStock: $0.inStock,
-                                                                category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil) })
+                                                                        category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) })
 //        return try await detailOutput(req, leaseModel)
     }
     
@@ -299,7 +299,7 @@ extension UserLeasesApiController {
                 armoryItems.append(armoryItem)
             }
             
-            leases.append(.init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil) }))
+            leases.append(.init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email, isAdmin: leaseModel.user.isAdmin), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) }))
         }
         
         
@@ -344,7 +344,7 @@ extension UserLeasesApiController {
                 armoryItems.append(armoryItem)
             }
             
-            leases.append(.init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil) }))
+            leases.append(.init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email, isAdmin: leaseModel.user.isAdmin), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) }))
             
         }
         

@@ -86,7 +86,7 @@ struct UserApiController {
         try await refreshToken.create(on: req.db)
         
         let accessToken = try req.jwt.sign(JWTUser(with: user))
-        let userDetail = try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email)
+        let userDetail = try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
         
         return User.Token.Detail(id: refreshToken.id!, user: userDetail, accessToken: accessToken, refreshToken: token)
     }
@@ -145,7 +145,7 @@ struct UserApiController {
             throw AuthenticationError.userNotFound
         }
         
-        return try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email)
+        return try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
     }
     
     func resetPasswordHandler(_ req: Request) async throws -> HTTPStatus {

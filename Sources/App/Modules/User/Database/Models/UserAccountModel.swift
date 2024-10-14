@@ -27,6 +27,9 @@ final class UserAccountModel: DatabaseModelInterface {
     @Field(key: FieldKeys.v1.password)
     var password: String
     
+    @Field(key: FieldKeys.v1.isAdmin)
+    var isAdmin: Bool
+    
     @OptionalField(key: FieldKeys.v1.phoneNumber)
     var phoneNumber: String?
     
@@ -67,6 +70,7 @@ final class UserAccountModel: DatabaseModelInterface {
             static var password: FieldKey { "password" }
             static var phoneNumber: FieldKey { "phone_number" }
             static var address: FieldKey { "address" }
+            static var isAdmin: FieldKey { "is_admin" }
             static var profileImageUrlString: FieldKey { "profile_image_url_string"}
             static var createdAt: FieldKey { "created_at" }
             static var updatedAt: FieldKey { "updated_at" }
