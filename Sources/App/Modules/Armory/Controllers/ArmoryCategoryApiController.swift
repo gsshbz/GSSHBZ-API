@@ -94,11 +94,15 @@ extension ArmoryCategoryApiController {
         let models: [DatabaseModel]
         
         if let getList, getList {
-            models = try await list(req, queryBuilders: { $0.with(\.$armoryItems) })
+            models = try await list(req, queryBuilders: { query in
+                query.with(\.$armoryItems) { armoryItem in
+                    armoryItem.with(\.$category)
+                }
+            })
         } else {
             models = try await list(req)
         }
         
-        return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: nil, categoryId: try $0.category?.requireID()) }) }
+        return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category == nil ? nil : .init(id: try $0.category!.requireID(), name: $0.category!.name), categoryId: try $0.category?.requireID()) }) }
     }
 }
