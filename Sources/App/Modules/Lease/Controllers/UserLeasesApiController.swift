@@ -95,10 +95,15 @@ extension UserLeasesApiController {
             .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
             .all()
         
-        let armoryItems = try createdLeaseItems.map { leaseItem in
+        var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
+        
+        for leaseItem in createdLeaseItems {
             let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-            return (armoryItem, leaseItem.quantity)
+            try await armoryItem.$category.load(on: req.db)
+            
+            armoryItems.append((armoryItem, leaseItem.quantity))
         }
+        
         
         let detailOutput = DetailObject(
             id: try createdLeaseModel.requireID(),
@@ -182,7 +187,7 @@ extension UserLeasesApiController {
         
         for leaseItem in leaseItems {
             let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-            let category = try await armoryItem.$category.get(on: req.db)
+            try await armoryItem.$category.load(on: req.db)
             
             armoryItemsWithCategories.append((armoryItem, leaseItem.quantity))
         }

@@ -62,6 +62,9 @@ final class ArmoryItemModel: DatabaseModelInterface {
 struct ArmoryItemModelUpdateMiddleware: AsyncModelMiddleware {
     func update(model: ArmoryItemModel, on db: Database, next: AnyAsyncModelResponder) async throws {
         Task {
+            
+            try await model.$category.load(on: db)
+            
             try await ArmoryWebSocketSystem.shared.broadcastArmoryItemUpdated(.init(id: try model.requireID(), name: model.name, imageKey: model.imageKey, aboutInfo: model.aboutInfo, inStock: model.inStock, category: .init(id: try model.category.requireID(), name: model.category.name), categoryId: try model.category.requireID()))
         }
         
