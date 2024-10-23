@@ -18,9 +18,6 @@ final class LeaseModel: DatabaseModelInterface {
     @Parent(key: FieldKeys.v1.userId)
     var user: UserAccountModel
     
-//    @Siblings(through: LeaseItemModel.self, from: \.$lease, to: \.$armoryItem)
-//    var armoryItems: [ArmoryItemModel]
-    
     @Timestamp(key: FieldKeys.v1.createdAt, on: .create)
     var createdAt: Date?
     
@@ -29,12 +26,6 @@ final class LeaseModel: DatabaseModelInterface {
     
     @Timestamp(key: FieldKeys.v1.deletedAt, on: .delete)
     var deletedAt: Date?
-    
-//    @Field(key: "leased_at")
-//    var leasedAt: Date
-//    
-//    @Field(key: "returned_at")
-//    var returnedAt: Date?
     
     init() {}
     

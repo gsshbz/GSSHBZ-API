@@ -42,6 +42,9 @@ enum ArmoryMigrations {
     
     struct seed: AsyncMigration {
         func prepare(on database: Database) async throws {
+            let defaultCategory = ArmoryCategoryModel(name: "Default")
+            try await defaultCategory.create(on: database)
+            
             let carabinerCategory = ArmoryCategoryModel(name: "Carabiner")
             try await carabinerCategory.create(on: database)
             
@@ -57,25 +60,32 @@ enum ArmoryMigrations {
                     imageKey: "william.jpeg",
                     aboutInfo: "Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use",
                     categoryId: carabinerCategory.id!,
-                    inStock: 10),
+                    inStock: (0...10).randomElement()!),
                 ArmoryItemModel(
                     name: "OK karabiner",
                     imageKey: "carabiner-ok.jpeg",
                 aboutInfo: "Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK",
                     categoryId: carabinerCategory.id!,
-                    inStock: 10),
+                    inStock: (0...10).randomElement()!),
                 ArmoryItemModel(
                     name: "GRIGRI",
                     imageKey: "grigri.jpeg",
                 aboutInfo: "GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA",
                     categoryId: carabinerCategory.id!,
-                    inStock: 10),
+                    inStock: (0...10).randomElement()!),
                 ArmoryItemModel(
                     name: "Petzl Boreo Caving kaciga",
                     imageKey: "petzl-boreo-caving.jpeg",
                 aboutInfo: "BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA",
                     categoryId: helmetCategory.id!,
-                    inStock: 10)
+                    inStock: (0...10).randomElement()!),
+                
+                ArmoryItemModel(
+                    name: "Armory item with default category",
+                    imageKey: "petzl-boreo-caving.jpeg",
+                aboutInfo: "Some about info description bla bla bla bla bla bla",
+                    categoryId: defaultCategory.id!,
+                    inStock: 5)
             ]
             
             try await armoryItems.create(on: database)

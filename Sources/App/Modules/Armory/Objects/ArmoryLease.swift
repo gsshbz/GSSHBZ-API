@@ -23,7 +23,15 @@ public extension Armory.Lease {
     struct Detail: Codable {
         let id: UUID
         let user: User.Account.List
-        let armoryItems: [Armory.Item.List]
+        let armoryItems: [ArmoryItem]
+        let createdAt: Date?
+        let updatedAt: Date?
+        let deletedAt: Date?
+        
+        struct ArmoryItem: Codable {
+            let armoryItem: Armory.Item.Detail
+            let quantity: Int
+        }
     }
     
     struct Create: Codable {

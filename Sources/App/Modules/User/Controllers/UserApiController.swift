@@ -67,12 +67,12 @@ struct UserApiController {
             .filter(\.$email == loginRequest.email)
             .first()
         
-        guard let user = user else { throw Abort(.notFound) }
+        guard let user = user else { throw AuthenticationError.userNotFound }
         
         let successfulLogin = try await req.password.async.verify(loginRequest.password, created: user.password)
         
         if !successfulLogin {
-            throw Abort(.unauthorized)
+            throw AuthenticationError.invalidEmailOrPassword
         }
         
         // Delete refresh token

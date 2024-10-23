@@ -39,75 +39,6 @@ struct UserLeasesApiController: ListController {
 //        existingModelRoutes.on(.PATCH, use: patchApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
     }
-    
-//    func listOutput(_ req: Request, _ models: [DatabaseModel]) async throws -> [Armory.Lease.List] {
-//        try models.map { model in
-//                .init(id: model.id!,
-//                      user: .init(id: try model.user.requireID(), firstName: model.user.firstName, lastName: model.user.lastName, email: model.user.email),
-//                      armoryItems: model.armoryItems.map { .init(id: $0.id!,
-//                                                                 name: $0.name,
-//                                                                 imageKey: $0.imageKey,
-//                                                                 aboutInfo: $0.aboutInfo,
-//                                                                 inStock: $0.inStock,
-//                                                                 category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil) }, 
-//                      metadata: nil
-//                )
-//        }
-//    }
-    
-//    func paginatedListOutput(_ req: Request, _ paginatedModel: Page<DatabaseModel>) async throws -> [Armory.Lease.List] {
-//        try paginatedModel.items.map { model in
-//                .init(id: model.id!,
-//                      user: .init(id: try model.user.requireID(), firstName: model.user.firstName, lastName: model.user.lastName, email: model.user.email),
-//                      armoryItems: model.armoryItems.map { .init(id: $0.id!,
-//                                                                 name: $0.name,
-//                                                                 imageKey: $0.imageKey,
-//                                                                 aboutInfo: $0.aboutInfo,
-//                                                                 inStock: $0.inStock,
-//                                                                 category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil) }, 
-//                      metadata: .init(page: paginatedModel.metadata.page, per: paginatedModel.metadata.per, total: paginatedModel.metadata.total)
-//                )
-//        }
-//    }
-    
-//    func detailOutput(_ req: Request, _ model: DatabaseModel) async throws -> Armory.Lease.Detail {
-//        return .init(id: model.id!, user: .init(id: try model.user.requireID(), firstName: model.user.firstName, lastName: model.user.lastName, email: model.user.email),
-//                         armoryItems: model.armoryItems.map { .init(id: $0.id!,
-//                                                                    name: $0.name,
-//                                                                    imageKey: $0.imageKey,
-//                                                                    aboutInfo: $0.aboutInfo,
-//                                                                    inStock: $0.inStock,
-//                                                                    category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil) })
-//    }
-    
-    func createInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Lease.Create) async throws {
-    }
-    
-    func updateInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Lease.Update) async throws {
-    }
-    
-    func patchInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Lease.Patch) async throws {
-        let jwtUser = try req.auth.require(JWTUser.self)
-        
-        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db) else {
-            throw AuthenticationError.userNotFound
-        }
-        
-        model.user = user
-    }
-    
-    
-    func createResponse(_ req: Vapor.Request, _ model: LeaseModel) async throws -> Response {
-        return Response(status: .ok)
-    }
-    
-    func updateResponse(_ req: Vapor.Request, _ model: LeaseModel) async throws -> Response {
-        return Response(status: .ok)
-    }
-    
-    func patchResponse(_ req: Vapor.Request, _ model: LeaseModel) async throws -> Response {
-        return Response(status: .ok)
-    }
 }
 
 
@@ -164,9 +95,36 @@ extension UserLeasesApiController {
             .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
             .all()
         
-        let armoryItems = try createdLeaseItems.map { try $0.joined(ArmoryItemModel.self) }
+        let armoryItems = try createdLeaseItems.map { leaseItem in
+            let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
+            return (armoryItem, leaseItem.quantity)
+        }
         
-        let detailOutput = DetailObject(id: try createdLeaseModel.requireID(), user: .init(id: try createdLeaseModel.user.requireID(), firstName: createdLeaseModel.user.firstName, lastName: createdLeaseModel.user.lastName, email: createdLeaseModel.user.email, isAdmin: createdLeaseModel.user.isAdmin), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: try $0.category!.requireID(), name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) })
+        let detailOutput = DetailObject(
+            id: try createdLeaseModel.requireID(),
+            user: .init(
+                id: try createdLeaseModel.user.requireID(),
+                firstName: createdLeaseModel.user.firstName,
+                lastName: createdLeaseModel.user.lastName,
+                email: createdLeaseModel.user.email,
+                isAdmin: createdLeaseModel.user.isAdmin),
+            armoryItems: try armoryItems.map { (armoryItem, quantity) in
+                .init(
+                    armoryItem: .init(
+                        id: try armoryItem.requireID(),
+                        name: armoryItem.name,
+                        imageKey: armoryItem.imageKey,
+                        aboutInfo: armoryItem.aboutInfo,
+                        inStock: armoryItem.inStock,
+                        category: .init(id: try armoryItem.category.requireID(),
+                                        name: armoryItem.category.name),
+                        categoryId: try armoryItem.category.requireID()),
+                    quantity: quantity)
+            },
+            createdAt: createdLeaseModel.createdAt,
+            updatedAt: createdLeaseModel.updatedAt,
+            deletedAt: createdLeaseModel.deletedAt
+        )
         
         try await ArmoryWebSocketSystem.shared.broadcastNewLeaseCreated(detailOutput)
         
@@ -174,9 +132,36 @@ extension UserLeasesApiController {
     }
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
-        let model = try await findBy(identifier(req), on: req.db)
-        try await model.delete(on: req.db)
-        return .noContent
+        let leaseModel = try await findBy(identifier(req), on: req.db)
+        
+        // Fetch all lease items associated with this lease
+        let leaseItems = try await LeaseItemModel.query(on: req.db)
+            .filter(\.$leaseId == leaseModel.requireID())
+            .all()
+        
+        // Start a transaction to ensure atomic updates
+            try await req.db.transaction { db in
+                // Restore stock for each armory item based on the quantity in the lease
+                for leaseItem in leaseItems {
+                    guard let armoryItem = try await ArmoryItemModel.find(leaseItem.armoryItemId, on: db) else {
+                        throw Abort(.notFound, reason: "Armory item not found.")
+                    }
+                    
+                    // Restore the stock count
+                    armoryItem.inStock += leaseItem.quantity
+                    
+                    // Save the updated armory item
+                    try await armoryItem.save(on: db)
+                }
+                
+                // Delete the lease items
+                try await leaseItems.delete(on: db)
+                
+                // Delete the lease itself
+                try await leaseModel.delete(on: db)
+            }
+            
+            return .noContent
     }
     
     func detailApi(_ req: Request) async throws -> DetailObject {
@@ -193,50 +178,37 @@ extension UserLeasesApiController {
             .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
             .all()
         
-        var armoryItemsWithCategories: [ArmoryItemModel] = []
+        var armoryItemsWithCategories: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
         
         for leaseItem in leaseItems {
             let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
             let category = try await armoryItem.$category.get(on: req.db)
             
-            if let category = category {
-                print("Category: \(category.name)")
-            } else {
-                print("No category for this item")
-            }
-            
-            armoryItemsWithCategories.append(armoryItem)
+            armoryItemsWithCategories.append((armoryItem, leaseItem.quantity))
         }
         
         
-        return .init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email, isAdmin: leaseModel.user.isAdmin),
-                     armoryItems: try armoryItemsWithCategories.map { .init(id: $0.id!,
-                                                                name: $0.name,
-                                                                imageKey: $0.imageKey,
-                                                                aboutInfo: $0.aboutInfo,
-                                                                inStock: $0.inStock,
-                                                                        category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) })
-//        return try await detailOutput(req, leaseModel)
+        return .init(id: try leaseModel.requireID(),
+                     user: .init(id: try leaseModel.user.requireID(),
+                                 firstName: leaseModel.user.firstName,
+                                 lastName: leaseModel.user.lastName,
+                                 email: leaseModel.user.email,
+                                 isAdmin: leaseModel.user.isAdmin),
+                     armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
+                .init(armoryItem: .init(id: try armoryItem.requireID(),
+                                        name: armoryItem.name,
+                                        imageKey: armoryItem.imageKey,
+                                        aboutInfo: armoryItem.aboutInfo,
+                                        inStock: armoryItem.inStock,
+                                        category: .init(id: try armoryItem.category.requireID(),
+                                                        name: armoryItem.category.name),
+                                        categoryId: try armoryItem.category.requireID()),
+                      quantity: quantity) },
+                     createdAt: leaseModel.createdAt,
+                     updatedAt: leaseModel.updatedAt,
+                     deletedAt: leaseModel.deletedAt
+        )
     }
-    
-//    func patchApi(_ req: Request) async throws -> Response {
-//        let jwtUser = try req.auth.require(JWTUser.self)
-//        
-//        guard let leaseModel = try await DatabaseModel.query(on: req.db)
-//            .with(\.$user)
-//            .with(\.$armoryItems)
-//            .filter(\.$id == identifier(req))
-//            .first() else {
-//            throw Abort(.notFound)
-//        }
-//        
-//        let patchObject = try req.content.decode(PatchObject.self)
-//        
-//
-//
-//        try await model.update(on: req.db)
-//        return try await patchResponse(req, model)
-//    }
     
     func updateApi(_ req: Request) async throws -> Response {
         let updateObject = try req.content.decode(UpdateObject.self)
@@ -268,7 +240,7 @@ extension UserLeasesApiController {
         
         
         try await leaseModel.update(on: req.db)
-        return try await updateResponse(req, leaseModel)
+        return Response(status: .ok)
     }
     
     func listApi(_ req: Request) async throws -> ListObject {
@@ -284,22 +256,36 @@ extension UserLeasesApiController {
                 .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
                 .all()
             
-            var armoryItems: [ArmoryItemModel] = []
+            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
             
             for leaseItem in leaseItems {
                 let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-                let category = try await armoryItem.$category.query(on: req.db).first()
+                try await armoryItem.$category.load(on: req.db)
                 
-                if let category = category {
-                    print("Category: \(category.name)")
-                } else {
-                    print("No category for this item")
-                }
-                
-                armoryItems.append(armoryItem)
+                armoryItems.append((armoryItem, leaseItem.quantity))
             }
             
-            leases.append(.init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email, isAdmin: leaseModel.user.isAdmin), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) }))
+            leases.append(.init(id: try leaseModel.requireID(),
+                                user: .init(id: try leaseModel.user.requireID(),
+                                            firstName: leaseModel.user.firstName,
+                                            lastName: leaseModel.user.lastName,
+                                            email: leaseModel.user.email,
+                                            isAdmin: leaseModel.user.isAdmin),
+                                armoryItems: try armoryItems.map { armoryItem, quantity in
+                    .init(armoryItem: .init(id: try armoryItem.requireID(),
+                                            name: armoryItem.name,
+                                            imageKey: armoryItem.imageKey,
+                                            aboutInfo: armoryItem.aboutInfo,
+                                            inStock: armoryItem.inStock,
+                                            category: .init(id: armoryItem.category.id!,
+                                                            name: armoryItem.category.name),
+                                            categoryId: try armoryItem.category.requireID()),
+                          quantity: quantity)},
+                                createdAt: leaseModel.createdAt,
+                                updatedAt: leaseModel.updatedAt,
+                                deletedAt: leaseModel.deletedAt
+                               )
+            )
         }
         
         
@@ -329,23 +315,37 @@ extension UserLeasesApiController {
                 .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
                 .all()
             
-            var armoryItems: [ArmoryItemModel] = []
+            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
             
             for leaseItem in leaseItems {
                 let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-                let category = try await armoryItem.$category.query(on: req.db).first()
+                try await armoryItem.$category.load(on: req.db)
                 
-                if let category = category {
-                    print("Category: \(category.name)")
-                } else {
-                    print("No category for this item")
-                }
-                
-                armoryItems.append(armoryItem)
+                armoryItems.append((armoryItem, leaseItem.quantity))
             }
             
-            leases.append(.init(id: try leaseModel.requireID(), user: .init(id: try leaseModel.user.requireID(), firstName: leaseModel.user.firstName, lastName: leaseModel.user.lastName, email: leaseModel.user.email, isAdmin: leaseModel.user.isAdmin), armoryItems: try armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: $0.category != nil ? .init(id: $0.category!.id!, name: $0.category!.name) : nil, categoryId: try $0.category?.requireID()) }))
-            
+            leases.append(.init(id: try leaseModel.requireID(),
+                                user: .init(id: try leaseModel.user.requireID(),
+                                            firstName: leaseModel.user.firstName,
+                                            lastName: leaseModel.user.lastName,
+                                            email: leaseModel.user.email,
+                                            isAdmin: leaseModel.user.isAdmin),
+                                armoryItems: try armoryItems.map { armoryItem, quantity in
+                    .init(armoryItem: .init(id: try armoryItem.requireID(),
+                                            name: armoryItem.name,
+                                            imageKey: armoryItem.imageKey,
+                                            aboutInfo: armoryItem.aboutInfo,
+                                            inStock: armoryItem.inStock,
+                                            category: .init(id: armoryItem.category.id!,
+                                                            name: armoryItem.category.name),
+                                            categoryId: try armoryItem.category.requireID()
+                                           ),
+                          quantity: quantity)},
+                                createdAt: leaseModel.createdAt,
+                                updatedAt: leaseModel.updatedAt,
+                                deletedAt: leaseModel.deletedAt
+                               )
+            )
         }
         
         return .init(leases: leases, metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total))

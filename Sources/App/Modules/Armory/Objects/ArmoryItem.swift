@@ -15,8 +15,8 @@ public extension Armory.Item {
         let imageKey: String
         let aboutInfo: String
         let inStock: Int
-        let category: Armory.Category.List?
-        let categoryId: UUID?
+        let category: Armory.Category.List
+        let categoryId: UUID
     }
     
     struct Detail: Codable {
@@ -25,8 +25,8 @@ public extension Armory.Item {
         let imageKey: String
         let aboutInfo: String
         let inStock: Int
-        let category: Armory.Category.List?
-        let categoryId: UUID?
+        let category: Armory.Category.List
+        let categoryId: UUID
     }
     
     struct Create: Codable {
