@@ -67,7 +67,7 @@ extension ArmoryCategoryApiController {
         guard let categoryModel = try await DatabaseModel.query(on: req.db)
             .filter(\.$id == identifier(req))
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.categoryNotFound
         }
         
         return .init(id: try categoryModel.requireID(), name: categoryModel.name)
@@ -79,7 +79,7 @@ extension ArmoryCategoryApiController {
         guard let categoryModel = try await DatabaseModel.query(on: req.db)
             .filter(\.$id == identifier(req))
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.categoryNotFound
         }
         
         categoryModel.name = updateObject.name
@@ -100,7 +100,8 @@ extension ArmoryCategoryApiController {
                 }
             })
         } else {
-            models = try await list(req)
+            // Currently this api call is used only for admins to edit Category name or delete the category that's why default category is not needed
+            models = try await list(req, queryBuilders: { $0.filter(\.$name != "Default") })
         }
         
         return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: .init(id: try $0.category.requireID(), name: $0.category.name), categoryId: try $0.category.requireID()) }) }

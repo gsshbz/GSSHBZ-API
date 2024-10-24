@@ -78,7 +78,7 @@ struct ArmoryItemsApiController: ListController {
         guard let defaultCategory = try await ArmoryCategoryModel.query(on: req.db)
             .filter(\.$name == "Default")
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.categoryNotFound
         }
         
         let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
@@ -90,7 +90,7 @@ struct ArmoryItemsApiController: ListController {
         guard let armoryModel = try await ArmoryItemModel.query(on: req.db)
             .with(\.$category)
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.armoryItemNotFound
         }
         
         return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())

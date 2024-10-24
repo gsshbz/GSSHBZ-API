@@ -103,6 +103,4 @@ extension AuthenticationError: AbortError {
             return "password_token_has_expired"
         }
     }
-    
-    
 }
