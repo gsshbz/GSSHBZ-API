@@ -68,11 +68,9 @@ struct ArmoryItemsApiController: ListController {
     
     func createApi(_ req: Request) async throws -> Armory.Item.Detail {
         let input = try req.content.decode(CreateObject.self)
-        let jwtUser = try req.auth.require(JWTUser.self)
         
-        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db),
-              let userId = try? user.requireID() else {
-            throw AuthenticationError.userNotFound
+        if let futureArmoryItem = try await ArmoryItemModel.query(on: req.db).filter(\.$name == input.name).first() {
+            throw ArmoryErrors.duplicateItemName(futureArmoryItem.name)
         }
         
         guard let defaultCategory = try await ArmoryCategoryModel.query(on: req.db)
@@ -83,11 +81,15 @@ struct ArmoryItemsApiController: ListController {
         
         let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
         
+        try await armoryModel.save(on: req.db)
+        try await armoryModel.$category.load(on: req.db)
+        
         return  .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
     }
     
     func detailApi(_ req: Request) async throws -> Armory.Item.Detail {
         guard let armoryModel = try await ArmoryItemModel.query(on: req.db)
+            .filter(\.$id == identifier(req))
             .with(\.$category)
             .first() else {
             throw ArmoryErrors.armoryItemNotFound
@@ -98,9 +100,9 @@ struct ArmoryItemsApiController: ListController {
     
     func updateApi(_ req: Request) async throws -> Armory.Item.Detail {
         let input = try req.content.decode(UpdateObject.self)
-        let jwtUser = try req.auth.require(JWTUser.self)
         
         guard let armoryModel = try await ArmoryItemModel.query(on: req.db)
+            .filter(\.$id == identifier(req))
             .with(\.$category)
             .first() else {
             throw Abort(.notFound)

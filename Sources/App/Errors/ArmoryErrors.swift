@@ -12,6 +12,7 @@ import Vapor
 enum ArmoryErrors: AppError {
     case categoryNotFound
     case armoryItemNotFound
+    case duplicateItemName(String)
 }
 
 extension ArmoryErrors: AbortError {
@@ -22,6 +23,9 @@ extension ArmoryErrors: AbortError {
             
         case .armoryItemNotFound:
             return .notFound
+            
+        case .duplicateItemName(let name):
+            return .conflict
         }
     }
     
@@ -32,6 +36,9 @@ extension ArmoryErrors: AbortError {
             
         case .armoryItemNotFound:
             return "Armory Item couldn't be found"
+            
+        case .duplicateItemName(let name):
+            return "An armory item with the name '\(name)' already exists. Please choose a different name."
         }
     }
     
@@ -42,6 +49,9 @@ extension ArmoryErrors: AbortError {
             
         case .armoryItemNotFound:
             return "armory_item_not_found"
+            
+        case .duplicateItemName(let name):
+            return "duplicate_item_name"
         }
     }
     

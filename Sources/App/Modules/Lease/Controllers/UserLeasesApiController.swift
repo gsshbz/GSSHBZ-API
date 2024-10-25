@@ -215,9 +215,44 @@ extension UserLeasesApiController {
         )
     }
     
+//    func updateApi(_ req: Request) async throws -> Response {
+//        let updateObject = try req.content.decode(UpdateObject.self)
+//        
+//        guard let leaseModel = try await DatabaseModel.query(on: req.db)
+//            .with(\.$user)
+//            .filter(\.$id == identifier(req))
+//            .first() else {
+//            throw Abort(.notFound)
+//        }
+//        
+//        let armoryItems = try await ArmoryItemModel.query(on: req.db)
+//            .filter(\.$id ~~ updateObject.items.compactMap { $0.armoryItemId }) // Use `~~` for "in" clause
+//            .all()
+//        
+//        try await LeaseItemModel.query(on: req.db)
+//            .filter(\.$leaseId == leaseModel.requireID())
+//            .delete()
+//        
+//        for armoryItem in armoryItems {
+//            let armoryItemId = try armoryItem.requireID()
+//            let newLeaseItem = LeaseItemModel(
+//                leaseId: try leaseModel.requireID(),
+//                armoryItemId: try armoryItem.requireID(),
+//                quantity: updateObject.items.first(where: { $0.armoryItemId == armoryItemId })?.quantity ?? 1 // Set quantity from updateObject, or default to 1
+//            )
+//            try await newLeaseItem.create(on: req.db)
+//        }
+//        
+//        
+//        try await leaseModel.update(on: req.db)
+//        return Response(status: .ok)
+//    }
+    
+    
     func updateApi(_ req: Request) async throws -> Response {
         let updateObject = try req.content.decode(UpdateObject.self)
         
+        // Fetch the existing lease, including user and items
         guard let leaseModel = try await DatabaseModel.query(on: req.db)
             .with(\.$user)
             .filter(\.$id == identifier(req))
@@ -225,26 +260,72 @@ extension UserLeasesApiController {
             throw Abort(.notFound)
         }
         
-        let armoryItems = try await ArmoryItemModel.query(on: req.db)
-            .filter(\.$id ~~ updateObject.items.compactMap { $0.armoryItemId }) // Use `~~` for "in" clause
+        let leaseItems = try await LeaseItemModel.query(on: req.db)
+            .filter(\.$leaseId == leaseModel.requireID())
+            .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
             .all()
         
+        var armoryItems: [ArmoryItemModel] = []
+        
+        // Step 1: Revert stock for previous lease items
+        for leaseItem in leaseItems {
+            let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
+            armoryItem.inStock += leaseItem.quantity
+            try await armoryItem.update(on: req.db)
+            
+            try await armoryItem.$category.load(on: req.db)
+            
+            armoryItems.append(armoryItem)
+        }
+        
+//        // Step 1: Revert stock for previous lease items
+//        for existingLeaseItem in leaseItems {
+//            if let armoryItem = try await ArmoryItemModel.find(existingLeaseItem.armoryItemId, on: req.db) {
+//                armoryItem.inStock += existingLeaseItem.quantity
+//                try await armoryItem.update(on: req.db)
+//            }
+//        }
+        
+        // Step 2: Delete existing lease items
         try await LeaseItemModel.query(on: req.db)
             .filter(\.$leaseId == leaseModel.requireID())
             .delete()
         
+//        // Step 3: Fetch armory items for the new lease and validate quantities
+//        let armoryItems = try await ArmoryItemModel.query(on: req.db)
+//            .filter(\.$id ~~ updateObject.items.compactMap { $0.armoryItemId }) // Use `~~` for "in" clause
+//            .all()
+        
+        // Prepare new lease items and update stock
         for armoryItem in armoryItems {
             let armoryItemId = try armoryItem.requireID()
+            let newLeaseItemData = updateObject.items.first { $0.armoryItemId == armoryItemId }
+            
+            guard let quantity = newLeaseItemData?.quantity, quantity > 0 else {
+                throw Abort(.badRequest, reason: "Invalid quantity for armory item \(armoryItem.name).")
+            }
+            
+            // Check if there is enough stock to lease
+            if armoryItem.inStock < quantity {
+                throw Abort(.badRequest, reason: "Not enough stock for item \(armoryItem.name). Only \(armoryItem.inStock) left.")
+            }
+            
+            // Deduct the stock
+            armoryItem.inStock -= quantity
+            try await armoryItem.update(on: req.db)
+            
+            // Create new lease item
             let newLeaseItem = LeaseItemModel(
                 leaseId: try leaseModel.requireID(),
-                armoryItemId: try armoryItem.requireID(),
-                quantity: updateObject.items.first(where: { $0.armoryItemId == armoryItemId })?.quantity ?? 1 // Set quantity from updateObject, or default to 1
+                armoryItemId: armoryItemId,
+                quantity: quantity
             )
             try await newLeaseItem.create(on: req.db)
         }
         
-        
+        // Step 4: Update the lease record if necessary
         try await leaseModel.update(on: req.db)
+        
         return Response(status: .ok)
     }
     
