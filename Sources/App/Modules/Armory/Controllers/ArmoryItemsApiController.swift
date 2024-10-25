@@ -14,18 +14,6 @@ extension Armory.Item.Detail: Content {}
 extension Armory.Item.Create: Content {}
 
 struct ArmoryItemsApiController: ListController {
-//    func createResponse(_ req: Request, _ model: DatabaseModel) async throws -> Response {
-//        try await detailOutput(req, model).encodeResponse(status: .created, for: req)
-//    }
-    
-//    func updateResponse(_ req: Request, _ model: DatabaseModel) async throws -> Response {
-//        try await detailOutput(req, model).encodeResponse(for: req)
-//    }
-//    
-//    func patchResponse(_ req: Request, _ model: DatabaseModel) async throws -> Response {
-//        try await detailOutput(req, model).encodeResponse(for: req)
-//    }
-    
     typealias ApiModel = Armory.Item
     typealias DatabaseModel = ArmoryItemModel
     
@@ -128,45 +116,4 @@ struct ArmoryItemsApiController: ListController {
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
         .noContent
     }
-    
-//    func detailOutput(_ req: Request, _ model: DatabaseModel) async throws -> Armory.Item.Detail {
-//        do {
-//            let category = try await model.$category.query(on: req.db).first()
-//            
-//            return .init(id: model.id!,
-//                         name: model.name,
-//                         imageKey: model.imageKey,
-//                         aboutInfo: model.aboutInfo,
-//                         inStock: model.inStock,
-//                         category: .init(id: category.id!, name: category.name),
-//                         categoryId: try category.requireID())
-//        } catch {
-//            print(error)
-//            
-//        }
-//    }
-//    
-//    func createInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Item.Create) async throws {
-//        model.name = input.name
-//        model.imageKey = input.imageKey
-//        model.aboutInfo = input.aboutInfo
-//        model.inStock = input.inStock
-//        model.$category.id = input.categoryId
-//    }
-//    
-//    func updateInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Item.Update) async throws {
-//        model.name = input.name
-//        model.imageKey = input.imageKey
-//        model.aboutInfo = input.aboutInfo
-//        model.inStock = input.inStock
-//        model.$category.id = input.categoryId
-//    }
-//    
-//    func patchInput(_ req: Request, _ model: DatabaseModel, _ input: Armory.Item.Patch) async throws {
-//        model.name = input.name ?? model.name
-//        model.imageKey = input.imageKey ?? model.imageKey
-//        model.aboutInfo = input.aboutInfo ?? model.aboutInfo
-//        model.inStock = input.inStock ?? model.inStock
-//        model.$category.id = input.categoryId ?? model.$category.id
-//    }
 }
