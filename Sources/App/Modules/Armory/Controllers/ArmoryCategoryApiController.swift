@@ -28,6 +28,8 @@ struct ArmoryCategoryApiController: ListController {
     var modelName: Name = .init(singular: "category", plural: "categories")
     var parameterId: String = "categoryId"
     
+    var defaultCategoryName = "Default"
+    
     func setupRoutes(_ routes: RoutesBuilder) {
         let baseRoutes = getBaseRoutes(routes)
         let existingModelRoutes = baseRoutes.grouped(ApiModel.pathIdComponent)
@@ -59,7 +61,21 @@ extension ArmoryCategoryApiController {
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
         let model = try await findBy(identifier(req), on: req.db)
+        let categoryId = try model.requireID()
+        
+        guard let defaultCategory = try await ArmoryCategoryModel.query(on: req.db)
+            .filter(\.$name == defaultCategoryName)
+            .first() else {
+            throw Abort(.internalServerError, reason: "Default category not found.")
+        }
+        
+        try await ArmoryItemModel.query(on: req.db)
+            .filter(\.$category.$id == categoryId)
+            .set(\.$category.$id, to: defaultCategory.requireID())
+            .update()
+        
         try await model.delete(on: req.db)
+        
         return .noContent
     }
     
@@ -101,7 +117,7 @@ extension ArmoryCategoryApiController {
             })
         } else {
             // Currently this api call is used only for admins to edit Category name or delete the category that's why default category is not needed
-            models = try await list(req, queryBuilders: { $0.filter(\.$name != "Default") })
+            models = try await list(req, queryBuilders: { $0.filter(\.$name != defaultCategoryName) })
         }
         
         return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: .init(id: try $0.category.requireID(), name: $0.category.name), categoryId: try $0.category.requireID()) }) }
