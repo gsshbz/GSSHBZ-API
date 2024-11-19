@@ -67,7 +67,20 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.categoryNotFound
         }
         
-        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
+        // Get the `Public` directory path
+        let assetsDirectory = req.application.directory.publicDirectory + "img/"
+        
+        // Generate a unique file name for the image
+        let fileExtension = input.image.filename.split(separator: ".").last ?? "jpg"
+        let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+        
+        // Full path where the image will be saved
+        let filePath = assetsDirectory + uniqueFileName
+        
+        // Save the image data to the specified path
+        try await req.fileio.writeFile(input.image.data, at: filePath)
+        
+        let armoryModel = ArmoryItemModel(name: input.name, imageKey: uniqueFileName, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
         
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
@@ -102,8 +115,21 @@ struct ArmoryItemsApiController: ListController {
             throw Abort(.notFound)
         }
         
+        // Get the `Public` directory path
+        let assetsDirectory = req.application.directory.publicDirectory + "assets/"
+        
+        // Generate a unique file name for the image
+        let fileExtension = input.image.filename.split(separator: ".").last ?? "jpg"
+        let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+        
+        // Full path where the image will be saved
+        let filePath = assetsDirectory + uniqueFileName
+        
+        // Save the image data to the specified path
+        try await req.fileio.writeFile(input.image.data, at: filePath)
+        
         armoryModel.name = input.name
-        armoryModel.imageKey = input.imageKey
+        armoryModel.imageKey = uniqueFileName
         armoryModel.aboutInfo = input.aboutInfo
         armoryModel.inStock = input.inStock
         armoryModel.$category.id = input.categoryId ?? defaultCategory.id!

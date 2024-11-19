@@ -5,7 +5,7 @@
 //  Created by Mico Miloloza on 12.11.2023..
 //
 
-import Foundation
+import Vapor
 
 
 public extension Armory.Item {
@@ -31,7 +31,7 @@ public extension Armory.Item {
     
     struct Create: Codable {
         let name: String
-        let imageKey: String
+        let image: File
         let aboutInfo: String
         let inStock: Int
         let categoryId: UUID?
@@ -39,7 +39,7 @@ public extension Armory.Item {
     
     struct Update: Codable {
         let name: String
-        let imageKey: String
+        let image: File
         let aboutInfo: String
         let inStock: Int
         let categoryId: UUID?
@@ -47,7 +47,7 @@ public extension Armory.Item {
     
     struct Patch: Codable {
         let name: String?
-        let imageKey: String?
+        let image: File?
         let aboutInfo: String?
         let inStock: Int?
         let categoryId: UUID?
