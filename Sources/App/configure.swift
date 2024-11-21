@@ -62,16 +62,6 @@ public func configure(_ app: Application) async throws {
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(app.sessions.middleware)
     
-    let corsConfiguration = CORSMiddleware.Configuration(
-        allowedOrigin: .all,
-        allowedMethods: [.GET, .POST, .PUT, .OPTIONS, .DELETE, .PATCH],
-        allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent, .accessControlAllowOrigin]
-    )
-    
-    let cors = CORSMiddleware(configuration: corsConfiguration)
-    // cors middleware should come before default error middleware using `at: .beginning`
-    app.middleware.use(cors, at: .beginning)
-    
     app.randomGenerators.use(.random)
 
     //MARK: - register routes
@@ -98,13 +88,25 @@ public func configure(_ app: Application) async throws {
     // MARK: - Mail service setup
     app.sendgrid.initialize()
     
+    
+    app.webSocket("echo") { req, ws in
+      // 2
+      print("ws connected")
+      // 3
+      ws.onText { ws, text in
+        // 4
+        print("ws received: \(text)")
+        // 5
+        ws.send("echo: " + text)
+      }
+    }
+    
     // MARK: - WebSocket setup
     let eventLoop = app.eventLoopGroup.next()
     ArmoryWebSocketSystem.shared = ArmoryWebSocketSystem(eventLoop: eventLoop)
     
-    // WebSocket route setup
     app.webSocket("armory") { req, ws async in
-        do {
+        do { 
             guard let clientIdString = req.query[String.self, at: "client"],
                   let clientId = UUID(uuidString: clientIdString),
                   let user = try await UserAccountModel.find(clientId, on: req.db) else {
@@ -112,12 +114,7 @@ public func configure(_ app: Application) async throws {
                 return
             }
             
-            let client = WebSocketClient(id: try user.requireID(), socket: ws)
-            ArmoryWebSocketSystem.shared.clients.add(client)
-            
-            ws.onClose.whenComplete { _ in
-                ArmoryWebSocketSystem.shared.clients.remove(client)
-            }
+            ArmoryWebSocketSystem.shared.connect(try user.requireID(), ws)
         } catch {
             print("Error handling WebSocket connection: \(error)")
             Task {
@@ -125,4 +122,14 @@ public func configure(_ app: Application) async throws {
             }
         }
     }
+    
+    let corsConfiguration = CORSMiddleware.Configuration(
+        allowedOrigin: .all,
+        allowedMethods: [.GET, .POST, .PUT, .OPTIONS, .DELETE, .PATCH],
+        allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent, .accessControlAllowOrigin]
+    )
+    
+    let cors = CORSMiddleware(configuration: corsConfiguration)
+    // cors middleware should come before default error middleware using `at: .beginning`
+    app.middleware.use(cors, at: .beginning)
 }

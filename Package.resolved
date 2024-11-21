@@ -226,15 +226,6 @@
       }
     },
     {
-      "identity" : "swift-aws-lambda-runtime",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swift-server/swift-aws-lambda-runtime",
-      "state" : {
-        "revision" : "8d9f44b7838750b103ad2ad49055e8333d719e8a",
-        "version" : "1.0.0-alpha.2"
-      }
-    },
-    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
@@ -349,15 +340,6 @@
       "state" : {
         "revision" : "1aeeaafb0099a9c9372916ca2ff74f197d26b36c",
         "version" : "4.87.0"
-      }
-    },
-    {
-      "identity" : "vercel",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swift-cloud/Vercel",
-      "state" : {
-        "revision" : "15d2598cd6872d1fafa5a4b58d751b9cb622f5c4",
-        "version" : "1.17.2"
       }
     },
     {

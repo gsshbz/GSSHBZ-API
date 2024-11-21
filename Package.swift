@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "GSSHBZ",
     platforms: [
-       .macOS(.v13)
+        .macOS(.v14)
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
@@ -22,13 +22,11 @@ let package = Package(
         .package(url: "https://github.com/vapor/queues-redis-driver.git", from: "1.0.0-rc.1"),
         
         // Other
-        .package(url: "https://github.com/swift-cloud/Vercel", from : "1.0.0")
     ],
     targets: [
         .executableTarget(
             name: "App",
             dependencies: [
-                .product(name: "Vercel", package: "Vercel"),
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),

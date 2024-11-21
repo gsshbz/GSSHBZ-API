@@ -38,6 +38,14 @@ class ArmoryWebSocketSystem {
             try await client.socket.send(jsonString)
         }
     }
+    
+    func connect(_ id: UUID, _ ws: WebSocket) {
+        let client = WebSocketClient(id: id, socket: ws)
+        self.clients.add(client)
+        ws.onText { [unowned self] ws, text in
+            self.clients.add(client)
+        }
+    }
 }
 
 extension ArmoryWebSocketSystem {
