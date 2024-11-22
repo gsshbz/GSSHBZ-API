@@ -116,7 +116,7 @@ struct ArmoryItemsApiController: ListController {
         }
         
         // Get the `Public` directory path
-        let assetsDirectory = req.application.directory.publicDirectory + "assets/"
+        let assetsDirectory = req.application.directory.publicDirectory + "img/"
         
         // Generate a unique file name for the image
         let fileExtension = input.image.filename.split(separator: ".").last ?? "jpg"
@@ -136,7 +136,9 @@ struct ArmoryItemsApiController: ListController {
         
         try await armoryModel.update(on: req.db)
         
-        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        
+        return armoryItem
     }
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {

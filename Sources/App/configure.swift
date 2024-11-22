@@ -89,28 +89,16 @@ public func configure(_ app: Application) async throws {
     app.sendgrid.initialize()
     
     
-    app.webSocket("echo") { req, ws in
-      // 2
-      print("ws connected")
-      // 3
-      ws.onText { ws, text in
-        // 4
-        print("ws received: \(text)")
-        // 5
-        ws.send("echo: " + text)
-      }
-    }
-    
     // MARK: - WebSocket setup
     let eventLoop = app.eventLoopGroup.next()
     ArmoryWebSocketSystem.shared = ArmoryWebSocketSystem(eventLoop: eventLoop)
     
     app.webSocket("armory") { req, ws async in
-        do { 
+        do {
             guard let clientIdString = req.query[String.self, at: "client"],
                   let clientId = UUID(uuidString: clientIdString),
                   let user = try await UserAccountModel.find(clientId, on: req.db) else {
-                ws.close(promise: nil)
+                try await ws.close()
                 return
             }
             
