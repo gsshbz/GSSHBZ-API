@@ -442,6 +442,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImZ1bGxOYW1lIjoiQWRtaW4gQWRtaW4iLCJleHBpcmF0aW9uIjoxNzMxNjI2MDk2LjkzODEzOCwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.Ca5igxlOrOwwfS3LOc0-cAifrbjQAIRUvSr07TOFBjYw5tPJ2vMQdR9wrKtyD9fdFYOMK3tgoG-HbnCPwlyuxAGtzhqNXDlTbRzttH7iRb1bz_UeI0lQ6lCo7FCzAwbvR_k1ZDEHrWlfA2CsHlYOOJdN3ZG8l7GvSKiTaGPEbikYsXoF3yNRcXqRJy2WqWgScE8coyGO8mI6SQvCDoS-6dCTqutIUIHZoqxbn_ZbmwAxPadlqxSDwh-CtHk017_gREbcL6BpWr36VjjMB8teXrFGhUfsYuUnC3jjiRn66haCawniIfEYct35mQw9DUOPSCDiMnV4VBh-JwJ8BkRCcw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -454,14 +464,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"raw": "{{base_api_url}}/armory/categories/7AB48DDC-AB1F-4D42-84C4-A14967822164",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"categories",
-								"92B79E61-449F-46F3-85F1-5837ED445B74"
+								"7AB48DDC-AB1F-4D42-84C4-A14967822164"
 							]
 						},
 						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
@@ -946,7 +956,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTcyOTc2MDUyNC4xMzE5NTksInVzZXJJZCI6IjIyMUIwMzU4LTM4N0UtNDlFNi04QjNGLTMxREU0NTAxQzMzQyIsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.jgyTkFUuCp-8ixHbD3QZ4eKK6XZCvjAsZ-ip2AX0fJO8SC5UeWyjyF-jC1l54XelhDoctWDtfMocGu1Sd8t8yeduIwmtdPEfJA-xVpoy0AIjIN1rEKkxGGrcQfeYFVmuukakLmmcOxjKO1MTT0sf8wZ9-mFhmZ2YkySIhly2d1BbK8SNpw0WP8sG8PiEZUeSlHkb9ho53ChTumdn-JQrEvKuRLempFwSQXAe_XTqSvc11V9-VIN0TWc-rjTCoWkLtFBQWAtnWVdSWJcHzqaKINr8u9xhHwv0x9QAhgy-yYS3-24RgllZoVMNQDOwCGav9JfHaVzIOGfivFr9eiL1eA",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNzMyMzE1NTU0LjI4MzUyNiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJ1c2VySWQiOiI5NkRGMDU1Ny1DMzRELTQ5REQtOURCMC1FOUQ4OUYyMjg0MEQiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIn0.Bf2XhZRVtMSNV4GJUTEPQ6zpHDyUt5XLaK-pK3nItilp5ASkgTYsxAPYJu48_kUcgJpmy3SVivNF0T42A9l-9AI4oxPYDkkDhZYpV2Sdpprk0MXcgFhZWFOS1DluFKceiUYbioDxYhZwsUNn6Fzb5X4qHULr3wIkIGdwLBgInsmYNAfn4SLVotMnEStD7kX7acygdR8hZnoC8rIAYyGZMI0KEn5PBu1WM0bxhcOuhpE1FVDEejPHM3rKOPb3_rcp3JihykaQSEv6EH34zdq_QhQf7nqCJzGsHezoD6CQnTO6ykSsskKoIcQ-MsWVYiKEKWurB-7NR64VESBVg5xjeQ",
 									"type": "string"
 								}
 							]
@@ -954,13 +964,34 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Petzl Kruskasti karabiner\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Karabiner uže bla bla bla\",\n    \"inStock\": 10,\n    \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "asdfasdfff",
+									"type": "text"
+								},
+								{
+									"key": "aboutInfo",
+									"value": "Testing image upload",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/priv/Downloads/1282271.jpg"
+								},
+								{
+									"key": "inStock",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "D7963051-247E-46B8-BF53-E9122280D988",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{base_api_url}}/armory/items",
@@ -1037,7 +1068,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiMjIxQjAzNTgtMzg3RS00OUU2LThCM0YtMzFERTQ1MDFDMzNDIiwiZXhwaXJhdGlvbiI6MTcyOTg0ODQ3NC40NTc5OTksImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.c7VgvQ15nh25tJQcVmh3U5_Qdaem_28FgjKKz30sYvmL7yr9zNNr1BWEXA0CISucusZ7JOaKtBJSgPuXBeQbSZuyzseU7fJQX7LxquNOO6m-PbocL_w4hnZEIMbtA4fYmWUKpD1xneaLMJrbxBWJb1tEHORW62-8zpkv2kPkoOtCraRw-roOw2Cw73x1knm-UbkvDoXltTmM8AtH3NFRB8LMny4HwEOkUD2maRpaE_jm0f2vnu-VaRxjCSVpgZN80_EOxEJ9HDfJH-Q9LBu1l-NFzSkGQvTG90ejAGaqnWOf1qFwSiEDedZ8Wk1rpJAVEd7SlHprVdyYeMhpW9KdZw",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjA1NTE5OC44MDY0MDgsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.IUUaQZkDGOXKy_Ev4eepQckmz7Rg15mj3ZO_1AxhVNzt80anJn6VdVUp3TFSlWpsGfD3Iu0HX5kztQrnHc7shsyR6Djzy_qbMd6niDmyRfIGSPWEHIMUevigEGjZZAm2lKhyHju4W2U1PjEJVSbRC_I-Km6mWzzlmtqzAHou_IagoYdRsOsfosVeDPpB_6BPQ37DPzCkxb6my4o-UOkrjkrPx-bj1cwWYPduYQlnmOdWIOsEMTYcLIT-XmOTEWK2lXeQI_yM6-NvZjUbErvzV4xgqUvsFHQ8uPTZMXT-6xcDHzkGd8qL8jItXo4UCH-ImCMw-3lWPwYCfJsm6F6KOg",
 									"type": "string"
 								}
 							]
@@ -1045,14 +1076,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3",
+							"raw": "{{base_api_url}}/armory/items/C82D34D4-0714-4B6F-83A0-0E70A4B48B6A",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3"
+								"C82D34D4-0714-4B6F-83A0-0E70A4B48B6A"
 							]
 						}
 					},
@@ -1112,7 +1143,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiMjIxQjAzNTgtMzg3RS00OUU2LThCM0YtMzFERTQ1MDFDMzNDIiwiZXhwaXJhdGlvbiI6MTcyOTg0ODQ3NC40NTc5OTksImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.c7VgvQ15nh25tJQcVmh3U5_Qdaem_28FgjKKz30sYvmL7yr9zNNr1BWEXA0CISucusZ7JOaKtBJSgPuXBeQbSZuyzseU7fJQX7LxquNOO6m-PbocL_w4hnZEIMbtA4fYmWUKpD1xneaLMJrbxBWJb1tEHORW62-8zpkv2kPkoOtCraRw-roOw2Cw73x1knm-UbkvDoXltTmM8AtH3NFRB8LMny4HwEOkUD2maRpaE_jm0f2vnu-VaRxjCSVpgZN80_EOxEJ9HDfJH-Q9LBu1l-NFzSkGQvTG90ejAGaqnWOf1qFwSiEDedZ8Wk1rpJAVEd7SlHprVdyYeMhpW9KdZw",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
 									"type": "string"
 								}
 							]
@@ -1185,7 +1216,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJ1c2VySWQiOiIyMjFCMDM1OC0zODdFLTQ5RTYtOEIzRi0zMURFNDUwMUMzM0MiLCJleHBpcmF0aW9uIjoxNzI5NzYzNzIyLjc3NjY3MX0.bb1rrPyZJDYDmcp40tpKu8qX0-deqwdUvwfDQLGlpHAQzy3-SIuViX-Lol5barxhUpeeB-FTNKqDuXbjrVqNbW2WeuXzN7wBSvY75C3hlDpw8UcmFjKCMzOy2JefoENAB80bMyzRWyD7fqo14WGvf60Sk0cwmpL94PV5_qkLWiXMhVZOj67ky8MrIfiBPcj5oC3w0RIs64AF7n2UtBblB-Fwhasl1wFEldDSmeEhY055uJGXoJxkFlEz3j96Jlu63Kei9_dU1qIYsKS0SN4_3pWM_zTFUJJjzlPc5sUbOS9LzrUGcSL2mxM4IT-3Wp4JzhcEuwlTsrIH5aaYkxb5BQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjc0NTc0NS45OTMwMTMsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.K2uD5PwH4tLRFhwUPqqpVkkGpUe9afJf0YFibKekTpbpS2sD2JVfrAClGPEGLWE601G6dwOXRiW7fFcdiEmLVbtZvGQKyp0rjmDWJjWmedXUCOgFz5cvUC9oDP6NUbTENElhWPx5QeEP-VONsrrjSQb0RvMNuONtVaNTM-LuNsevaTTmxn7q7x0OAl3tZ1HQ5zWSJcDeKhZlmcHGS6QCJOmUahZ0QSsWh0yRKvs7cC5SP7SGdR0BBhWgyn-YOcgI7ZaUw4N_BaW8CeHv3EBVeJdtJLO3bJSpEdCGpeMQ6W25V9Jj_eh9OB0IhgdUTSlxWHfjGDT12-vnUvxGly-i4w",
 									"type": "string"
 								}
 							]
@@ -1193,23 +1224,39 @@
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 40\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Updateani armory item",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/priv/Downloads/1331544.png"
+								},
+								{
+									"key": "aboutInfo",
+									"value": "Updateani info",
+									"type": "text"
+								},
+								{
+									"key": "inStock",
+									"value": "40",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/5963FA33-23EC-4A16-9585-5C6E3D07042C",
+							"raw": "{{base_api_url}}/armory/items/8BDD0BD2-DCA6-403C-AA64-6E224E773740",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"5963FA33-23EC-4A16-9585-5C6E3D07042C"
+								"8BDD0BD2-DCA6-403C-AA64-6E224E773740"
 							]
 						}
 					},
@@ -1278,7 +1325,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTU0NzY0LjY3ODgxNSwidXNlcklkIjoiM0IzN0RENjYtRjg2Ny00OTQ2LTk5OEQtMkIwQjRFQTQ2NTk2IiwiZnVsbE5hbWUiOiJUZXN0bmkgS29yaXNuaWsifQ.g7ofYn1_UxqodsUlXAC4xa77tI7zaLH8Pt_DEqt3GydVCfmTPt4gOKRY_LH5ywYHqJvmzJvxmxskGzaL9-ljfvnlvDKqR_cSzi1XxFdcVts2UcMUqpRTEPM0zmqco2ZwQ1viCHwkJjFpTfpyN0cOoO6x1AHTXGPcAJp2uXbJ5QLIB7WMPcfyOzU_fsJ56qpqNd7rSYDPBRVajKeLXC21ov4okWfc09KqWNBBHGkdgnYBqcqBN0dao3vgzq6bkSZCNuzELxHqre-fSUOh0h4lcGmwa7RroK3VbyZ5WAWiHvy4u_iPWkSECf9mOsp8ebu1vgSRHZpXyf-bNJSmhNMFgA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NkRGMDU1Ny1DMzRELTQ5REQtOURCMC1FOUQ4OUYyMjg0MEQiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJleHBpcmF0aW9uIjoxNzMyNjY3MzYwLjQzMzMzNn0.LBS2JQNrrvxFfZvs-MFTM-giAOq6BJzEswCd-_9__NAGjgSH57UHQuX2E7LMxzjIvytJM4pJlRGixW2YyBgUUr7RSB5Az17fQJtZPp1M7AtasK1tgA_cYRMtWR3XsmEjiPL3VDowXgtO1nJCd-zx33KZ8bCEhYcXPZRbXb6BUFPKOaO8jLnemEwvVoxhGp668KMdorgNzoQKbecU0qpi-AF_hS0Qnc-wAASJq5Pz1KaiCe8Y8-CWlD--OYhPbb0uTkKrHfbbwtos5Jzz5GIcYVE_ceRMRR4-IM3AuJl0yX1n_CjhxnIJmkg6BQNPHF2g0j16LI6ZpmohvklXqecJ5g",
 									"type": "string"
 								}
 							]
@@ -1286,14 +1333,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/325AD55B-9A1E-48F9-8C4D-327A3242A453",
+							"raw": "{{base_api_url}}/armory/items/596E2AF0-33FC-4525-A7F2-FB5F70F92FE6",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"325AD55B-9A1E-48F9-8C4D-327A3242A453"
+								"596E2AF0-33FC-4525-A7F2-FB5F70F92FE6"
 							]
 						}
 					},
@@ -1378,7 +1425,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiIyMjFCMDM1OC0zODdFLTQ5RTYtOEIzRi0zMURFNDUwMUMzM0MiLCJleHBpcmF0aW9uIjoxNzI5NzU5NzM2LjgwMjg2MSwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiIsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.V0DFSX3gYBaa7e-dWqSinAkkjlkTnYhIjmfenhfKnQNl4LhPXoZaVGAl5f-Lul-2QMUemobUGfPWq40HkDf1ziAq40rWDLM0EjNqT7zO2YJluax-g9VcnczJjYR_6eYEzYMh7VoqXzNiaLiAuTKmi0k0dM9PVDiOSflnjkqWSJRO3LqC4RJvjEiIgoaYyB-pf6KsFRgThVUtWIZm71I92yoX71YZiCkYSNHsaq_ZbgP12ESgkF__d3Nh4ST4IQCqre3E7CxyEX0d69FO8vBuXcPFoCwPmYwJQKBVmRHvkKzpg3txp_eEbYIjjKUOnlq3rlCzkAp1Enf_RO9dk8REDg",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
 									"type": "string"
 								}
 							]
@@ -1387,7 +1434,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n            \"quantity\": 2\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"C82D34D4-0714-4B6F-83A0-0E70A4B48B6A\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n            \"quantity\": 2\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1544,7 +1591,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiIyMjFCMDM1OC0zODdFLTQ5RTYtOEIzRi0zMURFNDUwMUMzM0MiLCJleHBpcmF0aW9uIjoxNzI5NzU5NzM2LjgwMjg2MSwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiIsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.V0DFSX3gYBaa7e-dWqSinAkkjlkTnYhIjmfenhfKnQNl4LhPXoZaVGAl5f-Lul-2QMUemobUGfPWq40HkDf1ziAq40rWDLM0EjNqT7zO2YJluax-g9VcnczJjYR_6eYEzYMh7VoqXzNiaLiAuTKmi0k0dM9PVDiOSflnjkqWSJRO3LqC4RJvjEiIgoaYyB-pf6KsFRgThVUtWIZm71I92yoX71YZiCkYSNHsaq_ZbgP12ESgkF__d3Nh4ST4IQCqre3E7CxyEX0d69FO8vBuXcPFoCwPmYwJQKBVmRHvkKzpg3txp_eEbYIjjKUOnlq3rlCzkAp1Enf_RO9dk8REDg",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
 									"type": "string"
 								}
 							]
@@ -1619,7 +1666,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJ1c2VySWQiOiIyMjFCMDM1OC0zODdFLTQ5RTYtOEIzRi0zMURFNDUwMUMzM0MiLCJleHBpcmF0aW9uIjoxNzI5NzYzNzIyLjc3NjY3MX0.bb1rrPyZJDYDmcp40tpKu8qX0-deqwdUvwfDQLGlpHAQzy3-SIuViX-Lol5barxhUpeeB-FTNKqDuXbjrVqNbW2WeuXzN7wBSvY75C3hlDpw8UcmFjKCMzOy2JefoENAB80bMyzRWyD7fqo14WGvf60Sk0cwmpL94PV5_qkLWiXMhVZOj67ky8MrIfiBPcj5oC3w0RIs64AF7n2UtBblB-Fwhasl1wFEldDSmeEhY055uJGXoJxkFlEz3j96Jlu63Kei9_dU1qIYsKS0SN4_3pWM_zTFUJJjzlPc5sUbOS9LzrUGcSL2mxM4IT-3Wp4JzhcEuwlTsrIH5aaYkxb5BQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
 									"type": "string"
 								}
 							]
@@ -1628,7 +1675,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n            \"quantity\": 2\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\",\n            \"quantity\": 1\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1636,18 +1683,73 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2",
+							"raw": "{{base_api_url}}/armory/leases/2B3D9890-71FB-4CC5-B28A-5EBF68D5D905",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2"
+								"2B3D9890-71FB-4CC5-B28A-5EBF68D5D905"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Update Lease",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\",\n            \"quantity\": 1\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/2B3D9890-71FB-4CC5-B28A-5EBF68D5D905",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"2B3D9890-71FB-4CC5-B28A-5EBF68D5D905"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "804"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=vcSiKSKx2Kw9SkJOhCRwIDT1ZekDwciKUwAyjR8qftg=; Expires=Wed, 04 Dec 2024 21:01:54 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 27 Nov 2024 21:01:54 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2024-11-27T00:02:54Z\",\n    \"armoryItems\": [\n        {\n            \"quantity\": 1,\n            \"armoryItem\": {\n                \"name\": \"OK karabiner\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"inStock\": 9,\n                \"categoryId\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\"\n                },\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"id\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\"\n            }\n        }\n    ],\n    \"id\": \"2B3D9890-71FB-4CC5-B28A-5EBF68D5D905\",\n    \"user\": {\n        \"isAdmin\": false,\n        \"lastName\": \"Admin\",\n        \"firstName\": \"Admin\",\n        \"id\": \"96DF0557-C34D-49DD-9DB0-E9D89F22840D\",\n        \"email\": \"root@localhost.localhost\"\n    },\n    \"updatedAt\": \"2024-11-27T00:02:54Z\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete Lease",
@@ -1657,7 +1759,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmF0aW9uIjoxNzI5Njg2NzcxLjU5MjI2NywiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiIsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiNjM0ODA1QzUtQjY4Ri00Nzc0LTk2OTUtRTFBODFCQTI5RUM4In0.JGb_mANrUOQxXIC_CuQN2_5BCQrbTgcgAUcGyXZmCIE8Kg4LHgPXurtMyaHsRJtaoA8eYo36ah7Bij31CDDYVCP0IzdIqQc42eQXpt5qgLwf3r9GKYXBjvbR8ec2sKx2wey6_lqHB-zAF1sFnH1ZQE8S9D4wtVWxsbWpHVydkyiczDCdn_4K2zZl8KS4tI1DOkj-qUvp2jgMMNL-LDNp-yCi6cqiaWoJI23m_-yMftxfnNo_iri8Ra9ijIYN-TO3JsMVQmw2xy6EVghwRp7FVWuFlk8pvtLvOBhbgWRPbArKXU2FONlwC2V42zSRH4d-XdlFspuKq0MkeViE2GJ5-Q",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
 									"type": "string"
 								}
 							]
@@ -1665,14 +1767,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/B708C9A4-9146-4C38-A913-F4DE0334DF30",
+							"raw": "{{base_api_url}}/armory/leases/A8199718-DEAC-4702-8C6B-0E146BE8E0D0",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"B708C9A4-9146-4C38-A913-F4DE0334DF30"
+								"A8199718-DEAC-4702-8C6B-0E146BE8E0D0"
 							]
 						}
 					},
@@ -1724,7 +1826,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiIyMjFCMDM1OC0zODdFLTQ5RTYtOEIzRi0zMURFNDUwMUMzM0MiLCJleHBpcmF0aW9uIjoxNzI5NzU5NzM2LjgwMjg2MSwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiIsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0In0.V0DFSX3gYBaa7e-dWqSinAkkjlkTnYhIjmfenhfKnQNl4LhPXoZaVGAl5f-Lul-2QMUemobUGfPWq40HkDf1ziAq40rWDLM0EjNqT7zO2YJluax-g9VcnczJjYR_6eYEzYMh7VoqXzNiaLiAuTKmi0k0dM9PVDiOSflnjkqWSJRO3LqC4RJvjEiIgoaYyB-pf6KsFRgThVUtWIZm71I92yoX71YZiCkYSNHsaq_ZbgP12ESgkF__d3Nh4ST4IQCqre3E7CxyEX0d69FO8vBuXcPFoCwPmYwJQKBVmRHvkKzpg3txp_eEbYIjjKUOnlq3rlCzkAp1Enf_RO9dk8REDg",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjc0NTc0NS45OTMwMTMsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.K2uD5PwH4tLRFhwUPqqpVkkGpUe9afJf0YFibKekTpbpS2sD2JVfrAClGPEGLWE601G6dwOXRiW7fFcdiEmLVbtZvGQKyp0rjmDWJjWmedXUCOgFz5cvUC9oDP6NUbTENElhWPx5QeEP-VONsrrjSQb0RvMNuONtVaNTM-LuNsevaTTmxn7q7x0OAl3tZ1HQ5zWSJcDeKhZlmcHGS6QCJOmUahZ0QSsWh0yRKvs7cC5SP7SGdR0BBhWgyn-YOcgI7ZaUw4N_BaW8CeHv3EBVeJdtJLO3bJSpEdCGpeMQ6W25V9Jj_eh9OB0IhgdUTSlxWHfjGDT12-vnUvxGly-i4w",
 									"type": "string"
 								}
 							]
