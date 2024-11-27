@@ -56,7 +56,11 @@ extension ArmoryCategoryApiController {
         let categoryModel = ArmoryCategoryModel(name: input.name)
         try await categoryModel.save(on: req.db)
         
-        return .init(id: try categoryModel.requireID(), name: categoryModel.name)
+        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryCreated, category)
+        
+        return category
     }
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
@@ -73,6 +77,8 @@ extension ArmoryCategoryApiController {
             .filter(\.$category.$id == categoryId)
             .set(\.$category.$id, to: defaultCategory.requireID())
             .update()
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryDeleted, categoryId)
         
         try await model.delete(on: req.db)
         
@@ -101,7 +107,12 @@ extension ArmoryCategoryApiController {
         categoryModel.name = updateObject.name
         
         try await categoryModel.update(on: req.db)
-        return .init(id: try categoryModel.requireID(), name: categoryModel.name)
+        
+        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryUpdated, detailObject)
+        
+        return detailObject
     }
     
     func listApi(_ req: Request) async throws -> [ListObject] {

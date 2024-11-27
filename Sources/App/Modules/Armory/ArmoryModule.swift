@@ -16,7 +16,6 @@ struct ArmoryModule: ModuleInterface {
         app.migrations.add(ArmoryMigrations.seed())
         
         app.middleware.use(UserSessionAuthenticator())
-        app.databases.middleware.use(ArmoryItemModelUpdateMiddleware(), on: .psql)
         
         try router.boot(routes: app.routes)
     }

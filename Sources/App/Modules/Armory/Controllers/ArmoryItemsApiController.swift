@@ -85,7 +85,11 @@ struct ArmoryItemsApiController: ListController {
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
         
-        return  .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemCreated, armoryItem)
+        
+        return  armoryItem
     }
     
     func detailApi(_ req: Request) async throws -> Armory.Item.Detail {
@@ -138,10 +142,25 @@ struct ArmoryItemsApiController: ListController {
         
         let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
         
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, armoryItem)
+        
         return armoryItem
     }
     
     func deleteApi(_ req: Request) async throws -> HTTPStatus {
-        .noContent
+        guard let armoryModel = try await ArmoryItemModel.query(on: req.db)
+            .filter(\.$id == identifier(req))
+            .with(\.$category)
+            .first() else {
+            throw ArmoryErrors.armoryItemNotFound
+        }
+        
+        let armoryModelId = try armoryModel.requireID()
+        
+        try await armoryModel.delete(on: req.db)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemDeleted, armoryModelId)
+        
+        return .noContent
     }
 }

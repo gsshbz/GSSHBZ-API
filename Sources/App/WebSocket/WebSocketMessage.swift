@@ -9,8 +9,19 @@ import Vapor
 
 
 enum WebSocketMessageType: String, Codable {
+    case armoryItemCreated
     case armoryItemUpdated
-    case newLeaseCreated
+    case armoryItemDeleted
+    
+    case categoryCreated
+    case categoryUpdated
+    case categoryDeleted
+    
+    case leaseCreated
+    case leaseUpdated
+    case leaseDeleted
+    
+    case ping
 }
 
 struct WebSocketMessage<T: Codable>: Codable {
@@ -18,8 +29,14 @@ struct WebSocketMessage<T: Codable>: Codable {
     let data: T
 }
 
+extension Data {
+    func decodeWebSocketMessage<T: Codable>(_ type: T.Type) -> WebSocketMessage<T>? {
+        try? JSONDecoder().decode(WebSocketMessage<T>.self, from: self)
+    }
+}
+
 extension ByteBuffer {
-    func decodeWebsocketMessage<T: Codable>(_ type: T.Type) -> WebSocketMessage<T>? {
+    func decodeWebSocketMessage<T: Codable>(_ type: T.Type) -> WebSocketMessage<T>? {
         try? JSONDecoder().decode(WebSocketMessage<T>.self, from: self)
     }
 }
