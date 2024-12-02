@@ -575,13 +575,49 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"Mico\",\n    \"lastName\": \"Miloloza\",\n    \"email\": \"brinaxx@gmail.com\",\n    \"password\": \"123456789\",\n    \"confirmPassword\": \"123456789\",\n    \"address\": \"Testna Ulica 1\",\n    \"phoneNumber\": \"0028428371098\",\n    \"profileImageUrlString\": \"https://sidneyliebrand.io/media/posts/asdfmovie-banner.svg\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "Mico",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Miloloza",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "root@localhost.roottttt",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "confirmPassword",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Testna Ulica 1",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "0028428371098",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/priv/Downloads/IMG_5304.heic"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{base_api_url}}/sign-up",
@@ -880,7 +916,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTcyODU5ODcxNS4yNDkxOTYsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiNDMzQTY5REEtNjE4RS00M0JGLTgxNTQtNUQ1NEMxRkRBQjZGIn0.RmBpRFqgRbKXtwQMdytq71SxwjOdoh48HoUgzwNbd1lvbc0LxYjN5fLIqDVyT4mFM6R0zYg5K75P4I-0l5SQqR6qnP37O5FU0qehFwkGDO81Mz9bVT6EvO9LJvKKn-G7H0Dtit02w4ilJd39zI9-U3cJK_A1QKxFkj9qUmYpbpbjS7t53BfjjYdpLk4XSDSNS4GoPbXRPRrkSYlhrx8-T8XRcN991gQLneMfAceanu7pqAKOTgnwWITb-8nCgggT96FsGpEpnoTPPb6StIX73wQaQNNGagvwqoN2CiYmwiB3mdimMr3S4OlrKgyYBPJuQZVzEsMJymTbZOiHNEWqXg",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNzMzMTc3MjUxLjk1NjIyNCwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.exUl5A9Zzz3tu-YLkITmmX9PyoiXNU2j1cURoQzH9_bScxI_8HQxBUyR_f9Y6PLWnvlkXJS46V-aChBti15SOKRsuUqLkABA0JP1ABrusIEQrCWqXDyt0k_PG-axYIO-xU8Ta6LddJwhFQsqn4gjkCV2u7sTkg4XnoMcN3aHoB5eALyZ48QBYnsyozyHYhhB6W_ualE7AvFAlXIL3BJuv7Qfd-6Jr9FaXq2YLevhb0K41go2cdlar2p4uQX5uDqCXYsBhVbGhpQzVTsQxOs9TOKHcEkpoh7DQnu8ugmHTDhUT6k6L6n3VA8Qc3_a2qU9YvNlu5Mo22gN6PQno_a-dw",
 									"type": "string"
 								}
 							]
@@ -940,6 +976,127 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"lastName\": \"Admin\",\n    \"email\": \"root@localhost.localhost\",\n    \"firstName\": \"Admin\",\n    \"id\": \"433A69DA-618E-43BF-8154-5D54C1FDAB6F\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJleHBpcmF0aW9uIjoxNzMzMTc2NTQxLjg0MTcxNywidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.KKQoHAoYw-qVe0VUS-05YFLzYuSIUXzMLkctg9KgvaBrsMSdPPO7W2ExGP6Lkq_NR2t1XjonYTZEOtfUDxnT1-JHcM-Gb6hOOuXZ4fp7Yj-07bxdss9lIMQwRT-Rv2mYg-CN_nJJa2SXT2hcCl64BIM78hgLSRiimEVPspc3Og-vOHz67Rydo07kMgTXCDWMiT4_0wjkdIXiiDmagcYytcEtK4QA1eQmKzu-9GSwu5NJgjfO5dzbsyj2nvKtUAnSACc3cBySTX4n0pzbwHxcPlILaLuDVj0XKa5ulCBCBuMFsaVkWSAn7IA7_oczftGX-A5fFMNFCI23N4Na_vHOKA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG",
+									"disabled": true
+								},
+								{
+									"key": "phoneNumber",
+									"value": "0342834098239048",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "firstName",
+									"value": "Ime korisnika 2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "isAdmin",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/user",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG"
+										},
+										{
+											"key": "phoneNumber",
+											"value": "0342834098239048",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "firstName",
+											"value": "Ime korisnika 2",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_api_url}}/user",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "232"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=IAR/QR/sU8Tkmxo9RALinS5KECIf6kDEFaeZzNQ+ImU=; Expires=Mon, 09 Dec 2024 21:10:30 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 02 Dec 2024 21:10:30 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"root@localhost.localhost\",\n    \"profileImageUrlString\": \"http://localhost:8080/img/68DADA64-1EF3-42E6-927D-729EF53544A7.JPG\",\n    \"firstName\": \"Admin\",\n    \"isAdmin\": false,\n    \"id\": \"96DF0557-C34D-49DD-9DB0-E9D89F22840D\",\n    \"lastName\": \"Admin\"\n}"
 						}
 					]
 				}
@@ -1143,7 +1300,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -1216,12 +1373,12 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjc0NTc0NS45OTMwMTMsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.K2uD5PwH4tLRFhwUPqqpVkkGpUe9afJf0YFibKekTpbpS2sD2JVfrAClGPEGLWE601G6dwOXRiW7fFcdiEmLVbtZvGQKyp0rjmDWJjWmedXUCOgFz5cvUC9oDP6NUbTENElhWPx5QeEP-VONsrrjSQb0RvMNuONtVaNTM-LuNsevaTTmxn7q7x0OAl3tZ1HQ5zWSJcDeKhZlmcHGS6QCJOmUahZ0QSsWh0yRKvs7cC5SP7SGdR0BBhWgyn-YOcgI7ZaUw4N_BaW8CeHv3EBVeJdtJLO3bJSpEdCGpeMQ6W25V9Jj_eh9OB0IhgdUTSlxWHfjGDT12-vnUvxGly-i4w",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNzMzMTc3MjUxLjk1NjIyNCwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.exUl5A9Zzz3tu-YLkITmmX9PyoiXNU2j1cURoQzH9_bScxI_8HQxBUyR_f9Y6PLWnvlkXJS46V-aChBti15SOKRsuUqLkABA0JP1ABrusIEQrCWqXDyt0k_PG-axYIO-xU8Ta6LddJwhFQsqn4gjkCV2u7sTkg4XnoMcN3aHoB5eALyZ48QBYnsyozyHYhhB6W_ualE7AvFAlXIL3BJuv7Qfd-6Jr9FaXq2YLevhb0K41go2cdlar2p4uQX5uDqCXYsBhVbGhpQzVTsQxOs9TOKHcEkpoh7DQnu8ugmHTDhUT6k6L6n3VA8Qc3_a2qU9YvNlu5Mo22gN6PQno_a-dw",
 									"type": "string"
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "formdata",
@@ -1234,7 +1391,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/Users/priv/Downloads/1331544.png"
+									"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG"
 								},
 								{
 									"key": "aboutInfo",
@@ -1264,26 +1421,42 @@
 						{
 							"name": "Update Armory Item",
 							"originalRequest": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 40\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Updateani armory item",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG"
+										},
+										{
+											"key": "aboutInfo",
+											"value": "Updateani info",
+											"type": "text"
+										},
+										{
+											"key": "inStock",
+											"value": "40",
+											"type": "text"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{base_api_url}}/armory/items/5963FA33-23EC-4A16-9585-5C6E3D07042C",
+									"raw": "{{base_api_url}}/armory/items/8BDD0BD2-DCA6-403C-AA64-6E224E773740",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"items",
-										"5963FA33-23EC-4A16-9585-5C6E3D07042C"
+										"8BDD0BD2-DCA6-403C-AA64-6E224E773740"
 									]
 								}
 							},
@@ -1297,11 +1470,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "343"
+									"value": "328"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 08:57:11 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=IAR/QR/sU8Tkmxo9RALinS5KECIf6kDEFaeZzNQ+ImU=; Expires=Mon, 09 Dec 2024 21:08:02 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1309,11 +1482,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 08:57:11 GMT"
+									"value": "Mon, 02 Dec 2024 21:08:02 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"aboutInfo\": \"Updateani info\",\n    \"name\": \"Updateani armory item\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"id\": \"1C309D14-C925-4177-A94D-56E0127475A1\",\n    \"category\": {\n        \"name\": \"Default\",\n        \"id\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\"\n    },\n    \"categoryId\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\",\n    \"inStock\": 40\n}"
+							"body": "{\n    \"id\": \"8BDD0BD2-DCA6-403C-AA64-6E224E773740\",\n    \"category\": {\n        \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n        \"name\": \"Default\"\n    },\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 40,\n    \"imageKey\": \"http://localhost:8080/img/736A4760-A752-4A82-9F62-3315BAF4AAFB.JPG\",\n    \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n    \"name\": \"Updateani armory item\"\n}"
 						}
 					]
 				},
@@ -1425,7 +1598,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjc0NTc0NS45OTMwMTMsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.K2uD5PwH4tLRFhwUPqqpVkkGpUe9afJf0YFibKekTpbpS2sD2JVfrAClGPEGLWE601G6dwOXRiW7fFcdiEmLVbtZvGQKyp0rjmDWJjWmedXUCOgFz5cvUC9oDP6NUbTENElhWPx5QeEP-VONsrrjSQb0RvMNuONtVaNTM-LuNsevaTTmxn7q7x0OAl3tZ1HQ5zWSJcDeKhZlmcHGS6QCJOmUahZ0QSsWh0yRKvs7cC5SP7SGdR0BBhWgyn-YOcgI7ZaUw4N_BaW8CeHv3EBVeJdtJLO3bJSpEdCGpeMQ6W25V9Jj_eh9OB0IhgdUTSlxWHfjGDT12-vnUvxGly-i4w",
 									"type": "string"
 								}
 							]
