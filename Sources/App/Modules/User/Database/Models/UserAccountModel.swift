@@ -53,12 +53,16 @@ final class UserAccountModel: DatabaseModelInterface {
     
     init() { }
     
-    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String) {
+    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String, phoneNumber: String?, address: String?, profileImageUrlString: String?, isAdmin: Bool = false) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.password = password
+        self.phoneNumber = phoneNumber
+        self.address = address
+        self.profileImageUrlString = profileImageUrlString
+        self.isAdmin = isAdmin
     }
     
     struct FieldKeys {
@@ -71,7 +75,7 @@ final class UserAccountModel: DatabaseModelInterface {
             static var phoneNumber: FieldKey { "phone_number" }
             static var address: FieldKey { "address" }
             static var isAdmin: FieldKey { "is_admin" }
-            static var profileImageUrlString: FieldKey { "profile_image_url_string"}
+            static var profileImageUrlString: FieldKey { "profile_image_url_string" }
             static var createdAt: FieldKey { "created_at" }
             static var updatedAt: FieldKey { "updated_at" }
             static var deletedAt: FieldKey { "deleted_at" }
@@ -94,10 +98,37 @@ extension UserAccountModel {
         return try OAuthToken.generate(for: self, source: source)
     }
     
-    static func create(from registerData: User.Account.Create, hash: String, registrationType: RegistrationType) -> UserAccountModel {
+    static func create(from registerData: User.Account.Create, req: Request, hash: String, registrationType: RegistrationType) async throws -> UserAccountModel {
+        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
+        
+        if let image = registerData.image {
+            // Validate MIME type
+            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+            }
+            
+            // Get the `Public` directory path
+            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+            
+            // Generate a unique file name for the image
+            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+            
+            // Full path where the image will be saved
+            let filePath = assetsDirectory + uniqueFileName
+            
+            // Save the image data to the specified path
+            try await req.fileio.writeFile(image.data, at: filePath)
+            
+            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+        }
+        
         return UserAccountModel(firstName: registerData.firstName,
                                 lastName: registerData.lastName,
                                 email: registerData.email,
-                                password: hash)
+                                password: hash,
+                                phoneNumber: registerData.phoneNumber,
+                                address: registerData.address,
+                                profileImageUrlString: publicImageUrl)
     }
 }

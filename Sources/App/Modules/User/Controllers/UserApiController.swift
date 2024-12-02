@@ -37,7 +37,7 @@ extension User.Account.Create: Validatable {
 
 // MARK: - Authentication requests
 struct UserApiController {
-    func signUpApi(_ req: Request) async throws -> HTTPStatus {
+    func signUpApi(_ req: Request) async throws -> User.Token.Detail {
         try User.Account.Create.validate(content: req)
         
         let registerRequest = try req.content.decode(User.Account.Create.self)
@@ -50,13 +50,36 @@ struct UserApiController {
             .async
             .hash(registerRequest.password)
         
-        let user = UserAccountModel.create(from: registerRequest, hash: hashedPassword, registrationType: .manual)
+        let user = try await UserAccountModel.create(from: registerRequest, req: req, hash: hashedPassword, registrationType: .manual)
         
         try await user.create(on: req.db)
         
-//        try await req.emailVerifier.verify(for: user)
+        let token = req.random.generate(bits: 256)
+        let refreshToken = try RefreshTokenModel(token: SHA256.hash(token), userId: user.requireID())
         
-        return .created
+        // Save the refresh token to the database
+        try await refreshToken.create(on: req.db)
+        
+        // Generate an access token (JWT)
+        let accessToken = try req.jwt.sign(JWTUser(with: user))
+        
+        // Build user details for the response
+        let userDetail = try User.Account.Detail(
+            id: user.requireID(),
+            firstName: user.firstName,
+            lastName: user.lastName,
+            profileImageUrlString: user.profileImageUrlString,
+            email: user.email,
+            isAdmin: user.isAdmin
+        )
+        
+        // Return the token details
+        return User.Token.Detail(
+            id: refreshToken.id!,
+            user: userDetail,
+            accessToken: accessToken,
+            refreshToken: token
+        )
     }
     
     func signInApi(_ req: Request) async throws -> User.Token.Detail {
@@ -146,6 +169,54 @@ struct UserApiController {
         }
         
         return try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
+    }
+    
+    func updateUserApi(_ req: Request) async throws -> User.Account.Detail {
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        let patchUser = try req.content.decode(User.Account.Patch.self)
+        
+        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db) else {
+            throw AuthenticationError.userNotFound
+        }
+        
+        var shouldUpdateImage: Bool = false
+        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
+        
+        if let image = patchUser.image {
+            // Validate MIME type
+            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+            }
+            
+            shouldUpdateImage = true
+            // Get the `Public` directory path
+            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+            
+            // Generate a unique file name for the image
+            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+            
+            // Full path where the image will be saved
+            let filePath = assetsDirectory + uniqueFileName
+            
+            // Save the image data to the specified path
+            try await req.fileio.writeFile(image.data, at: filePath)
+            
+            shouldUpdateImage = true
+            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+        }
+        
+        user.firstName = patchUser.firstName ?? user.firstName
+        user.lastName = patchUser.lastName ?? user.lastName
+        user.email = patchUser.email ?? user.email
+        user.phoneNumber = patchUser.phoneNumber ?? user.phoneNumber
+        user.address = patchUser.address ?? user.address
+        user.profileImageUrlString = shouldUpdateImage ? publicImageUrl : user.profileImageUrlString
+        
+        let userDetails = User.Account.Detail(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
+        
+        return userDetails
     }
     
     func resetPasswordHandler(_ req: Request) async throws -> HTTPStatus {

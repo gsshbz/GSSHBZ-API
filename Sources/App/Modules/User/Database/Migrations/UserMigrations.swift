@@ -90,7 +90,13 @@ enum UserMigrations {
     struct seed: AsyncMigration {
         func prepare(on database: Database) async throws {
             let password = "admin"
-            let userAccountModel = UserAccountModel(firstName: "Admin", lastName: "Admin", email: "root@localhost.localhost", password: try Bcrypt.hash(password))
+            let userAccountModel = UserAccountModel(firstName: "Admin",
+                                                    lastName: "Admin",
+                                                    email: "root@localhost.localhost",
+                                                    password: try Bcrypt.hash(password),
+                                                    phoneNumber: "00387445394857",
+                                                    address: "Ulica 1",
+                                                    profileImageUrlString: "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg")
             
             try await userAccountModel.create(on: database)
         }

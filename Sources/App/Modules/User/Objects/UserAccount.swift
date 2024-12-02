@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Vapor
 
 
 extension User.Account {
@@ -34,19 +35,29 @@ extension User.Account {
         let confirmPassword: String
         let phoneNumber: String?
         let address: String?
-        let profileImageUrlString: String?
+        let image: File?
     }
     
     struct Update: Codable {
+        let firstName: String
+        let lastName: String
         let email: String
-        let password: String?
+        let password: String
+        let phoneNumber: String
+        let address: String
         let isAdmin: Bool
+        let image: File
     }
     
     struct Patch: Codable {
+        let firstName: String?
+        let lastName: String?
         let email: String?
-        let password: String?
+        let phoneNumber: String?
+        let address: String?
         let isAdmin: Bool?
+        let image: File?
+        
     }
     
     struct LoginRequest: Codable {
