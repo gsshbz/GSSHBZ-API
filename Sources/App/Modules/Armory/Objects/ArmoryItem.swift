@@ -31,17 +31,17 @@ public extension Armory.Item {
     
     struct Create: Codable {
         let name: String
-        let image: File
+        let image: File?
         let aboutInfo: String
         let inStock: Int
         let categoryId: UUID?
     }
     
     struct Update: Codable {
-        let name: String
-        let image: File
-        let aboutInfo: String
-        let inStock: Int
+        let name: String?
+        let image: File?
+        let aboutInfo: String?
+        let inStock: Int?
         let categoryId: UUID?
     }
     

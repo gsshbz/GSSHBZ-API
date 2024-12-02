@@ -34,7 +34,7 @@ struct ArmoryItemsApiController: ListController {
         baseRoutes.on(.POST, use: createApi)
         
         existingModelRoutes.on(.GET, use: detailApi)
-        existingModelRoutes.on(.PUT, use: updateApi)
+        existingModelRoutes.on(.POST, use: updateApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
     }
     
@@ -67,20 +67,34 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.categoryNotFound
         }
         
-        // Get the `Public` directory path
-        let assetsDirectory = req.application.directory.publicDirectory + "img/"
+        var shouldUpdateImage: Bool = false
+        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
-        // Generate a unique file name for the image
-        let fileExtension = input.image.filename.split(separator: ".").last ?? "jpg"
-        let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+        if let image = input.image {
+            // Validate MIME type
+            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+            }
+            
+            shouldUpdateImage = true
+            // Get the `Public` directory path
+            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+            
+            // Generate a unique file name for the image
+            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+            
+            // Full path where the image will be saved
+            let filePath = assetsDirectory + uniqueFileName
+            
+            // Save the image data to the specified path
+            try await req.fileio.writeFile(image.data, at: filePath)
+            
+            shouldUpdateImage = true
+            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+        }
         
-        // Full path where the image will be saved
-        let filePath = assetsDirectory + uniqueFileName
-        
-        // Save the image data to the specified path
-        try await req.fileio.writeFile(input.image.data, at: filePath)
-        
-        let armoryModel = ArmoryItemModel(name: input.name, imageKey: uniqueFileName, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
+        let armoryModel = ArmoryItemModel(name: input.name, imageKey: publicImageUrl, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
         
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
@@ -119,24 +133,38 @@ struct ArmoryItemsApiController: ListController {
             throw Abort(.notFound)
         }
         
-        // Get the `Public` directory path
-        let assetsDirectory = req.application.directory.publicDirectory + "img/"
+        var shouldUpdateImage: Bool = false
+        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
-        // Generate a unique file name for the image
-        let fileExtension = input.image.filename.split(separator: ".").last ?? "jpg"
-        let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+        if let image = input.image {
+            // Validate MIME type
+            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+            }
+            
+            shouldUpdateImage = true
+            // Get the `Public` directory path
+            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+            
+            // Generate a unique file name for the image
+            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+            
+            // Full path where the image will be saved
+            let filePath = assetsDirectory + uniqueFileName
+            
+            // Save the image data to the specified path
+            try await req.fileio.writeFile(image.data, at: filePath)
+            
+            shouldUpdateImage = true
+            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+        }
         
-        // Full path where the image will be saved
-        let filePath = assetsDirectory + uniqueFileName
-        
-        // Save the image data to the specified path
-        try await req.fileio.writeFile(input.image.data, at: filePath)
-        
-        armoryModel.name = input.name
-        armoryModel.imageKey = uniqueFileName
-        armoryModel.aboutInfo = input.aboutInfo
-        armoryModel.inStock = input.inStock
-        armoryModel.$category.id = input.categoryId ?? defaultCategory.id!
+        armoryModel.name = input.name ?? armoryModel.name
+        armoryModel.imageKey = shouldUpdateImage ? publicImageUrl : armoryModel.imageKey
+        armoryModel.aboutInfo = input.aboutInfo ?? armoryModel.aboutInfo
+        armoryModel.inStock = input.inStock ?? armoryModel.inStock
+        armoryModel.$category.id = input.categoryId ?? armoryModel.$category.id
         
         try await armoryModel.update(on: req.db)
         
