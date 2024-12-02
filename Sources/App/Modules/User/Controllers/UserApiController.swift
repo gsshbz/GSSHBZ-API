@@ -207,12 +207,15 @@ struct UserApiController {
             publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
         }
         
+        user.isAdmin = patchUser.isAdmin ?? user.isAdmin
         user.firstName = patchUser.firstName ?? user.firstName
         user.lastName = patchUser.lastName ?? user.lastName
         user.email = patchUser.email ?? user.email
         user.phoneNumber = patchUser.phoneNumber ?? user.phoneNumber
         user.address = patchUser.address ?? user.address
         user.profileImageUrlString = shouldUpdateImage ? publicImageUrl : user.profileImageUrlString
+        
+        try await user.update(on: req.db)
         
         let userDetails = User.Account.Detail(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
         
