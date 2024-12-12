@@ -56,7 +56,7 @@ extension ArmoryCategoryApiController {
         let categoryModel = ArmoryCategoryModel(name: input.name, imageKey: input.imageKey)
         try await categoryModel.save(on: req.db)
         
-        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey)
+        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey ?? "default")
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryCreated, category)
         
@@ -108,7 +108,7 @@ extension ArmoryCategoryApiController {
         
         try await categoryModel.update(on: req.db)
         
-        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey)
+        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey ?? "default")
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryUpdated, detailObject)
         

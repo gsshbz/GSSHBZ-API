@@ -129,8 +129,8 @@ struct ArmoryItemsApiController: ListController {
             throw Abort(.notFound)
         }
         
-        var shouldUpdateImage: Bool = false
-        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
+//        var shouldUpdateImage: Bool = false
+//        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
         // MARK: - Image upload code, currently not in use. Icons will be added in frontend project locally and server will save only their name string values
 //        if let image = input.image {
@@ -158,7 +158,7 @@ struct ArmoryItemsApiController: ListController {
 //        }
         
         armoryModel.name = input.name ?? armoryModel.name
-        armoryModel.imageKey = shouldUpdateImage ? publicImageUrl : armoryModel.imageKey
+        armoryModel.imageKey = /*shouldUpdateImage ? publicImageUrl : */ input.imageKey ?? armoryModel.imageKey
         armoryModel.aboutInfo = input.aboutInfo ?? armoryModel.aboutInfo
         armoryModel.inStock = input.inStock ?? armoryModel.inStock
         armoryModel.$category.id = input.categoryId ?? armoryModel.$category.id
