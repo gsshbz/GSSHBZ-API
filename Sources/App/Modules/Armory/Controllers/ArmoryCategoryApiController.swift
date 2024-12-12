@@ -53,10 +53,10 @@ extension ArmoryCategoryApiController {
             throw AuthenticationError.userNotFound
         }
         
-        let categoryModel = ArmoryCategoryModel(name: input.name)
+        let categoryModel = ArmoryCategoryModel(name: input.name, imageKey: input.imageKey)
         try await categoryModel.save(on: req.db)
         
-        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name)
+        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryCreated, category)
         
@@ -92,7 +92,7 @@ extension ArmoryCategoryApiController {
             throw ArmoryErrors.categoryNotFound
         }
         
-        return .init(id: try categoryModel.requireID(), name: categoryModel.name)
+        return .init(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey)
     }
     
     func updateApi(_ req: Request) async throws -> DetailObject {
@@ -108,7 +108,7 @@ extension ArmoryCategoryApiController {
         
         try await categoryModel.update(on: req.db)
         
-        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name)
+        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryUpdated, detailObject)
         
@@ -131,6 +131,6 @@ extension ArmoryCategoryApiController {
             models = try await list(req, queryBuilders: { $0.filter(\.$name != defaultCategoryName) })
         }
         
-        return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: .init(id: try $0.category.requireID(), name: $0.category.name), categoryId: try $0.category.requireID()) }) }
+        return try models.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: .init(id: try $0.category.requireID(), name: $0.category.name, imageKey: $0.category.imageKey), categoryId: try $0.category.requireID()) }) }
     }
 }

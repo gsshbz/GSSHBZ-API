@@ -35,8 +35,23 @@ enum ArmoryMigrations {
         }
         
         func revert(on database: Database) async throws {
+            try await database.schema(ArmoryCategoryModel.schema).delete()
             try await database.schema(ArmoryItemModel.schema).delete()
             
+        }
+    }
+    
+    struct v2: AsyncMigration {
+        func prepare(on database: any Database) async throws {
+            try await database.schema(ArmoryCategoryModel.schema)
+                .field(ArmoryCategoryModel.FieldKeys.v2.imageKey, .string)
+                .update()
+        }
+        
+        func revert(on database: any Database) async throws {
+            try await database.schema(ArmoryCategoryModel.schema)
+                .deleteField(ArmoryCategoryModel.FieldKeys.v2.imageKey)
+                .update()
         }
     }
     

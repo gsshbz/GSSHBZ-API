@@ -49,7 +49,7 @@ struct ArmoryItemsApiController: ListController {
                       imageKey: model.imageKey,
                       aboutInfo: model.aboutInfo,
                       inStock: model.inStock,
-                      category: .init(id: model.category.id!, name: model.category.name),
+                      category: .init(id: model.category.id!, name: model.category.name, imageKey: model.category.imageKey),
                       categoryId: try model.category.requireID())
         }
     }
@@ -67,39 +67,35 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.categoryNotFound
         }
         
-        var shouldUpdateImage: Bool = false
         var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
-        if let image = input.image {
-            // Validate MIME type
-            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
-                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
-            }
-            
-            shouldUpdateImage = true
-            // Get the `Public` directory path
-            let assetsDirectory = req.application.directory.publicDirectory + "img/"
-            
-            // Generate a unique file name for the image
-            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
-            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
-            
-            // Full path where the image will be saved
-            let filePath = assetsDirectory + uniqueFileName
-            
-            // Save the image data to the specified path
-            try await req.fileio.writeFile(image.data, at: filePath)
-            
-            shouldUpdateImage = true
-            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
-        }
+//        if let image = input.image {
+//            // Validate MIME type
+//            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+//                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+//            }
+//            // Get the `Public` directory path
+//            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+//            
+//            // Generate a unique file name for the image
+//            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+//            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+//            
+//            // Full path where the image will be saved
+//            let filePath = assetsDirectory + uniqueFileName
+//            
+//            // Save the image data to the specified path
+//            try await req.fileio.writeFile(image.data, at: filePath)
+//
+//            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+//        }
         
-        let armoryModel = ArmoryItemModel(name: input.name, imageKey: publicImageUrl, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
+        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? "default", aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
         
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
         
-        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemCreated, armoryItem)
         
@@ -114,7 +110,7 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.armoryItemNotFound
         }
         
-        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
     }
     
     func updateApi(_ req: Request) async throws -> Armory.Item.Detail {
@@ -136,29 +132,30 @@ struct ArmoryItemsApiController: ListController {
         var shouldUpdateImage: Bool = false
         var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
-        if let image = input.image {
-            // Validate MIME type
-            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
-                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
-            }
-            
-            shouldUpdateImage = true
-            // Get the `Public` directory path
-            let assetsDirectory = req.application.directory.publicDirectory + "img/"
-            
-            // Generate a unique file name for the image
-            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
-            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
-            
-            // Full path where the image will be saved
-            let filePath = assetsDirectory + uniqueFileName
-            
-            // Save the image data to the specified path
-            try await req.fileio.writeFile(image.data, at: filePath)
-            
-            shouldUpdateImage = true
-            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
-        }
+        // MARK: - Image upload code, currently not in use. Icons will be added in frontend project locally and server will save only their name string values
+//        if let image = input.image {
+//            // Validate MIME type
+//            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+//                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+//            }
+//            
+//            shouldUpdateImage = true
+//            // Get the `Public` directory path
+//            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+//            
+//            // Generate a unique file name for the image
+//            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+//            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+//            
+//            // Full path where the image will be saved
+//            let filePath = assetsDirectory + uniqueFileName
+//            
+//            // Save the image data to the specified path
+//            try await req.fileio.writeFile(image.data, at: filePath)
+//            
+//            shouldUpdateImage = true
+//            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+//        }
         
         armoryModel.name = input.name ?? armoryModel.name
         armoryModel.imageKey = shouldUpdateImage ? publicImageUrl : armoryModel.imageKey
@@ -168,7 +165,7 @@ struct ArmoryItemsApiController: ListController {
         
         try await armoryModel.update(on: req.db)
         
-        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, armoryItem)
         

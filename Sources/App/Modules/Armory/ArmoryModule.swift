@@ -13,6 +13,7 @@ struct ArmoryModule: ModuleInterface {
     
     func boot(_ app: Application) throws {
         app.migrations.add(ArmoryMigrations.v1())
+        app.migrations.add(ArmoryMigrations.v2())
         app.migrations.add(ArmoryMigrations.seed())
         
         app.middleware.use(UserSessionAuthenticator())
