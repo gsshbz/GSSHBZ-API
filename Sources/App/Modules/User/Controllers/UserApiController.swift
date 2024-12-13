@@ -68,7 +68,7 @@ struct UserApiController {
             id: user.requireID(),
             firstName: user.firstName,
             lastName: user.lastName,
-            profileImageUrlString: user.profileImageUrlString,
+            imageKey: user.imageKey,
             email: user.email,
             isAdmin: user.isAdmin
         )
@@ -109,7 +109,7 @@ struct UserApiController {
         try await refreshToken.create(on: req.db)
         
         let accessToken = try req.jwt.sign(JWTUser(with: user))
-        let userDetail = try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
+        let userDetail = try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, imageKey: user.imageKey, email: user.email, isAdmin: user.isAdmin)
         
         return User.Token.Detail(id: refreshToken.id!, user: userDetail, accessToken: accessToken, refreshToken: token)
     }
@@ -168,7 +168,7 @@ struct UserApiController {
             throw AuthenticationError.userNotFound
         }
         
-        return try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
+        return try User.Account.Detail(id: user.requireID(), firstName: user.firstName, lastName: user.lastName, imageKey: user.imageKey, email: user.email, isAdmin: user.isAdmin)
     }
     
     func updateUserApi(_ req: Request) async throws -> User.Account.Detail {
@@ -180,32 +180,32 @@ struct UserApiController {
             throw AuthenticationError.userNotFound
         }
         
-        var shouldUpdateImage: Bool = false
-        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
-        
-        if let image = patchUser.image {
-            // Validate MIME type
-            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
-                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
-            }
-            
-            shouldUpdateImage = true
-            // Get the `Public` directory path
-            let assetsDirectory = req.application.directory.publicDirectory + "img/"
-            
-            // Generate a unique file name for the image
-            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
-            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
-            
-            // Full path where the image will be saved
-            let filePath = assetsDirectory + uniqueFileName
-            
-            // Save the image data to the specified path
-            try await req.fileio.writeFile(image.data, at: filePath)
-            
-            shouldUpdateImage = true
-            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
-        }
+//        var shouldUpdateImage: Bool = false
+//        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
+//        
+//        if let image = patchUser.image {
+//            // Validate MIME type
+//            guard ["image/jpeg", "image/png"].contains(image.contentType?.description) else {
+//                throw Abort(.unsupportedMediaType, reason: "Only JPEG and PNG images are allowed.")
+//            }
+//            
+//            shouldUpdateImage = true
+//            // Get the `Public` directory path
+//            let assetsDirectory = req.application.directory.publicDirectory + "img/"
+//            
+//            // Generate a unique file name for the image
+//            let fileExtension = image.filename.split(separator: ".").last ?? "jpg"
+//            let uniqueFileName = "\(UUID().uuidString).\(fileExtension)"
+//            
+//            // Full path where the image will be saved
+//            let filePath = assetsDirectory + uniqueFileName
+//            
+//            // Save the image data to the specified path
+//            try await req.fileio.writeFile(image.data, at: filePath)
+//            
+//            shouldUpdateImage = true
+//            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
+//        }
         
         user.isAdmin = patchUser.isAdmin ?? user.isAdmin
         user.firstName = patchUser.firstName ?? user.firstName
@@ -213,11 +213,11 @@ struct UserApiController {
         user.email = patchUser.email ?? user.email
         user.phoneNumber = patchUser.phoneNumber ?? user.phoneNumber
         user.address = patchUser.address ?? user.address
-        user.profileImageUrlString = shouldUpdateImage ? publicImageUrl : user.profileImageUrlString
+        user.imageKey = /*shouldUpdateImage ? publicImageUrl : */patchUser.imageKey ?? user.imageKey
         
         try await user.update(on: req.db)
         
-        let userDetails = User.Account.Detail(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, profileImageUrlString: user.profileImageUrlString, email: user.email, isAdmin: user.isAdmin)
+        let userDetails = User.Account.Detail(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, imageKey: user.imageKey, email: user.email, isAdmin: user.isAdmin)
         
         return userDetails
     }

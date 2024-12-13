@@ -112,7 +112,8 @@ extension UserLeasesApiController {
                 firstName: createdLeaseModel.user.firstName,
                 lastName: createdLeaseModel.user.lastName,
                 email: createdLeaseModel.user.email,
-                isAdmin: createdLeaseModel.user.isAdmin),
+                isAdmin: createdLeaseModel.user.isAdmin,
+                imageKey: createdLeaseModel.user.imageKey),
             armoryItems: try armoryItems.map { (armoryItem, quantity) in
                 .init(
                     armoryItem: .init(
@@ -203,7 +204,8 @@ extension UserLeasesApiController {
                                  firstName: leaseModel.user.firstName,
                                  lastName: leaseModel.user.lastName,
                                  email: leaseModel.user.email,
-                                 isAdmin: leaseModel.user.isAdmin),
+                                 isAdmin: leaseModel.user.isAdmin,
+                                 imageKey: leaseModel.user.imageKey),
                      armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
                 .init(armoryItem: .init(id: try armoryItem.requireID(),
                                         name: armoryItem.name,
@@ -308,7 +310,8 @@ extension UserLeasesApiController {
                                  firstName: leaseModel.user.firstName,
                                  lastName: leaseModel.user.lastName,
                                  email: leaseModel.user.email,
-                                 isAdmin: leaseModel.user.isAdmin),
+                                 isAdmin: leaseModel.user.isAdmin,
+                                 imageKey: leaseModel.user.imageKey),
                      armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
                 .init(armoryItem: .init(id: try armoryItem.requireID(),
                                         name: armoryItem.name,
@@ -357,7 +360,8 @@ extension UserLeasesApiController {
                                             firstName: leaseModel.user.firstName,
                                             lastName: leaseModel.user.lastName,
                                             email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin),
+                                            isAdmin: leaseModel.user.isAdmin,
+                                            imageKey: leaseModel.user.imageKey),
                                 armoryItems: try armoryItems.map { armoryItem, quantity in
                     .init(armoryItem: .init(id: try armoryItem.requireID(),
                                             name: armoryItem.name,
@@ -417,7 +421,8 @@ extension UserLeasesApiController {
                                             firstName: leaseModel.user.firstName,
                                             lastName: leaseModel.user.lastName,
                                             email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin),
+                                            isAdmin: leaseModel.user.isAdmin,
+                                            imageKey: leaseModel.user.imageKey),
                                 armoryItems: try armoryItems.map { armoryItem, quantity in
                     .init(armoryItem: .init(id: try armoryItem.requireID(),
                                             name: armoryItem.name,

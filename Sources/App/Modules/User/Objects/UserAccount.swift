@@ -16,13 +16,14 @@ extension User.Account {
         let lastName: String
         let email: String
         let isAdmin: Bool
+        let imageKey: String?
     }
     
     struct Detail: Codable {
         let id: UUID
         let firstName: String
         let lastName: String
-        let profileImageUrlString: String?
+        let imageKey: String?
         let email: String
         let isAdmin: Bool
     }
@@ -35,7 +36,7 @@ extension User.Account {
         let confirmPassword: String
         let phoneNumber: String?
         let address: String?
-        let image: File?
+        let imageKey: String?
     }
     
     struct Update: Codable {
@@ -46,7 +47,7 @@ extension User.Account {
         let phoneNumber: String
         let address: String
         let isAdmin: Bool
-        let image: File
+        let imageKey: String?
     }
     
     struct Patch: Codable {
@@ -56,7 +57,7 @@ extension User.Account {
         let phoneNumber: String?
         let address: String?
         let isAdmin: Bool?
-        let image: File?
+        let imageKey: String?
         
     }
     
