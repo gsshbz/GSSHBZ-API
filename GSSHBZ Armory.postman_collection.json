@@ -600,7 +600,7 @@
 								},
 								{
 									"key": "email",
-									"value": "root@localhost.roottttt",
+									"value": "root@localhost.roott",
 									"type": "text"
 								},
 								{
@@ -624,9 +624,9 @@
 									"type": "text"
 								},
 								{
-									"key": "image",
-									"type": "file",
-									"src": "/Users/priv/Downloads/IMG_5304.heic"
+									"key": "imageKey",
+									"value": "1",
+									"type": "text"
 								}
 							]
 						},
@@ -640,7 +640,96 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Sign Up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstName",
+											"value": "Mico",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Miloloza",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "root@localhost.roott",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "text"
+										},
+										{
+											"key": "confirmPassword",
+											"value": "123456789",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "Testna Ulica 1",
+											"type": "text"
+										},
+										{
+											"key": "phoneNumber",
+											"value": "0028428371098",
+											"type": "text"
+										},
+										{
+											"key": "imageKey",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_api_url}}/sign-up",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"sign-up"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "864"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=viBSNXw7fpLo0hZOj7TcSzrChV3ic7uo2sWxSHHoX8M=; Expires=Fri, 20 Dec 2024 12:05:49 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 13 Dec 2024 12:05:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzMDdBNTE5RC1DMjQwLTQ0NkYtOTVDMC1CMDc0OTM3OTE2Q0MiLCJleHBpcmF0aW9uIjoxNzM0MDk1MTQ5Ljk0NjExMywiZW1haWwiOiJyb290QGxvY2FsaG9zdC5yb290dCIsImZ1bGxOYW1lIjoiTWljbyBNaWxvbG96YSJ9.DKNTnJ0pOu7kDOhzQSMHgfflodWrnT26ImiyzF9ZcVmz8txoBbqQ3jsFv9CBhBpgC5Pc-T9Q-WKy4jOWej3lPYWZ4G1I1D8L4STFhbc_Pb-W07bsUnU7Y6xeqHOGjIPj80kyMbLiSHLDxn5lEuHf8JihArpP2t1P6367Mz6koJHkd3fjO-uW3rCUBMvXZ9GT_9b8zq9LBGvldCe_tQO-_54kcHGYgSiTOfZcuwcYozhx6-YeWPAUHSNkFL5jXOpjhaJIVu8sGlxB-JeIzudKV96-K8IkVtSLCXxYlpTH5hjdPEfVyj-igP7_mHaNX7QBA8AgfQQklGDyRDCaxMFALg\",\n    \"user\": {\n        \"id\": \"307A519D-C240-446F-95C0-B074937916CC\",\n        \"firstName\": \"Mico\",\n        \"imageKey\": \"1\",\n        \"email\": \"root@localhost.roott\",\n        \"isAdmin\": false,\n        \"lastName\": \"Miloloza\"\n    },\n    \"id\": \"9475DE1A-868D-470F-A9AC-8DAAB7D120FA\",\n    \"refreshToken\": \"142640934c5f83cf37b6436735a1743c5f558f9519b241e7faaf5d6d8c3eb98a\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Sign In",
@@ -677,7 +766,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"tesnikorisnik@test.com\",\n    \"password\": \"123456789\"\n}",
+									"raw": "{\n    \"email\": \"root@localhost.localhost\",\n    \"password\": \"admin\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -704,11 +793,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "794"
+									"value": "869"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 19:26:58 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=viBSNXw7fpLo0hZOj7TcSzrChV3ic7uo2sWxSHHoX8M=; Expires=Fri, 20 Dec 2024 12:05:57 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -716,11 +805,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 19:26:58 GMT"
+									"value": "Fri, 13 Dec 2024 12:05:57 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"user\": {\n        \"id\": \"3B37DD66-F867-4946-998D-2B0B4EA46596\",\n        \"username\": \"tesniKorisnik12\"\n    },\n    \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiIzQjM3REQ2Ni1GODY3LTQ5NDYtOTk4RC0yQjBCNEVBNDY1OTYiLCJlbWFpbCI6InRlc25pa29yaXNuaWtAdGVzdC5jb20iLCJleHBpcmF0aW9uIjoxNzIzMTQ4ODE4LjYxMTE1LCJmdWxsTmFtZSI6IlRlc3RuaSBLb3Jpc25payJ9.FXlxUoyd3XwOypfYqBjKARdBaivzYy7vo37nr2MaRMp-b1XO2pRe08Ix90T_SQZpBUxJgCu1p3diVwYIYQ-2EZ0xkyCTUet4AJ3uQo1NyYolP-byep5NkuL1EEi6mFuZe1Z-kHoSk_ST6wmVN6waeJIK0z6nx_CKA12vfvQ-uAAhCiOj5zI4zoeTl3lm4AMuSJUkesw63HyLBHZw31ZZqobBxZ4JfwlP79XNKRwLbQH86uhLtbpC0rq9If0b1RRCF1cozfRODg5a4ZBC2R4Js4b0tZOX6rImEmF3WkNYQ5V3SAkEPaaUYJAp_ZVZrrA0hZ_zWTDQdtycwUBQW7pWag\",\n    \"id\": \"3EE7BCF6-CD42-4CD3-8540-D21C9A6D8FA2\",\n    \"refreshToken\": \"0da30ac9d51791c6fa721173e5fc13997d4ae40188f9414580e8c6c1ab352ab0\"\n}"
+							"body": "{\n    \"id\": \"7F32D883-109C-471A-BC39-ADEC6DAAB392\",\n    \"refreshToken\": \"66766a8809a80f97c720ae0a62e6b614eafd7a8bea029216dd1d20384be0f121\",\n    \"user\": {\n        \"lastName\": \"Admin\",\n        \"id\": \"B13FF8BE-6F20-46CF-AF23-4FF19091EE1C\",\n        \"firstName\": \"Admin\",\n        \"imageKey\": \"0\",\n        \"email\": \"root@localhost.localhost\",\n        \"isAdmin\": false\n    },\n    \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJleHBpcmF0aW9uIjoxNzM0MDk1MTU3Ljg0OTA1OSwidXNlcklkIjoiQjEzRkY4QkUtNkYyMC00NkNGLUFGMjMtNEZGMTkwOTFFRTFDIn0.Y6tm0W9R9MMdfJptFK7icEH6NjMqiwub7YlRtZYOMVOLm68Y9a_xidSPgPTZn25FDnPTZuhlTiyB7x8_3TelGZBRRyCmFRqtbH6embn64o3L0OXJKL2IIsqcpNpCDCSIQnqzYPpe1l4aeB7XQcYTyIzJJGw0bdQ8IWJD4uV6eyCh_7WifvWjNCy7MsY3suCk1WVFV7e0i809Dt616AvVNhxdY7crTqJHML8BiFbhb9aLKnu3hLAR3CCioPvCjqBHM3FBp9Wf_ZkAvzmk_XOeV1OTFKcow9KfS8XqsZrlBP68jB1A_fjNQrtFDeoThMLsjKYTq9GgbJPn2JuoEKiOpA\"\n}"
 						}
 					]
 				},
@@ -970,11 +1059,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "119"
+									"value": "150"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=3cc4D3N0rC/XFjTOqjAE11Fo+UuQXNG5knkFgb5lexk=; Expires=Thu, 17 Oct 2024 21:18:55 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=viBSNXw7fpLo0hZOj7TcSzrChV3ic7uo2sWxSHHoX8M=; Expires=Fri, 20 Dec 2024 12:06:11 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -982,11 +1071,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 10 Oct 2024 21:18:55 GMT"
+									"value": "Fri, 13 Dec 2024 12:06:11 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"lastName\": \"Admin\",\n    \"email\": \"root@localhost.localhost\",\n    \"firstName\": \"Admin\",\n    \"id\": \"433A69DA-618E-43BF-8154-5D54C1FDAB6F\"\n}"
+							"body": "{\n    \"isAdmin\": false,\n    \"email\": \"root@localhost.localhost\",\n    \"id\": \"B13FF8BE-6F20-46CF-AF23-4FF19091EE1C\",\n    \"imageKey\": \"0\",\n    \"lastName\": \"Admin\",\n    \"firstName\": \"Admin\"\n}"
 						}
 					]
 				},
