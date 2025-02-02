@@ -17,7 +17,7 @@ enum AuthenticationError: AppError {
     case userNotFound
     case emailTokenHasExpired
     case emailTokenNotFound
-    case emailIsNotVerified
+    case emailNotVerified
     case invalidPasswordToken
     case passwordTokenHasExpired
 }
@@ -41,7 +41,7 @@ extension AuthenticationError: AbortError {
             return .notFound
         case .refreshTokenHasExpired:
             return .unauthorized
-        case .emailIsNotVerified:
+        case .emailNotVerified:
             return .unauthorized
         case .invalidPasswordToken:
             return .notFound
@@ -53,7 +53,7 @@ extension AuthenticationError: AbortError {
     var reason: String {
         switch self {
         case .passwordsDontMatch:
-            return "Passwords did not match"
+            return "Passwords do not match"
         case .emailAlreadyExists:
             return "A user with that email already exists"
         case .invalidEmailOrPassword:
@@ -68,7 +68,7 @@ extension AuthenticationError: AbortError {
             return "Email token not found"
         case .emailTokenHasExpired:
             return "Email token has expired"
-        case .emailIsNotVerified:
+        case .emailNotVerified:
             return "Email is not verified"
         case .invalidPasswordToken:
             return "Invalid reset password token"
@@ -95,7 +95,7 @@ extension AuthenticationError: AbortError {
             return "email_token_not_found"
         case .emailTokenHasExpired:
             return "email_token_has_expired"
-        case .emailIsNotVerified:
+        case .emailNotVerified:
             return "email_is_not_verified"
         case .invalidPasswordToken:
             return "invalid_password_token"

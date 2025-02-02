@@ -58,7 +58,7 @@ struct ArmoryItemsApiController: ListController {
         let input = try req.content.decode(CreateObject.self)
         
         if let futureArmoryItem = try await ArmoryItemModel.query(on: req.db).filter(\.$name == input.name).first() {
-            throw ArmoryErrors.duplicateItemName(futureArmoryItem.name)
+            throw ArmoryErrors.duplicateArmoryItemName(itemName: futureArmoryItem.name)
         }
         
         guard let defaultCategory = try await ArmoryCategoryModel.query(on: req.db)
@@ -67,7 +67,7 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.categoryNotFound
         }
         
-        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
+//        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
 //        if let image = input.image {
 //            // Validate MIME type
@@ -164,6 +164,7 @@ struct ArmoryItemsApiController: ListController {
         armoryModel.$category.id = input.categoryId ?? armoryModel.$category.id
         
         try await armoryModel.update(on: req.db)
+        try await armoryModel.$category.load(on: req.db)
         
         let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
         

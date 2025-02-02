@@ -9,3 +9,9 @@ import Vapor
 
 
 protocol AppError: AbortError, DebuggableError {}
+
+extension AppError {
+    func abort() -> Abort {
+        return Abort(self.status, reason: self.reason, identifier: self.identifier)
+    }
+}
