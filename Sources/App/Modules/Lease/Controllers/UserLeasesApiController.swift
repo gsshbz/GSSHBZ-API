@@ -134,6 +134,7 @@ extension UserLeasesApiController {
         )
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .leaseCreated, detailOutput)
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboardUpdate, detailOutput)
         
         return detailOutput
     }

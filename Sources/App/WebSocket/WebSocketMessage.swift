@@ -9,17 +9,23 @@ import Vapor
 
 
 enum WebSocketMessageType: String, Codable {
+    // Armory item
     case armoryItemCreated
     case armoryItemUpdated
     case armoryItemDeleted
     
+    // Category
     case categoryCreated
     case categoryUpdated
     case categoryDeleted
     
+    // Lease
     case leaseCreated
     case leaseUpdated
     case leaseDeleted
+    
+    // Dashboard
+    case dashboardUpdate
     
     case ping
 }
