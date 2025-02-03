@@ -24,8 +24,13 @@ enum WebSocketMessageType: String, Codable {
     case leaseUpdated
     case leaseDeleted
     
+    // News Feed
+    case newsArticleCreated
+    case newsArticleUpdated
+    case newsArticleDeleted
+    
     // Dashboard
-    case dashboardUpdate
+    case dashboard
     
     case ping
 }

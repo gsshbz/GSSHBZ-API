@@ -30,6 +30,10 @@ enum ArmoryErrors: AppError {
     case leaseUpdateFailed(leaseId: UUID)
     case leaseDeleteFailed(leaseId: UUID)
     
+    // NewsFeed
+    case newsArticleNotFound
+    case newsArticleDeleteFailed(newsTitle: String)
+    
     case unknownError
     case unauthorizedAccess
 }
@@ -37,7 +41,7 @@ enum ArmoryErrors: AppError {
 extension ArmoryErrors {
     var status: HTTPResponseStatus {
         switch self {
-        case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable:
+        case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound:
             return .notFound
             
         case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed:
@@ -46,7 +50,7 @@ extension ArmoryErrors {
         case .unauthorizedAccess:
             return .forbidden
             
-        case .categoryDeleteFailed, .categoryUpdateFailed, .leaseDeleteFailed, .leaseUpdateFailed, .armoryItemUpdateFailed, .armoryItemDeleteFailed:
+        case .categoryDeleteFailed, .categoryUpdateFailed, .leaseDeleteFailed, .leaseUpdateFailed, .armoryItemUpdateFailed, .armoryItemDeleteFailed, .newsArticleDeleteFailed:
             return .internalServerError
             
         case .unknownError:
@@ -102,6 +106,10 @@ extension ArmoryErrors {
             return "Unknown error"
         case .unauthorizedAccess:
             return "You do not have permission to access."
+        case .newsArticleNotFound:
+            return "News couldn't be found"
+        case .newsArticleDeleteFailed(newsTitle: let newsTitle):
+            return "Failed to delete news feed with title '\(newsTitle)'. Please try again later."
         }
     }
     
@@ -153,6 +161,10 @@ extension ArmoryErrors {
             
         case .unauthorizedAccess:
             return "unauthorized_access"
+        case .newsArticleNotFound:
+            return "news_article_not_found"
+        case .newsArticleDeleteFailed:
+            return "news_article_delete_failed"
         }
     }
     

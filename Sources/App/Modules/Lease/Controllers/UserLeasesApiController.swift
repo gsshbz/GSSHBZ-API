@@ -35,7 +35,7 @@ struct UserLeasesApiController: ListController {
         baseRoutes.on(.GET, "user-leases", use: getUserLeases)
         
         existingModelRoutes.on(.GET, use: detailApi)
-        existingModelRoutes.on(.PUT, use: updateApi)
+        existingModelRoutes.on(.POST, use: updateApi)
 //        existingModelRoutes.on(.PATCH, use: patchApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
     }
@@ -134,7 +134,7 @@ extension UserLeasesApiController {
         )
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .leaseCreated, detailOutput)
-        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboardUpdate, detailOutput)
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, detailOutput)
         
         return detailOutput
     }

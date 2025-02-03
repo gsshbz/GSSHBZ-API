@@ -69,7 +69,8 @@ public func configure(_ app: Application) async throws {
     let modules: [ModuleInterface] = [
         ArmoryModule(),
         UserModule(),
-        LeaseModule()
+        LeaseModule(),
+        NewsFeedModule()
     ]
     
     for module in modules {
