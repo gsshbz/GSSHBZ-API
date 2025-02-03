@@ -94,7 +94,9 @@ extension ArmoryCategoryApiController {
         
         for armoryModel in armoryModels {
             try await armoryModel.$category.load(on: req.db)
-            let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
+            
+            // Frontend doesn't need categoryId parameter in socket update, that's why it is set to nil
+            let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: nil)
             
             try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, armoryItem)
         }

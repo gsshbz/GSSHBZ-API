@@ -176,7 +176,9 @@ struct ArmoryItemsApiController: ListController {
         
         let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
         
-        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, armoryItem)
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: nil)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, socketArmoryItem)
         
         return armoryItem
     }
