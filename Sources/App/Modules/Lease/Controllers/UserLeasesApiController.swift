@@ -65,11 +65,11 @@ extension UserLeasesApiController {
         try await req.db.transaction { db in
             for leaseItem in leaseItems {
                 guard let armoryItem = try await ArmoryItemModel.find(leaseItem.armoryItemId, on: db) else {
-                    throw Abort(.notFound, reason: "Armory item not found.")
+                    throw ArmoryErrors.armoryItemNotFound
                 }
                 
                 if armoryItem.inStock < leaseItem.quantity {
-                    throw Abort(.badRequest, reason: "Not enough stock available for item: \(armoryItem.name). Available: \(armoryItem.inStock), Requested: \(leaseItem.quantity)")
+                    throw ArmoryErrors.insufficientArmoryItemStock(itemName: armoryItem.name, requested: leaseItem.quantity, available: armoryItem.inStock)
                 }
                 
                 // Update inStock
@@ -87,8 +87,8 @@ extension UserLeasesApiController {
             .filter(\.$id == leaseModel.requireID())
             .with(\.$user)
             .first() else {
-                throw Abort(.badRequest)
-            }
+            throw ArmoryErrors.leaseNotFound
+        }
         
         let createdLeaseItems = try await LeaseItemModel.query(on: req.db)
             .filter(\.$leaseId == createdLeaseModel.requireID())
@@ -153,7 +153,7 @@ extension UserLeasesApiController {
             // Restore stock for each armory item based on the quantity in the lease
             for leaseItem in leaseItems {
                 guard let armoryItem = try await ArmoryItemModel.find(leaseItem.armoryItemId, on: db) else {
-                    throw Abort(.notFound, reason: "Armory item not found.")
+                    throw ArmoryErrors.armoryItemNotFound
                 }
                 
                 // Restore the stock count
@@ -181,7 +181,7 @@ extension UserLeasesApiController {
             .with(\.$user)
             .filter(\.$id == identifier(req))
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.leaseNotFound
         }
         
         let leaseItems = try await LeaseItemModel.query(on: req.db)
@@ -231,7 +231,7 @@ extension UserLeasesApiController {
             .with(\.$user)
             .filter(\.$id == identifier(req))
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.leaseNotFound
         }
         
         let leaseItems = try await LeaseItemModel.query(on: req.db)
@@ -262,9 +262,10 @@ extension UserLeasesApiController {
         // Prepare new lease items and update stock
         for armoryItem in updateObject.items {
             guard let armoryItemModel = try await ArmoryItemModel.find(armoryItem.armoryItemId, on: req.db) else {
-                throw Abort(.badRequest, reason: "Armory item couldn't be found")
+                throw ArmoryErrors.armoryItemNotFound
             }
             guard armoryItem.quantity > 0 else {
+                
                 throw Abort(.badRequest, reason: "Invalid quantity for armory item \(armoryItemModel.name).")
             }
             

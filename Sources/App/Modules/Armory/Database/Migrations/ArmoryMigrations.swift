@@ -16,6 +16,7 @@ enum ArmoryMigrations {
                 .id()
                 .field(ArmoryCategoryModel.FieldKeys.v1.name, .string, .required)
                 .field(ArmoryCategoryModel.FieldKeys.v1.imageKey, .string)
+                .unique(on: ArmoryCategoryModel.FieldKeys.v1.name)
                 .create()
             
             

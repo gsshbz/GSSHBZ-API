@@ -70,17 +70,38 @@ extension ArmoryCategoryApiController {
         guard let defaultCategory = try await ArmoryCategoryModel.query(on: req.db)
             .filter(\.$name == defaultCategoryName)
             .first() else {
-            throw Abort(.internalServerError, reason: "Default category not found.")
+            throw ArmoryErrors.categoryNotFound
         }
         
-        try await ArmoryItemModel.query(on: req.db)
-            .filter(\.$category.$id == categoryId)
-            .set(\.$category.$id, to: defaultCategory.requireID())
-            .update()
+        // Fetch affected Armory Items before updating
+        //        let affectedItems = try await ArmoryItemModel.query(on: req.db)
+        //            .with(\.$category)
+        //            .filter(\.$category.$id == categoryId)
+        //            .all()
         
-        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryDeleted, categoryId)
+        //        try await ArmoryItemModel.query(on: req.db)
+        //            .filter(\.$category.$id == categoryId)
+        //            .set(\.$category.$id, to: defaultCategory.requireID())
+        //            .update()
+        
+        let armoryModels = try await ArmoryItemModel.query(on: req.db)
+            .filter(\.$category.$id == categoryId)
+            .with(\.$category)
+            .all()
+        
+        try armoryModels.forEach { $0.$category.id = try defaultCategory.requireID() }
+        armoryModels.forEach { let _ = $0.update(on: req.db) }
+        
+        for armoryModel in armoryModels {
+            try await armoryModel.$category.load(on: req.db)
+            let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
+            
+            try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, armoryItem)
+        }
         
         try await model.delete(on: req.db)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryDeleted, categoryId)
         
         return .noContent
     }

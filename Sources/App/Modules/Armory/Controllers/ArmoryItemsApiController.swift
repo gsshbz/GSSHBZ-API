@@ -67,6 +67,14 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.categoryNotFound
         }
         
+        if let categoryId = input.categoryId {
+            guard let _ = try await ArmoryCategoryModel.query(on: req.db)
+                .filter(\.$id == categoryId)
+                .first() else {
+                throw ArmoryErrors.categoryNotFound
+            }
+        }
+        
 //        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         
 //        if let image = input.image {
@@ -90,7 +98,7 @@ struct ArmoryItemsApiController: ListController {
 //            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
 //        }
         
-        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? "default", aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!)
+        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? "default", aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!, inStock: input.inStock ?? 0)
         
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
@@ -120,13 +128,13 @@ struct ArmoryItemsApiController: ListController {
             .filter(\.$id == identifier(req))
             .with(\.$category)
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.armoryItemNotFound
         }
         
         guard let defaultCategory = try await ArmoryCategoryModel.query(on: req.db)
             .filter(\.$name == "Default")
             .first() else {
-            throw Abort(.notFound)
+            throw ArmoryErrors.categoryNotFound
         }
         
 //        var shouldUpdateImage: Bool = false
