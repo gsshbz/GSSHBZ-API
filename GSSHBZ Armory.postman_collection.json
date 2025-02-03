@@ -32,7 +32,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJleHBpcmF0aW9uIjoxNzM0MDI2NzM2LjczMjc3NX0.CCNh_JSuAX_B8yxDEWYx1OzeFzjSmVdpLAvrA0dNTq_7G8SZmoyNkbHMhtR55PO1evkhkQbY9J7IW_u1jltmQ4kYumUmHFfqFQfnzXIlv84iHebQAkYZJRcKxeap80VAVNvH7TAmRcU-ThPdU1nFYbq8UhWMs3gAEi4hU28OcOWliSJrfXoi6e47UTuWT67Ndh9EU7VfNXQN_0KtUZVSLpv0JZl6s-ZubO6JkH6uw7EZYHc-mf4TXx53ZdC9KbuG1r-uc37X9OUWeEqMSTKYDdE-7GX6MKfzAApKEBUc2HeDOZVi4VHjCvOGcgQcDEpx-uRfV6nFO6LIQk2mPNHUBA",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -41,7 +41,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Created category\",\n    \"imageKey\": \"icon1\"\n}",
+							"raw": "{\n\t\"name\": \"Testna kategorija\",\n    \"imageKey\": \"icon1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -458,7 +458,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImZ1bGxOYW1lIjoiQWRtaW4gQWRtaW4iLCJleHBpcmF0aW9uIjoxNzMxNjI2MDk2LjkzODEzOCwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.Ca5igxlOrOwwfS3LOc0-cAifrbjQAIRUvSr07TOFBjYw5tPJ2vMQdR9wrKtyD9fdFYOMK3tgoG-HbnCPwlyuxAGtzhqNXDlTbRzttH7iRb1bz_UeI0lQ6lCo7FCzAwbvR_k1ZDEHrWlfA2CsHlYOOJdN3ZG8l7GvSKiTaGPEbikYsXoF3yNRcXqRJy2WqWgScE8coyGO8mI6SQvCDoS-6dCTqutIUIHZoqxbn_ZbmwAxPadlqxSDwh-CtHk017_gREbcL6BpWr36VjjMB8teXrFGhUfsYuUnC3jjiRn66haCawniIfEYct35mQw9DUOPSCDiMnV4VBh-JwJ8BkRCcw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -475,14 +475,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/categories/7AB48DDC-AB1F-4D42-84C4-A14967822164",
+							"raw": "{{base_api_url}}/armory/categories/EF76FA6D-1E48-4E45-A472-1364ACD3344C",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"categories",
-								"7AB48DDC-AB1F-4D42-84C4-A14967822164"
+								"EF76FA6D-1E48-4E45-A472-1364ACD3344C"
 							]
 						},
 						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
@@ -733,6 +733,29 @@
 				},
 				{
 					"name": "Sign In",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"access_token\", jsonData[\"accessToken\"]);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -1016,7 +1039,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNzMzMTc3MjUxLjk1NjIyNCwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.exUl5A9Zzz3tu-YLkITmmX9PyoiXNU2j1cURoQzH9_bScxI_8HQxBUyR_f9Y6PLWnvlkXJS46V-aChBti15SOKRsuUqLkABA0JP1ABrusIEQrCWqXDyt0k_PG-axYIO-xU8Ta6LddJwhFQsqn4gjkCV2u7sTkg4XnoMcN3aHoB5eALyZ48QBYnsyozyHYhhB6W_ualE7AvFAlXIL3BJuv7Qfd-6Jr9FaXq2YLevhb0K41go2cdlar2p4uQX5uDqCXYsBhVbGhpQzVTsQxOs9TOKHcEkpoh7DQnu8ugmHTDhUT6k6L6n3VA8Qc3_a2qU9YvNlu5Mo22gN6PQno_a-dw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1087,7 +1110,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJleHBpcmF0aW9uIjoxNzMzMTc2NTQxLjg0MTcxNywidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.KKQoHAoYw-qVe0VUS-05YFLzYuSIUXzMLkctg9KgvaBrsMSdPPO7W2ExGP6Lkq_NR2t1XjonYTZEOtfUDxnT1-JHcM-Gb6hOOuXZ4fp7Yj-07bxdss9lIMQwRT-Rv2mYg-CN_nJJa2SXT2hcCl64BIM78hgLSRiimEVPspc3Og-vOHz67Rydo07kMgTXCDWMiT4_0wjkdIXiiDmagcYytcEtK4QA1eQmKzu-9GSwu5NJgjfO5dzbsyj2nvKtUAnSACc3cBySTX4n0pzbwHxcPlILaLuDVj0XKa5ulCBCBuMFsaVkWSAn7IA7_oczftGX-A5fFMNFCI23N4Na_vHOKA",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1207,13 +1230,25 @@
 			"item": [
 				{
 					"name": "Create Armory Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNzMyMzE1NTU0LjI4MzUyNiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJ1c2VySWQiOiI5NkRGMDU1Ny1DMzRELTQ5REQtOURCMC1FOUQ4OUYyMjg0MEQiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIn0.Bf2XhZRVtMSNV4GJUTEPQ6zpHDyUt5XLaK-pK3nItilp5ASkgTYsxAPYJu48_kUcgJpmy3SVivNF0T42A9l-9AI4oxPYDkkDhZYpV2Sdpprk0MXcgFhZWFOS1DluFKceiUYbioDxYhZwsUNn6Fzb5X4qHULr3wIkIGdwLBgInsmYNAfn4SLVotMnEStD7kX7acygdR8hZnoC8rIAYyGZMI0KEn5PBu1WM0bxhcOuhpE1FVDEejPHM3rKOPb3_rcp3JihykaQSEv6EH34zdq_QhQf7nqCJzGsHezoD6CQnTO6ykSsskKoIcQ-MsWVYiKEKWurB-7NR64VESBVg5xjeQ",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1225,7 +1260,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "asdfasdfff",
+									"value": "a",
 									"type": "text"
 								},
 								{
@@ -1240,12 +1275,13 @@
 								},
 								{
 									"key": "inStock",
-									"value": "10",
-									"type": "text"
+									"value": "12",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "categoryId",
-									"value": "D7963051-247E-46B8-BF53-E9122280D988",
+									"value": "DBCE1DA8-74C4-457B-9DF2-FEDEFC724522",
 									"type": "text"
 								}
 							]
@@ -1325,7 +1361,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjA1NTE5OC44MDY0MDgsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.IUUaQZkDGOXKy_Ev4eepQckmz7Rg15mj3ZO_1AxhVNzt80anJn6VdVUp3TFSlWpsGfD3Iu0HX5kztQrnHc7shsyR6Djzy_qbMd6niDmyRfIGSPWEHIMUevigEGjZZAm2lKhyHju4W2U1PjEJVSbRC_I-Km6mWzzlmtqzAHou_IagoYdRsOsfosVeDPpB_6BPQ37DPzCkxb6my4o-UOkrjkrPx-bj1cwWYPduYQlnmOdWIOsEMTYcLIT-XmOTEWK2lXeQI_yM6-NvZjUbErvzV4xgqUvsFHQ8uPTZMXT-6xcDHzkGd8qL8jItXo4UCH-ImCMw-3lWPwYCfJsm6F6KOg",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1333,14 +1369,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/C82D34D4-0714-4B6F-83A0-0E70A4B48B6A",
+							"raw": "{{base_api_url}}/armory/items/C69EDD08-BCBE-42C0-BD5D-617B008AEA39",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"C82D34D4-0714-4B6F-83A0-0E70A4B48B6A"
+								"C69EDD08-BCBE-42C0-BD5D-617B008AEA39"
 							]
 						}
 					},
@@ -1400,7 +1436,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1473,7 +1509,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJleHBpcmF0aW9uIjoxNzMzMTc3MjUxLjk1NjIyNCwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.exUl5A9Zzz3tu-YLkITmmX9PyoiXNU2j1cURoQzH9_bScxI_8HQxBUyR_f9Y6PLWnvlkXJS46V-aChBti15SOKRsuUqLkABA0JP1ABrusIEQrCWqXDyt0k_PG-axYIO-xU8Ta6LddJwhFQsqn4gjkCV2u7sTkg4XnoMcN3aHoB5eALyZ48QBYnsyozyHYhhB6W_ualE7AvFAlXIL3BJuv7Qfd-6Jr9FaXq2YLevhb0K41go2cdlar2p4uQX5uDqCXYsBhVbGhpQzVTsQxOs9TOKHcEkpoh7DQnu8ugmHTDhUT6k6L6n3VA8Qc3_a2qU9YvNlu5Mo22gN6PQno_a-dw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1502,18 +1538,23 @@
 									"key": "inStock",
 									"value": "40",
 									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "EF76FA6D-1E48-4E45-A472-1364ACD3344C",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/8BDD0BD2-DCA6-403C-AA64-6E224E773740",
+							"raw": "{{base_api_url}}/armory/items/6028C84D-852A-443E-B404-069C3EF20A49",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"8BDD0BD2-DCA6-403C-AA64-6E224E773740"
+								"6028C84D-852A-443E-B404-069C3EF20A49"
 							]
 						}
 					},
@@ -1598,7 +1639,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NkRGMDU1Ny1DMzRELTQ5REQtOURCMC1FOUQ4OUYyMjg0MEQiLCJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJleHBpcmF0aW9uIjoxNzMyNjY3MzYwLjQzMzMzNn0.LBS2JQNrrvxFfZvs-MFTM-giAOq6BJzEswCd-_9__NAGjgSH57UHQuX2E7LMxzjIvytJM4pJlRGixW2YyBgUUr7RSB5Az17fQJtZPp1M7AtasK1tgA_cYRMtWR3XsmEjiPL3VDowXgtO1nJCd-zx33KZ8bCEhYcXPZRbXb6BUFPKOaO8jLnemEwvVoxhGp668KMdorgNzoQKbecU0qpi-AF_hS0Qnc-wAASJq5Pz1KaiCe8Y8-CWlD--OYhPbb0uTkKrHfbbwtos5Jzz5GIcYVE_ceRMRR4-IM3AuJl0yX1n_CjhxnIJmkg6BQNPHF2g0j16LI6ZpmohvklXqecJ5g",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1698,7 +1739,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjc0NTc0NS45OTMwMTMsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.K2uD5PwH4tLRFhwUPqqpVkkGpUe9afJf0YFibKekTpbpS2sD2JVfrAClGPEGLWE601G6dwOXRiW7fFcdiEmLVbtZvGQKyp0rjmDWJjWmedXUCOgFz5cvUC9oDP6NUbTENElhWPx5QeEP-VONsrrjSQb0RvMNuONtVaNTM-LuNsevaTTmxn7q7x0OAl3tZ1HQ5zWSJcDeKhZlmcHGS6QCJOmUahZ0QSsWh0yRKvs7cC5SP7SGdR0BBhWgyn-YOcgI7ZaUw4N_BaW8CeHv3EBVeJdtJLO3bJSpEdCGpeMQ6W25V9Jj_eh9OB0IhgdUTSlxWHfjGDT12-vnUvxGly-i4w",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1789,7 +1830,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZW1haWwiOiJyb290QGxvY2FsaG9zdC5sb2NhbGhvc3QiLCJ1c2VySWQiOiIyMjFCMDM1OC0zODdFLTQ5RTYtOEIzRi0zMURFNDUwMUMzM0MiLCJleHBpcmF0aW9uIjoxNzI5NzYzNzIyLjc3NjY3MX0.bb1rrPyZJDYDmcp40tpKu8qX0-deqwdUvwfDQLGlpHAQzy3-SIuViX-Lol5barxhUpeeB-FTNKqDuXbjrVqNbW2WeuXzN7wBSvY75C3hlDpw8UcmFjKCMzOy2JefoENAB80bMyzRWyD7fqo14WGvf60Sk0cwmpL94PV5_qkLWiXMhVZOj67ky8MrIfiBPcj5oC3w0RIs64AF7n2UtBblB-Fwhasl1wFEldDSmeEhY055uJGXoJxkFlEz3j96Jlu63Kei9_dU1qIYsKS0SN4_3pWM_zTFUJJjzlPc5sUbOS9LzrUGcSL2mxM4IT-3Wp4JzhcEuwlTsrIH5aaYkxb5BQ",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1864,7 +1905,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1939,12 +1980,12 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -2032,7 +2073,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvb3RAbG9jYWxob3N0LmxvY2FsaG9zdCIsImV4cGlyYXRpb24iOjE3MzI3NDE2NzcuMTMzMjUyMSwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIiwiZnVsbE5hbWUiOiJBZG1pbiBBZG1pbiJ9.CEeh1GKtbJp6dJulLI1XC_Oaj-8pM2w1iJcFYavkM8h0Msdc7e1IRAmq7Wr0yPSC996L9ekmN4h1DdIcCms1Ee9G8WU1jGDJwZVEVzQkxoabKgc52mDgUPJL2p25hOU2f9bxFt7reB77doC-PXLM4dGvQyOQyON-yBA_nQ7JLwunt1F_5PsnI0OBGlhekb4Nty7WJJ3siVnHNYchmqq8rLpjHE48pckxBnn0X6Ho92wK-Va4U1y_pPbqSbTnWSI8CJ_SFfUsvAsBe1-F7J9aBB_k3V9srzsXaTjjW-pLvYe6n0Pc1PotjkpWl_eJ6h72In9ftRHPteImWfBFWYQ0nw",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -2099,7 +2140,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmdWxsTmFtZSI6IkFkbWluIEFkbWluIiwiZXhwaXJhdGlvbiI6MTczMjc0NTc0NS45OTMwMTMsImVtYWlsIjoicm9vdEBsb2NhbGhvc3QubG9jYWxob3N0IiwidXNlcklkIjoiOTZERjA1NTctQzM0RC00OURELTlEQjAtRTlEODlGMjI4NDBEIn0.K2uD5PwH4tLRFhwUPqqpVkkGpUe9afJf0YFibKekTpbpS2sD2JVfrAClGPEGLWE601G6dwOXRiW7fFcdiEmLVbtZvGQKyp0rjmDWJjWmedXUCOgFz5cvUC9oDP6NUbTENElhWPx5QeEP-VONsrrjSQb0RvMNuONtVaNTM-LuNsevaTTmxn7q7x0OAl3tZ1HQ5zWSJcDeKhZlmcHGS6QCJOmUahZ0QSsWh0yRKvs7cC5SP7SGdR0BBhWgyn-YOcgI7ZaUw4N_BaW8CeHv3EBVeJdtJLO3bJSpEdCGpeMQ6W25V9Jj_eh9OB0IhgdUTSlxWHfjGDT12-vnUvxGly-i4w",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -2185,6 +2226,457 @@
 							"body": "{\n    \"leases\": [\n        {\n            \"id\": \"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"inStock\": 3,\n                        \"category\": {\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"name\": \"William karabiner\"\n                    },\n                    \"quantity\": 1\n                }\n            ],\n            \"updatedAt\": \"2024-10-23T13:22:40Z\",\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            }\n        },\n        {\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"isAdmin\": false\n            },\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\"\n                        },\n                        \"inStock\": 5,\n                        \"id\": \"73A5009A-3903-439F-92AE-903E401AE7EC\",\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                        \"name\": \"Armory item with default category\",\n                        \"categoryId\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"id\": \"FB7133F3-A4E1-4CA8-9897-A18519460182\",\n            \"updatedAt\": \"2024-10-23T13:22:40Z\"\n        },\n        {\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"updatedAt\": \"2024-10-23T13:22:40Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"isAdmin\": false,\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"id\": \"2F8FD10E-9296-4F94-97CD-353BE22CFC68\",\n            \"armoryItems\": [\n                {\n                    \"quantity\": 3,\n                    \"armoryItem\": {\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"name\": \"William karabiner\",\n                        \"category\": {\n                            \"name\": \"Carabiner\",\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\"\n                        },\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"inStock\": 3\n                    }\n                }\n            ]\n        },\n        {\n            \"updatedAt\": \"2024-10-23T21:06:28Z\",\n            \"armoryItems\": [],\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\"\n            },\n            \"createdAt\": \"2024-10-23T21:06:28Z\",\n            \"id\": \"3B3C26E6-E46E-4337-B337-7C16D08EA18F\"\n        },\n        {\n            \"updatedAt\": \"2024-10-23T21:07:32Z\",\n            \"id\": \"AE9819FE-A79A-43C3-83A6-F8285E53C056\",\n            \"armoryItems\": [],\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\"\n            },\n            \"createdAt\": \"2024-10-23T21:07:32Z\"\n        }\n    ],\n    \"metadata\": {\n        \"page\": 1,\n        \"total\": 9,\n        \"per\": 5\n    }\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "News Feed",
+			"item": [
+				{
+					"name": "Create News Article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New News Article Title\",\n    \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/newsFeedArticles",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"newsFeedArticles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create News Article Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"New News Article Title\",\n    \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/newsFeedArticles",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"newsFeedArticles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "418"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=KC8a4W/kkIFY3q8nGs3FhwJ9sVXS21uTRn+5Y3lZcRc=; Expires=Mon, 10 Feb 2025 15:53:44 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 03 Feb 2025 15:53:44 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"updatedAt\": \"2025-02-03T15:53:44Z\",\n    \"user\": {\n        \"firstName\": \"Admin\",\n        \"lastName\": \"Admin\",\n        \"email\": \"root@localhost.localhost\",\n        \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n        \"isAdmin\": false,\n        \"imageKey\": \"0\"\n    },\n    \"id\": \"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7\",\n    \"createdAt\": \"2025-02-03T15:53:44Z\",\n    \"title\": \"New News Article Title\",\n    \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get News Article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/newsFeedArticles/AA256150-D3EC-4EF4-9EB7-280E3D48B9C7",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"newsFeedArticles",
+								"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get News Article",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/newsFeedArticles/AA256150-D3EC-4EF4-9EB7-280E3D48B9C7",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"newsFeedArticles",
+										"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "418"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=KC8a4W/kkIFY3q8nGs3FhwJ9sVXS21uTRn+5Y3lZcRc=; Expires=Mon, 10 Feb 2025 16:00:54 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 03 Feb 2025 16:00:54 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\",\n    \"user\": {\n        \"firstName\": \"Admin\",\n        \"isAdmin\": false,\n        \"lastName\": \"Admin\",\n        \"imageKey\": \"0\",\n        \"email\": \"root@localhost.localhost\",\n        \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\"\n    },\n    \"createdAt\": \"2025-02-03T15:53:44Z\",\n    \"id\": \"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7\",\n    \"updatedAt\": \"2025-02-03T15:53:44Z\",\n    \"title\": \"New News Article Title\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get News Articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/newsFeedArticles",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"newsFeedArticles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get News Articles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/newsFeedArticles",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"newsFeedArticles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2109"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=KC8a4W/kkIFY3q8nGs3FhwJ9sVXS21uTRn+5Y3lZcRc=; Expires=Mon, 10 Feb 2025 16:02:17 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 03 Feb 2025 16:02:17 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"news\": [\n        {\n            \"createdAt\": \"2025-02-03T15:48:20Z\",\n            \"id\": \"6785334D-BE1F-4AD6-BFBD-8E789346116F\",\n            \"text\": \"Sastanak u stanici će biti 15.02.2025 u 19h.\",\n            \"title\": \"Obavijest o sastanku\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"isAdmin\": false,\n                \"imageKey\": \"0\",\n                \"firstName\": \"Admin\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"updatedAt\": \"2025-02-03T15:48:20Z\"\n        },\n        {\n            \"id\": \"AA76452F-115C-4788-9622-1143AAFE662B\",\n            \"text\": \"Vježba će se održati od 10.4 do 12.04. Na sastanku ćemo dogovarati detalje i napraviti spisak ljudi koji će sudjelovati.\",\n            \"user\": {\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"imageKey\": \"0\",\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            },\n            \"createdAt\": \"2025-02-03T15:48:20Z\",\n            \"updatedAt\": \"2025-02-03T15:48:20Z\",\n            \"title\": \"Vježba spašavanja na Kamešnici\"\n        },\n        {\n            \"id\": \"5591E8A5-6473-4093-A215-EB598C592D86\",\n            \"text\": \"Nabavili smo novi paket karabinera, 10 novih jakni, 1 mariner i 7 užadi od 100m.\",\n            \"createdAt\": \"2025-02-03T15:48:20Z\",\n            \"title\": \"Obavijest o nabavci nove opreme\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"imageKey\": \"0\",\n                \"isAdmin\": false,\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\"\n            },\n            \"updatedAt\": \"2025-02-03T15:48:20Z\"\n        },\n        {\n            \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\",\n            \"id\": \"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7\",\n            \"updatedAt\": \"2025-02-03T15:53:44Z\",\n            \"title\": \"New News Article Title\",\n            \"user\": {\n                \"isAdmin\": false,\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"imageKey\": \"0\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"createdAt\": \"2025-02-03T15:53:44Z\"\n        },\n        {\n            \"updatedAt\": \"2025-02-03T15:55:19Z\",\n            \"createdAt\": \"2025-02-03T15:55:19Z\",\n            \"id\": \"431DEA6E-273F-4583-B054-D829566E235D\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"imageKey\": \"0\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\"\n            },\n            \"title\": \"New News Article Title\",\n            \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\"\n        }\n    ],\n    \"metadata\": {\n        \"per\": 10,\n        \"total\": 5,\n        \"page\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update News Article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Title je updatean\",\n    \"text\": \"Text je sada kraći\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/newsFeedArticles/AA256150-D3EC-4EF4-9EB7-280E3D48B9C7",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"newsFeedArticles",
+								"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update News Article",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Title je updatean\",\n    \"text\": \"Text je sada kraći\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/newsFeedArticles/AA256150-D3EC-4EF4-9EB7-280E3D48B9C7",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"newsFeedArticles",
+										"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "330"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=KC8a4W/kkIFY3q8nGs3FhwJ9sVXS21uTRn+5Y3lZcRc=; Expires=Mon, 10 Feb 2025 16:09:10 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 03 Feb 2025 16:09:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2025-02-03T15:53:44Z\",\n    \"updatedAt\": \"2025-02-03T16:09:10Z\",\n    \"title\": \"Title je updatean\",\n    \"text\": \"Text je sada kraći\",\n    \"id\": \"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7\",\n    \"user\": {\n        \"email\": \"root@localhost.localhost\",\n        \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n        \"firstName\": \"Admin\",\n        \"isAdmin\": false,\n        \"imageKey\": \"0\",\n        \"lastName\": \"Admin\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete News Article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/newsFeedArticles/AA256150-D3EC-4EF4-9EB7-280E3D48B9C7",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"newsFeedArticles",
+								"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete News Article",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/newsFeedArticles/AA256150-D3EC-4EF4-9EB7-280E3D48B9C7",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"newsFeedArticles",
+										"AA256150-D3EC-4EF4-9EB7-280E3D48B9C7"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=KC8a4W/kkIFY3q8nGs3FhwJ9sVXS21uTRn+5Y3lZcRc=; Expires=Mon, 10 Feb 2025 16:11:16 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 03 Feb 2025 16:11:16 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get User News Articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/newsFeedArticles/user-articles",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"newsFeedArticles",
+								"user-articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User News Articles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/newsFeedArticles/user-articles",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"newsFeedArticles",
+										"user-articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1690"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=KC8a4W/kkIFY3q8nGs3FhwJ9sVXS21uTRn+5Y3lZcRc=; Expires=Mon, 10 Feb 2025 16:12:17 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 03 Feb 2025 16:12:17 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"metadata\": {\n        \"total\": 4,\n        \"per\": 10,\n        \"page\": 1\n    },\n    \"news\": [\n        {\n            \"title\": \"Obavijest o sastanku\",\n            \"updatedAt\": \"2025-02-03T15:48:20Z\",\n            \"createdAt\": \"2025-02-03T15:48:20Z\",\n            \"id\": \"6785334D-BE1F-4AD6-BFBD-8E789346116F\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"isAdmin\": false,\n                \"email\": \"root@localhost.localhost\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"imageKey\": \"0\"\n            },\n            \"text\": \"Sastanak u stanici će biti 15.02.2025 u 19h.\"\n        },\n        {\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"imageKey\": \"0\",\n                \"firstName\": \"Admin\",\n                \"isAdmin\": false\n            },\n            \"createdAt\": \"2025-02-03T15:48:20Z\",\n            \"title\": \"Vježba spašavanja na Kamešnici\",\n            \"updatedAt\": \"2025-02-03T15:48:20Z\",\n            \"text\": \"Vježba će se održati od 10.4 do 12.04. Na sastanku ćemo dogovarati detalje i napraviti spisak ljudi koji će sudjelovati.\",\n            \"id\": \"AA76452F-115C-4788-9622-1143AAFE662B\"\n        },\n        {\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"firstName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"imageKey\": \"0\"\n            },\n            \"title\": \"Obavijest o nabavci nove opreme\",\n            \"text\": \"Nabavili smo novi paket karabinera, 10 novih jakni, 1 mariner i 7 užadi od 100m.\",\n            \"createdAt\": \"2025-02-03T15:48:20Z\",\n            \"updatedAt\": \"2025-02-03T15:48:20Z\",\n            \"id\": \"5591E8A5-6473-4093-A215-EB598C592D86\"\n        },\n        {\n            \"text\": \"as;dlfkasjfa;slkdfj; d;lfkjasdkl;fj askl;dfj askl;fj askl;fjaskl;fjas;kldfj akls;fj akls;fj akls;fj l;\",\n            \"id\": \"431DEA6E-273F-4583-B054-D829566E235D\",\n            \"user\": {\n                \"firstName\": \"Admin\",\n                \"isAdmin\": false,\n                \"id\": \"29BB69E4-B538-46B8-A56F-E2C41FEC2CFE\",\n                \"imageKey\": \"0\",\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"createdAt\": \"2025-02-03T15:55:19Z\",\n            \"updatedAt\": \"2025-02-03T15:55:19Z\",\n            \"title\": \"New News Article Title\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
