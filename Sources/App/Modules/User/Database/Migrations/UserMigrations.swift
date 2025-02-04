@@ -21,7 +21,7 @@ enum UserMigrations {
                 .field(UserAccountModel.FieldKeys.v1.password, .string, .required)
                 .field(UserAccountModel.FieldKeys.v1.phoneNumber, .string)
                 .field(UserAccountModel.FieldKeys.v1.address, .string)
-                .field(UserAccountModel.FieldKeys.v1.imageKey, .string)
+                .field(UserAccountModel.FieldKeys.v1.imageKey, .int)
                 .field(UserAccountModel.FieldKeys.v1.isAdmin, .bool, .required, .sql(.default(false)))
                 .field(UserAccountModel.FieldKeys.v1.createdAt, .datetime)
                 .field(UserAccountModel.FieldKeys.v1.updatedAt, .datetime)
@@ -96,7 +96,7 @@ enum UserMigrations {
                                                     password: try Bcrypt.hash(password),
                                                     phoneNumber: "00387445394857",
                                                     address: "Ulica 1",
-                                                    imageKey: /*"\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"*/"0")
+                                                    imageKey: /*"\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"*/0)
             
             try await userAccountModel.create(on: database)
         }

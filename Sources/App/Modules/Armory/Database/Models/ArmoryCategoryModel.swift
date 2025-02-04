@@ -21,7 +21,7 @@ final class ArmoryCategoryModel: DatabaseModelInterface {
     var name: String
     
     @Field(key: FieldKeys.v1.imageKey)
-    var imageKey: String?
+    var imageKey: Int?
     
     @Children(for: \.$category)
     var armoryItems: [ArmoryItemModel]
@@ -30,7 +30,7 @@ final class ArmoryCategoryModel: DatabaseModelInterface {
         
     }
     
-    public init(id: UUID? = nil, name: String, imageKey: String? = "default") {
+    public init(id: UUID? = nil, name: String, imageKey: Int? = 0) {
         self.id = id
         self.name = name
         self.imageKey = imageKey

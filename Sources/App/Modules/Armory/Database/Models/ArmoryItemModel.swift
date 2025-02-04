@@ -24,7 +24,7 @@ final class ArmoryItemModel: DatabaseModelInterface {
     var name: String
     
     @Field(key: FieldKeys.v1.imageKey)
-    var imageKey: String
+    var imageKey: Int
     
     @Field(key: FieldKeys.v1.aboutInfo)
     var aboutInfo: String
@@ -37,7 +37,7 @@ final class ArmoryItemModel: DatabaseModelInterface {
     
     public init() { }
     
-    public init(id: UUID? = nil, name: String, imageKey: String, aboutInfo: String, categoryId: UUID, inStock: Int = 0) {
+    public init(id: UUID? = nil, name: String, imageKey: Int, aboutInfo: String, categoryId: UUID, inStock: Int = 0) {
         self.id = id
         self.name = name
         self.imageKey = imageKey

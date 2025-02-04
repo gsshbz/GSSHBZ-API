@@ -41,7 +41,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Testna kategorija\",\n    \"imageKey\": \"icon1\"\n}",
+							"raw": "{\n\t\"name\": \"Testna kategorija\",\n    \"imageKey\": 5\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -68,7 +68,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"Created category\",\n    \"imageKey\": \"icon1\"\n}",
+									"raw": "{\n\t\"name\": \"Testna kategorija\",\n    \"imageKey\": 5\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -96,11 +96,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "90"
+									"value": "85"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=iq+ptqW2w4WcWLeY3KustO8iKcoaNwVnpB07lcywoMg=; Expires=Thu, 19 Dec 2024 17:14:50 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:05:00 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -108,11 +108,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 12 Dec 2024 17:14:50 GMT"
+									"value": "Tue, 04 Feb 2025 11:04:59 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"F7F7B7C3-2EB2-41F4-A00C-D54751D5DB3A\",\n    \"imageKey\": \"icon1\",\n    \"name\": \"Created category\"\n}"
+							"body": "{\n    \"id\": \"E829C32F-E639-4A9F-9AD2-CBDBE72D34C7\",\n    \"name\": \"Testna kategorija\",\n    \"imageKey\": 5\n}"
 						}
 					]
 				},
@@ -136,14 +136,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"raw": "{{base_api_url}}/armory/categories/12151B7B-4C40-49F1-B9DE-CE74D406D246",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"categories",
-								"92B79E61-449F-46F3-85F1-5837ED445B74"
+								"12151B7B-4C40-49F1-B9DE-CE74D406D246"
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -155,14 +155,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+									"raw": "{{base_api_url}}/armory/categories/12151B7B-4C40-49F1-B9DE-CE74D406D246",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"categories",
-										"92B79E61-449F-46F3-85F1-5837ED445B74"
+										"12151B7B-4C40-49F1-B9DE-CE74D406D246"
 									]
 								}
 							},
@@ -176,11 +176,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "71"
+									"value": "75"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:03:38 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:05:41 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -188,11 +188,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 21:03:38 GMT"
+									"value": "Tue, 04 Feb 2025 11:05:41 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Created category\"\n}"
+							"body": "{\n    \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n    \"imageKey\": 0,\n    \"name\": \"Default\"\n}"
 						}
 					]
 				},
@@ -240,56 +240,6 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_api_url}}/armory/categories?items=false",
-									"host": [
-										"{{base_api_url}}"
-									],
-									"path": [
-										"armory",
-										"categories"
-									],
-									"query": [
-										{
-											"key": "items",
-											"value": "false"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "content-type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "content-length",
-									"value": "378"
-								},
-								{
-									"key": "set-cookie",
-									"value": "vapor-session=iq+ptqW2w4WcWLeY3KustO8iKcoaNwVnpB07lcywoMg=; Expires=Thu, 19 Dec 2024 17:14:57 GMT; Path=/; SameSite=Lax"
-								},
-								{
-									"key": "connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "date",
-									"value": "Thu, 12 Dec 2024 17:14:57 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"name\": \"Carabiner\",\n        \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\"\n    },\n    {\n        \"id\": \"812E820B-60F7-4D87-BD6A-4A843AA25220\",\n        \"name\": \"Belays and Descenders\"\n    },\n    {\n        \"name\": \"Created category\",\n        \"id\": \"BCB6C0F7-A10A-4ADC-BF80-97B4E7DCC7DB\"\n    },\n    {\n        \"id\": \"F832BE9D-397B-4168-AF2F-5BD151B08225\",\n        \"name\": \"Created category\"\n    },\n    {\n        \"imageKey\": \"icon1\",\n        \"id\": \"F7F7B7C3-2EB2-41F4-A00C-D54751D5DB3A\",\n        \"name\": \"Created category\"\n    }\n]"
-						},
-						{
-							"name": "Get Categories",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
 									"raw": "{{base_api_url}}/armory/categories?items=true",
 									"host": [
 										"{{base_api_url}}"
@@ -316,11 +266,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "4706"
+									"value": "3296"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=iq+ptqW2w4WcWLeY3KustO8iKcoaNwVnpB07lcywoMg=; Expires=Thu, 19 Dec 2024 17:16:43 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:03:43 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -328,11 +278,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 12 Dec 2024 17:16:43 GMT"
+									"value": "Tue, 04 Feb 2025 11:03:42 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n        \"name\": \"Default\",\n        \"armoryItems\": [\n            {\n                \"inStock\": 5,\n                \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                \"category\": {\n                    \"name\": \"Default\",\n                    \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\"\n                },\n                \"name\": \"Armory item with default category\",\n                \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                \"id\": \"C477CD9D-0A3C-47D4-A7E9-64CAF83FAB35\",\n                \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\"\n            },\n            {\n                \"inStock\": 0,\n                \"aboutInfo\": \"Testing image upload\",\n                \"id\": \"D676E9F5-2582-4A90-9A5C-E1F30528BF94\",\n                \"category\": {\n                    \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                    \"name\": \"Default\"\n                },\n                \"name\": \"Petzl Kruskasti karabiner\",\n                \"imageKey\": \"AF7562E1-3AE8-4ABE-9634-8B0171E47099.jpg\",\n                \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\"\n            },\n            {\n                \"inStock\": 0,\n                \"category\": {\n                    \"name\": \"Default\",\n                    \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\"\n                },\n                \"name\": \"asdfasdfasdfasdf\",\n                \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                \"id\": \"2D25D799-F51C-44CF-A98C-7456836A3800\",\n                \"aboutInfo\": \"Testing image upload\",\n                \"imageKey\": \"DE64819B-B298-4D78-B330-0A0904FD7299.jpg\"\n            },\n            {\n                \"id\": \"8727BFA0-428D-4B7B-9175-250B418D04A6\",\n                \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                \"name\": \"asdfasdff\",\n                \"imageKey\": \"053B41AC-0B21-4CEA-93E6-5954F85E5E23.jpg\",\n                \"inStock\": 0,\n                \"aboutInfo\": \"Testing image upload\",\n                \"category\": {\n                    \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                    \"name\": \"Default\"\n                }\n            },\n            {\n                \"category\": {\n                    \"name\": \"Default\",\n                    \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\"\n                },\n                \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n                \"id\": \"C82D34D4-0714-4B6F-83A0-0E70A4B48B6A\",\n                \"inStock\": 10,\n                \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                \"name\": \"Petzl Boreo Caving kaciga\",\n                \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\"\n            },\n            {\n                \"inStock\": 40,\n                \"imageKey\": \"http://localhost:8080/img/736A4760-A752-4A82-9F62-3315BAF4AAFB.JPG\",\n                \"name\": \"Updateani armory item\",\n                \"id\": \"8BDD0BD2-DCA6-403C-AA64-6E224E773740\",\n                \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                \"category\": {\n                    \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n                    \"name\": \"Default\"\n                },\n                \"aboutInfo\": \"Updateani info\"\n            }\n        ]\n    },\n    {\n        \"name\": \"Carabiner\",\n        \"armoryItems\": [\n            {\n                \"name\": \"William karabiner\",\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\"\n                },\n                \"imageKey\": \"william.jpeg\",\n                \"id\": \"A51DDD35-E281-4433-A70E-98B0A9A8A0F9\",\n                \"categoryId\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                \"inStock\": 10,\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n            },\n            {\n                \"id\": \"F00A88DD-3ADB-4549-923E-773B21252216\",\n                \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                \"categoryId\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                \"category\": {\n                    \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                    \"name\": \"Carabiner\"\n                },\n                \"imageKey\": \"grigri.jpeg\",\n                \"inStock\": 10,\n                \"name\": \"GRIGRI\"\n            },\n            {\n                \"inStock\": 9,\n                \"name\": \"OK karabiner\",\n                \"category\": {\n                    \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                    \"name\": \"Carabiner\"\n                },\n                \"categoryId\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                \"id\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n            }\n        ],\n        \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\"\n    },\n    {\n        \"name\": \"Belays and Descenders\",\n        \"id\": \"812E820B-60F7-4D87-BD6A-4A843AA25220\",\n        \"armoryItems\": []\n    },\n    {\n        \"id\": \"BCB6C0F7-A10A-4ADC-BF80-97B4E7DCC7DB\",\n        \"name\": \"Created category\",\n        \"armoryItems\": []\n    },\n    {\n        \"armoryItems\": [],\n        \"id\": \"F832BE9D-397B-4168-AF2F-5BD151B08225\",\n        \"name\": \"Created category\"\n    },\n    {\n        \"imageKey\": \"icon1\",\n        \"name\": \"Created category\",\n        \"armoryItems\": [],\n        \"id\": \"F7F7B7C3-2EB2-41F4-A00C-D54751D5DB3A\"\n    }\n]"
+							"body": "[\n    {\n        \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n        \"armoryItems\": [\n            {\n                \"id\": \"4DAFE3E8-24DD-4BF1-AA30-C27D8BA55664\",\n                \"name\": \"Armory item with default category\",\n                \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                \"inStock\": 5,\n                \"imageKey\": 0,\n                \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                \"category\": {\n                    \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                    \"name\": \"Default\",\n                    \"imageKey\": 0\n                }\n            }\n        ],\n        \"imageKey\": 0,\n        \"name\": \"Default\"\n    },\n    {\n        \"armoryItems\": [\n            {\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"name\": \"William karabiner\",\n                \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"imageKey\": 0,\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n                },\n                \"imageKey\": 0,\n                \"inStock\": 10,\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n            },\n            {\n                \"inStock\": 10,\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                    \"imageKey\": 0\n                },\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n                \"name\": \"OK karabiner\",\n                \"imageKey\": 0,\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n            },\n            {\n                \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                \"inStock\": 10,\n                \"id\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n                \"category\": {\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                    \"imageKey\": 0,\n                    \"name\": \"Carabiner\"\n                },\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                \"imageKey\": 0,\n                \"name\": \"GRIGRI\"\n            }\n        ],\n        \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n        \"imageKey\": 0,\n        \"name\": \"Carabiner\"\n    },\n    {\n        \"name\": \"Belays and Descenders\",\n        \"id\": \"75EF0564-C7DD-4AF1-97A2-2278E9B47084\",\n        \"imageKey\": 0,\n        \"armoryItems\": []\n    },\n    {\n        \"id\": \"DA126181-398F-44BF-AF47-71A0413AF750\",\n        \"imageKey\": 0,\n        \"armoryItems\": [\n            {\n                \"imageKey\": 0,\n                \"id\": \"73E4D55E-B49B-4DAF-A332-75A42C6C5D4D\",\n                \"inStock\": 10,\n                \"category\": {\n                    \"imageKey\": 0,\n                    \"name\": \"Helmet\",\n                    \"id\": \"DA126181-398F-44BF-AF47-71A0413AF750\"\n                },\n                \"categoryId\": \"DA126181-398F-44BF-AF47-71A0413AF750\",\n                \"name\": \"Petzl Boreo Caving kaciga\",\n                \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\"\n            }\n        ],\n        \"name\": \"Helmet\"\n    }\n]"
 						}
 					]
 				},
@@ -354,11 +304,11 @@
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Updated category\",\n    \"imageKey\": \"icon1\"\n}",
+							"raw": "{\n\t\"name\": \"Default\",\n    \"imageKey\": 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,14 +316,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+							"raw": "{{base_api_url}}/armory/categories/12151B7B-4C40-49F1-B9DE-CE74D406D246",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"categories",
-								"92B79E61-449F-46F3-85F1-5837ED445B74"
+								"12151B7B-4C40-49F1-B9DE-CE74D406D246"
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
@@ -382,11 +332,11 @@
 						{
 							"name": "Update Category",
 							"originalRequest": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"Updated category\"\n}",
+									"raw": "{\n\t\"name\": \"Updated category\",\n    \"imageKey\": 4\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -394,14 +344,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_api_url}}/armory/categories/92B79E61-449F-46F3-85F1-5837ED445B74",
+									"raw": "{{base_api_url}}/armory/categories/12151B7B-4C40-49F1-B9DE-CE74D406D246",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"categories",
-										"92B79E61-449F-46F3-85F1-5837ED445B74"
+										"12151B7B-4C40-49F1-B9DE-CE74D406D246"
 									]
 								}
 							},
@@ -415,11 +365,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "71"
+									"value": "84"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=BYUf9HzAk3Z4AO2/HIqJUr2N46WqfJRXrQ/qu+5cIq8=; Expires=Thu, 15 Aug 2024 21:04:00 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:09:48 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -427,11 +377,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 08 Aug 2024 21:04:00 GMT"
+									"value": "Tue, 04 Feb 2025 11:09:48 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"92B79E61-449F-46F3-85F1-5837ED445B74\",\n    \"name\": \"Updated category\"\n}"
+							"body": "{\n    \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n    \"name\": \"Updated category\",\n    \"imageKey\": 4\n}"
 						}
 					]
 				},
@@ -1121,10 +1071,9 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "image",
-									"type": "file",
-									"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG",
-									"disabled": true
+									"key": "imageKey",
+									"value": "4",
+									"type": "text"
 								},
 								{
 									"key": "phoneNumber",
@@ -1165,9 +1114,9 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "image",
-											"type": "file",
-											"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG"
+											"key": "imageKey",
+											"value": "4",
+											"type": "text"
 										},
 										{
 											"key": "phoneNumber",
@@ -1180,6 +1129,11 @@
 											"value": "Ime korisnika 2",
 											"type": "text",
 											"disabled": true
+										},
+										{
+											"key": "isAdmin",
+											"value": "true",
+											"type": "text"
 										}
 									]
 								},
@@ -1203,11 +1157,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "232"
+									"value": "147"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=IAR/QR/sU8Tkmxo9RALinS5KECIf6kDEFaeZzNQ+ImU=; Expires=Mon, 09 Dec 2024 21:10:30 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:02:48 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1215,11 +1169,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Mon, 02 Dec 2024 21:10:30 GMT"
+									"value": "Tue, 04 Feb 2025 11:02:48 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"email\": \"root@localhost.localhost\",\n    \"profileImageUrlString\": \"http://localhost:8080/img/68DADA64-1EF3-42E6-927D-729EF53544A7.JPG\",\n    \"firstName\": \"Admin\",\n    \"isAdmin\": false,\n    \"id\": \"96DF0557-C34D-49DD-9DB0-E9D89F22840D\",\n    \"lastName\": \"Admin\"\n}"
+							"body": "{\n    \"firstName\": \"Admin\",\n    \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n    \"isAdmin\": true,\n    \"email\": \"root@localhost.localhost\",\n    \"lastName\": \"Admin\",\n    \"imageKey\": 4\n}"
 						}
 					]
 				}
@@ -1265,23 +1219,22 @@
 								},
 								{
 									"key": "aboutInfo",
-									"value": "Testing image upload",
+									"value": "Something about this armory item.....",
 									"type": "text"
 								},
 								{
-									"key": "image",
-									"type": "file",
-									"src": "/Users/priv/Downloads/1282271.jpg"
+									"key": "imageKey",
+									"value": "3",
+									"type": "text"
 								},
 								{
 									"key": "inStock",
 									"value": "12",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "categoryId",
-									"value": "DBCE1DA8-74C4-457B-9DF2-FEDEFC724522",
+									"value": "12151B7B-4C40-49F1-B9DE-CE74D406D246",
 									"type": "text"
 								}
 							]
@@ -1304,13 +1257,34 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Petzl Kruskasti karabiner asdf\",\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"aboutInfo\": \"Karabiner uže bla bla bla\",\n    \"inStock\": 10,\n    \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "a",
+											"type": "text"
+										},
+										{
+											"key": "aboutInfo",
+											"value": "Something about this armory item.....",
+											"type": "text"
+										},
+										{
+											"key": "imageKey",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "inStock",
+											"value": "12",
+											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "12151B7B-4C40-49F1-B9DE-CE74D406D246",
+											"type": "text"
 										}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{base_api_url}}/armory/items",
@@ -1333,11 +1307,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "365"
+									"value": "273"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 08:54:39 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:04:18 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1345,11 +1319,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 08:54:39 GMT"
+									"value": "Tue, 04 Feb 2025 11:04:18 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"4F07CE4D-A604-4210-BA89-077FE40DC5BD\",\n    \"aboutInfo\": \"Karabiner uže bla bla bla\",\n    \"inStock\": 0,\n    \"category\": {\n        \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"name\": \"Carabiner\"\n    },\n    \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n    \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n    \"name\": \"Petzl Kruskasti karabiner asdf\"\n}"
+							"body": "{\n    \"inStock\": 12,\n    \"category\": {\n        \"name\": \"Default\",\n        \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n        \"imageKey\": 0\n    },\n    \"name\": \"a\",\n    \"imageKey\": 3,\n    \"id\": \"230948CC-1EF4-4B57-B639-288DDC3B78F2\",\n    \"aboutInfo\": \"Something about this armory item.....\",\n    \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\"\n}"
 						}
 					]
 				},
@@ -1369,14 +1343,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/C69EDD08-BCBE-42C0-BD5D-617B008AEA39",
+							"raw": "{{base_api_url}}/armory/items/ABB6096A-C046-4A90-9DB8-F5E6BC61445D",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"C69EDD08-BCBE-42C0-BD5D-617B008AEA39"
+								"ABB6096A-C046-4A90-9DB8-F5E6BC61445D"
 							]
 						}
 					},
@@ -1387,14 +1361,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_api_url}}/armory/items/606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3",
+									"raw": "{{base_api_url}}/armory/items/ABB6096A-C046-4A90-9DB8-F5E6BC61445D",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"items",
-										"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3"
+										"ABB6096A-C046-4A90-9DB8-F5E6BC61445D"
 									]
 								}
 							},
@@ -1408,11 +1382,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "650"
+									"value": "651"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Fri, 01 Nov 2024 08:31:36 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:15:14 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1420,11 +1394,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Fri, 25 Oct 2024 08:31:36 GMT"
+									"value": "Tue, 04 Feb 2025 11:15:14 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"name\": \"William karabiner\",\n    \"inStock\": 2,\n    \"imageKey\": \"william.jpeg\",\n    \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n    \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n    \"category\": {\n        \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"name\": \"Carabiner\"\n    }\n}"
+							"body": "{\n    \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n    \"inStock\": 10,\n    \"category\": {\n        \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n        \"name\": \"Carabiner\",\n        \"imageKey\": 0\n    },\n    \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n    \"imageKey\": 0,\n    \"name\": \"William karabiner\",\n    \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n}"
 						}
 					]
 				},
@@ -1481,11 +1455,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "3661"
+									"value": "3204"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 08:56:19 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:14:30 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1493,11 +1467,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 08:56:19 GMT"
+									"value": "Tue, 04 Feb 2025 11:14:30 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n        \"inStock\": 1,\n        \"name\": \"OK karabiner\",\n        \"category\": {\n            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n            \"name\": \"Carabiner\"\n        },\n        \"imageKey\": \"carabiner-ok.jpeg\",\n        \"id\": \"1C309D14-C925-4177-A94D-56E0127475A1\"\n    },\n    {\n        \"category\": {\n            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n            \"name\": \"Carabiner\"\n        },\n        \"id\": \"5BB3DA91-692D-44BC-9167-601A0F785514\",\n        \"name\": \"GRIGRI\",\n        \"imageKey\": \"grigri.jpeg\",\n        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"inStock\": 3,\n        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\"\n    },\n    {\n        \"name\": \"Armory item with default category\",\n        \"id\": \"73A5009A-3903-439F-92AE-903E401AE7EC\",\n        \"inStock\": 5,\n        \"categoryId\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\",\n        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n        \"category\": {\n            \"id\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\",\n            \"name\": \"Default\"\n        },\n        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\"\n    },\n    {\n        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n        \"category\": {\n            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n            \"name\": \"Carabiner\"\n        },\n        \"name\": \"William karabiner\",\n        \"inStock\": 3,\n        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n        \"imageKey\": \"william.jpeg\"\n    },\n    {\n        \"categoryId\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\",\n        \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n        \"name\": \"Petzl Boreo Caving kaciga\",\n        \"category\": {\n            \"id\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\",\n            \"name\": \"Helmet\"\n        },\n        \"inStock\": 2,\n        \"id\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n        \"imageKey\": \"petzl-boreo-caving.jpeg\"\n    },\n    {\n        \"inStock\": 0,\n        \"name\": \"Petzl Kruskasti karabiner\",\n        \"category\": {\n            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n            \"name\": \"Carabiner\"\n        },\n        \"aboutInfo\": \"Karabiner uže bla bla bla\",\n        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"id\": \"54ED39B1-B912-4DB0-9B57-51AFB2AEB17A\",\n        \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\"\n    },\n    {\n        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n        \"name\": \"Petzl Kruskasti karabiner asdf\",\n        \"inStock\": 0,\n        \"id\": \"4F07CE4D-A604-4210-BA89-077FE40DC5BD\",\n        \"aboutInfo\": \"Karabiner uže bla bla bla\",\n        \"imageKey\": \"https://www.petzl.com/sfc/servlet.shepherd/version/download/0681r000006zcO1AAI\",\n        \"category\": {\n            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n            \"name\": \"Carabiner\"\n        }\n    }\n]"
+							"body": "[\n    {\n        \"inStock\": 10,\n        \"category\": {\n            \"imageKey\": 0,\n            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n            \"name\": \"Carabiner\"\n        },\n        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n        \"name\": \"William karabiner\",\n        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n        \"imageKey\": 0,\n        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n    },\n    {\n        \"imageKey\": 0,\n        \"name\": \"OK karabiner\",\n        \"category\": {\n            \"imageKey\": 0,\n            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n            \"name\": \"Carabiner\"\n        },\n        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n        \"inStock\": 10,\n        \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n    },\n    {\n        \"name\": \"GRIGRI\",\n        \"imageKey\": 0,\n        \"category\": {\n            \"imageKey\": 0,\n            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n            \"name\": \"Carabiner\"\n        },\n        \"inStock\": 10,\n        \"id\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n    },\n    {\n        \"id\": \"73E4D55E-B49B-4DAF-A332-75A42C6C5D4D\",\n        \"inStock\": 10,\n        \"categoryId\": \"DA126181-398F-44BF-AF47-71A0413AF750\",\n        \"category\": {\n            \"name\": \"Helmet\",\n            \"id\": \"DA126181-398F-44BF-AF47-71A0413AF750\",\n            \"imageKey\": 0\n        },\n        \"imageKey\": 0,\n        \"name\": \"Petzl Boreo Caving kaciga\",\n        \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\"\n    },\n    {\n        \"id\": \"4DAFE3E8-24DD-4BF1-AA30-C27D8BA55664\",\n        \"name\": \"Armory item with default category\",\n        \"category\": {\n            \"name\": \"Updated category\",\n            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n            \"imageKey\": 4\n        },\n        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n        \"imageKey\": 0,\n        \"inStock\": 5,\n        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\"\n    },\n    {\n        \"imageKey\": 3,\n        \"name\": \"a\",\n        \"aboutInfo\": \"Something about this armory item.....\",\n        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n        \"category\": {\n            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n            \"imageKey\": 4,\n            \"name\": \"Updated category\"\n        },\n        \"id\": \"230948CC-1EF4-4B57-B639-288DDC3B78F2\",\n        \"inStock\": 12\n    }\n]"
 						}
 					]
 				},
@@ -1525,9 +1499,9 @@
 									"type": "text"
 								},
 								{
-									"key": "image",
-									"type": "file",
-									"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG"
+									"key": "imageKey",
+									"value": "7",
+									"type": "text"
 								},
 								{
 									"key": "aboutInfo",
@@ -1541,20 +1515,20 @@
 								},
 								{
 									"key": "categoryId",
-									"value": "EF76FA6D-1E48-4E45-A472-1364ACD3344C",
+									"value": "12151B7B-4C40-49F1-B9DE-CE74D406D246",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/6028C84D-852A-443E-B404-069C3EF20A49",
+							"raw": "{{base_api_url}}/armory/items/ABB6096A-C046-4A90-9DB8-F5E6BC61445D",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"6028C84D-852A-443E-B404-069C3EF20A49"
+								"ABB6096A-C046-4A90-9DB8-F5E6BC61445D"
 							]
 						}
 					},
@@ -1573,9 +1547,9 @@
 											"type": "text"
 										},
 										{
-											"key": "image",
-											"type": "file",
-											"src": "/Users/priv/Downloads/c03e0e12-aa91-4013-a8fc-cc79ee604d7c.JPG"
+											"key": "imageKey",
+											"value": "7",
+											"type": "text"
 										},
 										{
 											"key": "aboutInfo",
@@ -1586,18 +1560,23 @@
 											"key": "inStock",
 											"value": "40",
 											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "12151B7B-4C40-49F1-B9DE-CE74D406D246",
+											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{base_api_url}}/armory/items/8BDD0BD2-DCA6-403C-AA64-6E224E773740",
+									"raw": "{{base_api_url}}/armory/items/ABB6096A-C046-4A90-9DB8-F5E6BC61445D",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"items",
-										"8BDD0BD2-DCA6-403C-AA64-6E224E773740"
+										"ABB6096A-C046-4A90-9DB8-F5E6BC61445D"
 									]
 								}
 							},
@@ -1611,11 +1590,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "328"
+									"value": "270"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=IAR/QR/sU8Tkmxo9RALinS5KECIf6kDEFaeZzNQ+ImU=; Expires=Mon, 09 Dec 2024 21:08:02 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:23:53 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1623,11 +1602,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Mon, 02 Dec 2024 21:08:02 GMT"
+									"value": "Tue, 04 Feb 2025 11:23:53 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"8BDD0BD2-DCA6-403C-AA64-6E224E773740\",\n    \"category\": {\n        \"id\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n        \"name\": \"Default\"\n    },\n    \"aboutInfo\": \"Updateani info\",\n    \"inStock\": 40,\n    \"imageKey\": \"http://localhost:8080/img/736A4760-A752-4A82-9F62-3315BAF4AAFB.JPG\",\n    \"categoryId\": \"D7963051-247E-46B8-BF53-E9122280D988\",\n    \"name\": \"Updateani armory item\"\n}"
+							"body": "{\n    \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n    \"imageKey\": 7,\n    \"aboutInfo\": \"Updateani info\",\n    \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n    \"inStock\": 40,\n    \"category\": {\n        \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n        \"imageKey\": 4,\n        \"name\": \"Default\"\n    },\n    \"name\": \"Updateani armory item\"\n}"
 						}
 					]
 				},
@@ -1748,7 +1727,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"C82D34D4-0714-4B6F-83A0-0E70A4B48B6A\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n            \"quantity\": 2\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n            \"quantity\": 2\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1774,7 +1753,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n            \"quantity\": 2\n        }\n    ]\n}",
+									"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n            \"quantity\": 2\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1802,11 +1781,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "1790"
+									"value": "1481"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 07:51:06 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:27:36 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1814,11 +1793,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 07:51:06 GMT"
+									"value": "Tue, 04 Feb 2025 11:27:36 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"03CAE3E8-B62C-4313-9535-980B21B58E35\",\n    \"armoryItems\": [\n        {\n            \"armoryItem\": {\n                \"imageKey\": \"william.jpeg\",\n                \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                \"inStock\": 3,\n                \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                \"category\": {\n                    \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                    \"name\": \"Carabiner\"\n                },\n                \"name\": \"William karabiner\"\n            },\n            \"quantity\": 1\n        },\n        {\n            \"armoryItem\": {\n                \"category\": {\n                    \"id\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\",\n                    \"name\": \"Helmet\"\n                },\n                \"inStock\": 2,\n                \"id\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n                \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n                \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                \"name\": \"Petzl Boreo Caving kaciga\",\n                \"categoryId\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\"\n            },\n            \"quantity\": 2\n        }\n    ],\n    \"updatedAt\": \"2024-10-24T07:51:06Z\",\n    \"createdAt\": \"2024-10-24T07:51:06Z\",\n    \"user\": {\n        \"firstName\": \"Admin\",\n        \"isAdmin\": false,\n        \"lastName\": \"Admin\",\n        \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n        \"email\": \"root@localhost.localhost\"\n    }\n}"
+							"body": "{\n    \"armoryItems\": [\n        {\n            \"armoryItem\": {\n                \"imageKey\": 0,\n                \"name\": \"OK karabiner\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"inStock\": 9,\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                    \"imageKey\": 0\n                },\n                \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n            },\n            \"quantity\": 1\n        },\n        {\n            \"quantity\": 2,\n            \"armoryItem\": {\n                \"name\": \"GRIGRI\",\n                \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                \"imageKey\": 0,\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                    \"imageKey\": 0\n                },\n                \"inStock\": 8,\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                \"id\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\"\n            }\n        }\n    ],\n    \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\",\n    \"user\": {\n        \"lastName\": \"Admin\",\n        \"email\": \"root@localhost.localhost\",\n        \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n        \"isAdmin\": true,\n        \"firstName\": \"Admin\",\n        \"imageKey\": 4\n    },\n    \"createdAt\": \"2025-02-04T11:27:36Z\",\n    \"updatedAt\": \"2025-02-04T11:27:36Z\"\n}"
 						}
 					]
 				},
@@ -1838,14 +1817,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2",
+							"raw": "{{base_api_url}}/armory/leases/89310271-2B67-46EA-B600-75E57088FC4F",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2"
+								"89310271-2B67-46EA-B600-75E57088FC4F"
 							]
 						}
 					},
@@ -1856,14 +1835,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_api_url}}/armory/leases/BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2",
+									"raw": "{{base_api_url}}/armory/leases/89310271-2B67-46EA-B600-75E57088FC4F",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"leases",
-										"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2"
+										"89310271-2B67-46EA-B600-75E57088FC4F"
 									]
 								}
 							},
@@ -1877,11 +1856,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "953"
+									"value": "1481"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 07:51:59 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:28:27 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1889,11 +1868,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 07:51:59 GMT"
+									"value": "Tue, 04 Feb 2025 11:28:27 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"armoryItems\": [\n        {\n            \"quantity\": 1,\n            \"armoryItem\": {\n                \"imageKey\": \"william.jpeg\",\n                \"inStock\": 3,\n                \"name\": \"William karabiner\",\n                \"category\": {\n                    \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                    \"name\": \"Carabiner\"\n                },\n                \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n            }\n        }\n    ],\n    \"id\": \"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2\",\n    \"updatedAt\": \"2024-10-23T13:22:40Z\",\n    \"user\": {\n        \"firstName\": \"Admin\",\n        \"lastName\": \"Admin\",\n        \"email\": \"root@localhost.localhost\",\n        \"isAdmin\": false,\n        \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\"\n    },\n    \"createdAt\": \"2024-10-23T13:22:40Z\"\n}"
+							"body": "{\n    \"createdAt\": \"2025-02-04T11:27:36Z\",\n    \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\",\n    \"user\": {\n        \"isAdmin\": true,\n        \"lastName\": \"Admin\",\n        \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n        \"imageKey\": 4,\n        \"firstName\": \"Admin\",\n        \"email\": \"root@localhost.localhost\"\n    },\n    \"armoryItems\": [\n        {\n            \"armoryItem\": {\n                \"name\": \"OK karabiner\",\n                \"imageKey\": 0,\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                \"inStock\": 9,\n                \"category\": {\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                    \"imageKey\": 0,\n                    \"name\": \"Carabiner\"\n                },\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\"\n            },\n            \"quantity\": 1\n        },\n        {\n            \"quantity\": 2,\n            \"armoryItem\": {\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                    \"imageKey\": 0\n                },\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                \"id\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n                \"imageKey\": 0,\n                \"name\": \"GRIGRI\",\n                \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                \"inStock\": 8\n            }\n        }\n    ],\n    \"updatedAt\": \"2025-02-04T11:27:36Z\"\n}"
 						}
 					]
 				},
@@ -1952,11 +1931,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "7280"
+									"value": "3629"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 07:53:18 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:28:44 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -1964,11 +1943,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 07:53:18 GMT"
+									"value": "Tue, 04 Feb 2025 11:28:44 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"leases\": [\n        {\n            \"id\": \"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2\",\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"updatedAt\": \"2024-10-23T13:22:40Z\",\n            \"armoryItems\": [\n                {\n                    \"quantity\": 1,\n                    \"armoryItem\": {\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"name\": \"William karabiner\",\n                        \"inStock\": 3,\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"category\": {\n                            \"name\": \"Carabiner\",\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\"\n                        }\n                    }\n                }\n            ],\n            \"user\": {\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            }\n        },\n        {\n            \"user\": {\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\"\n            },\n            \"armoryItems\": [\n                {\n                    \"quantity\": 2,\n                    \"armoryItem\": {\n                        \"name\": \"Armory item with default category\",\n                        \"category\": {\n                            \"id\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\",\n                            \"name\": \"Default\"\n                        },\n                        \"id\": \"73A5009A-3903-439F-92AE-903E401AE7EC\",\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"inStock\": 5,\n                        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                        \"categoryId\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\"\n                    }\n                }\n            ],\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"updatedAt\": \"2024-10-23T13:22:40Z\",\n            \"id\": \"FB7133F3-A4E1-4CA8-9897-A18519460182\"\n        },\n        {\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"id\": \"2F8FD10E-9296-4F94-97CD-353BE22CFC68\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": \"william.jpeg\",\n                        \"inStock\": 3,\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"name\": \"William karabiner\",\n                        \"category\": {\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\"\n                    },\n                    \"quantity\": 3\n                }\n            ],\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"isAdmin\": false\n            },\n            \"updatedAt\": \"2024-10-23T13:22:40Z\"\n        },\n        {\n            \"armoryItems\": [],\n            \"id\": \"3B3C26E6-E46E-4337-B337-7C16D08EA18F\",\n            \"createdAt\": \"2024-10-23T21:06:28Z\",\n            \"updatedAt\": \"2024-10-23T21:06:28Z\",\n            \"user\": {\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            }\n        },\n        {\n            \"createdAt\": \"2024-10-23T21:07:32Z\",\n            \"armoryItems\": [],\n            \"updatedAt\": \"2024-10-23T21:07:32Z\",\n            \"user\": {\n                \"isAdmin\": false,\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"id\": \"AE9819FE-A79A-43C3-83A6-F8285E53C056\"\n        },\n        {\n            \"createdAt\": \"2024-10-23T21:10:50Z\",\n            \"id\": \"7BB90016-A808-4E6F-9AA3-F6BA24D3A5F5\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"firstName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            },\n            \"updatedAt\": \"2024-10-23T21:10:50Z\",\n            \"armoryItems\": []\n        },\n        {\n            \"createdAt\": \"2024-10-23T21:11:24Z\",\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"lastName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"isAdmin\": false,\n                \"firstName\": \"Admin\"\n            },\n            \"armoryItems\": [],\n            \"id\": \"9CC16668-B7C2-4EC3-8949-D6DC244464B1\",\n            \"updatedAt\": \"2024-10-23T21:11:24Z\"\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"quantity\": 1,\n                    \"armoryItem\": {\n                        \"category\": {\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"inStock\": 3,\n                        \"name\": \"William karabiner\"\n                    }\n                },\n                {\n                    \"armoryItem\": {\n                        \"category\": {\n                            \"name\": \"Helmet\",\n                            \"id\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\"\n                        },\n                        \"name\": \"Petzl Boreo Caving kaciga\",\n                        \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n                        \"id\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n                        \"categoryId\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\",\n                        \"inStock\": 2,\n                        \"imageKey\": \"petzl-boreo-caving.jpeg\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"user\": {\n                \"isAdmin\": false,\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\",\n                \"lastName\": \"Admin\"\n            },\n            \"createdAt\": \"2024-10-23T21:12:35Z\",\n            \"updatedAt\": \"2024-10-23T21:12:35Z\",\n            \"id\": \"EFF5085B-889B-4090-99E6-48AA3736899B\"\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"inStock\": 3,\n                        \"category\": {\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"name\": \"William karabiner\"\n                    },\n                    \"quantity\": 1\n                },\n                {\n                    \"quantity\": 2,\n                    \"armoryItem\": {\n                        \"aboutInfo\": \"BOREO CAVING je kaciga posebno dizajnirana za speleologiju. Opremljena montažnim pločama naprijed i na stražnjoj strani kacige za postavljanje DUO RL, DUO S ili DUO Z2 svjetiljke. Dizajn pruža veću pokrivenost i stražnji dio je niži za poboljšanu zaštitu od padajućih kamenja, kao i od bočnih, frontalnih i stražnjih udaraca. Tvrdi vanjski oklop otporan je na udarce i ogrebotine za optimalnu trajnost. Stabilna prilikom nošenja, s fleksibilnom trakom za glavu koja se prilagođava obliku glave. Certifikati: CE EN 12492, UIAA\",\n                        \"inStock\": 2,\n                        \"id\": \"7F865D5C-8E29-492E-9DC4-0DEE3A9B5EBB\",\n                        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                        \"name\": \"Petzl Boreo Caving kaciga\",\n                        \"category\": {\n                            \"id\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\",\n                            \"name\": \"Helmet\"\n                        },\n                        \"categoryId\": \"318B0B90-B377-4074-9E90-EFDBDACE68C0\"\n                    }\n                }\n            ],\n            \"user\": {\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            },\n            \"createdAt\": \"2024-10-24T07:51:06Z\",\n            \"updatedAt\": \"2024-10-24T07:51:06Z\",\n            \"id\": \"03CAE3E8-B62C-4313-9535-980B21B58E35\"\n        }\n    ],\n    \"metadata\": {\n        \"page\": 1,\n        \"per\": 10,\n        \"total\": 9\n    }\n}"
+							"body": "{\n    \"leases\": [\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 7,\n                        \"name\": \"Updateani armory item\",\n                        \"aboutInfo\": \"Updateani info\",\n                        \"inStock\": 40,\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4\n                        },\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\"\n                    },\n                    \"quantity\": 1\n                }\n            ],\n            \"id\": \"1A8CFC2D-AD81-4BC8-BD3A-2BAD8C01D3D8\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\",\n                \"imageKey\": 4\n            },\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"updatedAt\": \"2025-02-04T10:59:51Z\"\n        },\n        {\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"name\": \"Armory item with default category\",\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"imageKey\": 0,\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4\n                        },\n                        \"inStock\": 5,\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"id\": \"4DAFE3E8-24DD-4BF1-AA30-C27D8BA55664\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"imageKey\": 4,\n                \"firstName\": \"Admin\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n            },\n            \"id\": \"F80DD2AD-13AE-40A6-A6EB-42BC32DCA268\"\n        },\n        {\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 7,\n                        \"aboutInfo\": \"Updateani info\",\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"inStock\": 40,\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"name\": \"Updateani armory item\",\n                        \"category\": {\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"name\": \"Default\",\n                            \"imageKey\": 4\n                        }\n                    },\n                    \"quantity\": 3\n                }\n            ],\n            \"id\": \"7439A5A8-7107-457A-B844-715CC828FF5C\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"imageKey\": 4\n            },\n            \"updatedAt\": \"2025-02-04T10:59:51Z\"\n        },\n        {\n            \"id\": \"E43FD653-5B61-4454-9D8C-CC5A90B7CE30\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true,\n                \"email\": \"root@localhost.localhost\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"imageKey\": 4,\n                \"firstName\": \"Admin\"\n            },\n            \"createdAt\": \"2025-02-04T11:24:29Z\",\n            \"armoryItems\": [],\n            \"updatedAt\": \"2025-02-04T11:24:29Z\"\n        },\n        {\n            \"createdAt\": \"2025-02-04T11:27:36Z\",\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"imageKey\": 4,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\"\n            },\n            \"armoryItems\": [\n                {\n                    \"quantity\": 1,\n                    \"armoryItem\": {\n                        \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n                        \"imageKey\": 0,\n                        \"category\": {\n                            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                            \"imageKey\": 0,\n                            \"name\": \"Carabiner\"\n                        },\n                        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                        \"inStock\": 9,\n                        \"name\": \"OK karabiner\"\n                    }\n                },\n                {\n                    \"armoryItem\": {\n                        \"inStock\": 8,\n                        \"imageKey\": 0,\n                        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                        \"id\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n                        \"name\": \"GRIGRI\",\n                        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                        \"category\": {\n                            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                            \"imageKey\": 0,\n                            \"name\": \"Carabiner\"\n                        }\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"updatedAt\": \"2025-02-04T11:27:36Z\",\n            \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\"\n        }\n    ],\n    \"metadata\": {\n        \"total\": 5,\n        \"page\": 1,\n        \"per\": 10\n    }\n}"
 						}
 					]
 				},
@@ -1989,7 +1968,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\",\n            \"quantity\": 1\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n            \"quantity\": 8\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1997,14 +1976,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/2B3D9890-71FB-4CC5-B28A-5EBF68D5D905",
+							"raw": "{{base_api_url}}/armory/leases/89310271-2B67-46EA-B600-75E57088FC4F",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"2B3D9890-71FB-4CC5-B28A-5EBF68D5D905"
+								"89310271-2B67-46EA-B600-75E57088FC4F"
 							]
 						}
 					},
@@ -2012,11 +1991,11 @@
 						{
 							"name": "Update Lease",
 							"originalRequest": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\",\n            \"quantity\": 1\n        }\n    ]\n}",
+									"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n            \"quantity\": 8\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2024,14 +2003,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_api_url}}/armory/leases/2B3D9890-71FB-4CC5-B28A-5EBF68D5D905",
+									"raw": "{{base_api_url}}/armory/leases/89310271-2B67-46EA-B600-75E57088FC4F",
 									"host": [
 										"{{base_api_url}}"
 									],
 									"path": [
 										"armory",
 										"leases",
-										"2B3D9890-71FB-4CC5-B28A-5EBF68D5D905"
+										"89310271-2B67-46EA-B600-75E57088FC4F"
 									]
 								}
 							},
@@ -2045,11 +2024,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "804"
+									"value": "811"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=vcSiKSKx2Kw9SkJOhCRwIDT1ZekDwciKUwAyjR8qftg=; Expires=Wed, 04 Dec 2024 21:01:54 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:30:37 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -2057,11 +2036,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Wed, 27 Nov 2024 21:01:54 GMT"
+									"value": "Tue, 04 Feb 2025 11:30:37 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"createdAt\": \"2024-11-27T00:02:54Z\",\n    \"armoryItems\": [\n        {\n            \"quantity\": 1,\n            \"armoryItem\": {\n                \"name\": \"OK karabiner\",\n                \"imageKey\": \"carabiner-ok.jpeg\",\n                \"inStock\": 9,\n                \"categoryId\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\",\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"id\": \"40FBF2DC-5B6E-4A37-8A5D-81A9297B5CF3\"\n                },\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"id\": \"A47F4901-E982-4F88-9E20-EC4DC2D24BEC\"\n            }\n        }\n    ],\n    \"id\": \"2B3D9890-71FB-4CC5-B28A-5EBF68D5D905\",\n    \"user\": {\n        \"isAdmin\": false,\n        \"lastName\": \"Admin\",\n        \"firstName\": \"Admin\",\n        \"id\": \"96DF0557-C34D-49DD-9DB0-E9D89F22840D\",\n        \"email\": \"root@localhost.localhost\"\n    },\n    \"updatedAt\": \"2024-11-27T00:02:54Z\"\n}"
+							"body": "{\n    \"createdAt\": \"2025-02-04T11:27:36Z\",\n    \"user\": {\n        \"email\": \"root@localhost.localhost\",\n        \"firstName\": \"Admin\",\n        \"lastName\": \"Admin\",\n        \"isAdmin\": true,\n        \"imageKey\": 4,\n        \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n    },\n    \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\",\n    \"updatedAt\": \"2025-02-04T11:27:36Z\",\n    \"armoryItems\": [\n        {\n            \"armoryItem\": {\n                \"name\": \"OK karabiner\",\n                \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                \"imageKey\": 0,\n                \"category\": {\n                    \"name\": \"Carabiner\",\n                    \"imageKey\": 0,\n                    \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\"\n                },\n                \"inStock\": 2,\n                \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\"\n            },\n            \"quantity\": 8\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2207,11 +2186,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "3145"
+									"value": "2958"
 								},
 								{
 									"key": "set-cookie",
-									"value": "vapor-session=HAq1hRvy5RWsQDO1LRgrcdRSlzDsNWbvLrPOBS4/k1I=; Expires=Thu, 31 Oct 2024 07:56:26 GMT; Path=/; SameSite=Lax"
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:31:28 GMT; Path=/; SameSite=Lax"
 								},
 								{
 									"key": "connection",
@@ -2219,11 +2198,11 @@
 								},
 								{
 									"key": "date",
-									"value": "Thu, 24 Oct 2024 07:56:26 GMT"
+									"value": "Tue, 04 Feb 2025 11:31:28 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"leases\": [\n        {\n            \"id\": \"BFACCC49-4D7A-4DA2-B206-2FDD7DD235F2\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"inStock\": 3,\n                        \"category\": {\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"name\": \"William karabiner\"\n                    },\n                    \"quantity\": 1\n                }\n            ],\n            \"updatedAt\": \"2024-10-23T13:22:40Z\",\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false\n            }\n        },\n        {\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"isAdmin\": false\n            },\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\"\n                        },\n                        \"inStock\": 5,\n                        \"id\": \"73A5009A-3903-439F-92AE-903E401AE7EC\",\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"imageKey\": \"petzl-boreo-caving.jpeg\",\n                        \"name\": \"Armory item with default category\",\n                        \"categoryId\": \"4850592C-39EF-4972-B7A0-AA9842ED85E8\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"id\": \"FB7133F3-A4E1-4CA8-9897-A18519460182\",\n            \"updatedAt\": \"2024-10-23T13:22:40Z\"\n        },\n        {\n            \"createdAt\": \"2024-10-23T13:22:40Z\",\n            \"updatedAt\": \"2024-10-23T13:22:40Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"isAdmin\": false,\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"id\": \"2F8FD10E-9296-4F94-97CD-353BE22CFC68\",\n            \"armoryItems\": [\n                {\n                    \"quantity\": 3,\n                    \"armoryItem\": {\n                        \"id\": \"606C1096-CFEB-40AF-B4BD-B34BC2E4DEF3\",\n                        \"name\": \"William karabiner\",\n                        \"category\": {\n                            \"name\": \"Carabiner\",\n                            \"id\": \"027FC174-4441-4202-AC54-E4508C076728\"\n                        },\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"categoryId\": \"027FC174-4441-4202-AC54-E4508C076728\",\n                        \"imageKey\": \"william.jpeg\",\n                        \"inStock\": 3\n                    }\n                }\n            ]\n        },\n        {\n            \"updatedAt\": \"2024-10-23T21:06:28Z\",\n            \"armoryItems\": [],\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\"\n            },\n            \"createdAt\": \"2024-10-23T21:06:28Z\",\n            \"id\": \"3B3C26E6-E46E-4337-B337-7C16D08EA18F\"\n        },\n        {\n            \"updatedAt\": \"2024-10-23T21:07:32Z\",\n            \"id\": \"AE9819FE-A79A-43C3-83A6-F8285E53C056\",\n            \"armoryItems\": [],\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": false,\n                \"firstName\": \"Admin\",\n                \"id\": \"221B0358-387E-49E6-8B3F-31DE4501C33C\"\n            },\n            \"createdAt\": \"2024-10-23T21:07:32Z\"\n        }\n    ],\n    \"metadata\": {\n        \"page\": 1,\n        \"total\": 9,\n        \"per\": 5\n    }\n}"
+							"body": "{\n    \"leases\": [\n        {\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"id\": \"1A8CFC2D-AD81-4BC8-BD3A-2BAD8C01D3D8\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 7,\n                        \"name\": \"Updateani armory item\",\n                        \"aboutInfo\": \"Updateani info\",\n                        \"category\": {\n                            \"imageKey\": 4,\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"name\": \"Default\"\n                        },\n                        \"inStock\": 40,\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\"\n                    },\n                    \"quantity\": 1\n                }\n            ],\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"imageKey\": 4,\n                \"email\": \"root@localhost.localhost\"\n            }\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"name\": \"Armory item with default category\",\n                        \"imageKey\": 0,\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"category\": {\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4,\n                            \"name\": \"Default\"\n                        },\n                        \"inStock\": 5,\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"id\": \"4DAFE3E8-24DD-4BF1-AA30-C27D8BA55664\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"id\": \"F80DD2AD-13AE-40A6-A6EB-42BC32DCA268\",\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"imageKey\": 4,\n                \"firstName\": \"Admin\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n            }\n        },\n        {\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\",\n                \"imageKey\": 4,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n            },\n            \"id\": \"7439A5A8-7107-457A-B844-715CC828FF5C\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"aboutInfo\": \"Updateani info\",\n                        \"name\": \"Updateani armory item\",\n                        \"imageKey\": 7,\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"category\": {\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4,\n                            \"name\": \"Default\"\n                        },\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"inStock\": 40\n                    },\n                    \"quantity\": 3\n                }\n            ],\n            \"createdAt\": \"2025-02-04T10:59:51Z\"\n        },\n        {\n            \"updatedAt\": \"2025-02-04T11:24:29Z\",\n            \"id\": \"E43FD653-5B61-4454-9D8C-CC5A90B7CE30\",\n            \"armoryItems\": [],\n            \"createdAt\": \"2025-02-04T11:24:29Z\",\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"imageKey\": 4,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true\n            }\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 0,\n                        \"inStock\": 2,\n                        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                        \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n                        \"name\": \"OK karabiner\",\n                        \"category\": {\n                            \"imageKey\": 0,\n                            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n                    },\n                    \"quantity\": 8\n                }\n            ],\n            \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\",\n            \"createdAt\": \"2025-02-04T11:27:36Z\",\n            \"updatedAt\": \"2025-02-04T11:27:36Z\",\n            \"user\": {\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"imageKey\": 4,\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\"\n            }\n        }\n    ],\n    \"metadata\": {\n        \"per\": 5,\n        \"total\": 5,\n        \"page\": 1\n    }\n}"
 						}
 					]
 				}

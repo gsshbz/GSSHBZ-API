@@ -12,7 +12,7 @@ public extension Armory.Item {
     struct List: Codable {
         let id: UUID
         let name: String
-        let imageKey: String
+        let imageKey: Int
         let aboutInfo: String
         let inStock: Int
         let category: Armory.Category.List
@@ -22,7 +22,7 @@ public extension Armory.Item {
     struct Detail: Codable {
         let id: UUID
         let name: String
-        let imageKey: String
+        let imageKey: Int
         let aboutInfo: String
         let inStock: Int
         let category: Armory.Category.List
@@ -31,7 +31,7 @@ public extension Armory.Item {
     
     struct Create: Codable {
         let name: String
-        let imageKey: String?
+        let imageKey: Int?
         let aboutInfo: String
         let inStock: Int?
         let categoryId: UUID?
@@ -39,7 +39,7 @@ public extension Armory.Item {
     
     struct Update: Codable {
         let name: String?
-        let imageKey: String?
+        let imageKey: Int?
         let aboutInfo: String?
         let inStock: Int?
         let categoryId: UUID?
@@ -47,7 +47,7 @@ public extension Armory.Item {
     
     struct Patch: Codable {
         let name: String?
-        let imageKey: String?
+        let imageKey: Int?
         let aboutInfo: String?
         let inStock: Int?
         let categoryId: UUID?

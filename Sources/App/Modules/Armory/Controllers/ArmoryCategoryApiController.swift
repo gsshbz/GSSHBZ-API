@@ -38,7 +38,7 @@ struct ArmoryCategoryApiController: ListController {
         baseRoutes.on(.POST, use: createApi)
         
         existingModelRoutes.on(.GET, use: detailApi)
-        existingModelRoutes.on(.PUT, use: updateApi)
+        existingModelRoutes.on(.POST, use: updateApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
     }
 }
@@ -56,7 +56,7 @@ extension ArmoryCategoryApiController {
         let categoryModel = ArmoryCategoryModel(name: input.name, imageKey: input.imageKey)
         try await categoryModel.save(on: req.db)
         
-        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey ?? "default")
+        let category = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey ?? 0)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryCreated, category)
         
@@ -128,10 +128,13 @@ extension ArmoryCategoryApiController {
         }
         
         categoryModel.name = updateObject.name
+        if let imageKey = updateObject.imageKey {
+            categoryModel.imageKey = imageKey
+        }
         
         try await categoryModel.update(on: req.db)
         
-        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey ?? "default")
+        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name, imageKey: categoryModel.imageKey)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryUpdated, detailObject)
         

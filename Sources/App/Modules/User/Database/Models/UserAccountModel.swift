@@ -37,7 +37,7 @@ final class UserAccountModel: DatabaseModelInterface {
     var address: String?
     
     @OptionalField(key: FieldKeys.v1.imageKey)
-    var imageKey: String?
+    var imageKey: Int?
     
     @Timestamp(key: FieldKeys.v1.createdAt, on: .create)
     var createdAt: Date?
@@ -53,7 +53,7 @@ final class UserAccountModel: DatabaseModelInterface {
     
     init() { }
     
-    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String, phoneNumber: String?, address: String?, imageKey: String?, isAdmin: Bool = false) {
+    init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String, phoneNumber: String?, address: String?, imageKey: Int?, isAdmin: Bool = false) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -129,6 +129,6 @@ extension UserAccountModel {
                                 password: hash,
                                 phoneNumber: registerData.phoneNumber,
                                 address: registerData.address,
-                                imageKey: registerData.imageKey ?? "0")
+                                imageKey: registerData.imageKey ?? 0)
     }
 }
