@@ -20,9 +20,6 @@ final class ArmoryCategoryModel: DatabaseModelInterface {
     @Field(key: FieldKeys.v1.name)
     var name: String
     
-    @Field(key: FieldKeys.v1.imageKey)
-    var imageKey: Int?
-    
     @Children(for: \.$category)
     var armoryItems: [ArmoryItemModel]
     
@@ -30,16 +27,14 @@ final class ArmoryCategoryModel: DatabaseModelInterface {
         
     }
     
-    public init(id: UUID? = nil, name: String, imageKey: Int? = 0) {
+    public init(id: UUID? = nil, name: String) {
         self.id = id
         self.name = name
-        self.imageKey = imageKey
     }
     
     struct FieldKeys {
         struct v1 {
             static var name: FieldKey { "name" }
-            static var imageKey: FieldKey { "image_key" }
         }
     }
 }

@@ -49,7 +49,7 @@ struct ArmoryItemsApiController: ListController {
                       imageKey: model.imageKey,
                       aboutInfo: model.aboutInfo,
                       inStock: model.inStock,
-                      category: .init(id: model.category.id!, name: model.category.name, imageKey: model.category.imageKey),
+                      category: .init(id: model.category.id!, name: model.category.name),
                       categoryId: try model.category.requireID())
         }
     }
@@ -98,14 +98,14 @@ struct ArmoryItemsApiController: ListController {
 //            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
 //        }
         
-        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? 0, aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!, inStock: input.inStock ?? 0)
+        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? "0", aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!, inStock: input.inStock ?? 0)
         
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
         
-        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
         
-        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: nil)
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemCreated, socketArmoryItem)
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, socketArmoryItem)
@@ -121,7 +121,7 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.armoryItemNotFound
         }
         
-        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
+        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
     }
     
     func updateApi(_ req: Request) async throws -> Armory.Item.Detail {
@@ -177,9 +177,9 @@ struct ArmoryItemsApiController: ListController {
         try await armoryModel.update(on: req.db)
         try await armoryModel.$category.load(on: req.db)
         
-        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
         
-        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name, imageKey: armoryModel.category.imageKey), categoryId: nil)
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, socketArmoryItem)
         
