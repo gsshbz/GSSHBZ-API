@@ -174,6 +174,19 @@ extension UserLeasesApiController {
                 
                 // Save the updated armory item
                 try await armoryItem.save(on: db)
+                try await armoryItem.$category.load(on: req.db)
+                
+                let updatedArmoryItem: Armory.Item.Detail = .init(
+                    id: try armoryItem.requireID(),
+                    name: armoryItem.name,
+                    imageKey: armoryItem.imageKey,
+                    aboutInfo: armoryItem.aboutInfo,
+                    inStock: armoryItem.inStock,
+                    category: .init(id: try armoryItem.category.requireID(),
+                                    name: armoryItem.category.name),
+                    categoryId: try armoryItem.category.requireID())
+                
+                try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, updatedArmoryItem)
             }
             
             // Delete the lease items
