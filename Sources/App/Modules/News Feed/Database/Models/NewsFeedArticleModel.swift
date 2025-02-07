@@ -35,11 +35,14 @@ final class NewsFeedArticleModel: DatabaseModelInterface {
     
     init() {}
     
-    init(id: UUID? = nil, userId: UUID, title: String, text: String) throws {
+    init(id: UUID? = nil, userId: UUID, title: String, text: String, createdAt: Date? = nil, updatedAt: Date? = nil, deletedAt: Date? = nil) throws {
         self.id = id
         self.$user.id = userId
         self.title = title
         self.text = text
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.deletedAt = deletedAt
     }
 }
 

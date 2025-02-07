@@ -46,7 +46,9 @@ class ArmoryWebSocketSystem {
     
     private func broadcast<T: Codable>(_ message: WebSocketMessage<T>) async throws {
         // Pre-encode JSON data once
-        let jsonData = try JSONEncoder().encode(message)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        let jsonData = try encoder.encode(message)
         
         guard let jsonString = String(data: jsonData, encoding: .utf8) else {
             throw Abort(.internalServerError, reason: "Failed to encode message to string.")
