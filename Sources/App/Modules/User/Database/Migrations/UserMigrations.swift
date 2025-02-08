@@ -96,7 +96,8 @@ enum UserMigrations {
                                                     password: try Bcrypt.hash(password),
                                                     phoneNumber: "00387445394857",
                                                     address: "Ulica 1",
-                                                    imageKey: /*"\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"*/0)
+                                                    imageKey: /*"\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"*/0,
+                                                    isAdmin: true)
             
             try await userAccountModel.create(on: database)
         }
