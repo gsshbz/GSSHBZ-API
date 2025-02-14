@@ -392,7 +392,7 @@ extension UserLeasesApiController {
                     try await armoryItem.save(on: db)
                     try await armoryItem.$category.load(on: req.db)
                     
-                    armoryItemsWithCategories.append((armoryItem, leaseItem.quantity))
+//                    armoryItemsWithCategories.append((armoryItem, leaseItem.quantity))
                     
                     let updatedArmoryItem: Armory.Item.Detail = .init(
                         id: try armoryItem.requireID(),
