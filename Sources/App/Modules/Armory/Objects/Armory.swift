@@ -30,4 +30,9 @@ public enum Armory: ApiModuleInterface {
         public typealias Module = Armory
         public static let pathKey: String = "newsFeedArticles"
     }
+    
+    public enum Dashboard: ApiModelInterface {
+        public typealias Module = Armory
+        public static let pathKey: String = "dashboard"
+    }
 }

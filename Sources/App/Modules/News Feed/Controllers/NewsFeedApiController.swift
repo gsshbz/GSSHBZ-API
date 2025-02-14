@@ -207,5 +207,31 @@ extension NewsFeedApiController {
                                                               per: models.metadata.per,
                                                               total: models.metadata.total))
     }
+    
+    /// Fetches the 5 most recent news articles.
+    func latestNewsApi(req: Request) async throws -> [Armory.NewsFeedArticle.Detail] {
+        let newsArticles = try await NewsFeedArticleModel.query(on: req.db)
+            .with(\.$user)
+            .sort(\.$createdAt, .descending)
+            .limit(5)
+            .all()
+        
+        let newsArticleModels: [DetailObject] = try newsArticles.map { article in
+                .init(id: try article.requireID(),
+                      title: article.title,
+                      text: article.text,
+                      user: .init(id: try article.user.requireID(),
+                                  firstName: article.user.firstName,
+                                  lastName: article.user.lastName,
+                                  email: article.user.email,
+                                  isAdmin: article.user.isAdmin,
+                                  imageKey: article.user.imageKey),
+                      createdAt: article.createdAt,
+                      updatedAt: article.updatedAt,
+                      deletedAt: article.deletedAt)
+        }
+        
+        return newsArticleModels
+    }
 }
 

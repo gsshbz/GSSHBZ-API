@@ -17,6 +17,7 @@ enum LeaseMigrations {
                 .id()
                 .field(LeaseModel.FieldKeys.v1.userId, .uuid, .required)
                 .foreignKey(LeaseModel.FieldKeys.v1.userId, references: UserAccountModel.schema, .id)
+                .field(LeaseModel.FieldKeys.v1.returned, .bool)
                 .field(LeaseModel.FieldKeys.v1.createdAt, .datetime)
                 .field(LeaseModel.FieldKeys.v1.updatedAt, .datetime)
                 .field(LeaseModel.FieldKeys.v1.deletedAt, .datetime)
@@ -51,7 +52,7 @@ enum LeaseMigrations {
                 throw Abort(.internalServerError, reason: "No user found for seeding leases.")
             }
 
-            let lease1 = try LeaseModel(userId: try user.requireID())
+            let lease1 = try LeaseModel(userId: try user.requireID(), returned: true)
             let lease2 = try LeaseModel(userId: try user.requireID())
             let lease3 = try LeaseModel(userId: try user.requireID())
             

@@ -18,6 +18,9 @@ final class LeaseModel: DatabaseModelInterface {
     @Parent(key: FieldKeys.v1.userId)
     var user: UserAccountModel
     
+    @Field(key: FieldKeys.v1.returned)
+    var returned: Bool
+    
     @Timestamp(key: FieldKeys.v1.createdAt, on: .create)
     var createdAt: Date?
     
@@ -29,9 +32,10 @@ final class LeaseModel: DatabaseModelInterface {
     
     init() {}
     
-    init(id: UUID? = nil, userId: UUID) throws {
+    init(id: UUID? = nil, userId: UUID, returned: Bool = false) throws {
         self.id = id
         self.$user.id = userId
+        self.returned = returned
     }
 }
 
@@ -41,6 +45,7 @@ extension LeaseModel {
         struct v1 {
             static var id: FieldKey { "id" }
             static var userId: FieldKey { "user_id" }
+            static var returned: FieldKey { "returned" }
             static var leaseId: FieldKey { "lease_id" }
             static var createdAt: FieldKey { "created_at" }
             static var updatedAt: FieldKey { "updated_at" }

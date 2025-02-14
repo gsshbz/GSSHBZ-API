@@ -26,6 +26,9 @@ enum ArmoryMigrations {
                 .field(ArmoryItemModel.FieldKeys.v1.aboutInfo, .string, .required)
                 .field(ArmoryItemModel.FieldKeys.v1.categoryId, .uuid)
                 .field(ArmoryItemModel.FieldKeys.v1.inStock, .int64, .required, .sql(.default(0)))
+                .field(ArmoryItemModel.FieldKeys.v1.createdAt, .datetime)
+                .field(ArmoryItemModel.FieldKeys.v1.updatedAt, .datetime)
+                .field(ArmoryItemModel.FieldKeys.v1.deletedAt, .datetime)
                 .foreignKey(ArmoryItemModel.FieldKeys.v1.categoryId,
                             references: ArmoryCategoryModel.schema,
                             .id,

@@ -202,4 +202,28 @@ struct ArmoryItemsApiController: ListController {
         
         return .noContent
     }
+    
+    /// Fetches the 5 most recently added armory items.
+    func recentlyAddedItemsApi(req: Request) async throws -> [Armory.Item.List] {
+        let armoryItems = try await ArmoryItemModel.query(on: req.db)
+            .with(\.$category)
+            .sort(\.$createdAt, .descending)
+            .limit(5)
+            .all()
+        
+        return try armoryItems.map { model in
+                .init(id: model.id!,
+                      name: model.name,
+                      imageKey: model.imageKey,
+                      aboutInfo: model.aboutInfo,
+                      inStock: model.inStock,
+                      category: .init(id: model.category.id!, name: model.category.name),
+                      categoryId: try model.category.requireID())
+        }
+    }
+
+    /// Fetches the total number of armory items.
+    func totalItemsApi(req: Request) async throws -> Int {
+        return try await ArmoryItemModel.query(on: req.db).count()
+    }
 }

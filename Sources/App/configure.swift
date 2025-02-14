@@ -105,6 +105,31 @@ public func configure(_ app: Application) async throws {
             }
             
             ArmoryWebSocketSystem.shared.connect(try user.requireID(), ws)
+            
+            let leasesApi = UserLeasesApiController()
+            let armoryApi = ArmoryItemsApiController()
+            let newsApi = NewsFeedApiController()
+            
+            // Latest leases
+            async let latestLeases = leasesApi.latestLeasesApi(req)
+            // Latest items
+            async let recentlyAddedItems = armoryApi.recentlyAddedItemsApi(req: req)
+            // Latest news
+            async let latestNews = newsApi.latestNewsApi(req: req)
+            // Items in armory
+            async let itemsInArmory = armoryApi.totalItemsApi(req: req)
+            // Leased today
+            async let leasedToday = leasesApi.leasedTodayApi(req: req)
+            
+            let dashboardData = Armory.Dashboard.Detail(
+                latestLeases: try await latestLeases,
+                recentlyAddedItems: try await recentlyAddedItems,
+                latestNews: try await latestNews,
+                itemsInArmory: try await itemsInArmory,
+                leasedToday: try await leasedToday
+            )
+            
+            try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, dashboardData)
         } catch {
             print("Error handling WebSocket connection: \(error)")
             Task {

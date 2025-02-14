@@ -23,6 +23,7 @@ public extension Armory.Lease {
     struct Detail: Codable {
         let id: UUID
         let user: User.Account.List
+        let returned: Bool
         let armoryItems: [ArmoryItem]
         let createdAt: Date?
         let updatedAt: Date?
@@ -45,6 +46,7 @@ public extension Armory.Lease {
     
     struct Update: Codable {
         let items: [ArmoryItem]
+        let returned: Bool
         
         struct ArmoryItem: Codable {
             let armoryItemId: UUID
@@ -54,6 +56,7 @@ public extension Armory.Lease {
     
     struct Patch: Codable {
         let items: [ArmoryItem]?
+        let returned: Bool?
         
         struct ArmoryItem: Codable {
             let armoryItemId: UUID
