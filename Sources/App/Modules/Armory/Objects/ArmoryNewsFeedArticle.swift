@@ -24,7 +24,7 @@ public extension Armory.NewsFeedArticle {
         let id: UUID
         let title: String
         let text: String
-        let user: User.Account.List
+        let user: User.Account.Detail
         let createdAt: Date?
         let updatedAt: Date?
         let deletedAt: Date?

@@ -50,7 +50,10 @@ struct ArmoryItemsApiController: ListController {
                       aboutInfo: model.aboutInfo,
                       inStock: model.inStock,
                       category: .init(id: model.category.id!, name: model.category.name),
-                      categoryId: try model.category.requireID())
+                      categoryId: try model.category.requireID(),
+                      createdAt: model.createdAt,
+                      updatedAt: model.updatedAt,
+                      deletedAt: model.deletedAt)
         }
     }
     
@@ -103,9 +106,15 @@ struct ArmoryItemsApiController: ListController {
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
         
-        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID(),
+                                            createdAt: armoryModel.createdAt,
+                                            updatedAt: armoryModel.updatedAt,
+                                            deletedAt: armoryModel.deletedAt)
         
-        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil)
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil,
+                                                  createdAt: armoryModel.createdAt,
+                                                  updatedAt: armoryModel.updatedAt,
+                                                  deletedAt: armoryModel.deletedAt)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemCreated, socketArmoryItem)
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, socketArmoryItem)
@@ -121,7 +130,10 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.armoryItemNotFound
         }
         
-        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        return .init(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID(),
+                     createdAt: armoryModel.createdAt,
+                     updatedAt: armoryModel.updatedAt,
+                     deletedAt: armoryModel.deletedAt)
     }
     
     func updateApi(_ req: Request) async throws -> Armory.Item.Detail {
@@ -177,9 +189,15 @@ struct ArmoryItemsApiController: ListController {
         try await armoryModel.update(on: req.db)
         try await armoryModel.$category.load(on: req.db)
         
-        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID())
+        let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID(),
+                                            createdAt: armoryModel.createdAt,
+                                            updatedAt: armoryModel.updatedAt,
+                                            deletedAt: armoryModel.deletedAt)
         
-        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil)
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil,
+                                                  createdAt: armoryModel.createdAt,
+                                                  updatedAt: armoryModel.updatedAt,
+                                                  deletedAt: armoryModel.deletedAt)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, socketArmoryItem)
         
@@ -218,7 +236,10 @@ struct ArmoryItemsApiController: ListController {
                       aboutInfo: model.aboutInfo,
                       inStock: model.inStock,
                       category: .init(id: model.category.id!, name: model.category.name),
-                      categoryId: try model.category.requireID())
+                      categoryId: try model.category.requireID(),
+                      createdAt: model.createdAt,
+                      updatedAt: model.updatedAt,
+                      deletedAt: model.deletedAt)
         }
     }
 

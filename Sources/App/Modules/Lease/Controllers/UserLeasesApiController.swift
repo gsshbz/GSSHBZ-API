@@ -112,7 +112,10 @@ extension UserLeasesApiController {
                 inStock: armoryItem.inStock,
                 category: .init(id: try armoryItem.category.requireID(),
                                 name: armoryItem.category.name),
-                categoryId: try armoryItem.category.requireID())
+                categoryId: try armoryItem.category.requireID(),
+                createdAt: armoryItem.createdAt,
+                updatedAt: armoryItem.updatedAt,
+                deletedAt: armoryItem.deletedAt)
             
             try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, updatedArmoryItem)
         }
@@ -124,22 +127,25 @@ extension UserLeasesApiController {
                 id: try createdLeaseModel.user.requireID(),
                 firstName: createdLeaseModel.user.firstName,
                 lastName: createdLeaseModel.user.lastName,
+                imageKey: createdLeaseModel.user.imageKey,
                 email: createdLeaseModel.user.email,
-                isAdmin: createdLeaseModel.user.isAdmin,
-                imageKey: createdLeaseModel.user.imageKey),
+                isAdmin: createdLeaseModel.user.isAdmin),
             returned: createdLeaseModel.returned,
             armoryItems: try armoryItems.map { (armoryItem, quantity) in
-                .init(
-                    armoryItem: .init(
-                        id: try armoryItem.requireID(),
-                        name: armoryItem.name,
-                        imageKey: armoryItem.imageKey,
-                        aboutInfo: armoryItem.aboutInfo,
-                        inStock: armoryItem.inStock,
-                        category: .init(id: try armoryItem.category.requireID(),
-                                        name: armoryItem.category.name),
-                        categoryId: try armoryItem.category.requireID()),
-                    quantity: quantity)
+                    .init(
+                        armoryItem: .init(
+                            id: try armoryItem.requireID(),
+                            name: armoryItem.name,
+                            imageKey: armoryItem.imageKey,
+                            aboutInfo: armoryItem.aboutInfo,
+                            inStock: armoryItem.inStock,
+                            category: .init(id: try armoryItem.category.requireID(),
+                                            name: armoryItem.category.name),
+                            categoryId: try armoryItem.category.requireID(),
+                            createdAt: armoryItem.createdAt,
+                            updatedAt: armoryItem.updatedAt,
+                            deletedAt: armoryItem.deletedAt),
+                        quantity: quantity)
             },
             createdAt: createdLeaseModel.createdAt,
             updatedAt: createdLeaseModel.updatedAt,
@@ -185,7 +191,10 @@ extension UserLeasesApiController {
                     inStock: armoryItem.inStock,
                     category: .init(id: try armoryItem.category.requireID(),
                                     name: armoryItem.category.name),
-                    categoryId: try armoryItem.category.requireID())
+                    categoryId: try armoryItem.category.requireID(),
+                    createdAt: armoryItem.createdAt,
+                    updatedAt: armoryItem.updatedAt,
+                    deletedAt: armoryItem.deletedAt)
                 
                 try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, updatedArmoryItem)
             }
@@ -230,9 +239,9 @@ extension UserLeasesApiController {
                      user: .init(id: try leaseModel.user.requireID(),
                                  firstName: leaseModel.user.firstName,
                                  lastName: leaseModel.user.lastName,
+                                 imageKey: leaseModel.user.imageKey,
                                  email: leaseModel.user.email,
-                                 isAdmin: leaseModel.user.isAdmin,
-                                 imageKey: leaseModel.user.imageKey),
+                                 isAdmin: leaseModel.user.isAdmin),
                      returned: leaseModel.returned,
                      armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
                 .init(armoryItem: .init(id: try armoryItem.requireID(),
@@ -242,7 +251,10 @@ extension UserLeasesApiController {
                                         inStock: armoryItem.inStock,
                                         category: .init(id: try armoryItem.category.requireID(),
                                                         name: armoryItem.category.name),
-                                        categoryId: try armoryItem.category.requireID()),
+                                        categoryId: try armoryItem.category.requireID(),
+                                        createdAt: armoryItem.createdAt,
+                                        updatedAt: armoryItem.updatedAt,
+                                        deletedAt: armoryItem.deletedAt),
                       quantity: quantity) },
                      createdAt: leaseModel.createdAt,
                      updatedAt: leaseModel.updatedAt,
@@ -337,9 +349,9 @@ extension UserLeasesApiController {
                                                    user: .init(id: try leaseModel.user.requireID(),
                                                                firstName: leaseModel.user.firstName,
                                                                lastName: leaseModel.user.lastName,
+                                                               imageKey: leaseModel.user.imageKey,
                                                                email: leaseModel.user.email,
-                                                               isAdmin: leaseModel.user.isAdmin,
-                                                               imageKey: leaseModel.user.imageKey),
+                                                               isAdmin: leaseModel.user.isAdmin),
                                                    returned: leaseModel.returned,
                                                    armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
                 .init(armoryItem: .init(id: try armoryItem.requireID(),
@@ -349,7 +361,10 @@ extension UserLeasesApiController {
                                         inStock: armoryItem.inStock,
                                         category: .init(id: try armoryItem.category.requireID(),
                                                         name: armoryItem.category.name),
-                                        categoryId: try armoryItem.category.requireID()),
+                                        categoryId: try armoryItem.category.requireID(),
+                                        createdAt: armoryItem.createdAt,
+                                        updatedAt: armoryItem.updatedAt,
+                                        deletedAt: armoryItem.deletedAt),
                       quantity: quantity) },
                                                    createdAt: leaseModel.createdAt,
                                                    updatedAt: leaseModel.updatedAt,
@@ -402,7 +417,10 @@ extension UserLeasesApiController {
                         inStock: armoryItem.inStock,
                         category: .init(id: try armoryItem.category.requireID(),
                                         name: armoryItem.category.name),
-                        categoryId: try armoryItem.category.requireID())
+                        categoryId: try armoryItem.category.requireID(),
+                        createdAt: armoryItem.createdAt,
+                        updatedAt: armoryItem.updatedAt,
+                        deletedAt: armoryItem.deletedAt)
                     
                     try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, updatedArmoryItem)
                 }
@@ -418,9 +436,9 @@ extension UserLeasesApiController {
                                                        user: .init(id: try leaseModel.user.requireID(),
                                                                    firstName: leaseModel.user.firstName,
                                                                    lastName: leaseModel.user.lastName,
+                                                                   imageKey: leaseModel.user.imageKey,
                                                                    email: leaseModel.user.email,
-                                                                   isAdmin: leaseModel.user.isAdmin,
-                                                                   imageKey: leaseModel.user.imageKey),
+                                                                   isAdmin: leaseModel.user.isAdmin),
                                                        returned: leaseModel.returned,
                                                        armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
                     .init(armoryItem: .init(id: try armoryItem.requireID(),
@@ -430,7 +448,10 @@ extension UserLeasesApiController {
                                             inStock: armoryItem.inStock,
                                             category: .init(id: try armoryItem.category.requireID(),
                                                             name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID()),
+                                            categoryId: try armoryItem.category.requireID(),
+                                            createdAt: armoryItem.createdAt,
+                                            updatedAt: armoryItem.updatedAt,
+                                            deletedAt: armoryItem.deletedAt),
                           quantity: quantity) },
                                                        createdAt: leaseModel.createdAt,
                                                        updatedAt: leaseModel.updatedAt,
@@ -469,9 +490,9 @@ extension UserLeasesApiController {
                                 user: .init(id: try leaseModel.user.requireID(),
                                             firstName: leaseModel.user.firstName,
                                             lastName: leaseModel.user.lastName,
+                                            imageKey: leaseModel.user.imageKey,
                                             email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin,
-                                            imageKey: leaseModel.user.imageKey),
+                                            isAdmin: leaseModel.user.isAdmin),
                                 returned: leaseModel.returned,
                                 armoryItems: try armoryItems.map { armoryItem, quantity in
                     .init(armoryItem: .init(id: try armoryItem.requireID(),
@@ -481,7 +502,10 @@ extension UserLeasesApiController {
                                             inStock: armoryItem.inStock,
                                             category: .init(id: armoryItem.category.id!,
                                                             name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID()),
+                                            categoryId: try armoryItem.category.requireID(),
+                                            createdAt: armoryItem.createdAt,
+                                            updatedAt: armoryItem.updatedAt,
+                                            deletedAt: armoryItem.deletedAt),
                           quantity: quantity)},
                                 createdAt: leaseModel.createdAt,
                                 updatedAt: leaseModel.updatedAt,
@@ -530,9 +554,9 @@ extension UserLeasesApiController {
                                 user: .init(id: try leaseModel.user.requireID(),
                                             firstName: leaseModel.user.firstName,
                                             lastName: leaseModel.user.lastName,
+                                            imageKey: leaseModel.user.imageKey,
                                             email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin,
-                                            imageKey: leaseModel.user.imageKey),
+                                            isAdmin: leaseModel.user.isAdmin),
                                 returned: leaseModel.returned,
                                 armoryItems: try armoryItems.map { armoryItem, quantity in
                     .init(armoryItem: .init(id: try armoryItem.requireID(),
@@ -542,7 +566,10 @@ extension UserLeasesApiController {
                                             inStock: armoryItem.inStock,
                                             category: .init(id: armoryItem.category.id!,
                                                             name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID()
+                                            categoryId: try armoryItem.category.requireID(),
+                                            createdAt: armoryItem.createdAt,
+                                            updatedAt: armoryItem.updatedAt,
+                                            deletedAt: armoryItem.deletedAt
                                            ),
                           quantity: quantity)},
                                 createdAt: leaseModel.createdAt,
@@ -584,9 +611,9 @@ extension UserLeasesApiController {
                                 user: .init(id: try leaseModel.user.requireID(),
                                             firstName: leaseModel.user.firstName,
                                             lastName: leaseModel.user.lastName,
+                                            imageKey: leaseModel.user.imageKey,
                                             email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin,
-                                            imageKey: leaseModel.user.imageKey),
+                                            isAdmin: leaseModel.user.isAdmin),
                                 returned: leaseModel.returned,
                                 armoryItems: try armoryItems.map { armoryItem, quantity in
                     .init(armoryItem: .init(id: try armoryItem.requireID(),
@@ -596,7 +623,10 @@ extension UserLeasesApiController {
                                             inStock: armoryItem.inStock,
                                             category: .init(id: armoryItem.category.id!,
                                                             name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID()),
+                                            categoryId: try armoryItem.category.requireID(),
+                                            createdAt: armoryItem.createdAt,
+                                            updatedAt: armoryItem.updatedAt,
+                                            deletedAt: armoryItem.deletedAt),
                           quantity: quantity)},
                                 createdAt: leaseModel.createdAt,
                                 updatedAt: leaseModel.updatedAt,

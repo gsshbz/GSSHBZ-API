@@ -96,7 +96,7 @@ extension ArmoryCategoryApiController {
             try await armoryModel.$category.load(on: req.db)
             
             // Frontend doesn't need categoryId parameter in socket update, that's why it is set to nil
-            let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil)
+            let armoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil, createdAt: armoryModel.createdAt, updatedAt: armoryModel.updatedAt, deletedAt: armoryModel.deletedAt)
             
             try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, armoryItem)
         }
@@ -154,6 +154,6 @@ extension ArmoryCategoryApiController {
             models = try await list(req, queryBuilders: { $0.filter(\.$name != defaultCategoryName) })
         }
         
-        return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: .init(id: try $0.category.requireID(), name: $0.category.name), categoryId: try $0.category.requireID()) }) }
+        return try models.map { .init(id: try $0.requireID(), name: $0.name, armoryItems: $0.$armoryItems.value == nil ? nil : try $0.armoryItems.map { .init(id: try $0.requireID(), name: $0.name, imageKey: $0.imageKey, aboutInfo: $0.aboutInfo, inStock: $0.inStock, category: .init(id: try $0.category.requireID(), name: $0.category.name), categoryId: try $0.category.requireID(), createdAt: $0.createdAt, updatedAt: $0.updatedAt, deletedAt: $0.deletedAt) }) }    
     }
 }

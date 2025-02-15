@@ -17,6 +17,9 @@ public extension Armory.Item {
         let inStock: Int
         let category: Armory.Category.List
         let categoryId: UUID
+        let createdAt: Date?
+        let updatedAt: Date?
+        let deletedAt: Date?
     }
     
     struct Detail: Codable {
@@ -27,6 +30,9 @@ public extension Armory.Item {
         let inStock: Int
         let category: Armory.Category.List
         let categoryId: UUID?
+        let createdAt: Date?
+        let updatedAt: Date?
+        let deletedAt: Date?
     }
     
     struct Create: Codable {

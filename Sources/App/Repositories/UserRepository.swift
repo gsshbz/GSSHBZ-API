@@ -12,7 +12,7 @@ import Fluent
 protocol UserRepository: Repository {
     func create(_ user: UserAccountModel) async throws
     func delete(id: UUID) async throws
-    func all() async throws -> [User.Account.List]
+    func all() async throws -> [User.Account.Detail]
     func find(id: UUID?) async throws -> UserAccountModel?
     func find(email: String) async throws -> UserAccountModel?
     func set<Field>(_ field: KeyPath<UserAccountModel, Field>, to value: Field.Value, for userId: UUID) async throws where Field: QueryableProperty, Field.Model == UserAccountModel
@@ -32,9 +32,9 @@ struct DatabaseUserRepository: UserRepository, DatabaseRepository {
             .delete()
     }
     
-    func all() async throws -> [User.Account.List] {
+    func all() async throws -> [User.Account.Detail] {
         try await UserAccountModel.query(on: database).all().map { user in
-                .init(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, email: user.email, isAdmin: user.isAdmin, imageKey: user.imageKey)
+                .init(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, imageKey: user.imageKey, email: user.email, isAdmin: user.isAdmin)
         }
     }
     

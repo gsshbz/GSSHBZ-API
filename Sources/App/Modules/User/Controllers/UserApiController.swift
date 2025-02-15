@@ -36,7 +36,10 @@ extension User.Account.Create: Validatable {
 
 
 // MARK: - Authentication requests
-struct UserApiController {
+struct UserApiController: ListController {
+    typealias ApiModel = User.Account
+    typealias DatabaseModel = UserAccountModel
+    
     func signUpApi(_ req: Request) async throws -> User.Token.Detail {
         try User.Account.Create.validate(content: req)
         
@@ -220,6 +223,38 @@ struct UserApiController {
         let userDetails = User.Account.Detail(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, imageKey: user.imageKey, email: user.email, isAdmin: user.isAdmin)
         
         return userDetails
+    }
+    
+    func getAllUsersApi(_ req: Request) async throws -> User.Account.List {
+        let searchQuery = req.query[String.self, at: "search"]?.lowercased()
+        
+        // Use paginatedList with queryBuilders to apply filters
+        let models = try await paginatedList(req) { query in
+            if let searchQuery = searchQuery, !searchQuery.isEmpty {
+                query.group(.or) { or in
+                    or.filter(\.$firstName, .custom("ilike"), "%\(searchQuery)%")
+                    or.filter(\.$lastName, .custom("ilike"), "%\(searchQuery)%")
+                    or.filter(\.$email, .custom("ilike"), "%\(searchQuery)%")
+                }
+            }
+        }
+        
+        // Map models to response
+        let userList = try models.items.map { user in
+            User.Account.Detail(
+                id: try user.requireID(),
+                firstName: user.firstName,
+                lastName: user.lastName,
+                imageKey: user.imageKey,
+                email: user.email,
+                isAdmin: user.isAdmin
+            )
+        }
+        
+        return User.Account.List(
+            users: userList,
+            metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total)
+        )
     }
     
     func resetPasswordHandler(_ req: Request) async throws -> HTTPStatus {
