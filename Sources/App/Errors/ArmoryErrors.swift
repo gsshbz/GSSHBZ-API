@@ -169,6 +169,8 @@ extension ArmoryErrors {
             return "news_article_not_found"
         case .newsArticleDeleteFailed:
             return "news_article_delete_failed"
+        case .armoryItemQuantityNotSufficient:
+            return "armory_item_quantity_not_sufficient"
         }
     }
     
