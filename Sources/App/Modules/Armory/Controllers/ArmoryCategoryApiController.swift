@@ -39,6 +39,7 @@ struct ArmoryCategoryApiController: ListController {
         
         existingModelRoutes.on(.GET, use: detailApi)
         existingModelRoutes.on(.POST, use: updateApi)
+        existingModelRoutes.on(.PUT, use: patchApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
     }
 }
@@ -128,6 +129,26 @@ extension ArmoryCategoryApiController {
         }
         
         categoryModel.name = updateObject.name
+        
+        try await categoryModel.update(on: req.db)
+        
+        let detailObject = DetailObject(id: try categoryModel.requireID(), name: categoryModel.name)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .categoryUpdated, detailObject)
+        
+        return detailObject
+    }
+    
+    func patchApi(_ req: Request) async throws -> DetailObject {
+        let updateObject = try req.content.decode(PatchObject.self)
+        
+        guard let categoryModel = try await DatabaseModel.query(on: req.db)
+            .filter(\.$id == identifier(req))
+            .first() else {
+            throw ArmoryErrors.categoryNotFound
+        }
+        
+        categoryModel.name = updateObject.name ?? categoryModel.name
         
         try await categoryModel.update(on: req.db)
         
