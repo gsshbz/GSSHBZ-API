@@ -117,7 +117,11 @@ struct ArmoryItemsApiController: ListController {
                                                   deletedAt: armoryModel.deletedAt)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemCreated, socketArmoryItem)
-        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, socketArmoryItem)
+        
+        let recentlyAddedItems = try await  recentlyAddedItemsApi(req: req)
+        let dashboardUpdate = Armory.Dashboard.Detail(latestLeases: nil, recentlyAddedItems: recentlyAddedItems, latestNews: nil, itemsInArmory: try await totalItemsApi(req: req), leasedToday: nil)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, dashboardUpdate)
         
         return  armoryItem
     }

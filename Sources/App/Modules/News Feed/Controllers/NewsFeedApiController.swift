@@ -70,7 +70,11 @@ extension NewsFeedApiController {
                                         deletedAt: newsFeedModel.deletedAt)
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .newsArticleCreated, detailOutput)
-        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, detailOutput)
+        
+        let latestNews = try await latestNewsApi(req: req)
+        let dashboardUpdate = Armory.Dashboard.Detail(latestLeases: nil, recentlyAddedItems: nil, latestNews: latestNews, itemsInArmory: nil, leasedToday: nil)
+        
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .dashboard, dashboardUpdate)
         
         return detailOutput
     }

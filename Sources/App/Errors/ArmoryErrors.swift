@@ -20,6 +20,7 @@ enum ArmoryErrors: AppError {
     case armoryItemNotFound
     case duplicateArmoryItemName(itemName: String)
     case insufficientArmoryItemStock(itemName: String, requested: Int, available: Int)
+    case armoryItemQuantityNotSufficient
     case armoryItemDeleteFailed(itemName: String)
     case armoryItemUpdateFailed(itemName: String)
     
@@ -44,7 +45,7 @@ extension ArmoryErrors {
         case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound:
             return .notFound
             
-        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed:
+        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .armoryItemQuantityNotSufficient:
             return .conflict
             
         case .unauthorizedAccess:
@@ -80,6 +81,9 @@ extension ArmoryErrors {
             
         case .insufficientArmoryItemStock(itemName: let itemName, requested: let requested, available: let available):
             return "Not enough stock for '\(itemName)'. Requested: \(requested), Available: \(available)."
+            
+        case .armoryItemQuantityNotSufficient:
+            return "Armory item quantity needs to be more than 0"
             
         case .armoryItemDeleteFailed(itemName: let itemName):
             return "Armory item with name '\(itemName)' couldn't be deleted."

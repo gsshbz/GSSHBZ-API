@@ -17,7 +17,7 @@ enum LeaseMigrations {
                 .id()
                 .field(LeaseModel.FieldKeys.v1.userId, .uuid, .required)
                 .foreignKey(LeaseModel.FieldKeys.v1.userId, references: UserAccountModel.schema, .id)
-                .field(LeaseModel.FieldKeys.v1.returned, .bool)
+                .field(LeaseModel.FieldKeys.v1.returned, .bool, .sql(.default(false)))
                 .field(LeaseModel.FieldKeys.v1.createdAt, .datetime)
                 .field(LeaseModel.FieldKeys.v1.updatedAt, .datetime)
                 .field(LeaseModel.FieldKeys.v1.deletedAt, .datetime)
