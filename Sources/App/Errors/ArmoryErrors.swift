@@ -27,6 +27,7 @@ enum ArmoryErrors: AppError {
     // Leases
     case leaseNotFound
     case leaseAlreadyClosed
+    case leaseAlreadyOpened
     case leaseItemNotAvailable(itemName: String)
     case leaseUpdateFailed(leaseId: UUID)
     case leaseDeleteFailed(leaseId: UUID)
@@ -45,7 +46,7 @@ extension ArmoryErrors {
         case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound:
             return .notFound
             
-        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .armoryItemQuantityNotSufficient:
+        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .leaseAlreadyOpened, .armoryItemQuantityNotSufficient:
             return .conflict
             
         case .unauthorizedAccess:
@@ -96,6 +97,9 @@ extension ArmoryErrors {
             
         case .leaseAlreadyClosed:
             return "This lease has already been closed and cannot be modified."
+            
+        case .leaseAlreadyOpened:
+            return "This lease is already opened."
             
         case .leaseItemNotAvailable(itemName: let itemName):
             return "Item '\(itemName)' is not available for lease."
@@ -150,6 +154,9 @@ extension ArmoryErrors {
             
         case .leaseAlreadyClosed:
             return "lease_already_closed"
+            
+        case .leaseAlreadyOpened:
+            return "lease_already_opened"
             
         case .leaseItemNotAvailable:
             return "lease_item_not_available"

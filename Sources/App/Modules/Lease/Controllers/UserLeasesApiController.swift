@@ -285,6 +285,7 @@ extension UserLeasesApiController {
     }
     
     func patchApi(_ req: Request) async throws -> DetailObject {
+        // Decode the incoming patch request, which may contain optional updates
         let patchObject = try req.content.decode(PatchObject.self)
         
         // Fetch the existing lease, including user and items
@@ -292,30 +293,35 @@ extension UserLeasesApiController {
             .with(\.$user)
             .filter(\.$id == identifier(req))
             .first() else {
-            throw ArmoryErrors.leaseNotFound
+            throw ArmoryErrors.leaseNotFound // Throw an error if the lease does not exist
         }
         
-        // Handle optional `items` update
+        // If the `items` parameter is provided in the request, update the lease items
         if let items = patchObject.items {
-            var updateObject = UpdateObject(
+            let updateObject = UpdateObject(
                 items: items.map { .init(armoryItemId: $0.armoryItemId, quantity: $0.quantity) },
                 returned: leaseModel.returned // Keep the current `returned` state
             )
             return try await updateLease(req, leaseModel: leaseModel, updateObject: updateObject)
         }
-        #warning("POPRAVIT OVO SA KRIVIM PATCHANJEM LEASE ITEMA")
-        // Handle optional `returned` update
+        
+        // If the `returned` parameter is provided, handle lease closing/opening
         if let returned = patchObject.returned {
-            guard leaseModel.returned != returned else { throw ArmoryErrors.leaseUpdateFailed(leaseId: try leaseModel.requireID())}
-            var updateObject = UpdateObject(
-                items: [],
-                returned: leaseModel.returned // Keep the current `returned` state
+            // Prevent redundant updates (e.g., reopening an already open lease)
+            if returned == leaseModel.returned {
+                throw returned ? ArmoryErrors.leaseAlreadyClosed : ArmoryErrors.leaseAlreadyOpened
+            }
+            
+            let updateObject = UpdateObject(
+                items: [], // No item changes, only updating the `returned` status
+                returned: returned // Keep the current `returned` state
             )
             
+            // If `returned` is true, close the lease; otherwise, reopen it
             return returned ? try await closeLease(req, leaseModel: leaseModel, updateObject: updateObject) : try await openLease(req, leaseModel: leaseModel, updateObject: updateObject)
         }
         
-        // If nothing is updated, return the current lease details
+        // If no updates were provided, return the current lease details
         return try await detailApi(req)
     }
     
