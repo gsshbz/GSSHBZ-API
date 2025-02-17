@@ -216,19 +216,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/categories?items=true",
+							"raw": "{{base_api_url}}/armory/categories",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"categories"
-							],
-							"query": [
-								{
-									"key": "items",
-									"value": "true"
-								}
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -308,7 +302,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Default\",\n    \"imageKey\": 4\n}",
+							"raw": "{\n\t\"name\": \"Karabineri\"\n    // \"imageKey\": 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -316,14 +310,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/categories/12151B7B-4C40-49F1-B9DE-CE74D406D246",
+							"raw": "{{base_api_url}}/armory/categories/1BABC693-68CC-48F4-AF2D-1DCEB7380173",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"categories",
-								"12151B7B-4C40-49F1-B9DE-CE74D406D246"
+								"1BABC693-68CC-48F4-AF2D-1DCEB7380173"
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
@@ -1176,6 +1170,29 @@
 							"body": "{\n    \"firstName\": \"Admin\",\n    \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n    \"isAdmin\": true,\n    \"email\": \"root@localhost.localhost\",\n    \"lastName\": \"Admin\",\n    \"imageKey\": 4\n}"
 						}
 					]
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/users?search=root",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "root"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1343,14 +1360,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/ABB6096A-C046-4A90-9DB8-F5E6BC61445D",
+							"raw": "{{base_api_url}}/armory/items/6073BCFA-C627-4BAD-9635-2BCF7BDC4D24",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"ABB6096A-C046-4A90-9DB8-F5E6BC61445D"
+								"6073BCFA-C627-4BAD-9635-2BCF7BDC4D24"
 							]
 						}
 					},
@@ -1968,7 +1985,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n            \"quantity\": 8\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"4BE62BD0-EDBF-42E7-82F2-401D37D13A77\",\n            \"quantity\": 3\n        }\n    ],\n    \"returned\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1976,14 +1993,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/89310271-2B67-46EA-B600-75E57088FC4F",
+							"raw": "{{base_api_url}}/armory/leases/3A2867BE-53E6-4468-A468-8CD420481F1E",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"89310271-2B67-46EA-B600-75E57088FC4F"
+								"3A2867BE-53E6-4468-A468-8CD420481F1E"
 							]
 						}
 					},
@@ -2112,7 +2129,7 @@
 					]
 				},
 				{
-					"name": "Get User Leases",
+					"name": "Get Current User Leases",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2203,6 +2220,131 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"leases\": [\n        {\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"id\": \"1A8CFC2D-AD81-4BC8-BD3A-2BAD8C01D3D8\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 7,\n                        \"name\": \"Updateani armory item\",\n                        \"aboutInfo\": \"Updateani info\",\n                        \"category\": {\n                            \"imageKey\": 4,\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"name\": \"Default\"\n                        },\n                        \"inStock\": 40,\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\"\n                    },\n                    \"quantity\": 1\n                }\n            ],\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"imageKey\": 4,\n                \"email\": \"root@localhost.localhost\"\n            }\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"name\": \"Armory item with default category\",\n                        \"imageKey\": 0,\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"category\": {\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4,\n                            \"name\": \"Default\"\n                        },\n                        \"inStock\": 5,\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"id\": \"4DAFE3E8-24DD-4BF1-AA30-C27D8BA55664\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"id\": \"F80DD2AD-13AE-40A6-A6EB-42BC32DCA268\",\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"imageKey\": 4,\n                \"firstName\": \"Admin\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n            }\n        },\n        {\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\",\n                \"imageKey\": 4,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n            },\n            \"id\": \"7439A5A8-7107-457A-B844-715CC828FF5C\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"aboutInfo\": \"Updateani info\",\n                        \"name\": \"Updateani armory item\",\n                        \"imageKey\": 7,\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"category\": {\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4,\n                            \"name\": \"Default\"\n                        },\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"inStock\": 40\n                    },\n                    \"quantity\": 3\n                }\n            ],\n            \"createdAt\": \"2025-02-04T10:59:51Z\"\n        },\n        {\n            \"updatedAt\": \"2025-02-04T11:24:29Z\",\n            \"id\": \"E43FD653-5B61-4454-9D8C-CC5A90B7CE30\",\n            \"armoryItems\": [],\n            \"createdAt\": \"2025-02-04T11:24:29Z\",\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"imageKey\": 4,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true\n            }\n        },\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 0,\n                        \"inStock\": 2,\n                        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                        \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n                        \"name\": \"OK karabiner\",\n                        \"category\": {\n                            \"imageKey\": 0,\n                            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                            \"name\": \"Carabiner\"\n                        },\n                        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\"\n                    },\n                    \"quantity\": 8\n                }\n            ],\n            \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\",\n            \"createdAt\": \"2025-02-04T11:27:36Z\",\n            \"updatedAt\": \"2025-02-04T11:27:36Z\",\n            \"user\": {\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"imageKey\": 4,\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\"\n            }\n        }\n    ],\n    \"metadata\": {\n        \"per\": 5,\n        \"total\": 5,\n        \"page\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Patch Lease",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returned\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/F8489F0F-09B5-4208-A0CF-A2B996917E03",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"F8489F0F-09B5-4208-A0CF-A2B996917E03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Leases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/user-leases/EDAFA818-8AB9-4027-9E79-4A96721F6CD5?page=1&per=5",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"user-leases",
+								"EDAFA818-8AB9-4027-9E79-4A96721F6CD5"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User Leases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/user-leases/EDAFA818-8AB9-4027-9E79-4A96721F6CD5?page=1&per=5",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"user-leases",
+										"EDAFA818-8AB9-4027-9E79-4A96721F6CD5"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "per",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2849"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=11IeT67+Ce5M5meBiLFtYeRddSydhDdULBjA45GXsDE=; Expires=Mon, 24 Feb 2025 19:17:06 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 17 Feb 2025 19:17:06 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"leases\": [\n        {\n            \"returned\": false,\n            \"createdAt\": \"2025-02-16T19:45:36Z\",\n            \"armoryItems\": [\n                {\n                    \"quantity\": 2,\n                    \"armoryItem\": {\n                        \"name\": \"Armory item with default category\",\n                        \"updatedAt\": \"2025-02-16T19:45:36Z\",\n                        \"categoryId\": \"0C2C4E02-1500-4CA6-998E-8BA1B1FBE71A\",\n                        \"inStock\": 5,\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"imageKey\": \"0\",\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"0C2C4E02-1500-4CA6-998E-8BA1B1FBE71A\"\n                        },\n                        \"id\": \"60D095DC-31A6-4CBC-A5BC-2051543E66D8\",\n                        \"createdAt\": \"2025-02-16T19:45:36Z\"\n                    }\n                }\n            ],\n            \"updatedAt\": \"2025-02-16T19:45:36Z\",\n            \"id\": \"2A170AB8-3E13-4076-B340-9C532BE6C142\",\n            \"user\": {\n                \"imageKey\": 0,\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true,\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"id\": \"EDAFA818-8AB9-4027-9E79-4A96721F6CD5\"\n            }\n        },\n        {\n            \"user\": {\n                \"id\": \"EDAFA818-8AB9-4027-9E79-4A96721F6CD5\",\n                \"email\": \"root@localhost.localhost\",\n                \"firstName\": \"Admin\",\n                \"imageKey\": 0,\n                \"isAdmin\": true,\n                \"lastName\": \"Admin\"\n            },\n            \"returned\": false,\n            \"armoryItems\": [\n                {\n                    \"quantity\": 3,\n                    \"armoryItem\": {\n                        \"name\": \"William karabiner\",\n                        \"category\": {\n                            \"id\": \"1BABC693-68CC-48F4-AF2D-1DCEB7380173\",\n                            \"name\": \"Karabineri\"\n                        },\n                        \"inStock\": 10,\n                        \"categoryId\": \"1BABC693-68CC-48F4-AF2D-1DCEB7380173\",\n                        \"updatedAt\": \"2025-02-16T20:15:44Z\",\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"imageKey\": \"0\",\n                        \"id\": \"6073BCFA-C627-4BAD-9635-2BCF7BDC4D24\",\n                        \"createdAt\": \"2025-02-16T19:45:36Z\"\n                    }\n                }\n            ],\n            \"id\": \"288D1D30-CB01-43DA-B412-B304DECE32D8\",\n            \"updatedAt\": \"2025-02-16T19:45:36Z\",\n            \"createdAt\": \"2025-02-16T19:45:36Z\"\n        },\n        {\n            \"id\": \"F8489F0F-09B5-4208-A0CF-A2B996917E03\",\n            \"returned\": true,\n            \"user\": {\n                \"firstName\": \"Admin\",\n                \"lastName\": \"Admin\",\n                \"imageKey\": 0,\n                \"isAdmin\": true,\n                \"id\": \"EDAFA818-8AB9-4027-9E79-4A96721F6CD5\",\n                \"email\": \"root@localhost.localhost\"\n            },\n            \"armoryItems\": [\n                {\n                    \"quantity\": 1,\n                    \"armoryItem\": {\n                        \"createdAt\": \"2025-02-16T19:45:36Z\",\n                        \"imageKey\": \"0\",\n                        \"aboutInfo\": \"Petzl William asimetrični karabiner visokog kapaciteta. Sa svojim kruškolikim oblikom pogodan je za ukopčavanje više komada opreme. Unutarnji fluidan dizajn i Keylock sustav olakšavaju rukovanje karabinerom. Karabiner dolazi u 3 vrste sustava za zatvaranje: karabiner s maticom (SCREW-LOCK), automatsko zatvaranje (TRIACT-LOCK, BALL-LOCK) Certifikati: CE EN 362, EAAC, NFPA 1983 Technical Use\",\n                        \"name\": \"William karabiner\",\n                        \"inStock\": 10,\n                        \"category\": {\n                            \"name\": \"Karabineri\",\n                            \"id\": \"1BABC693-68CC-48F4-AF2D-1DCEB7380173\"\n                        },\n                        \"categoryId\": \"1BABC693-68CC-48F4-AF2D-1DCEB7380173\",\n                        \"id\": \"6073BCFA-C627-4BAD-9635-2BCF7BDC4D24\",\n                        \"updatedAt\": \"2025-02-16T20:15:44Z\"\n                    }\n                }\n            ],\n            \"updatedAt\": \"2025-02-16T20:15:44Z\",\n            \"createdAt\": \"2025-02-16T19:45:36Z\"\n        }\n    ],\n    \"metadata\": {\n        \"total\": 3,\n        \"page\": 1,\n        \"per\": 5\n    }\n}"
 						}
 					]
 				}
