@@ -32,7 +32,8 @@ struct UserLeasesApiController: ListController {
         
         baseRoutes.on(.GET, use: listApi)
         baseRoutes.on(.POST, use: createApi)
-        baseRoutes.on(.GET, "user-leases", use: getUserLeases)
+        baseRoutes.on(.GET, "user-leases", use: getActiveUserLeases)
+        baseRoutes.on(.GET, "user-leases", ":userId", use: getUserLeases)
         
         existingModelRoutes.on(.GET, use: detailApi)
         existingModelRoutes.on(.POST, use: updateApi)
@@ -381,6 +382,67 @@ extension UserLeasesApiController {
     }
     
     func getUserLeases(_ req: Request) async throws -> ListObject {
+        guard let userIdString = req.parameters.get("userId"), let userId = UUID(uuidString: userIdString) else { throw AuthenticationError.userNotFound }
+        
+//        guard let user = try await UserAccountModel.find(userId, on: req.db) else {
+//            throw AuthenticationError.userNotFound
+//        }
+        
+        let models = try await paginatedList(req,
+                                             queryBuilders: { $0.with(\.$user) },
+                                             { $0.filter(\.$user.$id == userId) }
+        )
+        
+        var leases: [Armory.Lease.Detail] = []
+        
+        for leaseModel in models.items {
+            let leaseItems = try await LeaseItemModel.query(on: req.db)
+                .filter(\.$leaseId == leaseModel.requireID())
+                .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
+                .all()
+            
+            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
+            
+            for leaseItem in leaseItems {
+                let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
+                try await armoryItem.$category.load(on: req.db)
+                
+                armoryItems.append((armoryItem, leaseItem.quantity))
+            }
+            
+            leases.append(.init(id: try leaseModel.requireID(),
+                                user: .init(id: try leaseModel.user.requireID(),
+                                            firstName: leaseModel.user.firstName,
+                                            lastName: leaseModel.user.lastName,
+                                            imageKey: leaseModel.user.imageKey,
+                                            email: leaseModel.user.email,
+                                            isAdmin: leaseModel.user.isAdmin),
+                                returned: leaseModel.returned,
+                                armoryItems: try armoryItems.map { armoryItem, quantity in
+                    .init(armoryItem: .init(id: try armoryItem.requireID(),
+                                            name: armoryItem.name,
+                                            imageKey: armoryItem.imageKey,
+                                            aboutInfo: armoryItem.aboutInfo,
+                                            inStock: armoryItem.inStock,
+                                            category: .init(id: armoryItem.category.id!,
+                                                            name: armoryItem.category.name),
+                                            categoryId: try armoryItem.category.requireID(),
+                                            createdAt: armoryItem.createdAt,
+                                            updatedAt: armoryItem.updatedAt,
+                                            deletedAt: armoryItem.deletedAt
+                                           ),
+                          quantity: quantity)},
+                                createdAt: leaseModel.createdAt,
+                                updatedAt: leaseModel.updatedAt,
+                                deletedAt: leaseModel.deletedAt
+                               )
+            )
+        }
+        
+        return .init(leases: leases, metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total))
+    }
+    
+    func getActiveUserLeases(_ req: Request) async throws -> ListObject {
         let jwtUser = try req.auth.require(JWTUser.self)
         
         guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db) else {
