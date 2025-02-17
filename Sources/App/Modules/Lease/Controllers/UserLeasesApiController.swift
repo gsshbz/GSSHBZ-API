@@ -44,6 +44,67 @@ struct UserLeasesApiController: ListController {
 
 
 extension UserLeasesApiController {
+    // Helper method to fetch all armory items (with their category loaded) for a given lease
+    private func fetchArmoryItemsForLease(leaseModel: LeaseModel, req: Request) async throws -> [(ArmoryItemModel, Int)] {
+        let leaseItems = try await LeaseItemModel.query(on: req.db)
+            .filter(\.$leaseId == leaseModel.requireID())
+            .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
+            .all()
+        
+        var result: [(ArmoryItemModel, Int)] = []
+        for leaseItem in leaseItems {
+            let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
+            try await armoryItem.$category.load(on: req.db)
+            result.append((armoryItem, leaseItem.quantity))
+        }
+        return result
+    }
+    
+    // Helper method to map an ArmoryItemModel (with loaded category) and quantity to an Armory.Lease.Item
+    private func mapArmoryItemDetail(armoryItem: ArmoryItemModel, quantity: Int, req: Request) async throws -> Armory.Lease.Detail.ArmoryItem {
+        // Ensure the category is loaded already
+        return .init(
+            armoryItem: .init(
+                id: try armoryItem.requireID(),
+                name: armoryItem.name,
+                imageKey: armoryItem.imageKey,
+                aboutInfo: armoryItem.aboutInfo,
+                inStock: armoryItem.inStock,
+                category: .init(
+                    id: try armoryItem.category.requireID(),
+                    name: armoryItem.category.name
+                ),
+                categoryId: try armoryItem.category.requireID(),
+                createdAt: armoryItem.createdAt,
+                updatedAt: armoryItem.updatedAt,
+                deletedAt: armoryItem.deletedAt
+            ),
+            quantity: quantity
+        )
+    }
+    
+    // Helper method to map a LeaseModel (with fetched armory items) to an Armory.Lease.Detail
+    private func mapLeaseDetail(leaseModel: LeaseModel, armoryItemsWithQuantities: [(ArmoryItemModel, Int)], req: Request) async throws -> Armory.Lease.Detail {
+        let armoryItemsDetails = try await armoryItemsWithQuantities.asyncMap { try await mapArmoryItemDetail(armoryItem: $0, quantity: $1, req: req) }
+        
+        return .init(
+            id: try leaseModel.requireID(),
+            user: .init(
+                id: try leaseModel.user.requireID(),
+                firstName: leaseModel.user.firstName,
+                lastName: leaseModel.user.lastName,
+                imageKey: leaseModel.user.imageKey,
+                email: leaseModel.user.email,
+                isAdmin: leaseModel.user.isAdmin
+            ),
+            returned: leaseModel.returned,
+            armoryItems: armoryItemsDetails,
+            createdAt: leaseModel.createdAt,
+            updatedAt: leaseModel.updatedAt,
+            deletedAt: leaseModel.deletedAt
+        )
+    }
+    
     func createApi(_ req: Request) async throws -> DetailObject {
         let input = try req.content.decode(CreateObject.self)
         let jwtUser = try req.auth.require(JWTUser.self)
@@ -173,11 +234,14 @@ extension UserLeasesApiController {
         
         let leaseModelId = try leaseModel.requireID()
         
+        // If lease is opened don't delete it. It needs to be closed first and than deleted.
+        if !leaseModel.returned { throw ArmoryErrors.leaseDeleteFailed(leaseId: leaseModelId) }
+        
         // Start a transaction to ensure atomic updates
-        try await req.db.transaction { db in
+//        try await req.db.transaction { db in
             // Restore stock for each armory item based on the quantity in the lease
             for leaseItem in leaseItems {
-                guard let armoryItem = try await ArmoryItemModel.find(leaseItem.armoryItemId, on: db) else {
+                guard let armoryItem = try await ArmoryItemModel.find(leaseItem.armoryItemId, on: req.db) else {
                     throw ArmoryErrors.armoryItemNotFound
                 }
                 
@@ -185,7 +249,7 @@ extension UserLeasesApiController {
                 armoryItem.inStock += leaseItem.quantity
                 
                 // Save the updated armory item
-                try await armoryItem.save(on: db)
+                try await armoryItem.save(on: req.db)
                 try await armoryItem.$category.load(on: req.db)
                 
                 let updatedArmoryItem: Armory.Item.Detail = .init(
@@ -202,13 +266,13 @@ extension UserLeasesApiController {
                     deletedAt: armoryItem.deletedAt)
                 
                 try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemUpdated, updatedArmoryItem)
-            }
+//            }
             
             // Delete the lease items
-            try await leaseItems.delete(on: db)
+            try await leaseItems.delete(on: req.db)
             
             // Delete the lease itself
-            try await leaseModel.delete(on: db)
+            try await leaseModel.delete(on: req.db)
         }
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .leaseDeleted, leaseModelId)
@@ -230,41 +294,9 @@ extension UserLeasesApiController {
             .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
             .all()
         
-        var armoryItemsWithCategories: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
+        let armoryItemsWithQuantities = try await fetchArmoryItemsForLease(leaseModel: leaseModel, req: req)
         
-        for leaseItem in leaseItems {
-            let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-            try await armoryItem.$category.load(on: req.db)
-            
-            armoryItemsWithCategories.append((armoryItem, leaseItem.quantity))
-        }
-        
-        
-        return .init(id: try leaseModel.requireID(),
-                     user: .init(id: try leaseModel.user.requireID(),
-                                 firstName: leaseModel.user.firstName,
-                                 lastName: leaseModel.user.lastName,
-                                 imageKey: leaseModel.user.imageKey,
-                                 email: leaseModel.user.email,
-                                 isAdmin: leaseModel.user.isAdmin),
-                     returned: leaseModel.returned,
-                     armoryItems: try armoryItemsWithCategories.map { armoryItem, quantity in
-                .init(armoryItem: .init(id: try armoryItem.requireID(),
-                                        name: armoryItem.name,
-                                        imageKey: armoryItem.imageKey,
-                                        aboutInfo: armoryItem.aboutInfo,
-                                        inStock: armoryItem.inStock,
-                                        category: .init(id: try armoryItem.category.requireID(),
-                                                        name: armoryItem.category.name),
-                                        categoryId: try armoryItem.category.requireID(),
-                                        createdAt: armoryItem.createdAt,
-                                        updatedAt: armoryItem.updatedAt,
-                                        deletedAt: armoryItem.deletedAt),
-                      quantity: quantity) },
-                     createdAt: leaseModel.createdAt,
-                     updatedAt: leaseModel.updatedAt,
-                     deletedAt: leaseModel.deletedAt
-        )
+        return try await mapLeaseDetail(leaseModel: leaseModel, armoryItemsWithQuantities: armoryItemsWithQuantities, req: req)
     }
     
     func updateApi(_ req: Request) async throws -> DetailObject {
@@ -334,59 +366,16 @@ extension UserLeasesApiController {
         var leases: [Armory.Lease.Detail] = []
         
         for leaseModel in models.items {
-            let leaseItems = try await LeaseItemModel.query(on: req.db)
-                .filter(\.$leaseId == leaseModel.requireID())
-                .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
-                .all()
-            
-            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
-            
-            for leaseItem in leaseItems {
-                let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-                try await armoryItem.$category.load(on: req.db)
-                
-                armoryItems.append((armoryItem, leaseItem.quantity))
-            }
-            
-            leases.append(.init(id: try leaseModel.requireID(),
-                                user: .init(id: try leaseModel.user.requireID(),
-                                            firstName: leaseModel.user.firstName,
-                                            lastName: leaseModel.user.lastName,
-                                            imageKey: leaseModel.user.imageKey,
-                                            email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin),
-                                returned: leaseModel.returned,
-                                armoryItems: try armoryItems.map { armoryItem, quantity in
-                    .init(armoryItem: .init(id: try armoryItem.requireID(),
-                                            name: armoryItem.name,
-                                            imageKey: armoryItem.imageKey,
-                                            aboutInfo: armoryItem.aboutInfo,
-                                            inStock: armoryItem.inStock,
-                                            category: .init(id: armoryItem.category.id!,
-                                                            name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID(),
-                                            createdAt: armoryItem.createdAt,
-                                            updatedAt: armoryItem.updatedAt,
-                                            deletedAt: armoryItem.deletedAt),
-                          quantity: quantity)},
-                                createdAt: leaseModel.createdAt,
-                                updatedAt: leaseModel.updatedAt,
-                                deletedAt: leaseModel.deletedAt
-                               )
-            )
+            let armoryItemsWithQuantities = try await fetchArmoryItemsForLease(leaseModel: leaseModel, req: req)
+            let leaseDetail = try await mapLeaseDetail(leaseModel: leaseModel, armoryItemsWithQuantities: armoryItemsWithQuantities, req: req)
+            leases.append(leaseDetail)
         }
-        
-        
         
         return .init(leases: leases, metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total))
     }
     
     func getUserLeases(_ req: Request) async throws -> ListObject {
         guard let userIdString = req.parameters.get("userId"), let userId = UUID(uuidString: userIdString) else { throw AuthenticationError.userNotFound }
-        
-//        guard let user = try await UserAccountModel.find(userId, on: req.db) else {
-//            throw AuthenticationError.userNotFound
-//        }
         
         let models = try await paginatedList(req,
                                              queryBuilders: { $0.with(\.$user) },
@@ -396,47 +385,9 @@ extension UserLeasesApiController {
         var leases: [Armory.Lease.Detail] = []
         
         for leaseModel in models.items {
-            let leaseItems = try await LeaseItemModel.query(on: req.db)
-                .filter(\.$leaseId == leaseModel.requireID())
-                .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
-                .all()
-            
-            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
-            
-            for leaseItem in leaseItems {
-                let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-                try await armoryItem.$category.load(on: req.db)
-                
-                armoryItems.append((armoryItem, leaseItem.quantity))
-            }
-            
-            leases.append(.init(id: try leaseModel.requireID(),
-                                user: .init(id: try leaseModel.user.requireID(),
-                                            firstName: leaseModel.user.firstName,
-                                            lastName: leaseModel.user.lastName,
-                                            imageKey: leaseModel.user.imageKey,
-                                            email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin),
-                                returned: leaseModel.returned,
-                                armoryItems: try armoryItems.map { armoryItem, quantity in
-                    .init(armoryItem: .init(id: try armoryItem.requireID(),
-                                            name: armoryItem.name,
-                                            imageKey: armoryItem.imageKey,
-                                            aboutInfo: armoryItem.aboutInfo,
-                                            inStock: armoryItem.inStock,
-                                            category: .init(id: armoryItem.category.id!,
-                                                            name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID(),
-                                            createdAt: armoryItem.createdAt,
-                                            updatedAt: armoryItem.updatedAt,
-                                            deletedAt: armoryItem.deletedAt
-                                           ),
-                          quantity: quantity)},
-                                createdAt: leaseModel.createdAt,
-                                updatedAt: leaseModel.updatedAt,
-                                deletedAt: leaseModel.deletedAt
-                               )
-            )
+            let armoryItemsWithQuantities = try await fetchArmoryItemsForLease(leaseModel: leaseModel, req: req)
+            let leaseDetail = try await mapLeaseDetail(leaseModel: leaseModel, armoryItemsWithQuantities: armoryItemsWithQuantities, req: req)
+            leases.append(leaseDetail)
         }
         
         return .init(leases: leases, metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total))
@@ -459,47 +410,9 @@ extension UserLeasesApiController {
         var leases: [Armory.Lease.Detail] = []
         
         for leaseModel in models.items {
-            let leaseItems = try await LeaseItemModel.query(on: req.db)
-                .filter(\.$leaseId == leaseModel.requireID())
-                .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
-                .all()
-            
-            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
-            
-            for leaseItem in leaseItems {
-                let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-                try await armoryItem.$category.load(on: req.db)
-                
-                armoryItems.append((armoryItem, leaseItem.quantity))
-            }
-            
-            leases.append(.init(id: try leaseModel.requireID(),
-                                user: .init(id: try leaseModel.user.requireID(),
-                                            firstName: leaseModel.user.firstName,
-                                            lastName: leaseModel.user.lastName,
-                                            imageKey: leaseModel.user.imageKey,
-                                            email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin),
-                                returned: leaseModel.returned,
-                                armoryItems: try armoryItems.map { armoryItem, quantity in
-                    .init(armoryItem: .init(id: try armoryItem.requireID(),
-                                            name: armoryItem.name,
-                                            imageKey: armoryItem.imageKey,
-                                            aboutInfo: armoryItem.aboutInfo,
-                                            inStock: armoryItem.inStock,
-                                            category: .init(id: armoryItem.category.id!,
-                                                            name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID(),
-                                            createdAt: armoryItem.createdAt,
-                                            updatedAt: armoryItem.updatedAt,
-                                            deletedAt: armoryItem.deletedAt
-                                           ),
-                          quantity: quantity)},
-                                createdAt: leaseModel.createdAt,
-                                updatedAt: leaseModel.updatedAt,
-                                deletedAt: leaseModel.deletedAt
-                               )
-            )
+            let armoryItemsWithQuantities = try await fetchArmoryItemsForLease(leaseModel: leaseModel, req: req)
+            let leaseDetail = try await mapLeaseDetail(leaseModel: leaseModel, armoryItemsWithQuantities: armoryItemsWithQuantities, req: req)
+            leases.append(leaseDetail)
         }
         
         return .init(leases: leases, metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total))
@@ -516,46 +429,9 @@ extension UserLeasesApiController {
         var leases: [Armory.Lease.Detail] = []
         
         for leaseModel in models.items {
-            let leaseItems = try await LeaseItemModel.query(on: req.db)
-                .filter(\.$leaseId == leaseModel.requireID())
-                .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
-                .all()
-            
-            var armoryItems: [(armoryItem: ArmoryItemModel, quantity: Int)] = []
-            
-            for leaseItem in leaseItems {
-                let armoryItem = try leaseItem.joined(ArmoryItemModel.self)
-                try await armoryItem.$category.load(on: req.db)
-                
-                armoryItems.append((armoryItem, leaseItem.quantity))
-            }
-            
-            leases.append(.init(id: try leaseModel.requireID(),
-                                user: .init(id: try leaseModel.user.requireID(),
-                                            firstName: leaseModel.user.firstName,
-                                            lastName: leaseModel.user.lastName,
-                                            imageKey: leaseModel.user.imageKey,
-                                            email: leaseModel.user.email,
-                                            isAdmin: leaseModel.user.isAdmin),
-                                returned: leaseModel.returned,
-                                armoryItems: try armoryItems.map { armoryItem, quantity in
-                    .init(armoryItem: .init(id: try armoryItem.requireID(),
-                                            name: armoryItem.name,
-                                            imageKey: armoryItem.imageKey,
-                                            aboutInfo: armoryItem.aboutInfo,
-                                            inStock: armoryItem.inStock,
-                                            category: .init(id: armoryItem.category.id!,
-                                                            name: armoryItem.category.name),
-                                            categoryId: try armoryItem.category.requireID(),
-                                            createdAt: armoryItem.createdAt,
-                                            updatedAt: armoryItem.updatedAt,
-                                            deletedAt: armoryItem.deletedAt),
-                          quantity: quantity)},
-                                createdAt: leaseModel.createdAt,
-                                updatedAt: leaseModel.updatedAt,
-                                deletedAt: leaseModel.deletedAt
-                               )
-            )
+            let armoryItemsWithQuantities = try await fetchArmoryItemsForLease(leaseModel: leaseModel, req: req)
+            let leaseDetail = try await mapLeaseDetail(leaseModel: leaseModel, armoryItemsWithQuantities: armoryItemsWithQuantities, req: req)
+            leases.append(leaseDetail)
         }
         
         return leases
