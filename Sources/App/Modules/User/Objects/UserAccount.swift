@@ -11,7 +11,7 @@ import Vapor
 
 extension User.Account {
     struct List: Codable {
-        let users: [Detail]
+        let users: [Public]
         let metadata: Metadata?
         
         struct Metadata: Codable {
@@ -36,6 +36,13 @@ extension User.Account {
         let imageKey: Int?
         let email: String
         let isAdmin: Bool
+    }
+    
+    struct Public: Codable {
+        let id: UUID
+        let firstName: String
+        let lastName: String
+        let imageKey: Int?
     }
     
     struct Create: Codable {

@@ -241,13 +241,11 @@ struct UserApiController: ListController {
         
         // Map models to response
         let userList = try models.items.map { user in
-            User.Account.Detail(
+            User.Account.Public(
                 id: try user.requireID(),
                 firstName: user.firstName,
                 lastName: user.lastName,
-                imageKey: user.imageKey,
-                email: user.email,
-                isAdmin: user.isAdmin
+                imageKey: user.imageKey
             )
         }
         
