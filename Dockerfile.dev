@@ -1,0 +1,26 @@
+# ================================
+# Development Image
+# ================================
+FROM swift:5.10-jammy as dev
+
+# Install debugging and development tools
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
+    && apt-get -q update \
+    && apt-get -q install -y \
+        lldb \
+        vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependencies to cache layer
+COPY Package.swift Package.resolved ./
+RUN swift package resolve --skip-update \
+    $([ -f ./Package.resolved ] && echo "--force-resolved-versions" || true)
+
+# Copy the entire project (live updates will be mounted via volumes)
+COPY . .
+
+# Run the project in debug mode (hot reload via volumes)
+CMD ["swift", "run", "App", "--", "serve", "--env", "development", "--hostname", "0.0.0.0", "--port", "8080"]

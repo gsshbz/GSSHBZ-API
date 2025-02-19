@@ -1,0 +1,79 @@
+# ================================
+# Build Image
+# ================================
+# Fly.io runs on x86_64 (amd64), so this prevents any unexpected architecture mismatches.
+FROM --platform=linux/amd64 swift:5.10-jammy as build
+
+# Install system updates
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
+    && apt-get -q update \
+    && apt-get -q dist-upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set build directory
+WORKDIR /build
+
+# Copy dependencies first for caching
+COPY Package.* ./
+RUN swift package resolve --skip-update \
+    $([ -f ./Package.resolved ] && echo "--force-resolved-versions" || true)
+
+# Copy the entire source code
+COPY . .
+
+# Build optimized binary
+RUN swift build -c release --static-swift-stdlib \
+    -Xlinker -u -Xlinker _swift_backtrace_isThunkFunction
+    
+# Copy resources bundled by SPM to staging area
+RUN find -L "$(swift build --package-path /build -c release --show-bin-path)/" -regex '.*\.resources$' -exec cp -Ra {} ./ \;
+
+# Copy any resources from the public directory and views directory if the directories exist
+# Ensure that by default, neither the directory nor any of its contents are writable.
+RUN [ -d /build/Public ] && { mv /build/Public ./Public && chmod -R a-w ./Public; } || true
+RUN mkdir -p /build/Resources
+RUN [ -d /build/Resources ] && { mv /build/Resources ./Resources && chmod -R a-w ./Resources; } || true
+
+
+# ================================
+# Runtime Image
+# ================================
+# Fly.io runs on x86_64 (amd64), so this prevents any unexpected architecture mismatches.
+FROM --platform=linux/amd64 swift:5.10-jammy-slim
+
+# Install essential runtime packages
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
+    && apt-get -q update \
+    && apt-get -q install -y \
+        ca-certificates \
+        tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a vapor user and group
+RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app vapor
+
+# Set working directory
+WORKDIR /app
+
+# Copy built executable and resources from build stage
+COPY --from=build --chown=vapor:vapor /build/.build/release/App ./
+COPY --from=build --chown=vapor:vapor /build/Public ./Public
+COPY --from=build --chown=vapor:vapor /build/Resources ./Resources
+
+# Copy configuration files
+COPY --from=build --chown=vapor:vapor /build/.env.production /app/.env
+COPY --from=build --chown=vapor:vapor /build/keypair.jwks /app
+COPY --from=build --chown=vapor:vapor /build/ca-certificate.crt /app
+
+# Set environment variables
+ENV SWIFT_BACKTRACE=enable=yes,sanitize=yes,threads=all,images=all,interactive=no
+
+# Run the app as a non-root user
+USER vapor:vapor
+
+# Expose port for the application
+EXPOSE 8080
+
+# Start the server in production mode
+ENTRYPOINT ["./App"]
+CMD ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8080"]
