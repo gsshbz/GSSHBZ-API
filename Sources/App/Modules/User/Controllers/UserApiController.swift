@@ -16,6 +16,7 @@ extension User.Account.Create: Content {}
 extension User.Account.LoginRequest: Content {}
 extension User.Account.List: Content {}
 extension User.Account.Detail: Content {}
+extension User.Account.Public: Content {}
 
 extension User.Account.LoginRequest: Validatable {
     static func validations(_ validations: inout Validations) {
@@ -164,6 +165,21 @@ struct UserApiController: ListController {
         return User.Token.AccessTokenResponse(refreshToken: token, accessToken: accessToken)
     }
     
+    func getUserApi(_ req: Request) async throws -> User.Account.Public {
+        guard let userIdString = req.parameters.get("userId"), let userId = UUID(uuidString: userIdString) else { throw AuthenticationError.userNotFound }
+        
+        guard let user = try await UserAccountModel.find(userId, on: req.db) else { throw AuthenticationError.userNotFound }
+        
+        let userPublic = User.Account.Public(
+            id: try user.requireID(),
+            firstName: user.firstName,
+            lastName: user.lastName,
+            imageKey: user.imageKey
+        )
+        
+        return userPublic
+    }
+    
     func getCurrentUserHandler(_ req: Request) async throws -> User.Account.Detail {
         let jwtUser = try req.auth.require(JWTUser.self)
         
@@ -225,7 +241,7 @@ struct UserApiController: ListController {
         return userDetails
     }
     
-    func getAllUsersApi(_ req: Request) async throws -> User.Account.List {
+    func searchUsersApi(_ req: Request) async throws -> User.Account.List {
         let searchQuery = req.query[String.self, at: "search"]?.lowercased()
         
         // Use paginatedList with queryBuilders to apply filters
