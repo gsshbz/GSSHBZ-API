@@ -29,8 +29,10 @@ struct UserRouter: RouteCollection {
         apiRoutes.on(.GET, "current-user", use: apiController.getCurrentUserHandler)
         
         apiRoutes.on(.POST, "user", use: apiController.updateUserApi)
+        
+        apiRoutes.on(.GET, "user", ":userId", use: apiController.getUserApi)
                 
-        apiRoutes.on(.GET, "users", use: apiController.getAllUsersApi)
+        apiRoutes.on(.GET, "users", use: apiController.searchUsersApi)
         
         resetPassword.on(.POST, use: apiController.resetPasswordHandler)
         resetPassword.on(.GET, "verify", use: apiController.verifyResetPasswordTokenHandler)
