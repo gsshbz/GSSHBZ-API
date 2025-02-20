@@ -49,6 +49,7 @@ services:
     
 # DEVELOPMENT SERVICE
   app-dev:
+      user: "0" # Runs as root
       image: gsshbz-dev
       build:
         context: .
