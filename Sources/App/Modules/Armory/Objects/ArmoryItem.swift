@@ -39,7 +39,7 @@ public extension Armory.Item {
         let name: String
         let imageKey: String?
         let aboutInfo: String
-        let inStock: Int?
+        let inStock: Int
         let categoryId: UUID?
     }
     

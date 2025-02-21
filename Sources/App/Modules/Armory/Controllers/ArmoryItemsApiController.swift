@@ -101,7 +101,11 @@ struct ArmoryItemsApiController: ListController {
 //            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
 //        }
         
-        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? "0", aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!, inStock: input.inStock ?? 0)
+        if input.inStock < 0 {
+            throw ArmoryErrors.armoryItemQuantityNotSufficient
+        }
+        
+        let armoryModel = ArmoryItemModel(name: input.name, imageKey: input.imageKey ?? "0", aboutInfo: input.aboutInfo, categoryId: input.categoryId ?? defaultCategory.id!, inStock: input.inStock)
         
         try await armoryModel.save(on: req.db)
         try await armoryModel.$category.load(on: req.db)
@@ -187,6 +191,9 @@ struct ArmoryItemsApiController: ListController {
         armoryModel.name = input.name ?? armoryModel.name
         armoryModel.imageKey = /*shouldUpdateImage ? publicImageUrl : */ input.imageKey ?? armoryModel.imageKey
         armoryModel.aboutInfo = input.aboutInfo ?? armoryModel.aboutInfo
+        if let inStock = input.inStock, inStock < 0 {
+            throw ArmoryErrors.armoryItemQuantityNotSufficient
+        }
         armoryModel.inStock = input.inStock ?? armoryModel.inStock
         armoryModel.$category.id = input.categoryId ?? armoryModel.$category.id
         
