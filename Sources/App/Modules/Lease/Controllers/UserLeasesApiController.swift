@@ -32,7 +32,7 @@ struct UserLeasesApiController: ListController {
         
         baseRoutes.on(.GET, use: listApi)
         baseRoutes.on(.POST, use: createApi)
-        baseRoutes.on(.GET, "user-leases", use: getActiveUserLeases)
+        baseRoutes.on(.GET, "user-leases", use: getCurrentUserLeases)
         baseRoutes.on(.GET, "user-leases", ":userId", use: getUserLeases)
         
         existingModelRoutes.on(.GET, use: detailApi)
@@ -377,10 +377,12 @@ extension UserLeasesApiController {
     func getUserLeases(_ req: Request) async throws -> ListObject {
         guard let userIdString = req.parameters.get("userId"), let userId = UUID(uuidString: userIdString) else { throw AuthenticationError.userNotFound }
         
-        let models = try await paginatedList(req,
-                                             queryBuilders: { $0.with(\.$user) },
-                                             { $0.filter(\.$user.$id == userId) }
-        )
+        let models = try await paginatedList(req, queryBuilders: {
+            $0.sort(\.$returned, .ascending)
+                .sort(\.$createdAt, .descending)
+                .filter(\.$user.$id == userId)
+                .with(\.$user)
+        })
         
         var leases: [Armory.Lease.Detail] = []
         
@@ -393,7 +395,7 @@ extension UserLeasesApiController {
         return .init(leases: leases, metadata: .init(page: models.metadata.page, per: models.metadata.per, total: models.metadata.total))
     }
     
-    func getActiveUserLeases(_ req: Request) async throws -> ListObject {
+    func getCurrentUserLeases(_ req: Request) async throws -> ListObject {
         let jwtUser = try req.auth.require(JWTUser.self)
         
         guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db) else {
@@ -402,10 +404,12 @@ extension UserLeasesApiController {
         
         let userId = try user.requireID()
         
-        let models = try await paginatedList(req,
-                                    queryBuilders: { $0.with(\.$user) },
-                                    { $0.filter(\.$user.$id == userId) }
-        )
+        let models = try await paginatedList(req, queryBuilders: {
+            $0.sort(\.$returned, .ascending)
+                .sort(\.$createdAt, .descending)
+                .filter(\.$user.$id == userId)
+                .with(\.$user)
+        })
         
         var leases: [Armory.Lease.Detail] = []
         
@@ -419,12 +423,16 @@ extension UserLeasesApiController {
     }
     
     func latestLeasesApi(_ req: Request) async throws -> [DetailObject] {
-        let twentyFourHoursAgo = Calendar.current.date(byAdding: .hour, value: -24, to: Date())!
-        
-        let models = try await paginatedList(req) { query in
-            query.with(\.$user)
-                .filter(\.$createdAt >= twentyFourHoursAgo)
+        guard let twentyFourHoursAgo = Calendar.current.date(byAdding: .hour, value: -24, to: Date()) else {
+            throw Abort(.internalServerError, reason: "Failed to calculate date range")
         }
+        
+        let models = try await paginatedList(req, queryBuilders: {
+            $0.sort(\.$returned, .ascending)
+                .sort(\.$createdAt, .descending)
+                .filter(\.$createdAt >= twentyFourHoursAgo)
+                .with(\.$user)
+        })
         
         var leases: [Armory.Lease.Detail] = []
         
