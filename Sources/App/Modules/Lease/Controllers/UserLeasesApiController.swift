@@ -120,7 +120,8 @@ extension UserLeasesApiController {
         
         // Process lease items
         let leaseItems = try input.items.map { item in
-            LeaseItemModel(leaseId: try leaseModel.requireID(), armoryItemId: item.armoryItemId, quantity: item.quantity)
+            guard item.quantity > 0 else { throw ArmoryErrors.armoryItemQuantityNotSufficient }
+            return LeaseItemModel(leaseId: try leaseModel.requireID(), armoryItemId: item.armoryItemId, quantity: item.quantity)
         }
         
         // Verify and update inStock in a single transaction

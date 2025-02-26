@@ -225,7 +225,22 @@ struct ArmoryItemsApiController: ListController {
         
         let armoryModelId = try armoryModel.requireID()
         
-        try await armoryModel.delete(on: req.db)
+        // 🔍 Check if the item is in any open leases
+        let hasOpenLeases = try await LeaseItemModel.query(on: req.db)
+            .join(LeaseModel.self, on: \LeaseItemModel.$leaseId == \LeaseModel.$id)
+            .filter(LeaseItemModel.self, \.$armoryItemId == armoryModelId)
+            .filter(LeaseModel.self, \.$returned == false) // Adjust this based on how you track open leases
+            .first() != nil
+        
+        if hasOpenLeases {
+            throw ArmoryErrors.notAllItemsReturned
+        }
+        
+        do {
+            try await armoryModel.delete(on: req.db)
+        } catch {
+            throw ArmoryErrors.armoryItemDeleteFailed(itemName: armoryModel.name)
+        }
         
         try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemDeleted, armoryModelId)
         

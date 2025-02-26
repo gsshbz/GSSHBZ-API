@@ -32,7 +32,7 @@ extension AuthenticationError: AbortError {
         case .emailTokenHasExpired:
             return .badRequest
         case .invalidEmailOrPassword:
-            return .unauthorized
+            return .badRequest
         case .refreshTokenOrUserNotFound:
             return .notFound
         case .userNotFound:
@@ -57,7 +57,7 @@ extension AuthenticationError: AbortError {
         case .emailAlreadyExists:
             return "A user with that email already exists"
         case .invalidEmailOrPassword:
-            return "Email or password was incorrect"
+            return "Email or password is incorrect"
         case .refreshTokenOrUserNotFound:
             return "User or refresh token was not found"
         case .refreshTokenHasExpired:

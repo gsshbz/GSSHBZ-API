@@ -23,6 +23,7 @@ enum ArmoryErrors: AppError {
     case armoryItemQuantityNotSufficient
     case armoryItemDeleteFailed(itemName: String)
     case armoryItemUpdateFailed(itemName: String)
+    case notAllItemsReturned
     
     // Leases
     case leaseNotFound
@@ -46,7 +47,7 @@ extension ArmoryErrors {
         case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound:
             return .notFound
             
-        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .leaseAlreadyOpened, .armoryItemQuantityNotSufficient:
+        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .leaseAlreadyOpened, .armoryItemQuantityNotSufficient, .notAllItemsReturned:
             return .conflict
             
         case .unauthorizedAccess:
@@ -92,6 +93,9 @@ extension ArmoryErrors {
         case .armoryItemUpdateFailed(itemName: let itemName):
             return "Armory item with name '\(itemName)' couldn't be updated."
             
+        case .notAllItemsReturned:
+            return "Please, return all items first."
+            
         case .leaseNotFound:
             return "Lease couldn't be found"
             
@@ -134,6 +138,7 @@ extension ArmoryErrors {
             
         case .duplicateCategoryName:
             return "duplicate_category_name"
+            
         case .categoryDeleteFailed:
             return "category_delete_failed"
             
@@ -148,6 +153,9 @@ extension ArmoryErrors {
             
         case .armoryItemUpdateFailed:
             return "armory_item_update_failed"
+            
+        case .notAllItemsReturned:
+            return "not_all_items_returned"
             
         case .leaseNotFound:
             return "lease_not_found"
@@ -172,10 +180,13 @@ extension ArmoryErrors {
             
         case .unauthorizedAccess:
             return "unauthorized_access"
+            
         case .newsArticleNotFound:
             return "news_article_not_found"
+            
         case .newsArticleDeleteFailed:
             return "news_article_delete_failed"
+            
         case .armoryItemQuantityNotSufficient:
             return "armory_item_quantity_not_sufficient"
         }
