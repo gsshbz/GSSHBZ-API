@@ -52,6 +52,7 @@ enum UserMigrations {
                 .unique(on: OAuthToken.FieldKeys.v1.value)
                 .create()
             
+            // MARK: - EmailTokenModel
             try await database.schema(EmailTokenModel.schema)
                 .id()
                 .field(EmailTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
@@ -61,6 +62,7 @@ enum UserMigrations {
                 .unique(on: EmailTokenModel.FieldKeys.v1.token)
                 .create()
             
+            // MARK: - PasswordTokenModel
             try await database.schema(PasswordTokenModel.schema)
                 .id()
                 .field(PasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
@@ -68,12 +70,21 @@ enum UserMigrations {
                 .field(PasswordTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
                 .create()
             
+            // MARK: - ResetPasswordTokenModel
             try await database.schema(ResetPasswordTokenModel.schema)
                 .id()
                 .field(ResetPasswordTokenModel.FieldKeys.v1.token, .string, .required)
                 .field(ResetPasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id))
                 .field(ResetPasswordTokenModel.FieldKeys.v1.createdAt, .datetime)
                 .unique(on: ResetPasswordTokenModel.FieldKeys.v1.token)
+                .create()
+            
+            try await database.schema(RegistrationTokenModel.schema)
+                .id()
+                .field(RegistrationTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(RegistrationTokenModel.FieldKeys.v1.isUsed, .bool, .required)
+                .field(RegistrationTokenModel.FieldKeys.v1.createdAt, .datetime)
+                .unique(on: RegistrationTokenModel.FieldKeys.v1.token)
                 .create()
         }
         
@@ -84,6 +95,7 @@ enum UserMigrations {
             try await database.schema(EmailTokenModel.schema).delete()
             try await database.schema(PasswordTokenModel.schema).delete()
             try await database.schema(ResetPasswordTokenModel.schema).delete()
+            try await database.schema(RegistrationTokenModel.schema).delete()
         }
     }
     

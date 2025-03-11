@@ -12,6 +12,7 @@ import Fluent
 extension User.Token.Detail: Content {}
 extension User.Token.AccessTokenRequest: Content {}
 extension User.Token.AccessTokenResponse: Content {}
+extension User.Token.RegistrationToken: Content {}
 extension User.Account.Create: Content {}
 extension User.Account.LoginRequest: Content {}
 extension User.Account.List: Content {}
@@ -32,6 +33,7 @@ extension User.Account.Create: Validatable {
 //        validations.add("username", as: String.self, is: .alphanumeric && .count(4...))
         validations.add("email", as: String.self, is: .email)
         validations.add("password", as: String.self, is: .count(8...))
+        validations.add("registrationToken", as: String.self, is: !.empty)
     }
 }
 
@@ -50,13 +52,29 @@ struct UserApiController: ListController {
             throw AuthenticationError.passwordsDontMatch
         }
         
+        #warning("Error should be localized")
+        // Verify registration code
+        guard let registrationToken = try await RegistrationTokenModel.query(on: req.db)
+            .filter(\.$code == registerRequest.registrationToken)
+            .filter(\.$isUsed == false)
+            .first() else {
+            throw Abort(.badRequest, reason: "Invalid or used registration code")
+        }
+        
         let hashedPassword = try await req.password
             .async
             .hash(registerRequest.password)
         
         let user = try await UserAccountModel.create(from: registerRequest, req: req, hash: hashedPassword, registrationType: .manual)
         
-        try await user.create(on: req.db)
+        // Use a transaction to ensure both operations succeed or fail together
+        try await req.db.transaction { database in
+            try await user.create(on: req.db)
+            
+            // Mark the registration token as used
+            registrationToken.isUsed = true
+            try await registrationToken.save(on: database)
+        }
         
         let token = req.random.generate(bits: 256)
         let refreshToken = try RefreshTokenModel(token: SHA256.hash(token), userId: user.requireID())
@@ -298,5 +316,24 @@ struct UserApiController: ListController {
         }
         
         return .noContent
+    }
+    
+    func createRegistrationTokenApi(_ req: Request) async throws -> User.Token.RegistrationToken {
+        // Ensure only admins can create codes
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db) else {
+            throw AuthenticationError.userNotFound
+        }
+        
+        guard user.isAdmin else { throw ArmoryErrors.unauthorizedAccess }
+        
+        // Generate a random code or use a provided one
+        let randomToken = req.random.generate(bits: 128).base64String()
+        
+        let tokenModel = RegistrationTokenModel(code: randomToken)
+        try await tokenModel.create(on: req.db)
+        
+        return .init(id: try tokenModel.requireID(), token: tokenModel.code, isUsed: tokenModel.isUsed, createdAt: tokenModel.createdAt)
     }
 }

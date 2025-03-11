@@ -34,6 +34,8 @@ struct UserRouter: RouteCollection {
                 
         apiRoutes.on(.GET, "users", use: apiController.searchUsersApi)
         
+        apiRoutes.on(.GET, "generate-registration-token", use: apiController.createRegistrationTokenApi)
+        
         resetPassword.on(.POST, use: apiController.resetPasswordHandler)
         resetPassword.on(.GET, "verify", use: apiController.verifyResetPasswordTokenHandler)
     }

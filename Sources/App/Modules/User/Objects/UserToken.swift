@@ -28,4 +28,11 @@ extension User.Token {
     struct ResetPasswordRequest: Codable {
         let email: String
     }
+    
+    struct RegistrationToken: Codable {
+        let id: UUID
+        let token: String
+        let isUsed: Bool
+        let createdAt: Date?
+    }
 }

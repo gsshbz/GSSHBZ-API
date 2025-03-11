@@ -54,6 +54,7 @@ extension User.Account {
         let phoneNumber: String?
         let address: String?
         let imageKey: Int?
+        let registrationToken: String
     }
     
     struct Update: Codable {
