@@ -78,14 +78,6 @@ enum UserMigrations {
                 .field(ResetPasswordTokenModel.FieldKeys.v1.createdAt, .datetime)
                 .unique(on: ResetPasswordTokenModel.FieldKeys.v1.token)
                 .create()
-            
-            try await database.schema(RegistrationTokenModel.schema)
-                .id()
-                .field(RegistrationTokenModel.FieldKeys.v1.token, .string, .required)
-                .field(RegistrationTokenModel.FieldKeys.v1.isUsed, .bool, .required)
-                .field(RegistrationTokenModel.FieldKeys.v1.createdAt, .datetime)
-                .unique(on: RegistrationTokenModel.FieldKeys.v1.token)
-                .create()
         }
         
         func revert(on database: Database) async throws {
@@ -95,7 +87,6 @@ enum UserMigrations {
             try await database.schema(EmailTokenModel.schema).delete()
             try await database.schema(PasswordTokenModel.schema).delete()
             try await database.schema(ResetPasswordTokenModel.schema).delete()
-            try await database.schema(RegistrationTokenModel.schema).delete()
         }
     }
     
@@ -116,6 +107,23 @@ enum UserMigrations {
         
         func revert(on database: Database) async throws {
             
+        }
+    }
+    
+    struct v2: AsyncMigration {
+        // MARK: - Registration Token Model
+        func prepare(on database: any Database) async throws {
+            try await database.schema(RegistrationTokenModel.schema)
+                .id()
+                .field(RegistrationTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(RegistrationTokenModel.FieldKeys.v1.isUsed, .bool, .required)
+                .field(RegistrationTokenModel.FieldKeys.v1.createdAt, .datetime)
+                .unique(on: RegistrationTokenModel.FieldKeys.v1.token)
+                .create()
+        }
+        
+        func revert(on database: any Database) async throws {
+            try await database.schema(RegistrationTokenModel.schema).delete()
         }
     }
 }
