@@ -20,6 +20,9 @@ enum AuthenticationError: AppError {
     case emailNotVerified
     case invalidPasswordToken
     case passwordTokenHasExpired
+    case missingRegistrationToken
+    case multipleValidationFailures([String]) // For when multiple fields fail
+    case invalidField(String) // For other validation failures
 }
 
 extension AuthenticationError: AbortError {
@@ -47,6 +50,12 @@ extension AuthenticationError: AbortError {
             return .notFound
         case .passwordTokenHasExpired:
             return .unauthorized
+        case .missingRegistrationToken:
+            return .badRequest
+        case .multipleValidationFailures(_):
+            return .badRequest
+        case .invalidField(_):
+            return .badRequest
         }
     }
     
@@ -74,6 +83,12 @@ extension AuthenticationError: AbortError {
             return "Invalid reset password token"
         case .passwordTokenHasExpired:
             return "Reset password token has expired"
+        case .missingRegistrationToken:
+            return "Registration token is required"
+        case .multipleValidationFailures(let fields):
+            return "Validation failed for fields: \(fields.joined(separator: ", "))"
+        case .invalidField(let field):
+            return "Validation failed for field: \(field)"
         }
     }
     
@@ -101,6 +116,12 @@ extension AuthenticationError: AbortError {
             return "invalid_password_token"
         case .passwordTokenHasExpired:
             return "password_token_has_expired"
+        case .missingRegistrationToken:
+            return "missing_registration_token"
+        case .multipleValidationFailures:
+            return "validation_errors"
+        case .invalidField(let field):
+            return "invalid_\(field)"
         }
     }
 }

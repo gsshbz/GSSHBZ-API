@@ -28,10 +28,9 @@ extension User.Account.LoginRequest: Validatable {
 
 extension User.Account.Create: Validatable {
     static func validations(_ validations: inout Validations) {
-        validations.add("firstName", as: String.self, is: .ascii)
-        validations.add("lastName", as: String.self, is: .ascii)
-//        validations.add("username", as: String.self, is: .alphanumeric && .count(4...))
-        validations.add("email", as: String.self, is: .email)
+        validations.add("firstName", as: String.self, is: .ascii && !.empty)
+        validations.add("lastName", as: String.self, is: .ascii && !.empty)
+        validations.add("email", as: String.self, is: .email && !.empty)
         validations.add("password", as: String.self, is: .count(8...))
         validations.add("registrationToken", as: String.self, is: !.empty)
     }
@@ -44,7 +43,25 @@ struct UserApiController: ListController {
     typealias DatabaseModel = UserAccountModel
     
     func signUpApi(_ req: Request) async throws -> User.Token.Detail {
-        try User.Account.Create.validate(content: req)
+        do {
+            try User.Account.Create.validate(content: req)
+        } catch let error as ValidationsError {
+            // Convert Vapor's validation error to your custom error
+            let failedFields = error.failures.map { $0.key }
+            
+            if failedFields.count > 1 {
+                throw AuthenticationError.multipleValidationFailures(failedFields.map { $0.stringValue })
+            } else if failedFields.contains("email") {
+                throw AuthenticationError.invalidEmailOrPassword
+            } else if failedFields.contains("registrationToken") {
+                throw AuthenticationError.missingRegistrationToken
+            } else if let field = failedFields.first {
+                throw AuthenticationError.invalidField(field.stringValue)
+            } else {
+                // Fallback
+                throw AuthenticationError.invalidField("unknown")
+            }
+        }
         
         let registerRequest = try req.content.decode(User.Account.Create.self)
         
@@ -52,7 +69,13 @@ struct UserApiController: ListController {
             throw AuthenticationError.passwordsDontMatch
         }
         
-        #warning("Error should be localized")
+        // Check if the email already exists before attempting to create the user
+        if let _ = try await UserAccountModel.query(on: req.db)
+            .filter(\.$email == registerRequest.email)
+            .first() {
+            throw AuthenticationError.emailAlreadyExists
+        }
+        
         // Verify registration code
         guard let registrationToken = try await RegistrationTokenModel.query(on: req.db)
             .filter(\.$code == registerRequest.registrationToken)
@@ -69,7 +92,7 @@ struct UserApiController: ListController {
         
         // Use a transaction to ensure both operations succeed or fail together
         try await req.db.transaction { database in
-            try await user.create(on: req.db)
+            try await user.create(on: database)
             
             // Mark the registration token as used
             registrationToken.isUsed = true
@@ -328,10 +351,32 @@ struct UserApiController: ListController {
         
         guard user.isAdmin else { throw ArmoryErrors.unauthorizedAccess }
         
-        // Generate a random code or use a provided one
-        let randomToken = req.random.generate(bits: 128).base64String()
+        // Generate and verify uniqueness of a 6-character token
+        var token: String
+        var isUnique = false
         
-        let tokenModel = RegistrationTokenModel(code: randomToken)
+        repeat {
+            // Generate a random 6-character token
+            let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            var tokenChars = [Character]()
+            
+            for _ in 0..<6 {
+                let randomInt = Int.random(in: 0..<characters.count)
+                let index = characters.index(characters.startIndex, offsetBy: randomInt)
+                tokenChars.append(characters[index])
+            }
+            
+            token = String(tokenChars)
+            
+            // Check if token already exists
+            let existingToken = try await RegistrationTokenModel.query(on: req.db)
+                .filter(\.$code == token)
+                .first()
+            
+            isUnique = existingToken == nil
+        } while !isUnique
+        
+        let tokenModel = RegistrationTokenModel(code: token)
         try await tokenModel.create(on: req.db)
         
         return .init(id: try tokenModel.requireID(), token: tokenModel.code, isUsed: tokenModel.isUsed, createdAt: tokenModel.createdAt)

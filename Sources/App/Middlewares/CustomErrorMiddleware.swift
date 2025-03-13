@@ -14,7 +14,11 @@ struct CustomErrorMiddleware: Middleware {
             let identifier: String
             let reason: String
 
-            if let abortError = error as? AbortError {
+            if let validationError = error as? ValidationsError {
+                status = validationError.status
+                identifier = (validationError as? AppError)?.identifier ?? "unknown_error"
+                reason = validationError.reason
+            } else if let abortError = error as? AbortError {
                 status = abortError.status
                 identifier = (abortError as? AppError)?.identifier ?? "unknown_error"
                 reason = abortError.reason
@@ -22,6 +26,8 @@ struct CustomErrorMiddleware: Middleware {
                 status = .internalServerError
                 identifier = "internal_server_error"
                 reason = "An internal server error occurred"
+                
+                request.logger.error("Internal server error to investigate: \(error)")
             }
 
             let errorResponse = ErrorResponse(identifier: identifier, status: status.code, reason: reason)
