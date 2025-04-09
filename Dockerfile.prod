@@ -1,8 +1,12 @@
 # ================================
 # Build Image
 # ================================
-# Fly.io runs on x86_64 (amd64), so this prevents any unexpected architecture mismatches.
-FROM --platform=linux/amd64 swift:5.10-jammy as build
+# Use buildx for multi-platform support
+FROM --platform=$BUILDPLATFORM swift:5.10-jammy as build
+
+# Set ARG for platform targeting
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
 
 # Install system updates
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -23,7 +27,7 @@ COPY . .
 
 # Build optimized binary
 RUN swift build -c release --static-swift-stdlib \
-    -Xlinker -u -Xlinker _swift_backtrace_isThunkFunction
+    -Xlinker -u -Xlinker *swift*backtrace_isThunkFunction
     
 # Copy resources bundled by SPM to staging area
 RUN find -L "$(swift build --package-path /build -c release --show-bin-path)/" -regex '.*\.resources$' -exec cp -Ra {} ./ \;
@@ -34,12 +38,10 @@ RUN [ -d /build/Public ] && { mv /build/Public ./Public && chmod -R a-w ./Public
 RUN mkdir -p /build/Resources
 RUN [ -d /build/Resources ] && { mv /build/Resources ./Resources && chmod -R a-w ./Resources; } || true
 
-
 # ================================
 # Runtime Image
 # ================================
-# Fly.io runs on x86_64 (amd64), so this prevents any unexpected architecture mismatches.
-FROM --platform=linux/amd64 swift:5.10-jammy-slim
+FROM --platform=$TARGETPLATFORM swift:5.10-jammy-slim
 
 # Install essential runtime packages
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -47,6 +49,7 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
     && apt-get -q install -y \
         ca-certificates \
         tzdata \
+        curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a vapor user and group
@@ -65,14 +68,55 @@ COPY --from=build --chown=vapor:vapor /build/.env.production /app/.env
 COPY --from=build --chown=vapor:vapor /build/keypair.jwks /app
 COPY --from=build --chown=vapor:vapor /build/ca-certificate.crt /app
 
+# Add healthcheck script
+COPY --chown=vapor:vapor <<EOF /app/healthcheck.sh
+#!/bin/bash
+curl -f http://localhost:8080/health || exit 1
+EOF
+
+RUN chmod +x /app/healthcheck.sh
+
 # Set environment variables
 ENV SWIFT_BACKTRACE=enable=yes,sanitize=yes,threads=all,images=all,interactive=no
+ENV VAPOR_ENV=production
+
+# Add database connection retries script
+COPY --chown=vapor:vapor <<EOF /app/wait-for-db.sh
+#!/bin/bash
+set -e
+
+host="\${DATABASE_HOST:-db}"
+port="\${DATABASE_PORT:-5432}"
+user="\${DATABASE_USERNAME:-gsshbz_username}"
+password="\${DATABASE_PASSWORD:-gsshbz_password}"
+dbname="\${DATABASE_NAME:-gsshbz_database}"
+
+echo "Waiting for PostgreSQL..."
+
+for i in {1..30}; do
+  if PGPASSWORD="\$password" pg_isready -h "\$host" -p "\$port" -U "\$user" -d "\$dbname" -t 1 >/dev/null 2>&1; then
+    echo "PostgreSQL is ready!"
+    exit 0
+  fi
+  echo "Waiting for PostgreSQL... \$i/30"
+  sleep 1
+done
+
+echo "Failed to connect to PostgreSQL"
+exit 1
+EOF
+
+RUN chmod +x /app/wait-for-db.sh
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 
 # Run the app as a non-root user
 USER vapor:vapor
 
 # Expose port for the application
 EXPOSE 8080
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD ["./healthcheck.sh"]
 
 # Start the server in production mode
 ENTRYPOINT ["./App"]

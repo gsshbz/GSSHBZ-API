@@ -136,66 +136,12 @@
       }
     },
     {
-      "identity" : "queues",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/queues.git",
-      "state" : {
-        "revision" : "7511f2d573f032c4d5e6929d2bc36f5191d1c424",
-        "version" : "1.17.0"
-      }
-    },
-    {
-      "identity" : "queues-redis-driver",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/queues-redis-driver.git",
-      "state" : {
-        "revision" : "89a4350c1a6eb03b5693f481817741ff36a8cdcc",
-        "version" : "1.1.1"
-      }
-    },
-    {
-      "identity" : "redis",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/redis.git",
-      "state" : {
-        "revision" : "2a8d3e4639b90b39b74309b54216bdfd9cb52b41",
-        "version" : "4.10.0"
-      }
-    },
-    {
-      "identity" : "redistack",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swift-server/RediStack.git",
-      "state" : {
-        "revision" : "622ce440f90d79b58e45f3a3efdd64c51d1dfd17",
-        "version" : "1.6.2"
-      }
-    },
-    {
       "identity" : "routing-kit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/routing-kit.git",
       "state" : {
         "revision" : "8c9a227476555c55837e569be71944e02a056b72",
         "version" : "4.9.1"
-      }
-    },
-    {
-      "identity" : "sendgrid",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor-community/sendgrid.git",
-      "state" : {
-        "revision" : "c744bc4398bd8dec50e3a6cfb0cdeca1aa853c07",
-        "version" : "4.0.0"
-      }
-    },
-    {
-      "identity" : "sendgrid-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor-community/sendgrid-kit.git",
-      "state" : {
-        "revision" : "2da9f9558c690af07219b1e63f126105b747fec8",
-        "version" : "1.1.0"
       }
     },
     {

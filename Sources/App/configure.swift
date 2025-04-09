@@ -5,13 +5,28 @@ import Vapor
 import Liquid
 import LiquidLocalDriver
 import JWT
-import Redis
-import QueuesRedisDriver
-import SendGrid
 
 
 // configures your application
 public func configure(_ app: Application) async throws {
+    switch app.environment {
+        case .production:
+        app.logger.logLevel = .info
+        // Add production-specific configurations
+        app.http.server.configuration.responseCompression = .enabled
+        app.http.server.configuration.requestDecompression = .enabled
+        
+        // Protect against common web attacks
+        app.middleware.use(SecurityHeadersMiddleware())
+        
+        case .development:
+            app.logger.logLevel = .debug
+            // Add development-specific configurations
+        
+        default:
+            app.logger.logLevel = .debug
+        }
+    
     // MARK: - JWKS
     if app.environment != .testing {
         let jwksFilePath = app.directory.workingDirectory + (Environment.get("JWKS_KEYPAIR_FILE") ?? "keypair.jwks")
@@ -35,7 +50,7 @@ public func configure(_ app: Application) async throws {
     app.routes.defaultMaxBodySize = "10mb"
     
     let sslContext = try NIOSSLContext(configuration: .clientDefault)
-    let connectionConfig = PostgresConnection.Configuration.TLS.prefer(sslContext)
+//    let connectionConfig = PostgresConnection.Configuration.TLS.prefer(sslContext)
     app.databases.use(.postgres(configuration: SQLPostgresConfiguration(
         hostname: Environment.get("DATABASE_HOST") ?? "localhost",
         port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? 5436,//SQLPostgresConfiguration.ianaPortNumber,
@@ -43,14 +58,7 @@ public func configure(_ app: Application) async throws {
         password: Environment.get("DATABASE_PASSWORD") ?? "gsshbz_password",
         database: Environment.get("DATABASE_NAME") ?? "gsshbz_database",
         tls: .disable
-    ), sqlLogLevel: .debug), as: .psql)
-    
-    // MARK: - Redis setup
-    let redisHostname = Environment.get("REDIS_HOSTNAME") ?? "localhost"
-    let redisConfiguration = try RedisConfiguration(hostname: redisHostname)
-    
-    app.redis.configuration = redisConfiguration
-    app.sessions.use(.redis)
+    ), sqlLogLevel: app.environment == .production ? .info : .debug), as: .psql)
     
     // MARK: - Sessions
     app.sessions.use(.fluent)
@@ -77,19 +85,9 @@ public func configure(_ app: Application) async throws {
         try module.boot(app)
     }
     
-    try queues(app)
     try services(app)
     
     try await app.autoMigrate()
-    
-    
-    // MARK: - Queues Job
-    try app.queues.startInProcessJobs()
-    
-    
-    // MARK: - Mail service setup
-    app.sendgrid.initialize()
-    
     
     // MARK: - WebSocket setup
     let eventLoop = app.eventLoopGroup.next()
@@ -147,4 +145,34 @@ public func configure(_ app: Application) async throws {
     let cors = CORSMiddleware(configuration: corsConfiguration)
     // cors middleware should come before default error middleware using `at: .beginning`
     app.middleware.use(cors, at: .beginning)
+    
+    
+    // Health check api
+    app.get("health") { req -> HealthResponse in
+        // Check database connection
+        do {
+            let rows = try await (req.db as! SQLDatabase).raw("SELECT 1 AS result").all(decoding: HealthCheckResult.self)
+            guard let _ = rows.first else {
+                throw Abort(.internalServerError, reason: "Database check failed")
+            }
+            
+            // Add more health checks as needed
+            return HealthResponse(status: "ok", version: "1.0.0", environment: app.environment.name)
+        } catch {
+            req.logger.error("Health check failed: \(error)")
+            return HealthResponse(status: "error", version: "1.0.0", environment: app.environment.name)
+        }
+    }
+    
+    struct HealthCheckResult: Codable {
+        let result: Int
+    }
+    
+    // Health response model
+    struct HealthResponse: Content {
+        let status: String
+        let version: String
+        let environment: String
+        let timestamp = Date()
+    }
 }
