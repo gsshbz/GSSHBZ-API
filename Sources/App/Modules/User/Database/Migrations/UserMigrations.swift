@@ -29,64 +29,56 @@ enum UserMigrations {
                 .unique(on: UserAccountModel.FieldKeys.v1.email)
                 .create()
             
-            // MARK: - RefreshTokenModel
-            try await database.schema(RefreshTokenModel.schema)
+            // MARK: - UserRefreshTokenModel
+            try await database.schema(UserRefreshTokenModel.schema)
                 .id()
-                .field(RefreshTokenModel.FieldKeys.v1.token, .string)
-                .field(RefreshTokenModel.FieldKeys.v1.userId, .uuid, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
-                .field(RefreshTokenModel.FieldKeys.v1.expiresAt, .datetime)
-                .field(RefreshTokenModel.FieldKeys.v1.issuedAt, .datetime)
-                .foreignKey(RefreshTokenModel.FieldKeys.v1.userId, references: UserAccountModel.schema, .id)
-                .unique(on: RefreshTokenModel.FieldKeys.v1.token)
-                .unique(on: RefreshTokenModel.FieldKeys.v1.userId)
+                .field(UserRefreshTokenModel.FieldKeys.v1.token, .string)
+                .field(UserRefreshTokenModel.FieldKeys.v1.userId, .uuid, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
+                .field(UserRefreshTokenModel.FieldKeys.v1.expiresAt, .datetime)
+                .field(UserRefreshTokenModel.FieldKeys.v1.issuedAt, .datetime)
+                .foreignKey(UserRefreshTokenModel.FieldKeys.v1.userId, references: UserAccountModel.schema, .id)
+                .unique(on: UserRefreshTokenModel.FieldKeys.v1.token)
+                .unique(on: UserRefreshTokenModel.FieldKeys.v1.userId)
                 .create()
             
-            //MARK: - OAuthToken
-            try await database.schema(OAuthToken.schema)
+//            //MARK: - OAuthToken
+//            try await database.schema(OAuthToken.schema)
+//                .id()
+//                .field(OAuthToken.FieldKeys.v1.value, .string, .required)
+//                .field(OAuthToken.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
+//                .field(OAuthToken.FieldKeys.v1.source, .int, .required)
+//                .field(OAuthToken.FieldKeys.v1.createdAt, .datetime, .required)
+//                .field(OAuthToken.FieldKeys.v1.expiresAt, .datetime)
+//                .unique(on: OAuthToken.FieldKeys.v1.value)
+//                .create()
+            
+            // MARK: - UserResetPasswordTokenModel
+            try await database.schema(UserResetPasswordTokenModel.schema)
                 .id()
-                .field(OAuthToken.FieldKeys.v1.value, .string, .required)
-                .field(OAuthToken.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
-                .field(OAuthToken.FieldKeys.v1.source, .int, .required)
-                .field(OAuthToken.FieldKeys.v1.createdAt, .datetime, .required)
-                .field(OAuthToken.FieldKeys.v1.expiresAt, .datetime)
-                .unique(on: OAuthToken.FieldKeys.v1.value)
+                .field(UserResetPasswordTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(UserResetPasswordTokenModel.FieldKeys.v1.isUsed, .bool, .required)
+                .field(UserResetPasswordTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
+//                .field(UserResetPasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id))
+                .field(UserResetPasswordTokenModel.FieldKeys.v1.createdAt, .datetime)
+                .unique(on: UserResetPasswordTokenModel.FieldKeys.v1.token)
                 .create()
             
-            // MARK: - EmailTokenModel
-            try await database.schema(EmailTokenModel.schema)
+            // MARK: - UserRegistrationTokenModel
+            try await database.schema(UserRegistrationTokenModel.schema)
                 .id()
-                .field(EmailTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
-                .field(EmailTokenModel.FieldKeys.v1.token, .string, .required)
-                .field(EmailTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
-                .unique(on: EmailTokenModel.FieldKeys.v1.userId)
-                .unique(on: EmailTokenModel.FieldKeys.v1.token)
-                .create()
-            
-            // MARK: - PasswordTokenModel
-            try await database.schema(PasswordTokenModel.schema)
-                .id()
-                .field(PasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
-                .field(PasswordTokenModel.FieldKeys.v1.token, .string, .required)
-                .field(PasswordTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
-                .create()
-            
-            // MARK: - ResetPasswordTokenModel
-            try await database.schema(ResetPasswordTokenModel.schema)
-                .id()
-                .field(ResetPasswordTokenModel.FieldKeys.v1.token, .string, .required)
-                .field(ResetPasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id))
-                .field(ResetPasswordTokenModel.FieldKeys.v1.createdAt, .datetime)
-                .unique(on: ResetPasswordTokenModel.FieldKeys.v1.token)
+                .field(UserRegistrationTokenModel.FieldKeys.v1.token, .string, .required)
+                .field(UserRegistrationTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
+                .field(UserRegistrationTokenModel.FieldKeys.v1.isUsed, .bool, .required)
+                .field(UserRegistrationTokenModel.FieldKeys.v1.createdAt, .datetime)
+                .unique(on: UserRegistrationTokenModel.FieldKeys.v1.token)
                 .create()
         }
         
         func revert(on database: Database) async throws {
             try await database.schema(UserAccountModel.schema).delete()
-            try await database.schema(RefreshTokenModel.schema).delete()
-            try await database.schema(OAuthToken.schema).delete()
-            try await database.schema(EmailTokenModel.schema).delete()
-            try await database.schema(PasswordTokenModel.schema).delete()
-            try await database.schema(ResetPasswordTokenModel.schema).delete()
+            try await database.schema(UserRefreshTokenModel.schema).delete()
+//            try await database.schema(OAuthToken.schema).delete()
+            try await database.schema(UserResetPasswordTokenModel.schema).delete()
         }
     }
     
@@ -113,17 +105,11 @@ enum UserMigrations {
     struct v2: AsyncMigration {
         // MARK: - Registration Token Model
         func prepare(on database: any Database) async throws {
-            try await database.schema(RegistrationTokenModel.schema)
-                .id()
-                .field(RegistrationTokenModel.FieldKeys.v1.token, .string, .required)
-                .field(RegistrationTokenModel.FieldKeys.v1.isUsed, .bool, .required)
-                .field(RegistrationTokenModel.FieldKeys.v1.createdAt, .datetime)
-                .unique(on: RegistrationTokenModel.FieldKeys.v1.token)
-                .create()
+            
         }
         
         func revert(on database: any Database) async throws {
-            try await database.schema(RegistrationTokenModel.schema).delete()
+            try await database.schema(UserRegistrationTokenModel.schema).delete()
         }
     }
 }

@@ -21,8 +21,11 @@ enum AuthenticationError: AppError {
     case invalidPasswordToken
     case passwordTokenHasExpired
     case missingRegistrationToken
-    case multipleValidationFailures([String]) // For when multiple fields fail
+    case registrationTokenNotValid
+    case registrationTokenHasExpired
+    case multipleValidationFailures([(field: String, identifier: String)]) // For when multiple fields fail
     case invalidField(String) // For other validation failures
+    case specificError(identifier: String, reason: String, status: HTTPResponseStatus = .badRequest)
 }
 
 extension AuthenticationError: AbortError {
@@ -52,10 +55,16 @@ extension AuthenticationError: AbortError {
             return .unauthorized
         case .missingRegistrationToken:
             return .badRequest
+        case .registrationTokenNotValid:
+            return .badRequest
+        case .registrationTokenHasExpired:
+            return .badRequest
         case .multipleValidationFailures(_):
             return .badRequest
         case .invalidField(_):
             return .badRequest
+        case .specificError(_, _, let status):
+            return status
         }
     }
     
@@ -85,10 +94,17 @@ extension AuthenticationError: AbortError {
             return "Reset password token has expired"
         case .missingRegistrationToken:
             return "Registration token is required"
-        case .multipleValidationFailures(let fields):
+        case .registrationTokenNotValid:
+            return "Registration token is not valid"
+        case .registrationTokenHasExpired:
+            return "Registration token has expired"
+        case .multipleValidationFailures(let failures):
+            let fields = failures.map { $0.field }
             return "Validation failed for fields: \(fields.joined(separator: ", "))"
         case .invalidField(let field):
             return "Validation failed for field: \(field)"
+        case .specificError(_, let reason, _):
+            return reason
         }
     }
     
@@ -118,10 +134,17 @@ extension AuthenticationError: AbortError {
             return "password_token_has_expired"
         case .missingRegistrationToken:
             return "missing_registration_token"
-        case .multipleValidationFailures:
-            return "validation_errors"
+        case .registrationTokenNotValid:
+            return "registration_token_not_valid"
+        case .registrationTokenHasExpired:
+            return "registration_token_has_expired"
+        case .multipleValidationFailures(let failures):
+            let identifiers = failures.map { $0.identifier }
+            return "\(identifiers.joined(separator: "&"))"
         case .invalidField(let field):
             return "invalid_\(field)"
+        case .specificError(let identifier, _, _):
+            return identifier
         }
     }
 }

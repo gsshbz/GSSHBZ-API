@@ -1,5 +1,5 @@
 //
-//  RefreshTokenModel.swift
+//  UserRefreshTokenModel.swift
 //  
 //
 //  Created by Mico Miloloza on 09.02.2024..
@@ -9,7 +9,7 @@ import Vapor
 import Fluent
 
 
-final class RefreshTokenModel: DatabaseModelInterface {
+final class UserRefreshTokenModel: DatabaseModelInterface {
     typealias Module = UserModule
     @ID(key: .id)
     var id: UUID?
@@ -38,7 +38,7 @@ final class RefreshTokenModel: DatabaseModelInterface {
 }
 
 
-extension RefreshTokenModel {
+extension UserRefreshTokenModel {
     struct FieldKeys {
         struct v1 {
             static var id: FieldKey { "id" }

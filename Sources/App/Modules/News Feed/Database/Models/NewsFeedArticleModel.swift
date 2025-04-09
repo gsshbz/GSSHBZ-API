@@ -10,7 +10,7 @@ import Fluent
 
 
 final class NewsFeedArticleModel: DatabaseModelInterface {
-    typealias Module = LeaseModule
+    typealias Module = NewsFeedModule
     
     @ID
     var id: UUID?

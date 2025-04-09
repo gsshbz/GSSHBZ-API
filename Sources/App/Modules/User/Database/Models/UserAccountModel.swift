@@ -94,9 +94,9 @@ extension UserAccountModel: ModelAuthenticatable {
 }
 
 extension UserAccountModel {
-    func createRefreshToken(source: SessionSource) throws -> OAuthToken {
-        return try OAuthToken.generate(for: self, source: source)
-    }
+//    func createRefreshToken(source: SessionSource) throws -> OAuthToken {
+//        return try OAuthToken.generate(for: self, source: source)
+//    }
     
     static func create(from registerData: User.Account.Create, req: Request, hash: String, registrationType: RegistrationType) async throws -> UserAccountModel {
 //        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"

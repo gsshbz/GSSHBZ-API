@@ -22,9 +22,13 @@ public extension DatabaseModelInterface {
     }
     
     static var identifier: String {
-        String(describing: self)
+        let identifierString = String(describing: self)
             .dropFirst(Module.identifier.count)
             .dropLast(5)
             .lowercased() + "s"
+        
+        if identifierString == "s" { return Module.identifier + "s" }
+        
+        return identifierString
     }
 }
