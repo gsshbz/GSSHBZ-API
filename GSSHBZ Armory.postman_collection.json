@@ -534,42 +534,49 @@
 							"formdata": [
 								{
 									"key": "firstName",
-									"value": "Mico",
+									"value": "momo",
 									"type": "text"
 								},
 								{
 									"key": "lastName",
-									"value": "Miloloza",
+									"value": "momo",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "root@localhost.roott",
+									"value": "momo@momoo.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "123456789",
+									"value": "adminpassword13524!%#",
 									"type": "text"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "123456789",
+									"value": "adminpassword13524!%#",
 									"type": "text"
 								},
 								{
 									"key": "address",
 									"value": "Testna Ulica 1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "phoneNumber",
 									"value": "0028428371098",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "imageKey",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "registrationToken",
+									"value": "SUK809",
 									"type": "text"
 								}
 							]
@@ -708,7 +715,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"root@localhost.localhost\",\n    \"password\": \"admin\"\n}",
+							"raw": "{\n    \"email\": \"brinaxx@gmail.com\",\n    \"password\": \"adminpassword13524!%#\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -866,7 +873,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"root@localhost.localhost\"\n}",
+							"raw": "{\n    \"email\": \"brinaxx@gmail.com\",\n    \"token\": \"4TVDJ5\",\n    \"newPassword\": \"admin\",\n    \"confirmPassword\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -883,30 +890,96 @@
 							]
 						}
 					},
-					"response": []
-				},
-				{
-					"name": "Verify Reset Password Token",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_api_url}}/reset-password?token=feb340fe0973e7046928b551affa3125036be3a9e6c7a0cc4176edacc7277228",
-							"host": [
-								"{{base_api_url}}"
-							],
-							"path": [
-								"reset-password"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "feb340fe0973e7046928b551affa3125036be3a9e6c7a0cc4176edacc7277228"
+					"response": [
+						{
+							"name": "Reset Password Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"brinaxx@gmail.com\",\n    \"token\": \"4TVDJ5\",\n    \"newPassword\": \"admin\",\n    \"confirmPassword\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/reset-password",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"reset-password"
+									]
 								}
-							]
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=OQJoChdBFs5ycHVBhzyAY6o4pCNUb3LMPrCKpZI6PS8=; Expires=Wed, 16 Apr 2025 23:15:49 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "DENY"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "default-src 'self'"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 09 Apr 2025 23:15:49 GMT"
+								},
+								{
+									"key": "content-encoding",
+									"value": "deflate"
+								},
+								{
+									"key": "content-length",
+									"value": "676"
+								},
+								{
+									"key": "server",
+									"value": "Fly/77d8e9253 (2025-04-09)"
+								},
+								{
+									"key": "via",
+									"value": "1.1 fly.io"
+								},
+								{
+									"key": "fly-request-id",
+									"value": "01JREDD771J044N1GY5EHCG92R-otp"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"D42CC1F7-40EF-4B8F-9EFD-F00ED900C500\",\n    \"accessToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJEQ0I5OTY2Qi0xQTE2LTREODEtQkFFQi03REQ3MzIwOUZEQkYiLCJleHBpcmF0aW9uIjoxNzQ0MjQ0MTQ5LjM3Njk0LCJmdWxsTmFtZSI6Ik1pxIdvIE1pbG9sb8W-YSIsImVtYWlsIjoiYnJpbmF4eEBnbWFpbC5jb20ifQ.hRKiZrWFuJwQJww_-26gf3HTxL0CilYAOPqQh42nBfSD0j5H5f0NtsgWRecS2AxFHS0nsEwo03VuE-wAcEhwXwDILvydd2M-XVSQnni34dAliyzz_a25hJL9rd_cIbjVEkEiA9DiE5oxb-5HxrPmRN8D5jX53zXft70etlSshDC28CPiHO6zcEs-SKuNJeLIM4fhaogbFR0WLy41kwr9YMb6bkk_QHYHgfB0PDo5JBMBSL_01dWsTDYdnrjG1vuaJPv9wFqfwfzm4Y3NoD1NAzbPfMZhuspR_dOCg3bp_FmAk6kZm29U_SyJmJ7dMOq6u3GKw7hYvkkGdorx3diGJw\",\n    \"refreshToken\": \"cba7d3a47cfbcb49fdbedd74a081d118e0ad0f8c65ee0d5283735ad2378e567e\",\n    \"user\": {\n        \"firstName\": \"Mićo\",\n        \"lastName\": \"Miloloža\",\n        \"email\": \"brinaxx@gmail.com\",\n        \"id\": \"DCB9966B-1A16-4D81-BAEB-7DD73209FDBF\",\n        \"isAdmin\": true\n    }\n}"
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "Sign Out",
@@ -1193,6 +1266,238 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/user/EDAFA818-8AB9-4027-9E79-4A96721F6CD5",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"user",
+								"EDAFA818-8AB9-4027-9E79-4A96721F6CD5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Registration Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/generate-registration-token",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"generate-registration-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Generate Registration Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/generate-registration-token",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"generate-registration-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=OQJoChdBFs5ycHVBhzyAY6o4pCNUb3LMPrCKpZI6PS8=; Expires=Wed, 16 Apr 2025 23:14:56 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "DENY"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "default-src 'self'"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 09 Apr 2025 23:14:56 GMT"
+								},
+								{
+									"key": "content-encoding",
+									"value": "deflate"
+								},
+								{
+									"key": "content-length",
+									"value": "112"
+								},
+								{
+									"key": "server",
+									"value": "Fly/77d8e9253 (2025-04-09)"
+								},
+								{
+									"key": "via",
+									"value": "1.1 fly.io"
+								},
+								{
+									"key": "fly-request-id",
+									"value": "01JREDBM7HAGF31HMCCXADC9AS-otp"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"71YW7B\",\n    \"isUsed\": false,\n    \"createdAt\": \"2025-04-09T23:14:56Z\",\n    \"id\": \"C77B3F19-5E5C-4A82-B32B-259A37494942\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate reset password token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/generate-reset-password-token",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"generate-reset-password-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Generate reset password token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/generate-reset-password-token",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"generate-reset-password-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=OQJoChdBFs5ycHVBhzyAY6o4pCNUb3LMPrCKpZI6PS8=; Expires=Wed, 16 Apr 2025 23:10:42 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "DENY"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "default-src 'self'"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 09 Apr 2025 23:10:42 GMT"
+								},
+								{
+									"key": "content-encoding",
+									"value": "deflate"
+								},
+								{
+									"key": "content-length",
+									"value": "112"
+								},
+								{
+									"key": "server",
+									"value": "Fly/77d8e9253 (2025-04-09)"
+								},
+								{
+									"key": "via",
+									"value": "1.1 fly.io"
+								},
+								{
+									"key": "fly-request-id",
+									"value": "01JRED3W80H5QD2T0N9A42VB9G-otp"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"4TVDJ5\",\n    \"isUsed\": false,\n    \"id\": \"94C2F08C-72CC-4C5D-84D4-CCEAA32D6FD7\",\n    \"createdAt\": \"2025-04-09T23:10:42Z\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1360,14 +1665,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/6073BCFA-C627-4BAD-9635-2BCF7BDC4D24",
+							"raw": "{{base_api_url}}/armory/items/0EB7F059-9A54-4EC2-9F8A-E10E55ECCD95",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"6073BCFA-C627-4BAD-9635-2BCF7BDC4D24"
+								"0EB7F059-9A54-4EC2-9F8A-E10E55ECCD95"
 							]
 						}
 					},
@@ -1512,12 +1817,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Updateani armory item",
+									"value": "Minus test",
 									"type": "text"
 								},
 								{
 									"key": "imageKey",
-									"value": "7",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -1533,19 +1838,20 @@
 								{
 									"key": "categoryId",
 									"value": "12151B7B-4C40-49F1-B9DE-CE74D406D246",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/ABB6096A-C046-4A90-9DB8-F5E6BC61445D",
+							"raw": "{{base_api_url}}/armory/items/CFC36706-B33A-41AC-A073-2C11E9EED17B",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"ABB6096A-C046-4A90-9DB8-F5E6BC61445D"
+								"CFC36706-B33A-41AC-A073-2C11E9EED17B"
 							]
 						}
 					},
@@ -1643,14 +1949,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/items/596E2AF0-33FC-4525-A7F2-FB5F70F92FE6",
+							"raw": "{{base_api_url}}/armory/items/0EB7F059-9A54-4EC2-9F8A-E10E55ECCD95",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"items",
-								"596E2AF0-33FC-4525-A7F2-FB5F70F92FE6"
+								"0EB7F059-9A54-4EC2-9F8A-E10E55ECCD95"
 							]
 						}
 					},
@@ -1701,7 +2007,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    // \"categoryId\": \"51744A11-E2F3-46B8-92AA-67353E370609\"\n    \"inStock\": 7\n}",
+							"raw": "{\n    \"inStock\": -30\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1709,14 +2015,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/accessories/C1999D50-42A4-428B-8E27-8F71368D7D15",
+							"raw": "{{base_api_url}}/armory/accessories/1EB28F07-CCB7-4809-96F5-0087A0F5775E",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"accessories",
-								"C1999D50-42A4-428B-8E27-8F71368D7D15"
+								"1EB28F07-CCB7-4809-96F5-0087A0F5775E"
 							]
 						}
 					},
@@ -1744,7 +2050,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n            \"quantity\": 1\n        },\n        {\n            \"armoryItemId\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n            \"quantity\": 2\n        }\n    ]\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"7819A407-F621-4B31-9377-CDD0EDD8FE32\",//,1EB28F07-CCB7-4809-96F5-0087A0F5775E\n            \"quantity\": 0\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1834,14 +2140,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/89310271-2B67-46EA-B600-75E57088FC4F",
+							"raw": "{{base_api_url}}/armory/leases/851E3D4E-26F3-4A78-AE5B-0CB439954659",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"89310271-2B67-46EA-B600-75E57088FC4F"
+								"851E3D4E-26F3-4A78-AE5B-0CB439954659"
 							]
 						}
 					},
@@ -1909,14 +2215,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/",
+							"raw": "{{base_api_url}}/armory/leases?per=10&page=1",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
-								"leases",
-								""
+								"leases"
+							],
+							"query": [
+								{
+									"key": "per",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -1985,7 +2300,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"4BE62BD0-EDBF-42E7-82F2-401D37D13A77\",\n            \"quantity\": 3\n        }\n    ],\n    \"returned\": true\n}",
+							"raw": "{\n    \"items\": [\n        {\n            \"armoryItemId\": \"2E6A79CB-D4E8-42AB-A52C-BBFDB529DDF2\",\n            \"quantity\": 3\n        }\n    ],\n    \"returned\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1993,14 +2308,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/3A2867BE-53E6-4468-A468-8CD420481F1E",
+							"raw": "{{base_api_url}}/armory/leases/34A2A499-F27F-433F-AF28-D7D52231A7C3",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"3A2867BE-53E6-4468-A468-8CD420481F1E"
+								"34A2A499-F27F-433F-AF28-D7D52231A7C3"
 							]
 						}
 					},
@@ -2077,14 +2392,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/A8199718-DEAC-4702-8C6B-0E146BE8E0D0",
+							"raw": "{{base_api_url}}/armory/leases/34A2A499-F27F-433F-AF28-D7D52231A7C3",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"A8199718-DEAC-4702-8C6B-0E146BE8E0D0"
+								"34A2A499-F27F-433F-AF28-D7D52231A7C3"
 							]
 						}
 					},
@@ -2144,7 +2459,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/user-leases?page=1&per=5",
+							"raw": "{{base_api_url}}/armory/leases/user-leases?page=1&per=2",
 							"host": [
 								"{{base_api_url}}"
 							],
@@ -2160,7 +2475,7 @@
 								},
 								{
 									"key": "per",
-									"value": "5"
+									"value": "2"
 								}
 							]
 						}
@@ -2248,18 +2563,73 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/leases/F8489F0F-09B5-4208-A0CF-A2B996917E03",
+							"raw": "{{base_api_url}}/armory/leases/34A2A499-F27F-433F-AF28-D7D52231A7C3",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"leases",
-								"F8489F0F-09B5-4208-A0CF-A2B996917E03"
+								"34A2A499-F27F-433F-AF28-D7D52231A7C3"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Patch Lease",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"returned\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/34A2A499-F27F-433F-AF28-D7D52231A7C3",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										"34A2A499-F27F-433F-AF28-D7D52231A7C3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "1033"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=11IeT67+Ce5M5meBiLFtYeRddSydhDdULBjA45GXsDE=; Expires=Mon, 24 Feb 2025 21:59:17 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 17 Feb 2025 21:59:17 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"returned\": false,\n    \"user\": {\n        \"lastName\": \"Admin\",\n        \"email\": \"root@localhost.localhost\",\n        \"firstName\": \"Admin\",\n        \"id\": \"EDAFA818-8AB9-4027-9E79-4A96721F6CD5\",\n        \"imageKey\": 0,\n        \"isAdmin\": true\n    },\n    \"armoryItems\": [\n        {\n            \"quantity\": 3,\n            \"armoryItem\": {\n                \"updatedAt\": \"2025-02-17T21:59:17Z\",\n                \"id\": \"2E6A79CB-D4E8-42AB-A52C-BBFDB529DDF2\",\n                \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                \"name\": \"GRIGRI\",\n                \"imageKey\": \"0\",\n                \"inStock\": 7,\n                \"createdAt\": \"2025-02-16T19:45:36Z\",\n                \"categoryId\": \"1BABC693-68CC-48F4-AF2D-1DCEB7380173\",\n                \"category\": {\n                    \"id\": \"1BABC693-68CC-48F4-AF2D-1DCEB7380173\",\n                    \"name\": \"Karabineri\"\n                }\n            }\n        }\n    ],\n    \"updatedAt\": \"2025-02-17T21:59:17Z\",\n    \"createdAt\": \"2025-02-17T21:51:08Z\",\n    \"id\": \"34A2A499-F27F-433F-AF28-D7D52231A7C3\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get User Leases",
