@@ -13,7 +13,10 @@ struct ArmoryModule: ModuleInterface {
     
     func boot(_ app: Application) throws {
         app.migrations.add(ArmoryMigrations.v1())
-        app.migrations.add(ArmoryMigrations.seed())
+        
+        if app.environment == .development || app.environment == .testing {
+            app.migrations.add(ArmoryMigrations.seed())
+        }
         
         app.middleware.use(UserSessionAuthenticator())
         

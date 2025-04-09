@@ -13,8 +13,10 @@ struct UserModule: ModuleInterface {
     
     func boot(_ app: Application) throws {
         app.migrations.add(UserMigrations.v1())
-        app.migrations.add(UserMigrations.seed())
-        app.migrations.add(UserMigrations.v2())
+        
+        if app.environment == .development || app.environment == .testing {
+            app.migrations.add(UserMigrations.seed())
+        }
         
         app.middleware.use(UserSessionAuthenticator())
         

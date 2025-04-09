@@ -273,6 +273,8 @@ struct UserApiController: ListController {
             throw AuthenticationError.userNotFound
         }
         
+        guard user.isAdmin else { throw ArmoryErrors.unauthorizedAccess }
+        
         //        var shouldUpdateImage: Bool = false
         //        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
         //

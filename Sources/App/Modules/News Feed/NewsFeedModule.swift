@@ -14,7 +14,10 @@ struct NewsFeedModule: ModuleInterface {
     
     func boot(_ app: Application) throws {
         app.migrations.add(NewsFeedMigrations.v1())
-        app.migrations.add(NewsFeedMigrations.seed())
+        
+        if app.environment == .development || app.environment == .testing {
+            app.migrations.add(NewsFeedMigrations.seed())
+        }
         
         app.middleware.use(ApiUserAuthenticator())
         

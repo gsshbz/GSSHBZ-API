@@ -45,6 +45,7 @@ enum ArmoryMigrations {
         }
     }
     
+    // This is only for staging environment
     struct seed: AsyncMigration {
         func prepare(on database: Database) async throws {
             let defaultCategory = ArmoryCategoryModel(name: "Default")

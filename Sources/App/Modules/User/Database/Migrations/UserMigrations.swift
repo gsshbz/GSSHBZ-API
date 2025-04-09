@@ -101,15 +101,4 @@ enum UserMigrations {
             
         }
     }
-    
-    struct v2: AsyncMigration {
-        // MARK: - Registration Token Model
-        func prepare(on database: any Database) async throws {
-            
-        }
-        
-        func revert(on database: any Database) async throws {
-            try await database.schema(UserRegistrationTokenModel.schema).delete()
-        }
-    }
 }
