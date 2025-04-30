@@ -20,11 +20,11 @@ public func configure(_ app: Application) async throws {
         app.middleware.use(SecurityHeadersMiddleware())
         
         case .development:
-            app.logger.logLevel = .debug
-            // Add development-specific configurations
+        app.logger.logLevel = .debug
+        // Add development-specific configurations
         
         default:
-            app.logger.logLevel = .debug
+        app.logger.logLevel = .debug
         }
     
     // MARK: - JWKS
@@ -72,7 +72,7 @@ public func configure(_ app: Application) async throws {
     app.middleware.use(CustomErrorMiddleware())
     
     app.randomGenerators.use(.random)
-
+    
     //MARK: - register routes
     let modules: [ModuleInterface] = [
         ArmoryModule(),

@@ -359,10 +359,13 @@ struct UserApiController: ListController {
             throw Abort(.noContent)
         }
         
+        let userId = try user.requireID()
+        
         // Find the password reset token
         guard let resetPasswordToken = try await UserResetPasswordTokenModel.query(on: req.db)
             .filter(\.$token == resetPasswordRequest.token)
             .filter(\.$isUsed == false)
+            .filter(\.$user.$id == userId)
             .first() else {
             throw AuthenticationError.invalidPasswordToken
         }
@@ -471,6 +474,9 @@ struct UserApiController: ListController {
         
         guard user.isAdmin else { throw ArmoryErrors.unauthorizedAccess }
         
+        guard let userId = req.query[UUID.self, at: "id"] else {
+            throw ArmoryErrors.unknownError
+        }
         // Generate and verify uniqueness of a 6-character token
         var token: String
         var isUnique = false
@@ -489,14 +495,19 @@ struct UserApiController: ListController {
             token = String(tokenChars)
             
             // Check if token already exists
-            let existingToken = try await UserResetPasswordTokenModel.query(on: req.db)
-                .filter(\.$token == token)
-                .first()
+            do {
+                let existingToken = try await UserResetPasswordTokenModel.query(on: req.db)
+                    .filter(\.$token == token)
+                    .first()
+                
+                isUnique = existingToken == nil
+            } catch {
+                print(error)
+            }
             
-            isUnique = existingToken == nil
         } while !isUnique
         
-        let tokenModel = UserResetPasswordTokenModel(token: token)
+        let tokenModel = UserResetPasswordTokenModel(userId: userId, token: token)
         try await tokenModel.create(on: req.db)
         
         return .init(id: try tokenModel.requireID(), token: tokenModel.token, isUsed: tokenModel.isUsed, createdAt: tokenModel.createdAt)

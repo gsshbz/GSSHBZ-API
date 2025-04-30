@@ -58,7 +58,6 @@ enum UserMigrations {
                 .field(UserResetPasswordTokenModel.FieldKeys.v1.token, .string, .required)
                 .field(UserResetPasswordTokenModel.FieldKeys.v1.isUsed, .bool, .required)
                 .field(UserResetPasswordTokenModel.FieldKeys.v1.expiresAt, .datetime, .required)
-//                .field(UserResetPasswordTokenModel.FieldKeys.v1.userId, .uuid, .required, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id))
                 .field(UserResetPasswordTokenModel.FieldKeys.v1.createdAt, .datetime)
                 .unique(on: UserResetPasswordTokenModel.FieldKeys.v1.token)
                 .create()
@@ -79,6 +78,20 @@ enum UserMigrations {
             try await database.schema(UserRefreshTokenModel.schema).delete()
 //            try await database.schema(OAuthToken.schema).delete()
             try await database.schema(UserResetPasswordTokenModel.schema).delete()
+        }
+    }
+    
+    struct v2: AsyncMigration {
+        func prepare(on database: any Database) async throws {
+            try await database.schema(UserResetPasswordTokenModel.schema)
+                .field(UserResetPasswordTokenModel.FieldKeys.v2.userId, .uuid, .references(UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade))
+                .update()
+        }
+        
+        func revert(on database: any Database) async throws {
+            try await database.schema(UserResetPasswordTokenModel.schema)
+                .deleteField(UserResetPasswordTokenModel.FieldKeys.v2.userId)
+                .update()
         }
     }
     

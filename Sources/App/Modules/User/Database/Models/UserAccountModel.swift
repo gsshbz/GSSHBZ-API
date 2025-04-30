@@ -51,6 +51,9 @@ final class UserAccountModel: DatabaseModelInterface {
     @Children(for: \.$user)
     var leases: [LeaseModel]
     
+    @OptionalChild(for: \.$user)
+    var resetPasswordTokens: UserResetPasswordTokenModel?
+    
     init() { }
     
     init(id: UUID? = nil, firstName: String, lastName: String, email: String, password: String, phoneNumber: String?, address: String?, imageKey: Int?, isAdmin: Bool = false) {

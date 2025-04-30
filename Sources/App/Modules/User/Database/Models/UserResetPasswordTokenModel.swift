@@ -15,6 +15,9 @@ final class UserResetPasswordTokenModel: DatabaseModelInterface, Content {
     @ID
     var id: UUID?
     
+    @OptionalParent(key: FieldKeys.v2.userId)
+    var user: UserAccountModel?
+    
     @Field(key: FieldKeys.v1.token)
     var token: String
     
@@ -29,8 +32,11 @@ final class UserResetPasswordTokenModel: DatabaseModelInterface, Content {
     
     init() {}
     
-    init(id: UUID? = nil, token: String, expiresAt: Date = Date().addingTimeInterval(Constants.RESET_PASSWORD_TOKEN_LIFETIME)) {
+    init(id: UUID? = nil, userId: UUID? = nil, token: String, expiresAt: Date = Date().addingTimeInterval(Constants.RESET_PASSWORD_TOKEN_LIFETIME)) {
         self.id = id
+        if let userId = userId {
+            self.$user.id = userId
+        }
         self.token = token
         self.isUsed = false
         self.expiresAt = expiresAt
@@ -45,6 +51,10 @@ extension UserResetPasswordTokenModel {
             static var isUsed: FieldKey {"is_used" }
             static var createdAt: FieldKey { "created_at" }
             static var expiresAt: FieldKey { "expires_at" }
+        }
+        
+        struct v2 {
+            static var userId: FieldKey { "user_id" }
         }
     }
 }
