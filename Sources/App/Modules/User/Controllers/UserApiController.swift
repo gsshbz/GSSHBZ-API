@@ -356,7 +356,7 @@ struct UserApiController: ListController {
         }
         
         guard let user = try await UserAccountModel.query(on: req.db).filter(\.$email == resetPasswordRequest.email).first() else {
-            throw Abort(.noContent)
+            throw AuthenticationError.userNotFound
         }
         
         let userId = try user.requireID()
