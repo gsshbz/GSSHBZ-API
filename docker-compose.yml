@@ -31,28 +31,28 @@ volumes:
 
 services:
 # PRODUCTION SERVICE
-app:
-  image: gsshbz-image:latest
-  build:
-    context: .
-    dockerfile: Dockerfile.prod
-    args:
-      - BUILDPLATFORM=linux/amd64
-      - TARGETPLATFORM=linux/amd64
-  env_file: .env.production
-  depends_on:
-    db:
-      condition: service_healthy  # Wait for DB to be ready
-  ports:
-    - '8080:8080'
-  command: ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8080"]
-  restart: unless-stopped
-  healthcheck:
-    test: ["CMD", "./healthcheck.sh"]
-    interval: 30s
-    timeout: 10s
-    retries: 3
-    start_period: 10s
+  app:
+    image: gsshbz-image:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        - BUILDPLATFORM=linux/amd64
+        - TARGETPLATFORM=linux/amd64
+    env_file: .env.production
+    depends_on:
+      db:
+        condition: service_healthy  # Wait for DB to be ready
+    ports:
+      - '8080:8080'
+    command: ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8080"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "./healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 #  app:
 #    image: gsshbz-image:latest
 #    build:
@@ -71,7 +71,7 @@ app:
     
 # DEVELOPMENT SERVICE
   app-dev:
-      user: "0" # Runs as root
+#      user: "0" # Runs as root
       image: gsshbz-dev
       build:
         context: .
@@ -85,7 +85,10 @@ app:
       ports:
         - '8080:8080'
       volumes:
-        - .:/app  # Mount the project directory for live development
+        - ./Sources:/app/Sources
+        - ./Tests:/app/Tests
+        - ./Package.swift:/app/Package.swift
+        - ./Package.resolved:/app/Package.resolved
 #      command: ["swift", "run", "--hostname", "0.0.0.0", "--port", "8080"]
       command: ["swift", "run", "App", "serve", "--env", "development", "--hostname", "0.0.0.0", "--port", "8080"]
           
