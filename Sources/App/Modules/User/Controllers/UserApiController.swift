@@ -29,8 +29,8 @@ extension User.Account.LoginRequest: Validatable {
 
 extension User.Account.Create: Validatable {
     static func validations(_ validations: inout Validations) {
-        validations.add("firstName", as: String.self, is: .ascii && !.empty)
-        validations.add("lastName", as: String.self, is: .ascii && !.empty)
+        validations.add("firstName", as: String.self, is: !.empty)
+        validations.add("lastName", as: String.self, is: !.empty)
         validations.add("email", as: String.self, is: .email && !.empty)
         validations.add("password", as: String.self, is: .count(8...))
         validations.add("registrationToken", as: String.self, is: !.empty)
@@ -273,7 +273,22 @@ struct UserApiController: ListController {
             throw AuthenticationError.userNotFound
         }
         
-        guard user.isAdmin else { throw ArmoryErrors.unauthorizedAccess }
+        if !user.isAdmin {
+            user.firstName = patchUser.firstName ?? user.firstName
+            user.lastName = patchUser.lastName ?? user.lastName
+            user.email = patchUser.email ?? user.email
+            user.phoneNumber = patchUser.phoneNumber ?? user.phoneNumber
+            user.address = patchUser.address ?? user.address
+            user.imageKey = /*shouldUpdateImage ? publicImageUrl : */patchUser.imageKey ?? user.imageKey
+        } else {
+            user.isAdmin = patchUser.isAdmin ?? user.isAdmin
+            user.firstName = patchUser.firstName ?? user.firstName
+            user.lastName = patchUser.lastName ?? user.lastName
+            user.email = patchUser.email ?? user.email
+            user.phoneNumber = patchUser.phoneNumber ?? user.phoneNumber
+            user.address = patchUser.address ?? user.address
+            user.imageKey = /*shouldUpdateImage ? publicImageUrl : */patchUser.imageKey ?? user.imageKey
+        }
         
         //        var shouldUpdateImage: Bool = false
         //        var publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/default-avatar.jpg"
@@ -301,14 +316,6 @@ struct UserApiController: ListController {
         //            shouldUpdateImage = true
         //            publicImageUrl = "\(AppConfig.environment.frontendUrl)/img/\(uniqueFileName)"
         //        }
-        
-        user.isAdmin = patchUser.isAdmin ?? user.isAdmin
-        user.firstName = patchUser.firstName ?? user.firstName
-        user.lastName = patchUser.lastName ?? user.lastName
-        user.email = patchUser.email ?? user.email
-        user.phoneNumber = patchUser.phoneNumber ?? user.phoneNumber
-        user.address = patchUser.address ?? user.address
-        user.imageKey = /*shouldUpdateImage ? publicImageUrl : */patchUser.imageKey ?? user.imageKey
         
         try await user.update(on: req.db)
         
