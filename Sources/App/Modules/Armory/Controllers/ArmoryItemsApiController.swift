@@ -115,7 +115,7 @@ struct ArmoryItemsApiController: ListController {
                                             updatedAt: armoryModel.updatedAt,
                                             deletedAt: armoryModel.deletedAt)
         
-        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil,
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID(),
                                                   createdAt: armoryModel.createdAt,
                                                   updatedAt: armoryModel.updatedAt,
                                                   deletedAt: armoryModel.deletedAt)
@@ -205,7 +205,7 @@ struct ArmoryItemsApiController: ListController {
                                             updatedAt: armoryModel.updatedAt,
                                             deletedAt: armoryModel.deletedAt)
         
-        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: nil,
+        let socketArmoryItem = Armory.Item.Detail(id: try armoryModel.requireID(), name: armoryModel.name, imageKey: armoryModel.imageKey, aboutInfo: armoryModel.aboutInfo, inStock: armoryModel.inStock, category: .init(id: try armoryModel.category.requireID(), name: armoryModel.category.name), categoryId: try armoryModel.category.requireID(),
                                                   createdAt: armoryModel.createdAt,
                                                   updatedAt: armoryModel.updatedAt,
                                                   deletedAt: armoryModel.deletedAt)
