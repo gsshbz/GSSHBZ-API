@@ -58,4 +58,9 @@ public extension Armory.Item {
         let inStock: Int?
         let categoryId: UUID?
     }
+    
+    struct DeletedResponse: Codable {
+        let id: UUID
+        let categoryId: UUID
+    }
 }

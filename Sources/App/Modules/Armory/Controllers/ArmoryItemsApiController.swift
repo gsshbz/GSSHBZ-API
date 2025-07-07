@@ -224,6 +224,7 @@ struct ArmoryItemsApiController: ListController {
         }
         
         let armoryModelId = try armoryModel.requireID()
+        let categoryId = try armoryModel.category.requireID()
         
         // 🔍 Check if the item is in any open leases
         let hasOpenLeases = try await LeaseItemModel.query(on: req.db)
@@ -242,7 +243,7 @@ struct ArmoryItemsApiController: ListController {
             throw ArmoryErrors.armoryItemDeleteFailed(itemName: armoryModel.name)
         }
         
-        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemDeleted, armoryModelId)
+        try await ArmoryWebSocketSystem.shared.broadcastMessage(type: .armoryItemDeleted, Armory.Item.DeletedResponse(id: armoryModelId, categoryId: categoryId))
         
         return .noContent
     }
