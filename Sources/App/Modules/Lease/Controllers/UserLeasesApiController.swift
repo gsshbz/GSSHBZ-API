@@ -33,6 +33,7 @@ struct UserLeasesApiController: ListController {
         baseRoutes.on(.GET, use: listApi)
         baseRoutes.on(.POST, use: createApi)
         baseRoutes.on(.GET, "user-leases", use: getCurrentUserLeases)
+        baseRoutes.on(.GET, "active", use: getAllActiveLeasesApi)
         baseRoutes.on(.GET, "user-leases", ":userId", use: getUserLeases)
         
         existingModelRoutes.on(.GET, use: detailApi)
@@ -432,6 +433,24 @@ extension UserLeasesApiController {
             $0.sort(\.$returned, .ascending)
                 .sort(\.$createdAt, .descending)
                 .filter(\.$createdAt >= twentyFourHoursAgo)
+                .with(\.$user)
+        })
+        
+        var leases: [Armory.Lease.Detail] = []
+        
+        for leaseModel in models.items {
+            let armoryItemsWithQuantities = try await fetchArmoryItemsForLease(leaseModel: leaseModel, req: req)
+            let leaseDetail = try await mapLeaseDetail(leaseModel: leaseModel, armoryItemsWithQuantities: armoryItemsWithQuantities, req: req)
+            leases.append(leaseDetail)
+        }
+        
+        return leases
+    }
+    
+    func getAllActiveLeasesApi(_ req: Request) async throws -> [DetailObject] {
+        let models = try await paginatedList(req, queryBuilders: {
+            $0.sort(\.$createdAt, .descending)
+                .filter(\.$returned == false)
                 .with(\.$user)
         })
         
