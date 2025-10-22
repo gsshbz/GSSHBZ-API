@@ -78,7 +78,8 @@ public func configure(_ app: Application) async throws {
         ArmoryModule(),
         UserModule(),
         LeaseModule(),
-        NewsFeedModule()
+        NewsFeedModule(),
+        VehiclesModule()
     ]
     
     for module in modules {

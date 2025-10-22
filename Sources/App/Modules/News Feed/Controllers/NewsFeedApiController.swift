@@ -52,7 +52,7 @@ extension NewsFeedApiController {
             throw AuthenticationError.userNotFound
         }
         
-        // Create the lease model
+        // Create news article model
         let newsFeedModel = try NewsFeedArticleModel(userId: userId, title: input.title, text: input.text)
         try await newsFeedModel.save(on: req.db)
         

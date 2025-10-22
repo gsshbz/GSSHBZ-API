@@ -37,6 +37,9 @@ enum ArmoryErrors: AppError {
     case newsArticleNotFound
     case newsArticleDeleteFailed(newsTitle: String)
     
+    // Vehicles & Trip history
+    case vehicleNotFound
+    
     case unknownError
     case unauthorizedAccess
 }
@@ -44,7 +47,7 @@ enum ArmoryErrors: AppError {
 extension ArmoryErrors {
     var status: HTTPResponseStatus {
         switch self {
-        case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound:
+        case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound, .vehicleNotFound:
             return .notFound
             
         case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .leaseAlreadyOpened, .armoryItemQuantityNotSufficient, .notAllItemsReturned:
@@ -118,10 +121,15 @@ extension ArmoryErrors {
             return "Unknown error"
         case .unauthorizedAccess:
             return "You do not have permission to access."
+            
         case .newsArticleNotFound:
             return "News couldn't be found"
+            
         case .newsArticleDeleteFailed(newsTitle: let newsTitle):
             return "Failed to delete news feed with title '\(newsTitle)'. Please try again later."
+            
+        case .vehicleNotFound:
+            return "Vehicle couldn't be found"
         }
     }
     
@@ -189,6 +197,11 @@ extension ArmoryErrors {
             
         case .armoryItemQuantityNotSufficient:
             return "armory_item_quantity_not_sufficient"
+            
+        case .vehicleNotFound:
+            return "vehicle_not_found"
+            
+        
         }
     }
     

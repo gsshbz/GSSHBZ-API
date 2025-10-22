@@ -35,4 +35,14 @@ public enum Armory: ApiModuleInterface {
         public typealias Module = Armory
         public static let pathKey: String = "dashboard"
     }
+    
+    public enum Vehicle: ApiModelInterface {
+        public typealias Module = Armory
+        public static let pathKey: String = "vehicles"
+    }
+    
+    public enum TripHistory: ApiModelInterface {
+        public typealias Module = Armory
+        public static let pathKey: String = "tripHistory"
+    }
 }
