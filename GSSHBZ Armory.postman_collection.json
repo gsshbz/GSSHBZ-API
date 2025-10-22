@@ -534,12 +534,12 @@
 							"formdata": [
 								{
 									"key": "firstName",
-									"value": "momo",
+									"value": "ćčžð@",
 									"type": "text"
 								},
 								{
 									"key": "lastName",
-									"value": "momo",
+									"value": "ćčžð@",
 									"type": "text"
 								},
 								{
@@ -692,7 +692,8 @@
 									""
 								],
 								"type": "text/javascript",
-								"packages": {}
+								"packages": {},
+								"requests": {}
 							}
 						},
 						{
@@ -703,7 +704,8 @@
 									"pm.environment.set(\"access_token\", jsonData[\"accessToken\"]);"
 								],
 								"type": "text/javascript",
-								"packages": {}
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -715,7 +717,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"brinaxx@gmail.com\",\n    \"password\": \"adminpassword13524!%#\"\n}",
+							"raw": "{\n    \"email\": \"root@localhost.localhost\",\n    \"password\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2284,6 +2286,91 @@
 					]
 				},
 				{
+					"name": "Get Active Leases",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/leases/active?per=10&page=1",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"leases",
+								"active"
+							],
+							"query": [
+								{
+									"key": "per",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Leases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/leases/",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"leases",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "3629"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=wF7ulK1dacoRngutWC6M6KNCLj3YuhGvfPWqqCgM2CA=; Expires=Tue, 11 Feb 2025 11:28:44 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 04 Feb 2025 11:28:44 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"leases\": [\n        {\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 7,\n                        \"name\": \"Updateani armory item\",\n                        \"aboutInfo\": \"Updateani info\",\n                        \"inStock\": 40,\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4\n                        },\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\"\n                    },\n                    \"quantity\": 1\n                }\n            ],\n            \"id\": \"1A8CFC2D-AD81-4BC8-BD3A-2BAD8C01D3D8\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\",\n                \"imageKey\": 4\n            },\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"updatedAt\": \"2025-02-04T10:59:51Z\"\n        },\n        {\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"name\": \"Armory item with default category\",\n                        \"aboutInfo\": \"Some about info description bla bla bla bla bla bla\",\n                        \"imageKey\": 0,\n                        \"category\": {\n                            \"name\": \"Default\",\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"imageKey\": 4\n                        },\n                        \"inStock\": 5,\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"id\": \"4DAFE3E8-24DD-4BF1-AA30-C27D8BA55664\"\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"updatedAt\": \"2025-02-04T10:59:51Z\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"imageKey\": 4,\n                \"firstName\": \"Admin\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\"\n            },\n            \"id\": \"F80DD2AD-13AE-40A6-A6EB-42BC32DCA268\"\n        },\n        {\n            \"createdAt\": \"2025-02-04T10:59:51Z\",\n            \"armoryItems\": [\n                {\n                    \"armoryItem\": {\n                        \"imageKey\": 7,\n                        \"aboutInfo\": \"Updateani info\",\n                        \"categoryId\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                        \"inStock\": 40,\n                        \"id\": \"ABB6096A-C046-4A90-9DB8-F5E6BC61445D\",\n                        \"name\": \"Updateani armory item\",\n                        \"category\": {\n                            \"id\": \"12151B7B-4C40-49F1-B9DE-CE74D406D246\",\n                            \"name\": \"Default\",\n                            \"imageKey\": 4\n                        }\n                    },\n                    \"quantity\": 3\n                }\n            ],\n            \"id\": \"7439A5A8-7107-457A-B844-715CC828FF5C\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"firstName\": \"Admin\",\n                \"email\": \"root@localhost.localhost\",\n                \"isAdmin\": true,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"imageKey\": 4\n            },\n            \"updatedAt\": \"2025-02-04T10:59:51Z\"\n        },\n        {\n            \"id\": \"E43FD653-5B61-4454-9D8C-CC5A90B7CE30\",\n            \"user\": {\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true,\n                \"email\": \"root@localhost.localhost\",\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"imageKey\": 4,\n                \"firstName\": \"Admin\"\n            },\n            \"createdAt\": \"2025-02-04T11:24:29Z\",\n            \"armoryItems\": [],\n            \"updatedAt\": \"2025-02-04T11:24:29Z\"\n        },\n        {\n            \"createdAt\": \"2025-02-04T11:27:36Z\",\n            \"user\": {\n                \"email\": \"root@localhost.localhost\",\n                \"imageKey\": 4,\n                \"id\": \"D8492428-462A-470A-85D5-BA61084E506C\",\n                \"lastName\": \"Admin\",\n                \"isAdmin\": true,\n                \"firstName\": \"Admin\"\n            },\n            \"armoryItems\": [\n                {\n                    \"quantity\": 1,\n                    \"armoryItem\": {\n                        \"id\": \"E4496043-38F7-4777-80C0-643D492219B8\",\n                        \"imageKey\": 0,\n                        \"category\": {\n                            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                            \"imageKey\": 0,\n                            \"name\": \"Carabiner\"\n                        },\n                        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                        \"aboutInfo\": \"Petzl OK aluminijski karabiner s maticom za optimalno pozicioniranje opreme. Idealan za osiguravanje i spuštanje te izradu konstrukcija za podizanje, spuštanje i transport. Dostupno u tri verzije zaključavanja: SCREW-LOCK, TRIACT-LOCK, BALL-LOCK\",\n                        \"inStock\": 9,\n                        \"name\": \"OK karabiner\"\n                    }\n                },\n                {\n                    \"armoryItem\": {\n                        \"inStock\": 8,\n                        \"imageKey\": 0,\n                        \"aboutInfo\": \"GRIGRI + uređaj za osiguravanje. Pogodan za sve penjače na vanjskim ili unutrašnjim stijenama. Pogodan za upotrebu na užadi debljine 8,9mm – 10,5mm. Pogodan za intenzivniju upotrebu. Sigurnosna ručica (anti-panic) za spuštanje penjača partnera. Sistem za odabir načina penjanja: “top rope” ili “lead”. Pogodan za početnike penjače. Težina: 200g. Certifikati: CE EN 15151-1, UIAA\",\n                        \"id\": \"9B873C52-D1BC-4F1F-91E5-FE8A315D2214\",\n                        \"name\": \"GRIGRI\",\n                        \"categoryId\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                        \"category\": {\n                            \"id\": \"BF8F80D3-4167-4573-9430-F5DC8861AE31\",\n                            \"imageKey\": 0,\n                            \"name\": \"Carabiner\"\n                        }\n                    },\n                    \"quantity\": 2\n                }\n            ],\n            \"updatedAt\": \"2025-02-04T11:27:36Z\",\n            \"id\": \"89310271-2B67-46EA-B600-75E57088FC4F\"\n        }\n    ],\n    \"metadata\": {\n        \"total\": 5,\n        \"page\": 1,\n        \"per\": 10\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "Update Lease",
 					"request": {
 						"auth": {
@@ -3168,6 +3255,182 @@
 							""
 						]
 					}
+				}
+			]
+		},
+		{
+			"name": "Vehicles",
+			"item": [
+				{
+					"name": "Get Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/vehicles/BD23906F-EE25-4B32-A692-D63811F69569",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"vehicles",
+								"BD23906F-EE25-4B32-A692-D63811F69569"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"maker\": \"Nissan\",\n    \"model\": \"Patrol\",\n    \"year\": 2001,\n    \"odometer\": 212000.0,\n    \"imageKey\": \"0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/vehicles/",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"vehicles",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/vehicles/",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"vehicles",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_api_url}}/armory/vehicles/6B722361-EE65-4311-AABA-6AAD04F9F7DB",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"vehicles",
+								"6B722361-EE65-4311-AABA-6AAD04F9F7DB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Trip History",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vehicleId\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n    \"odometer\": 247000,\n    \"destination\": \"Frankfurt am Main\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/vehicles/BD23906F-EE25-4B32-A692-D63811F69569/create-new-trip",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"vehicles",
+								"BD23906F-EE25-4B32-A692-D63811F69569",
+								"create-new-trip"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
