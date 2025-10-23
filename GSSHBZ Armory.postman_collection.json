@@ -3288,7 +3288,53 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get Vehicle",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/vehicles/BD23906F-EE25-4B32-A692-D63811F69569",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"vehicles",
+										"BD23906F-EE25-4B32-A692-D63811F69569"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "511"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=fpWz2YLiyDlIsUJyZ1yVR6BZchSxvnVoLje3w+eVmto=; Expires=Thu, 30 Oct 2025 12:21:52 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Oct 2025 12:21:52 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n    \"tripHistory\": [\n        {\n            \"createdAt\": \"2025-10-22T00:07:48Z\",\n            \"id\": \"18740B95-E4A1-4A08-B096-DDCE76F6417F\",\n            \"odometer\": 1000,\n            \"destination\": \"Frankfurt am Main\",\n            \"distance\": -246000\n        },\n        {\n            \"createdAt\": \"2025-10-22T00:08:36Z\",\n            \"id\": \"F403EBF3-0B73-4688-842F-C89251783208\",\n            \"odometer\": 247000,\n            \"destination\": \"Frankfurt am Main\",\n            \"distance\": 246000\n        }\n    ],\n    \"odometer\": 247000,\n    \"maker\": \"Nissan\",\n    \"updatedAt\": \"2025-10-22T00:08:36Z\",\n    \"model\": \"Patrol\",\n    \"createdAt\": \"2025-10-21T23:46:13Z\",\n    \"year\": 2001,\n    \"imageKey\": \"0\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Create Vehicle",
@@ -3326,7 +3372,62 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Vehicle",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"maker\": \"Nissan\",\n    \"model\": \"Patrol\",\n    \"year\": 2001,\n    \"odometer\": 212000.0,\n    \"imageKey\": \"0\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/vehicles/",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"vehicles",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "211"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=fpWz2YLiyDlIsUJyZ1yVR6BZchSxvnVoLje3w+eVmto=; Expires=Thu, 30 Oct 2025 12:22:07 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Oct 2025 12:22:07 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"model\": \"Patrol\",\n    \"year\": 2001,\n    \"id\": \"7FE21BCC-A416-476F-8492-D9D565F14FD5\",\n    \"maker\": \"Nissan\",\n    \"imageKey\": \"0\",\n    \"updatedAt\": \"2025-10-23T12:22:07Z\",\n    \"tripHistory\": [],\n    \"odometer\": 212000,\n    \"createdAt\": \"2025-10-23T12:22:07Z\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get Vehicles",
@@ -3362,7 +3463,57 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get Vehicles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/vehicles/",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"vehicles",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "376"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=fpWz2YLiyDlIsUJyZ1yVR6BZchSxvnVoLje3w+eVmto=; Expires=Thu, 30 Oct 2025 12:22:21 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Oct 2025 12:22:21 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"imageKey\": \"1\",\n        \"odometer\": 279000,\n        \"maker\": \"Volkswagen\",\n        \"id\": \"D52CE486-CF12-44B8-95E6-72410AF31978\",\n        \"year\": 2016,\n        \"model\": \"T6\"\n    },\n    {\n        \"odometer\": 247000,\n        \"model\": \"Patrol\",\n        \"maker\": \"Nissan\",\n        \"imageKey\": \"0\",\n        \"id\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n        \"year\": 2001\n    },\n    {\n        \"odometer\": 212000,\n        \"model\": \"Patrol\",\n        \"maker\": \"Nissan\",\n        \"imageKey\": \"0\",\n        \"id\": \"7FE21BCC-A416-476F-8492-D9D565F14FD5\",\n        \"year\": 2001\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Delete Vehicle",
@@ -3380,18 +3531,56 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/vehicles/6B722361-EE65-4311-AABA-6AAD04F9F7DB",
+							"raw": "{{base_api_url}}/armory/vehicles/7FE21BCC-A416-476F-8492-D9D565F14FD5",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"vehicles",
-								"6B722361-EE65-4311-AABA-6AAD04F9F7DB"
+								"7FE21BCC-A416-476F-8492-D9D565F14FD5"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete Vehicle",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_api_url}}/armory/vehicles/7FE21BCC-A416-476F-8492-D9D565F14FD5",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"vehicles",
+										"7FE21BCC-A416-476F-8492-D9D565F14FD5"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=fpWz2YLiyDlIsUJyZ1yVR6BZchSxvnVoLje3w+eVmto=; Expires=Thu, 30 Oct 2025 12:23:16 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Oct 2025 12:23:16 GMT"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
 				},
 				{
 					"name": "Add Trip History",
@@ -3430,7 +3619,63 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add Trip History",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vehicleId\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n    \"odometer\": 247000,\n    \"destination\": \"Frankfurt am Main\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_api_url}}/armory/vehicles/BD23906F-EE25-4B32-A692-D63811F69569/create-new-trip",
+									"host": [
+										"{{base_api_url}}"
+									],
+									"path": [
+										"armory",
+										"vehicles",
+										"BD23906F-EE25-4B32-A692-D63811F69569",
+										"create-new-trip"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "280"
+								},
+								{
+									"key": "set-cookie",
+									"value": "vapor-session=fpWz2YLiyDlIsUJyZ1yVR6BZchSxvnVoLje3w+eVmto=; Expires=Thu, 30 Oct 2025 12:23:31 GMT; Path=/; SameSite=Lax"
+								},
+								{
+									"key": "connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Oct 2025 12:23:31 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2025-10-23T12:23:31Z\",\n    \"vehicle\": {\n        \"imageKey\": \"0\",\n        \"odometer\": 247000,\n        \"maker\": \"Nissan\",\n        \"id\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n        \"year\": 2001,\n        \"model\": \"Patrol\"\n    },\n    \"odometer\": 247000,\n    \"distance\": 0,\n    \"destination\": \"Frankfurt am Main\",\n    \"id\": \"1BCE8A80-8CF6-4AAC-812B-5FB79B27AB43\"\n}"
+						}
+					]
 				}
 			]
 		}
