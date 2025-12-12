@@ -28,19 +28,16 @@ public extension Armory.TripHistory {
     }
     
     struct Create: Codable {
-        let vehicleId: UUID
         let odometer: Double
         let destination: String
     }
     
     struct Update: Codable {
-        let vehicleId: UUID
         let odometer: Double
         let destination: String
     }
     
     struct Patch: Codable {
-        let vehicleId: UUID?
         let odometer: Double?
         let destination: String?
     }

@@ -164,16 +164,19 @@ extension VehiclesApiController {
         }
         
         let tripInfo = try req.content.decode(Armory.TripHistory.Create.self)
+        guard let vehicleId = try? identifier(req) else {
+            throw ArmoryErrors.vehicleNotFound
+        }
         
-        guard var vehicleModel = try await DatabaseModel.query(on: req.db)
+        guard let vehicleModel = try await DatabaseModel.query(on: req.db)
             .with(\.$tripHistory)
-            .filter(\.$id == tripInfo.vehicleId)
+            .filter(\.$id == vehicleId)
             .first() else {
             throw ArmoryErrors.vehicleNotFound
         }
         
         // Create trip history model
-        let tripHistoryModel = VehiclesTripHistoryModel(vehicleId: tripInfo.vehicleId, odometer: tripInfo.odometer, distance: tripInfo.odometer - vehicleModel.odometer, destination: tripInfo.destination)
+        let tripHistoryModel = VehiclesTripHistoryModel(vehicleId: vehicleId, odometer: tripInfo.odometer, distance: tripInfo.odometer - vehicleModel.odometer, destination: tripInfo.destination)
         vehicleModel.odometer = tripHistoryModel.odometer
         
         // Update vehicle odometer & save trip history model to database
