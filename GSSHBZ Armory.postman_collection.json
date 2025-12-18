@@ -3277,14 +3277,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_api_url}}/armory/vehicles/BD23906F-EE25-4B32-A692-D63811F69569",
+							"raw": "{{base_api_url}}/armory/vehicles/012BAB0A-D99E-4680-A495-674A6C456E12",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"vehicles",
-								"BD23906F-EE25-4B32-A692-D63811F69569"
+								"012BAB0A-D99E-4680-A495-674A6C456E12"
 							]
 						}
 					},
@@ -3308,7 +3308,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "content-type",
@@ -3401,7 +3401,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "content-type",
@@ -3487,7 +3487,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "content-type",
@@ -3562,7 +3562,7 @@
 							},
 							"status": "No Content",
 							"code": 204,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "set-cookie",
@@ -3578,7 +3578,7 @@
 								}
 							],
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -3599,7 +3599,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vehicleId\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n    \"odometer\": 247000,\n    \"destination\": \"Frankfurt am Main\"\n}",
+							"raw": "{\n    \"odometer\": 280000,\n    \"destination\": \"Ljubljana\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3607,14 +3607,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_api_url}}/armory/vehicles/BD23906F-EE25-4B32-A692-D63811F69569/create-new-trip",
+							"raw": "{{base_api_url}}/armory/vehicles/012BAB0A-D99E-4680-A495-674A6C456E12/create-new-trip",
 							"host": [
 								"{{base_api_url}}"
 							],
 							"path": [
 								"armory",
 								"vehicles",
-								"BD23906F-EE25-4B32-A692-D63811F69569",
+								"012BAB0A-D99E-4680-A495-674A6C456E12",
 								"create-new-trip"
 							]
 						}
@@ -3649,7 +3649,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "content-type",
@@ -3676,6 +3676,44 @@
 							"body": "{\n    \"createdAt\": \"2025-10-23T12:23:31Z\",\n    \"vehicle\": {\n        \"imageKey\": \"0\",\n        \"odometer\": 247000,\n        \"maker\": \"Nissan\",\n        \"id\": \"BD23906F-EE25-4B32-A692-D63811F69569\",\n        \"year\": 2001,\n        \"model\": \"Patrol\"\n    },\n    \"odometer\": 247000,\n    \"distance\": 0,\n    \"destination\": \"Frankfurt am Main\",\n    \"id\": \"1BCE8A80-8CF6-4AAC-812B-5FB79B27AB43\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Patch Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"odometer\": 100000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/armory/vehicles/475BD9BC-1205-47BC-A719-4F157C3BDC89",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"armory",
+								"vehicles",
+								"475BD9BC-1205-47BC-A719-4F157C3BDC89"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
