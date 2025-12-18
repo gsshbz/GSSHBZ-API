@@ -27,8 +27,13 @@ enum VehicleMigrations {
             
             try await database.schema(VehiclesTripHistoryModel.schema)
                 .id()
+            //Vehicle - Trip relation
                 .field(VehiclesTripHistoryModel.FieldKeys.v1.vehicleId, .uuid, .required)
                 .foreignKey(VehiclesTripHistoryModel.FieldKeys.v1.vehicleId, references: VehicleModel.schema, VehicleModel.FieldKeys.v1.id, onDelete: .cascade)
+            // User - Trip relation
+                .field(VehiclesTripHistoryModel.FieldKeys.v1.userId, .uuid, .required)
+                .foreignKey(VehiclesTripHistoryModel.FieldKeys.v1.userId, references: UserAccountModel.schema, UserAccountModel.FieldKeys.v1.id, onDelete: .cascade)
+            
                 .field(VehiclesTripHistoryModel.FieldKeys.v1.odometer, .double, .required)
                 .field(VehiclesTripHistoryModel.FieldKeys.v1.distance, .double, .required)
                 .field(VehiclesTripHistoryModel.FieldKeys.v1.destination, .string)

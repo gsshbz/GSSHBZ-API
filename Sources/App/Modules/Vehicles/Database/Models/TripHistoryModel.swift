@@ -11,12 +11,16 @@ import Fluent
 
 final class VehiclesTripHistoryModel: DatabaseModelInterface {
     typealias Module = VehiclesModule
+    static var identifier: String = "trip_histories"
     
     @ID
     var id: UUID?
     
     @Parent(key: FieldKeys.v1.vehicleId)
     var vehicle: VehicleModel
+    
+    @Parent(key: FieldKeys.v1.userId)
+    var user: UserAccountModel
     
     @Field(key: FieldKeys.v1.odometer)
     var odometer: Double
@@ -38,9 +42,10 @@ final class VehiclesTripHistoryModel: DatabaseModelInterface {
     
     init() { }
     
-    init(id: UUID? = nil, vehicleId: UUID, odometer: Double, distance: Double, destination: String, createdAt: Date? = nil, updatedAt: Date? = nil, deletedAt: Date? = nil) {
+    init(id: UUID? = nil, vehicleId: UUID, userId: UUID, odometer: Double, distance: Double, destination: String, createdAt: Date? = nil, updatedAt: Date? = nil, deletedAt: Date? = nil) {
         self.id = id
         self.$vehicle.id = vehicleId
+        self.$user.id = userId
         self.odometer = odometer
         self.distance = distance
         self.destination = destination
@@ -55,6 +60,7 @@ extension VehiclesTripHistoryModel {
         struct v1 {
             static var id: FieldKey { "id" }
             static var vehicleId: FieldKey { "vehicle_id" }
+            static var userId: FieldKey { "user_id" }
             static var odometer: FieldKey { "odometer" }
             static var distance: FieldKey { "distance" }
             static var destination: FieldKey { "destination" }

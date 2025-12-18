@@ -12,6 +12,8 @@ import Fluent
 final class VehicleModel: DatabaseModelInterface {
     typealias Module = VehiclesModule
     
+    static var identifier: String = "vehicles"
+    
     @ID
     var id: UUID?
     

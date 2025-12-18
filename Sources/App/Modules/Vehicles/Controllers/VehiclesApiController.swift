@@ -28,6 +28,7 @@ struct VehiclesApiController: ListController {
     
     var parameterId: String = "vehicleId"
     
+    
     func setupRoutes(_ routes: RoutesBuilder) {
         let baseRoutes = getBaseRoutes(routes)
         let existingModelRoutes = baseRoutes.grouped(ApiModel.pathIdComponent)
@@ -39,6 +40,7 @@ struct VehiclesApiController: ListController {
         existingModelRoutes.on(.POST, use: updateApi)
         existingModelRoutes.on(.DELETE, use: deleteApi)
         existingModelRoutes.on(.POST, "create-new-trip", use: createNewTrip)
+        existingModelRoutes.on(.PATCH, use: patchApi)
     }
 }
 
@@ -88,13 +90,18 @@ extension VehiclesApiController {
             throw ArmoryErrors.vehicleNotFound
         }
         
+        // Load user object for every trip history model
+        for tripHistory in vehicleModel.tripHistory {
+            try await tripHistory.$user.load(on: req.db)
+        }
+        
         return .init(id: try vehicleModel.requireID(),
                      maker: vehicleModel.maker,
                      model: vehicleModel.model,
                      year: vehicleModel.year,
                      odometer: vehicleModel.odometer,
                      imageKey: vehicleModel.imageKey,
-                     tripHistory: try vehicleModel.tripHistory.map { .init(id: try $0.requireID(), distance: $0.distance, odometer: $0.odometer, destination: $0.destination, createdAt: $0.createdAt) },
+                     tripHistory: try vehicleModel.tripHistory.map { .init(id: try $0.requireID(), distance: $0.distance, odometer: $0.odometer, destination: $0.destination, createdAt: $0.createdAt, user: .init(id: try $0.user.requireID(), firstName: $0.user.firstName, lastName: $0.user.lastName, imageKey: $0.user.imageKey)) },
                      createdAt: vehicleModel.createdAt,
                      updatedAt: vehicleModel.updatedAt,
                      deletedAt: vehicleModel.deletedAt)
@@ -116,6 +123,11 @@ extension VehiclesApiController {
             throw ArmoryErrors.vehicleNotFound
         }
         
+        // Load user object for every trip history model
+        for tripHistory in vehicleModel.tripHistory {
+            try await tripHistory.$user.load(on: req.db)
+        }
+        
         vehicleModel.maker = updateObject.maker
         vehicleModel.model = updateObject.model
         vehicleModel.imageKey = updateObject.imageKey
@@ -130,12 +142,63 @@ extension VehiclesApiController {
                                           year: vehicleModel.year,
                                           odometer: vehicleModel.odometer,
                                           imageKey: vehicleModel.imageKey,
-                                          tripHistory: try vehicleModel.tripHistory.map { .init(id: try $0.requireID(), distance: $0.distance, odometer: $0.odometer, destination: $0.destination, createdAt: $0.createdAt) },
+                                          tripHistory: try vehicleModel.tripHistory.map { .init(id: try $0.requireID(), distance: $0.distance, odometer: $0.odometer, destination: $0.destination, createdAt: $0.createdAt, user: .init(id: try $0.user.requireID(), firstName: $0.user.firstName, lastName: $0.user.lastName, imageKey: $0.user.imageKey)) },
                                           createdAt: vehicleModel.createdAt,
                                           updatedAt: vehicleModel.updatedAt,
                                           deletedAt: vehicleModel.deletedAt)
         
         return updatedVehicle
+    }
+    
+    func patchApi(_ req: Request) async throws -> DetailObject {
+        let patchObject = try req.content.decode(PatchObject.self)
+        let jwtUser = try req.auth.require(JWTUser.self)
+        
+        guard let user = try await UserAccountModel.find(jwtUser.userId, on: req.db),
+              let _ = try? user.requireID() else {
+            throw AuthenticationError.userNotFound
+        }
+        
+        guard let vehicleModel = try await DatabaseModel.query(on: req.db)
+            .with(\.$tripHistory)
+            .filter(\.$id == identifier(req))
+            .first() else {
+            throw ArmoryErrors.vehicleNotFound
+        }
+        
+        // Load user object for every trip history model
+        for tripHistory in vehicleModel.tripHistory {
+            try await tripHistory.$user.load(on: req.db)
+        }
+        
+        vehicleModel.imageKey = patchObject.imageKey ?? vehicleModel.imageKey
+        vehicleModel.maker = patchObject.maker ?? vehicleModel.maker
+        vehicleModel.model = patchObject.model ?? vehicleModel.model
+        vehicleModel.odometer = patchObject.odometer ?? vehicleModel.odometer
+        vehicleModel.year = patchObject.year ?? vehicleModel.year
+        
+        try await vehicleModel.update(on: req.db)
+        
+        return .init(id: try vehicleModel.requireID(),
+                     maker: vehicleModel.maker,
+                     model: vehicleModel.model,
+                     year: vehicleModel.year,
+                     odometer: vehicleModel.odometer,
+                     imageKey: vehicleModel.imageKey,
+                     tripHistory: try vehicleModel.tripHistory.map {
+            .init(id: try $0.requireID(),
+                  distance: $0.distance,
+                  odometer: $0.odometer,
+                  destination: $0.destination,
+                  createdAt: $0.createdAt,
+                  user: .init(id: try $0.user.requireID(),
+                              firstName: $0.user.firstName,
+                              lastName: $0.user.lastName,
+                              imageKey: $0.user.imageKey))
+        },
+                     createdAt: vehicleModel.createdAt,
+                     updatedAt: vehicleModel.updatedAt,
+                     deletedAt: vehicleModel.deletedAt)
     }
     
     func listApi(_ req: Request) async throws -> [ListObject] {
@@ -175,8 +238,12 @@ extension VehiclesApiController {
             throw ArmoryErrors.vehicleNotFound
         }
         
+        guard tripInfo.odometer > vehicleModel.odometer else {
+            throw ArmoryErrors.vehicleOdometerIsLessThanPrevious
+        }
+        
         // Create trip history model
-        let tripHistoryModel = VehiclesTripHistoryModel(vehicleId: vehicleId, odometer: tripInfo.odometer, distance: tripInfo.odometer - vehicleModel.odometer, destination: tripInfo.destination)
+        let tripHistoryModel = VehiclesTripHistoryModel(vehicleId: vehicleId, userId: try user.requireID(), odometer: tripInfo.odometer, distance: tripInfo.odometer - vehicleModel.odometer, destination: tripInfo.destination)
         vehicleModel.odometer = tripHistoryModel.odometer
         
         // Update vehicle odometer & save trip history model to database
@@ -193,7 +260,7 @@ extension VehiclesApiController {
                                                     distance: tripHistoryModel.distance,
                                                     odometer: tripHistoryModel.odometer,
                                                     destination: tripHistoryModel.destination,
-                                                    createdAt: tripHistoryModel.createdAt)
+                                                    createdAt: tripHistoryModel.createdAt, user: .init(id: try user.requireID(), firstName: user.firstName, lastName: user.lastName, imageKey: user.imageKey))
         
         return tripHistory
     }

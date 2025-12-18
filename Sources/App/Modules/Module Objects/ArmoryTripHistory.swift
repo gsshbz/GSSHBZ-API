@@ -15,6 +15,7 @@ public extension Armory.TripHistory {
         let odometer: Double
         let destination: String
         let createdAt: Date?
+        let user: User.Account.Public
         
     }
     
@@ -25,6 +26,7 @@ public extension Armory.TripHistory {
         let odometer: Double
         let destination: String
         let createdAt: Date?
+        let user: User.Account.Public
     }
     
     struct Create: Codable {

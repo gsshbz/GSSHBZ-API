@@ -39,6 +39,7 @@ enum ArmoryErrors: AppError {
     
     // Vehicles & Trip history
     case vehicleNotFound
+    case vehicleOdometerIsLessThanPrevious
     
     case unknownError
     case unauthorizedAccess
@@ -50,7 +51,7 @@ extension ArmoryErrors {
         case .categoryNotFound, .leaseNotFound, .armoryItemNotFound, .leaseItemNotAvailable, .newsArticleNotFound, .vehicleNotFound:
             return .notFound
             
-        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .leaseAlreadyOpened, .armoryItemQuantityNotSufficient, .notAllItemsReturned:
+        case .duplicateArmoryItemName, .duplicateCategoryName, .insufficientArmoryItemStock, .leaseAlreadyClosed, .leaseAlreadyOpened, .armoryItemQuantityNotSufficient, .notAllItemsReturned, .vehicleOdometerIsLessThanPrevious:
             return .conflict
             
         case .unauthorizedAccess:
@@ -130,6 +131,9 @@ extension ArmoryErrors {
             
         case .vehicleNotFound:
             return "Vehicle couldn't be found"
+            
+        case .vehicleOdometerIsLessThanPrevious:
+            return "Vehicle odometer is less than previous value"
         }
     }
     
@@ -201,9 +205,9 @@ extension ArmoryErrors {
         case .vehicleNotFound:
             return "vehicle_not_found"
             
+        case .vehicleOdometerIsLessThanPrevious:
+            return "vehicle_odometer_is_less_than_previous"
         
         }
     }
-    
-    
 }

@@ -51,6 +51,9 @@ final class UserAccountModel: DatabaseModelInterface {
     @Children(for: \.$user)
     var leases: [LeaseModel]
     
+    @Children(for: \.$user)
+    var tripHistory: [VehiclesTripHistoryModel]
+    
     @OptionalChild(for: \.$user)
     var resetPasswordTokens: UserResetPasswordTokenModel?
     
