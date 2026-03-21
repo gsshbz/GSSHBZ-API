@@ -46,7 +46,7 @@ struct UserLeasesApiController: ListController {
 
 extension UserLeasesApiController {
     // Helper method to fetch all armory items (with their category loaded) for a given lease
-    private func fetchArmoryItemsForLease(leaseModel: LeaseModel, req: Request) async throws -> [(ArmoryItemModel, Int)] {
+    func fetchArmoryItemsForLease(leaseModel: LeaseModel, req: Request) async throws -> [(ArmoryItemModel, Int)] {
         let leaseItems = try await LeaseItemModel.query(on: req.db)
             .filter(\.$leaseId == leaseModel.requireID())
             .join(ArmoryItemModel.self, on: \LeaseItemModel.$armoryItemId == \ArmoryItemModel.$id)
@@ -85,7 +85,7 @@ extension UserLeasesApiController {
     }
     
     // Helper method to map a LeaseModel (with fetched armory items) to an Armory.Lease.Detail
-    private func mapLeaseDetail(leaseModel: LeaseModel, armoryItemsWithQuantities: [(ArmoryItemModel, Int)], req: Request) async throws -> Armory.Lease.Detail {
+    func mapLeaseDetail(leaseModel: LeaseModel, armoryItemsWithQuantities: [(ArmoryItemModel, Int)], req: Request) async throws -> Armory.Lease.Detail {
         let armoryItemsDetails = try await armoryItemsWithQuantities.asyncMap { try await mapArmoryItemDetail(armoryItem: $0, quantity: $1, req: req) }
         
         return .init(
@@ -312,11 +312,20 @@ extension UserLeasesApiController {
             throw ArmoryErrors.leaseNotFound
         }
         
-        if updateObject.returned == leaseModel.returned {
-            return try await updateLease(req, leaseModel: leaseModel, updateObject: updateObject)
-        } else {
-            return updateObject.returned ? try await closeLease(req, leaseModel: leaseModel, updateObject: updateObject) : try await openLease(req, leaseModel: leaseModel, updateObject: updateObject)
+        let returningChanged = updateObject.returned != leaseModel.returned
+        let itemsChanged = !updateObject.items.isEmpty
+
+        if returningChanged && itemsChanged {
+            throw Abort(.badRequest, reason: "Cannot update items and change lease status in the same request.")
         }
+
+        if returningChanged {
+            return updateObject.returned
+                ? try await closeLease(req, leaseModel: leaseModel, updateObject: updateObject)
+                : try await openLease(req, leaseModel: leaseModel, updateObject: updateObject)
+        }
+
+        return try await updateLease(req, leaseModel: leaseModel, updateObject: updateObject)
     }
     
     func patchApi(_ req: Request) async throws -> DetailObject {
